@@ -16,7 +16,7 @@ const Layout: FC = () => {
       <Box mb={5}>
         <Header />
       </Box>
-      <Box sx={{ paddingBottom: "501px" }}>
+      <Box sx={{ height: "inherit" }}>
         <Outlet />
       </Box>
       {/* <Footer /> */}
