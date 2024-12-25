@@ -41,11 +41,11 @@ const TabsCommon: React.FC<Props> = ({
                 "::before": {
                   content: '""',
                   position: "absolute",
-                  width: "80%",
-                  height: "3px",
+                  width: "75%",
+                  height: "4px",
                   backgroundColor: theme.palette.primary.main,
-                  borderBottomLeftRadius: 10,
-                  borderBottomRightRadius: 10,
+                  borderBottomLeftRadius: 15,
+                  borderBottomRightRadius: 15,
                 },
               },
 
