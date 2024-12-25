@@ -1,5 +1,5 @@
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-import { Box, Tab } from "@mui/material";
+import { Box, Tab, Typography } from "@mui/material";
 import React from "react";
 import theme from "../styles/theme";
 
@@ -34,23 +34,33 @@ const TabsCommon: React.FC<Props> = ({
             sx={{
               ml: 2,
               "& .MuiTabs-indicator": {
-                top: {
-                  // xs: 20,
-                  lg: 0,
+                display: "flex",
+                justifyContent: "center",
+                backgroundColor: "transparent",
+                top: 0,
+                "::before": {
+                  content: '""',
+                  position: "absolute",
+                  width: "80%",
+                  height: "3px",
+                  backgroundColor: theme.palette.primary.main,
+                  borderBottomLeftRadius: 10,
+                  borderBottomRightRadius: 10,
                 },
-                bottom: "unset",
-                height: 3,
-                backgroundColor: theme.palette.primary.main,
-                width: "60px !important",
-                borderBottomLeftRadius: 10,
-                borderBottomRightRadius: 10,
-                marginLeft: "15px",
+              },
+
+              "& .MuiTabs-indicatorSpan": {
+                maxWidth: 40,
+                width: "100%",
+                backgroundColor: "#635ee7",
               },
 
               "& .MuiTab-root": {
                 bgcolor: "#fbfbfb",
                 border: "1px solid #d8d8d8",
+                minHeight: "50px",
               },
+
               "& .Mui-selected": {
                 bgcolor: "#fff",
                 color: `${theme.palette.primary.main} !important`,
@@ -60,18 +70,17 @@ const TabsCommon: React.FC<Props> = ({
             {tabMenuList?.map((item) => (
               <Tab
                 label={
-                  <Box display={"flex"} alignItems={"center"}>
-                    <item.icon sx={{ width: 15, height: 15 }} />
+                  <Typography sx={{ fontWeight: 600 }}>
                     {item?.label}
-                  </Box>
+                  </Typography>
                 }
+                icon={item.icon}
+                iconPosition="start"
                 value={item?.value}
                 sx={{
-                  p: 0,
                   background: "#fff",
-                  mr: 2,
-                  borderTopLeftRadius: "8px",
-                  borderTopRightRadius: "8px",
+                  borderTopLeftRadius: 12,
+                  borderTopRightRadius: 12,
                   textTransform: "none",
                 }}
               />

@@ -10,14 +10,14 @@ export const tabMenuList = [
     label: "List",
     isActive: true,
     value: "1",
-    icon: FormatListBulletedIcon,
+    icon: <FormatListBulletedIcon />,
   },
   {
     id: 1,
     label: "Calendar",
     isActive: false,
     value: "2",
-    icon: CalendarMonthIcon,
+    icon: <CalendarMonthIcon />,
   },
 ] as any;
 

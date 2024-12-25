@@ -54,16 +54,14 @@ const Inspections = () => {
   };
 
   return (
-    <Box>
-      <Box sx={{ position: "relative" }}>
-        <TabsCommon
-          type={MenuTypeEnum.Inspections}
-          tabMenuList={tabMenuList}
-          onTabChange={(value) => setActiveTab(value)}
-          tabContent={GetTabContentByActiveTab()}
-        />
-        <GradientButton label="Add Inspection" menuList={inspectionBtnList} />
-      </Box>
+    <Box sx={{ position: "relative" }}>
+      <TabsCommon
+        type={MenuTypeEnum.Inspections}
+        tabMenuList={tabMenuList}
+        onTabChange={(value) => setActiveTab(value)}
+        tabContent={GetTabContentByActiveTab()}
+      />
+      <GradientButton label="Add Inspection" menuList={inspectionBtnList} />
     </Box>
   );
 };
