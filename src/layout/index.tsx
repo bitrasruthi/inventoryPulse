@@ -16,7 +16,7 @@ const Layout: FC = () => {
       <Box>
         <Header />
       </Box>
-      <Box sx={{ paddingBottom: "501px", backgroundColor: "#f5f5f5", pt: 3 }}>
+      <Box sx={{ paddingBottom: 10, backgroundColor: "#f5f5f5", pt: 3 }}>
         <Outlet />
       </Box>
       {/* <Footer /> */}

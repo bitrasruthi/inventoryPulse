@@ -32,6 +32,7 @@ const TabsCommon: React.FC<Props> = ({
             onChange={handleChange}
             aria-label="lab API tabs example"
             sx={{
+              ml: 2,
               "& .MuiTabs-indicator": {
                 top: {
                   // xs: 20,

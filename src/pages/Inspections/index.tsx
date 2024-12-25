@@ -54,7 +54,7 @@ const Inspections = () => {
   };
 
   return (
-    <Box className="container" sx={{ pl: 2 }}>
+    <Box>
       <Box sx={{ position: "relative" }}>
         <TabsCommon
           type={MenuTypeEnum.Inspections}
