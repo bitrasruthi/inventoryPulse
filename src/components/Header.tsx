@@ -18,6 +18,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useNavigate, useParams } from "react-router-dom";
 import LogoImg from "../assets/logo.png";
 import { paths } from "../routes/paths";
+import clsx from "clsx";
 
 const pages = [
   { name: "Dashboard", path: paths.HOME },
@@ -61,6 +62,10 @@ function Header() {
     setAnchorElUser(null);
   };
 
+  const isActiveMenu = (page: string) => {
+    return page === selectedMenu;
+  };
+
   return (
     <AppBar
       position="static"
@@ -71,17 +76,10 @@ function Header() {
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
+          <Box
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
               cursor: "pointer",
             }}
             onClick={() => {
@@ -89,9 +87,9 @@ function Header() {
             }}
           >
             <Logo />
-          </Typography>
+          </Box>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "block", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -164,19 +162,21 @@ function Header() {
                 key={page?.name}
                 onClick={() => handleCloseNavMenu(page)}
                 sx={{
-                  my: 2,
-                  color: "black",
+                  mx: 1,
+                  color: isActiveMenu(page?.name)
+                    ? `${theme.palette.primary.main}`
+                    : "black",
                   display: "block",
                   textTransform: "none",
-                  borderBottom:
-                    page?.name === selectedMenu
-                      ? `2px solid ${theme.palette.primary.main} !important`
-                      : "transparent",
-                  borderRadius: "0px",
-                  "&:focus": {
-                    background: "transparent",
-                  },
+                  borderBottom: isActiveMenu(page?.name)
+                    ? `2px solid ${theme.palette.primary.main} !important`
+                    : "transparent",
                 }}
+                className={clsx({
+                  "hover:bg-primary hover:text-white rounded-lg": !isActiveMenu(
+                    page?.name
+                  ),
+                })}
               >
                 {page?.name}
               </Button>
@@ -189,9 +189,7 @@ function Header() {
               alignItems: "center",
             }}
           >
-            <NotificationsNoneIcon
-              sx={{ color: "#111", pr: 5, position: "relative" }}
-            />
+            <NotificationsNoneIcon sx={{ color: "black", mr: 2 }} />
             <Box
               sx={{
                 height: 8,
