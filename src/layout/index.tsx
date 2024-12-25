@@ -13,10 +13,10 @@ const Layout: FC = () => {
 
   return (
     <Box position={"relative"} minHeight={"100vh"}>
-      <Box mb={5}>
+      <Box>
         <Header />
       </Box>
-      <Box sx={{ paddingBottom: "501px" }}>
+      <Box sx={{ paddingBottom: "501px", backgroundColor: "#f5f5f5", pt: 3 }}>
         <Outlet />
       </Box>
       {/* <Footer /> */}
