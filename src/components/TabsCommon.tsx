@@ -78,6 +78,7 @@ const TabsCommon: React.FC<Props> = ({
                 iconPosition="start"
                 value={item?.value}
                 sx={{
+                  px: 3,
                   background: "#fff",
                   borderTopLeftRadius: 12,
                   borderTopRightRadius: 12,
