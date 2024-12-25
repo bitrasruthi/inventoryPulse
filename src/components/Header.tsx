@@ -76,17 +76,10 @@ function Header() {
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
+          <Box
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
               cursor: "pointer",
             }}
             onClick={() => {
@@ -94,7 +87,7 @@ function Header() {
             }}
           >
             <Logo />
-          </Typography>
+          </Box>
 
           <Box sx={{ flexGrow: 1, display: { xs: "block", md: "none" } }}>
             <IconButton
@@ -196,9 +189,7 @@ function Header() {
               alignItems: "center",
             }}
           >
-            <NotificationsNoneIcon
-              sx={{ color: "black", mr:2 }}
-            />
+            <NotificationsNoneIcon sx={{ color: "black", mr: 2 }} />
             <Box
               sx={{
                 height: 8,

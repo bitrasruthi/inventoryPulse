@@ -3,6 +3,7 @@ import { FC, useEffect } from "react";
 import Box from "@mui/material/Box";
 import { Outlet, useLocation } from "react-router-dom";
 import Header from "../components/Header";
+import { Container } from "@mui/material";
 
 const Layout: FC = () => {
   const location = useLocation();
@@ -13,12 +14,12 @@ const Layout: FC = () => {
 
   return (
     <Box position={"relative"} minHeight={"100vh"}>
-      <Box mb={5}>
+      <Box mb={3}>
         <Header />
       </Box>
-      <Box sx={{ height: "inherit" }}>
+      <Container maxWidth={"xl"}>
         <Outlet />
-      </Box>
+      </Container>
       {/* <Footer /> */}
     </Box>
   );

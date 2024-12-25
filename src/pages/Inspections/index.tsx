@@ -1,10 +1,9 @@
-import { Container } from "@mui/material";
-import React from "react";
+import { Box } from "@mui/material";
 
 type Props = {};
 
 const Inspections = (props: Props) => {
-  return <Container>Inspections</Container>;
+  return <Box>Inspections</Box>;
 };
 
 export default Inspections;
