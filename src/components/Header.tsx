@@ -171,7 +171,7 @@ function Header() {
                   borderBottom: isActiveMenu(page?.name)
                     ? `2px solid ${theme.palette.primary.main} !important`
                     : "transparent",
-                  borderRadius: 0,
+                  borderRadius: isActiveMenu(page?.name) ? 0 : 2,
                 }}
                 className={clsx({
                   "hover:bg-primary hover:text-white rounded-lg": !isActiveMenu(

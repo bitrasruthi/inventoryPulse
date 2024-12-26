@@ -37,7 +37,7 @@ const TabsCommon: React.FC<Props> = ({
                 display: "flex",
                 justifyContent: "center",
                 backgroundColor: "transparent",
-                top: 0,
+                top: 1,
                 "::before": {
                   content: '""',
                   position: "absolute",
@@ -47,12 +47,6 @@ const TabsCommon: React.FC<Props> = ({
                   borderBottomLeftRadius: 15,
                   borderBottomRightRadius: 15,
                 },
-              },
-
-              "& .MuiTabs-indicatorSpan": {
-                maxWidth: 40,
-                width: "100%",
-                backgroundColor: "#635ee7",
               },
 
               "& .MuiTab-root": {
