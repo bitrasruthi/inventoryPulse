@@ -12,11 +12,18 @@ const Layout: FC = () => {
   }, [location.pathname]);
 
   return (
-    <Box position={"relative"} minHeight={"100vh"}>
+    <Box
+      position={"relative"}
+      height={"100vh"}
+      overflow={"hidden"}
+      sx={{
+        backgroundColor: "#f0f0f0",
+      }}
+    >
       <Box>
         <Header />
       </Box>
-      <Box sx={{ paddingBottom: 10, backgroundColor: "#f5f5f5", pt: 3 }}>
+      <Box sx={{ pt: 3 }}>
         <Outlet />
       </Box>
       {/* <Footer /> */}

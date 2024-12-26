@@ -74,8 +74,8 @@ function Header() {
         height: 60,
       }}
     >
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
+      <Box>
+        <Toolbar>
           <Box
             sx={{
               mr: 2,
@@ -248,7 +248,7 @@ function Header() {
             </Menu>
           </Box>
         </Toolbar>
-      </Container>
+      </Box>
     </AppBar>
   );
 }

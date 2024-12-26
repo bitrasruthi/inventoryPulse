@@ -17,6 +17,11 @@ const theme = createTheme({
   typography: {
     fontFamily: "lexend-regular",
   },
+  components: {
+    MuiButton: {
+      
+    }
+  }
 });
 
 export default theme;

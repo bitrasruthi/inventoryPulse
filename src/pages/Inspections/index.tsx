@@ -1,4 +1,10 @@
-import { Box, Divider, Grid2 as Grid, Typography } from "@mui/material";
+import {
+  Box,
+  Divider,
+  Grid2 as Grid,
+  Typography,
+  Container,
+} from "@mui/material";
 import { useState } from "react";
 import TabsCommon from "../../components/TabsCommon";
 import { MenuTypeEnum } from "../../constants/enum";
@@ -16,13 +22,13 @@ const Inspections = () => {
 
   const inspectionListContent = (
     <Grid container spacing={0}>
-      <Grid size={2}>
+      <Grid size={3}>
         <Filters filters={inspectionFilters} />
       </Grid>
       <Grid size={0}>
         <Divider orientation="vertical" />
       </Grid>
-      <Grid size={10}>
+      <Grid size={9}>
         <InspectionList />
       </Grid>
     </Grid>
@@ -30,13 +36,13 @@ const Inspections = () => {
 
   const inspectionCalendarContent = (
     <Grid container spacing={0}>
-      <Grid size={2}>
+      <Grid size={3}>
         <Filters filters={inspectionFilters} />
       </Grid>
       <Grid size={0}>
         <Divider orientation="vertical" />
       </Grid>
-      <Grid size={10}>
+      <Grid size={9}>
         <Typography>Calendar</Typography>
       </Grid>
     </Grid>
@@ -54,7 +60,11 @@ const Inspections = () => {
   };
 
   return (
-    <Box sx={{ position: "relative" }}>
+    <Box
+      sx={{
+        position: "relative",
+      }}
+    >
       <TabsCommon
         type={MenuTypeEnum.Inspections}
         tabMenuList={tabMenuList}

@@ -19,8 +19,14 @@ interface Props {
 
 const Filters: React.FC<Props> = ({ filters }) => {
   return (
-    <Box sx={{ minHeight: 400, width: "100%" }}>
-      {" "}
+    <Box
+      sx={{
+        height: "80vh !important",
+        overflowY: "auto",
+        px: 2,
+        py: 3,
+      }}
+    >
       {filters?.map((item: any, index: number) => (
         <>
           <Accordion elevation={0} sx={{ p: 1, pt: 0, pb: 0 }}>
