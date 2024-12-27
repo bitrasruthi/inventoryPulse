@@ -16,6 +16,17 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  --rs-primary-50: #f3edff;
+  --rs-primary-100: #d9c8fa;
+  --rs-primary-200: #c0a4f5;
+  --rs-primary-300: #ac83f2;
+  --rs-primary-400: #9761ed;
+  --rs-primary-500: #8441e8;
+  --rs-primary-600: #782fde;
+  --rs-primary-700: #671cc9;
+  --rs-primary-800: #530cab;
+  --rs-primary-900: #3d0082;
 }
 
 body,
