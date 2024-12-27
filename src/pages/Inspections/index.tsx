@@ -1,10 +1,4 @@
-import {
-  Box,
-  Divider,
-  Grid2 as Grid,
-  Typography,
-  Container,
-} from "@mui/material";
+import { Box, Divider, Grid2 as Grid, Typography } from "@mui/material";
 import { useState } from "react";
 import TabsCommon from "../../components/TabsCommon";
 import { MenuTypeEnum } from "../../constants/enum";
@@ -71,7 +65,12 @@ const Inspections = () => {
         onTabChange={(value) => setActiveTab(value)}
         tabContent={GetTabContentByActiveTab()}
       />
-      <GradientButton label="Add Inspection" menuList={inspectionBtnList} />
+      <GradientButton
+        label="Add Inspection"
+        menuList={inspectionBtnList}
+        isGradient={true}
+        hasMenu={true}
+      />
     </Box>
   );
 };

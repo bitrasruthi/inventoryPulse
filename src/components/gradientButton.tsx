@@ -5,9 +5,16 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 interface Props {
   label: string;
   menuList: any;
+  isGradient: boolean;
+  hasMenu: boolean;
 }
 
-const GradientButton: React.FC<Props> = ({ label, menuList }) => {
+const GradientButton: React.FC<Props> = ({
+  label,
+  menuList,
+  isGradient,
+  hasMenu,
+}) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -25,7 +32,9 @@ const GradientButton: React.FC<Props> = ({ label, menuList }) => {
           position: "absolute",
           top: 5,
           right: 10,
-          background: "linear-gradient(90deg, #ac42e9, #8542e9)",
+          background: isGradient
+            ? "linear-gradient(90deg, #ac42e9, #8542e9)"
+            : "#8542e9",
           color: "#fff",
           textTransform: "none",
           minWidth: 150,
@@ -43,24 +52,26 @@ const GradientButton: React.FC<Props> = ({ label, menuList }) => {
         />
       </Button>
 
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          "aria-labelledby": "basic-button",
-        }}
-      >
-        {menuList?.map((item: any) => (
-          <MenuItem sx={{ display: "flex", alignItems: "center" }}>
-            {item?.icon && <item.icon />}{" "}
-            <Typography fontSize={12} pl={1}>
-              {item?.name}
-            </Typography>
-          </MenuItem>
-        ))}
-      </Menu>
+      {hasMenu && (
+        <Menu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            "aria-labelledby": "basic-button",
+          }}
+        >
+          {menuList?.map((item: any) => (
+            <MenuItem sx={{ display: "flex", alignItems: "center" }}>
+              {item?.icon && <item.icon />}{" "}
+              <Typography fontSize={12} pl={1}>
+                {item?.name}
+              </Typography>
+            </MenuItem>
+          ))}
+        </Menu>
+      )}
     </>
   );
 };
