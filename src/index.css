@@ -26,3 +26,25 @@ html {
 * {
   box-sizing: border-box;
 }
+
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+  -webkit-appearance: none;
+  -webkit-overflow-scrolling: touch
+}
+
+::-webkit-scrollbar-thumb {
+  background: #F0F0F0;
+  border-radius: 10px;
+}
+
+::-webkit-scroll-thumb:horizontal {
+  min-height: 8px !important;
+}
+
+::-webkit-scrollbar-track {
+  background: #FFF;
+  border-radius: 10px;
+}

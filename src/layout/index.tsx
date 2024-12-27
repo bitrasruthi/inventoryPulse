@@ -15,7 +15,6 @@ const Layout: FC = () => {
     <Box
       position={"relative"}
       height={"100vh"}
-      overflow={"hidden"}
       sx={{
         backgroundColor: "#f0f0f0",
       }}
@@ -23,7 +22,7 @@ const Layout: FC = () => {
       <Box>
         <Header />
       </Box>
-      <Box sx={{ pt: 3 }}>
+      <Box sx={{ pt: 10 }}>
         <Outlet />
       </Box>
       {/* <Footer /> */}

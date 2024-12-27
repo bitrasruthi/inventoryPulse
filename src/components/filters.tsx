@@ -12,6 +12,7 @@ import {
 import React from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import theme from "../styles/theme";
+import ContentWrapper from "./contentWrapper";
 
 interface Props {
   filters: any;
@@ -19,14 +20,7 @@ interface Props {
 
 const Filters: React.FC<Props> = ({ filters }) => {
   return (
-    <Box
-      sx={{
-        height: "80vh !important",
-        overflowY: "auto",
-        px: 2,
-        py: 3,
-      }}
-    >
+    <ContentWrapper paddingX={2} paddingY={3}>
       {filters?.map((item: any, index: number) => (
         <>
           <Accordion elevation={0} sx={{ p: 1, pt: 0, pb: 0 }}>
@@ -63,7 +57,7 @@ const Filters: React.FC<Props> = ({ filters }) => {
           {index !== filters?.length - 1 && <Divider variant="fullWidth" />}
         </>
       ))}
-    </Box>
+    </ContentWrapper>
   );
 };
 
