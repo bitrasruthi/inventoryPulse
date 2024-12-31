@@ -7,7 +7,7 @@ interface Props {
   paddingY?: number;
 }
 
-const ContentWrapper: React.FC<Props> = ({ children, paddingX, paddingY }) => {
+const ContentWrapper: React.FC<Props> = ({ children, paddingX = 3, paddingY=3 }) => {
   return (
     <Box
       sx={{

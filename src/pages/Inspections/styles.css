@@ -1,0 +1,88 @@
+@import "rsuite/dist/rsuite.min.css";
+
+.fc .fc-button {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.15s ease-out, background-color 0.15s ease-out;
+  border: var(--rs-btn-default-border, none);
+  user-select: none;
+  text-decoration: none;
+  color: var(--rs-btn-default-text);
+  background-color: var(--rs-btn-default-bg);
+  border-radius: 6px;
+  box-shadow: none !important;
+  text-transform: capitalize;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 8px 12px;
+}
+
+.fc .fc-button .button-activated {
+  color: var(--rs-btn-default-hover-text);
+  background-color: var(--rs-btn-default-hover-bg);
+  text-decoration: none;
+}
+.fc .fc-button .button-pressed {
+  color: var(--rs-btn-default-active-text);
+  background-color: var(--rs-btn-default-active-bg);
+}
+.fc .fc-button .button-disabled {
+  cursor: var(--rs-primary-600);
+  color: var(--rs-btn-default-disabled-text);
+  background-color: var(--rs-btn-default-disabled-bg);
+}
+.fc .fc-button.fc-button-active {
+  color: var(--rs-btn-default-active-text) !important;
+  background-color: var(--rs-btn-default-active-bg) !important;
+}
+.fc .fc-col-header-cell-cushion {
+  font-weight: 500;
+  color: var(--rs-text-primary);
+}
+.fc .fc-daygrid-day-number {
+  color: var(--rs-text-primary);
+}
+.fc .fc-scrollgrid {
+  border: none;
+}
+.fc .fc-scrollgrid td,
+.fc .fc-scrollgrid th {
+  color: red;
+  border: 1px solid var(--rs-border-secondary);
+}
+.fc .fc-scrollgrid th {
+  height: 36px;
+  line-height: 36px;
+}
+.fc .fc-daygrid-event {
+  margin-top: 1px;
+}
+.fc .fc-daygrid-dot-event {
+  padding: 4px;
+  background-color: var(--rs-btn-default-bg);
+  color: var(--rs-text-primary);
+}
+.fc .fc-event-main {
+  padding: 4px;
+}
+.fc .fc-h-event {
+  background-color: var(--rs-btn-primary-bg);
+  color: var(--rs-btn-primary-text);
+  border-color: var(--rs-btn-primary-bg);
+}
+.fc .fc-event-title {
+  font-weight: 600;
+  text-overflow: ellipsis;
+}
+
+.fc .fc-button:hover,
+.fc .fc-button:focus {
+  color: var(--rs-btn-default-hover-text);
+  background-color: var(--rs-btn-default-hover-bg);
+  text-decoration: none;
+}

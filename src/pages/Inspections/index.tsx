@@ -10,6 +10,7 @@ import {
   tabMenuList,
 } from "../../constants/constants";
 import GradientButton from "../../components/gradientButton";
+import Calendar from "./InspectionCalender";
 
 const Inspections = () => {
   const [activeTab, setActiveTab] = useState<string>(tabMenuList[0]?.value);
@@ -37,7 +38,7 @@ const Inspections = () => {
         <Divider orientation="vertical" />
       </Grid>
       <Grid size={9}>
-        <Typography>Calendar</Typography>
+        <Calendar />
       </Grid>
     </Grid>
   );
