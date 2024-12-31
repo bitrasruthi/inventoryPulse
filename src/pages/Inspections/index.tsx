@@ -1,6 +1,6 @@
 import { Box, Divider, Grid2 as Grid, Typography } from "@mui/material";
 import { useState } from "react";
-import TabsCommon from "../../components/TabsCommon";
+import TabsCommon from "../../components/tabsCommon";
 import { MenuTypeEnum } from "../../constants/enum";
 import Filters from "../../components/filters";
 import InspectionList from "./inspectionList";
