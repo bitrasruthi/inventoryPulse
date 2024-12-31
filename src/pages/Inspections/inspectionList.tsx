@@ -41,8 +41,9 @@ const InspectionList = (props: Props) => {
         <Grid size={6}>
           <SelectField
             value={selectedValue}
-            handleSelect={() => handleSelectChange}
+            handleSelect={handleSelectChange}
             options={options}
+            selectedValue={selectedValue}
           />
         </Grid>
         <Grid size={6}>

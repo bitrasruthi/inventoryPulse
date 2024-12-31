@@ -13,9 +13,10 @@ interface IProps extends OutlinedSelectProps {
   defaultValue?: string;
   options: { label: string; value: string }[];
   handleSelect: (selectedValue: string) => void;
+  selectedValue: string;
 }
 
-const StyledSelect = styled(Select)(({ theme }) => ({
+const StyledSelect = styled(Select<string>)(({ theme }) => ({
   height: 30,
   "&:hover .MuiOutlinedInput-notchedOutline": {
     borderColor: "#8542E9",
@@ -26,10 +27,10 @@ const StyledSelect = styled(Select)(({ theme }) => ({
 }));
 
 const SelectField: React.FC<IProps> = (props) => {
-  const { options, handleSelect } = props;
+  const { options, handleSelect, selectedValue } = props;
 
-  const handleSelectChange = (value: string) => {
-    handleSelect(value);
+  const handleChange = (event: SelectChangeEvent) => {
+    handleSelect(event.target.value);
   };
 
   return (
@@ -39,9 +40,8 @@ const SelectField: React.FC<IProps> = (props) => {
         {...props}
         fullWidth
         displayEmpty
-        onSelect={(e) => {
-          // handleSelectChange(e.target.value as string);
-        }}
+        value={selectedValue}
+        onChange={handleChange}
       >
         {options?.map((option) => (
           <MenuItem key={option?.value} value={option?.value}>
