@@ -4,36 +4,39 @@ import {
   OutlinedTextFieldProps,
   styled,
   TextField,
-  Typography,
 } from "@mui/material";
 import React from "react";
+import LabelCommon from "./labelCommon";
 
 interface IProps extends OutlinedTextFieldProps {
   StartAdormentIcon?: React.ElementType;
   EndAdormentIcon?: React.ElementType;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const StyledTextField = styled(TextField)(({ theme }) => ({
   "& .MuiInputBase-root": {
-    height: 30,
     "&:hover .MuiOutlinedInput-notchedOutline": {
-      borderColor: "#8542E9",
+      borderColor: theme.palette.primary.main,
     },
     "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-      borderColor: "#8542E9",
+      borderColor: theme.palette.primary.main,
+    },
+    "& .MuiInputBase-input": {
+      fontWeight: 600,
     },
   },
 }));
 
 const OutlinedTextField: React.FC<IProps> = (props) => {
-  const { StartAdormentIcon, EndAdormentIcon } = props;
+  const { StartAdormentIcon, EndAdormentIcon, label, required } = props;
   return (
     <>
-      <Typography>Field</Typography>
+      <LabelCommon fieldName={label} isRequired={required} />
       <StyledTextField
         fullWidth
+        size="small"
         {...props}
+        label={""}
         slotProps={{
           input: {
             startAdornment: (

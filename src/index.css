@@ -1,10 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('../src/assets/fonts/fonts.css');
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  font-family: roboto-regular, sans-serif;
+    line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
@@ -22,6 +23,7 @@ body,
 html {
   margin: 0;
   padding: 0;
+  font-family: inherit;
 }
 * {
   box-sizing: border-box;
@@ -47,4 +49,28 @@ html {
 ::-webkit-scrollbar-track {
   background: #FFF;
   border-radius: 10px;
+}
+
+.roboto-black {
+  font-family: roboto-black !important;
+}
+
+.roboto-bold {
+  font-family: roboto-bold !important;
+}
+
+.roboto-medium {
+  font-family: roboto-medium !important;
+}
+
+.roboto-light {
+  font-family: roboto-light !important;
+}
+
+.roboto-regular {
+  font-family: roboto-regular !important;
+}
+
+.roboto-thin {
+  font-family: roboto-thin !important;
 }

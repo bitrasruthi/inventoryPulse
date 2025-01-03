@@ -62,8 +62,11 @@ const GradientButton: React.FC<Props> = ({
             "aria-labelledby": "basic-button",
           }}
         >
-          {menuList?.map((item: any) => (
-            <MenuItem sx={{ display: "flex", alignItems: "center" }}>
+          {menuList?.map((item: any, index: number) => (
+            <MenuItem
+              key={index}
+              sx={{ display: "flex", alignItems: "center" }}
+            >
               {item?.icon && <item.icon />}{" "}
               <Typography fontSize={12} pl={1}>
                 {item?.name}
