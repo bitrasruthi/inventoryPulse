@@ -1,5 +1,5 @@
-import { Box, Grid2 as Grid, Grid2, SelectChangeEvent } from "@mui/material";
-import React, { ChangeEvent, useState } from "react";
+import { Box, Grid2 as Grid } from "@mui/material";
+import React, { useState } from "react";
 import ContentWrapper from "../../components/contentWrapper";
 import OutlinedTextField from "../../components/outlinedTextField";
 import SwitchButton from "../../components/switchButton";
@@ -98,6 +98,51 @@ const InspectionList = (props: Props) => {
           </Fieldset>
         </Grid>
       </Grid>
+      <Fieldset title={<div>Address</div>}>
+        <SelectField
+          value={selectedValue}
+          onChange={handleSelectChange}
+          options={options}
+          label={"Property Type"}
+          required={true}
+        />
+        <OutlinedTextField
+          variant="outlined"
+          startAdormentIcon={AccountBalanceIcon}
+          //endAdormentIcon={AdUnitsIcon}
+          onChange={handleTextFieldChange}
+          required={true}
+          label={"First Name"}
+        />
+        <SwitchButton
+          label={"Is Working?"}
+          defaultChecked
+          onChange={(e) => console.log(e)}
+        />
+      </Fieldset>
+
+      <Fieldset title={<div>Address</div>}>
+        <SelectField
+          value={selectedValue}
+          onChange={handleSelectChange}
+          options={options}
+          label={"Property Type"}
+          required={true}
+        />
+        <OutlinedTextField
+          variant="outlined"
+          startAdormentIcon={AccountBalanceIcon}
+          //endAdormentIcon={AdUnitsIcon}
+          onChange={handleTextFieldChange}
+          required={true}
+          label={"First Name"}
+        />
+        <SwitchButton
+          label={"Is Working?"}
+          defaultChecked
+          onChange={(e) => console.log(e)}
+        />
+      </Fieldset>
     </ContentWrapper>
   );
 };

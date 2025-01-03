@@ -1,4 +1,5 @@
 import {
+  Box,
   IconButton,
   InputAdornment,
   OutlinedTextFieldProps,
@@ -35,7 +36,7 @@ const OutlinedTextField: React.FC<IProps> = (props) => {
     required,
   } = props;
   return (
-    <>
+    <Box mb={3}>
       <LabelCommon fieldName={label} isRequired={required} />
       <StyledTextField
         fullWidth
@@ -73,7 +74,7 @@ const OutlinedTextField: React.FC<IProps> = (props) => {
           },
         }}
       />
-    </>
+    </Box>
   );
 };
 

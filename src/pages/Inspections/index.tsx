@@ -1,6 +1,5 @@
-import { Box, Divider, Grid2 as Grid, Typography } from "@mui/material";
+import { Box, Divider, Grid2 as Grid } from "@mui/material";
 import { useState } from "react";
-import TabsCommon from "../../components/tabsCommon";
 import { MenuTypeEnum } from "../../constants/enum";
 import Filters from "../../components/filters";
 import InspectionList from "./inspectionList";
@@ -11,6 +10,7 @@ import {
 } from "../../constants/constants";
 import GradientButton from "../../components/gradientButton";
 import Calendar from "./InspectionCalender";
+import TabsCommon from "../../components/TabsCommon";
 
 const Inspections = () => {
   const [activeTab, setActiveTab] = useState<string>(tabMenuList[0]?.value);
