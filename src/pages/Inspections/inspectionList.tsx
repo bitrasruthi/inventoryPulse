@@ -1,4 +1,4 @@
-import { Box, Grid2 as Grid, SelectChangeEvent } from "@mui/material";
+import { Box, Grid2 as Grid, Grid2, SelectChangeEvent } from "@mui/material";
 import React, { ChangeEvent, useState } from "react";
 import ContentWrapper from "../../components/contentWrapper";
 import OutlinedTextField from "../../components/outlinedTextField";
@@ -36,36 +36,68 @@ const InspectionList = (props: Props) => {
   return (
     <ContentWrapper>
       <Box p={1}>InspectionList</Box>
-      <Fieldset title={<div>User Info</div>}>
-        <Grid container spacing={4}>
-          <Grid size={6}>
-            <SelectField
-              value={selectedValue}
-              onChange={handleSelectChange}
-              options={options}
-              label={"Property Type"}
-              required={true}
-            />
-          </Grid>
-          <Grid size={6}>
-            <OutlinedTextField
-              variant="outlined"
-              StartAdormentIcon={AccountBalanceIcon}
-              EndAdormentIcon={AdUnitsIcon}
-              onChange={handleTextFieldChange}
-              required={true}
-              label={"First Name"}
-            />
-          </Grid>
-          <Grid size={6}>
-            <SwitchButton
-              label={"Garage"}
-              defaultChecked
-              onChange={(e) => console.log(e)}
-            />
-          </Grid>
+      <Grid container spacing={4}>
+        <Grid size={6}>
+          <Fieldset title={<div>User Info</div>}>
+            <Grid>
+              <SelectField
+                value={selectedValue}
+                onChange={handleSelectChange}
+                options={options}
+                label={"Property Type"}
+                required={true}
+              />
+            </Grid>
+            <Grid>
+              <OutlinedTextField
+                variant="outlined"
+                startAdormentIcon={AccountBalanceIcon}
+                endAdormentIcon={AdUnitsIcon}
+                onChange={handleTextFieldChange}
+                required={true}
+                label={"First Name"}
+              />
+            </Grid>
+            <Grid>
+              <SwitchButton
+                label={"Garage"}
+                defaultChecked
+                onChange={(e) => console.log(e)}
+              />
+            </Grid>
+          </Fieldset>
         </Grid>
-      </Fieldset>
+        <Grid size={6}>
+          <Fieldset title={<div>User Info</div>}>
+            <Grid>
+              <SelectField
+                value={selectedValue}
+                onChange={handleSelectChange}
+                options={options}
+                label={"Property Type"}
+                required={true}
+              />
+            </Grid>
+            <Grid>
+              <OutlinedTextField
+                variant="outlined"
+                startAdormentIcon={AccountBalanceIcon}
+                endAdormentIcon={AdUnitsIcon}
+                onChange={handleTextFieldChange}
+                required={true}
+                label={"First Name"}
+              />
+            </Grid>
+            <Grid>
+              <SwitchButton
+                label={"Garage"}
+                defaultChecked
+                onChange={(e) => console.log(e)}
+              />
+            </Grid>
+          </Fieldset>
+        </Grid>
+      </Grid>
     </ContentWrapper>
   );
 };
