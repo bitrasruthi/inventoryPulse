@@ -2,7 +2,7 @@
 import { FC, useEffect } from "react";
 import Box from "@mui/material/Box";
 import { Outlet, useLocation } from "react-router-dom";
-import Header from "../components/Header";
+import Header from "../components/header";
 
 const Layout: FC = () => {
   const location = useLocation();

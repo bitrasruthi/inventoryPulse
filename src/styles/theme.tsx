@@ -15,13 +15,11 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: "lexend-regular",
+    fontFamily: "roboto-regular, sans-serif",
   },
   components: {
-    MuiButton: {
-      
-    }
-  }
+    MuiButton: {},
+  },
 });
 
 export default theme;
