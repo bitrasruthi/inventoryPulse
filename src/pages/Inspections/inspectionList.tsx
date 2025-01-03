@@ -7,6 +7,7 @@ import SelectField from "../../components/selectField";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import AdUnitsIcon from "@mui/icons-material/AdUnits";
 import useDebounce from "../../helpers/UseDebounce";
+import Fieldset from "../../components/fieldSet";
 
 type Props = {};
 
@@ -22,8 +23,8 @@ const InspectionList = (props: Props) => {
 
   const debouncedSearch = useDebounce(searchTerm, 500);
 
-  const handleSelectChange = (value: string) => {
-    setSelectedValue(value as string);
+  const handleSelectChange = (event: any) => {
+    setSelectedValue(event.target.value as string);
   };
 
   const handleTextFieldChange = (
@@ -32,31 +33,39 @@ const InspectionList = (props: Props) => {
     setSearchTerm(event.target.value as string);
   };
 
-  console.log(debouncedSearch);
-
   return (
-    <ContentWrapper paddingX={2} paddingY={3}>
+    <ContentWrapper>
       <Box p={1}>InspectionList</Box>
-      <Grid container spacing={4}>
-        <Grid size={6}>
-          <SelectField
-            value={selectedValue}
-            handleSelect={() => handleSelectChange}
-            options={options}
-          />
+      <Fieldset title={<div>User Info</div>}>
+        <Grid container spacing={4}>
+          <Grid size={6}>
+            <SelectField
+              value={selectedValue}
+              onChange={handleSelectChange}
+              options={options}
+              label={"Property Type"}
+              required={true}
+            />
+          </Grid>
+          <Grid size={6}>
+            <OutlinedTextField
+              variant="outlined"
+              StartAdormentIcon={AccountBalanceIcon}
+              EndAdormentIcon={AdUnitsIcon}
+              onChange={handleTextFieldChange}
+              required={true}
+              label={"First Name"}
+            />
+          </Grid>
+          <Grid size={6}>
+            <SwitchButton
+              label={"Garage"}
+              defaultChecked
+              onChange={(e) => console.log(e)}
+            />
+          </Grid>
         </Grid>
-        <Grid size={6}>
-          <OutlinedTextField
-            variant="outlined"
-            StartAdormentIcon={AccountBalanceIcon}
-            EndAdormentIcon={AdUnitsIcon}
-            onChange={handleTextFieldChange}
-          />
-        </Grid>
-        <Grid size={6}>
-          <SwitchButton label={"Garage"} />
-        </Grid>
-      </Grid>
+      </Fieldset>
     </ContentWrapper>
   );
 };

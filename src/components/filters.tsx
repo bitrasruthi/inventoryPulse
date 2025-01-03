@@ -23,7 +23,7 @@ const Filters: React.FC<Props> = ({ filters }) => {
     <ContentWrapper paddingX={2} paddingY={3}>
       {filters?.map((item: any, index: number) => (
         <>
-          <Accordion elevation={0} sx={{ p: 1, pt: 0, pb: 0 }}>
+          <Accordion key={index} elevation={0} sx={{ p: 1, pt: 0, pb: 0 }}>
             <AccordionSummary
               sx={{ p: 0 }}
               expandIcon={<ExpandMoreIcon />}

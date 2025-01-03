@@ -1,15 +1,4 @@
-import {
-  OutlinedTextFieldProps,
-  TextField,
-  Typography,
-  Select,
-  OutlinedSelectProps,
-  Box,
-  Switch,
-  styled,
-  SwitchProps,
-  FormControlLabel,
-} from "@mui/material";
+import { Typography, Box, Switch, styled, SwitchProps } from "@mui/material";
 import React from "react";
 
 const StyledSwitch = styled((props: SwitchProps) => (
@@ -18,6 +7,7 @@ const StyledSwitch = styled((props: SwitchProps) => (
   width: 50,
   height: 26,
   padding: 0,
+  margin: "0px !important",
   "& .MuiSwitch-switchBase": {
     padding: 0,
     margin: 2,
@@ -82,7 +72,7 @@ const SwitchButton: React.FC<IProps> = (props) => {
         }}
       >
         <Typography>{label}</Typography>
-        <StyledSwitch sx={{ m: 1 }} defaultChecked />
+        <StyledSwitch sx={{ m: 1 }} {...props} />
       </Box>
     </>
   );

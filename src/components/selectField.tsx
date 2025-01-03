@@ -1,48 +1,31 @@
-import {
-  Typography,
-  Select,
-  OutlinedSelectProps,
-  SelectChangeEvent,
-  MenuItem,
-  styled,
-} from "@mui/material";
+import { Select, MenuItem, BaseSelectProps } from "@mui/material";
 import React from "react";
+import { styled } from "@mui/material/styles";
+import LabelCommon from "./labelCommon";
 
-interface IProps extends OutlinedSelectProps {
-  value: string;
-  defaultValue?: string;
+interface IProps extends BaseSelectProps {
   options: { label: string; value: string }[];
-  handleSelect: (selectedValue: string) => void;
 }
 
 const StyledSelect = styled(Select)(({ theme }) => ({
-  height: 30,
   "&:hover .MuiOutlinedInput-notchedOutline": {
-    borderColor: "#8542E9",
+    borderColor: theme.palette.primary.main,
   },
   "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-    borderColor: "#8542E9",
+    borderColor: theme.palette.primary.main,
+  },
+  "& .MuiInputBase-input": {
+    fontWeight: 600,
   },
 }));
 
 const SelectField: React.FC<IProps> = (props) => {
-  const { options, handleSelect } = props;
-
-  const handleSelectChange = (value: string) => {
-    handleSelect(value);
-  };
+  const { options, required, label } = props;
 
   return (
     <>
-      <Typography>Field</Typography>
-      <StyledSelect
-        {...props}
-        fullWidth
-        displayEmpty
-        onSelect={(e) => {
-          // handleSelectChange(e.target.value as string);
-        }}
-      >
+      <LabelCommon fieldName={label} isRequired={required} />
+      <StyledSelect {...props} fullWidth displayEmpty size="small" label={""}>
         {options?.map((option) => (
           <MenuItem key={option?.value} value={option?.value}>
             {option?.label}

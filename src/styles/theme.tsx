@@ -15,24 +15,10 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: "lexend-regular",
+    fontFamily: "roboto-regular, sans-serif",
   },
   components: {
     MuiButton: {},
-    MuiOutlinedInput: {
-      styleOverrides: {
-        root: {
-          "& .MuiOutlinedInput-notchedOutline": {
-            border: `5px solid green !important`,
-          },
-          "&.Mui-focused": {
-            "& .MuiOutlinedInput-notchedOutline": {
-              border: `5px dotted red !important`,
-            },
-          },
-        },
-      },
-    },
   },
 });
 
