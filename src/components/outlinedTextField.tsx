@@ -9,8 +9,8 @@ import React from "react";
 import LabelCommon from "./labelCommon";
 
 interface IProps extends OutlinedTextFieldProps {
-  StartAdormentIcon?: React.ElementType;
-  EndAdormentIcon?: React.ElementType;
+  startAdormentIcon?: React.ElementType;
+  endAdormentIcon?: React.ElementType;
 }
 
 export const StyledTextField = styled(TextField)(({ theme }) => ({
@@ -28,7 +28,12 @@ export const StyledTextField = styled(TextField)(({ theme }) => ({
 }));
 
 const OutlinedTextField: React.FC<IProps> = (props) => {
-  const { StartAdormentIcon, EndAdormentIcon, label, required } = props;
+  const {
+    startAdormentIcon: StartAdormentIcon,
+    endAdormentIcon: EndAdormentIcon,
+    label,
+    required,
+  } = props;
   return (
     <>
       <LabelCommon fieldName={label} isRequired={required} />

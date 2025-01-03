@@ -24,7 +24,7 @@ const Fieldset = ({ title, children, ...props }: FieldsetProps) => {
           sx={{
             fontSize: "1.2rem",
             fontWeight: "bold",
-            paddingX: 2,
+            paddingX: 1,
           }}
         >
           {title}
