@@ -1,4 +1,4 @@
-@import url('../src/assets/fonts/fonts.css');
+@import url("../src/assets/fonts/fonts.css");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,10 +6,7 @@
 :root {
   font-family: "Roboto", serif;
   line-height: 1.5;
-  font-family: roboto-regular, sans-serif;
-  line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
   background-color: #fff;
   color: #242424;
@@ -49,7 +46,7 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: blue;
+  background: #f0f0f0;
   border-radius: 20px;
 }
 
@@ -62,27 +59,26 @@ html {
   border-radius: 10px;
 }
 
-
 .roboto-black {
-  font-family: 'roboto-black', sans-serif !important;
+  font-family: "roboto-black", sans-serif !important;
 }
 
 .roboto-bold {
-  font-family: 'roboto-bold', sans-serif !important;
+  font-family: "roboto-bold", sans-serif !important;
 }
 
 .roboto-medium {
-  font-family: 'roboto-medium', sans-serif !important;
+  font-family: "roboto-medium", sans-serif !important;
 }
 
 .roboto-light {
-  font-family: 'roboto-light', sans-serif !important;
+  font-family: "roboto-light", sans-serif !important;
 }
 
 .roboto-regular {
-  font-family: 'roboto-regular', sans-serif !important;
+  font-family: "roboto-regular", sans-serif !important;
 }
 
 .roboto-thin {
-  font-family: 'roboto-thin', sans-serif !important;
+  font-family: "roboto-thin", sans-serif !important;
 }
