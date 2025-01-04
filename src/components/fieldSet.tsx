@@ -21,9 +21,9 @@ const Fieldset = ({ title, children, ...props }: FieldsetProps) => {
       {title && (
         <Typography
           component="legend"
+          className="roboto-black"
           sx={{
             fontSize: "1.2rem",
-            fontWeight: "bold",
             paddingX: 2,
           }}
         >

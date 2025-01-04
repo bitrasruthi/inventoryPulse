@@ -1,11 +1,11 @@
+@import url('../src/assets/fonts/fonts.css');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('../src/assets/fonts/fonts.css');
 
 :root {
-  font-family: roboto-regular, sans-serif;
-    line-height: 1.5;
+  font-family: "Roboto", serif;
+  line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
@@ -23,7 +23,6 @@ body,
 html {
   margin: 0;
   padding: 0;
-  font-family: inherit;
 }
 * {
   box-sizing: border-box;
@@ -31,15 +30,15 @@ html {
 
 
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 8px;
   height: 8px;
   -webkit-appearance: none;
   -webkit-overflow-scrolling: touch
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #F0F0F0;
-  border-radius: 10px;
+  background: blue;
+  border-radius: 20px;
 }
 
 ::-webkit-scroll-thumb:horizontal {
@@ -51,26 +50,27 @@ html {
   border-radius: 10px;
 }
 
+
 .roboto-black {
-  font-family: roboto-black !important;
+  font-family: 'roboto-black', sans-serif !important;
 }
 
 .roboto-bold {
-  font-family: roboto-bold !important;
+  font-family: 'roboto-bold', sans-serif !important;
 }
 
 .roboto-medium {
-  font-family: roboto-medium !important;
+  font-family: 'roboto-medium', sans-serif !important;
 }
 
 .roboto-light {
-  font-family: roboto-light !important;
+  font-family: 'roboto-light', sans-serif !important;
 }
 
 .roboto-regular {
-  font-family: roboto-regular !important;
+  font-family: 'roboto-regular', sans-serif !important;
 }
 
 .roboto-thin {
-  font-family: roboto-thin !important;
+  font-family: 'roboto-thin', sans-serif !important;
 }

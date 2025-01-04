@@ -22,7 +22,7 @@ export const StyledTextField = styled(TextField)(({ theme }) => ({
       borderColor: theme.palette.primary.main,
     },
     "& .MuiInputBase-input": {
-      fontWeight: 600,
+      fontFamily: "roboto-bold",
     },
   },
 }));

@@ -134,7 +134,7 @@ function Header() {
             sx={{
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontWeight: 700,
+              fontFamily: "roboto-black",
               textDecoration: "none",
               justifyContent: "space-between",
               cursor: "pointer",
@@ -211,10 +211,18 @@ function Header() {
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                 <Box textAlign={"left"} pl={1}>
                   {" "}
-                  <Typography color="#111" fontSize={12} fontWeight={700}>
+                  <Typography
+                    color="#111"
+                    fontSize={12}
+                    fontFamily={"roboto-black"}
+                  >
                     User Name{" "}
                   </Typography>{" "}
-                  <Typography color="#1D7486" fontSize={12} fontWeight={700}>
+                  <Typography
+                    color="#1D7486"
+                    fontSize={12}
+                    fontFamily={"roboto-black"}
+                  >
                     test@email.com{" "}
                   </Typography>{" "}
                 </Box>

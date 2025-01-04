@@ -33,18 +33,27 @@ export const inspectionFilters = [
       { id: 4, name: "In review" },
       { id: 5, name: "Completed" },
       { id: 6, name: "Closed" },
-      { id: 5, name: "Cancelled" },
+      { id: 7, name: "Cancelled" },
     ],
   },
   {
     id: 3,
     name: "Inspection Type",
     values: [
-      { id: 1, name: "Select/Unselect All" },
-      { id: 2, name: "Check in" },
-      { id: 2, name: "Check out" },
-      { id: 2, name: "Inventory & Check in" },
-      { id: 2, name: "Inventory & Schedule of condition" },
+      { id: 8, name: "Select/Unselect All" },
+      { id: 9, name: "Check in" },
+      { id: 10, name: "Check out" },
+      { id: 11, name: "Inventory & Check in" },
+      { id: 12, name: "Inventory & Schedule of condition" },
+    ],
+  },
+  {
+    id: 4,
+    name: "Confirmed",
+    values: [
+      { id: 13, name: "Confirmed" },
+      { id: 14, name: "To Be Confirmed" },
+      { id: 15, name: "To Be Confirmed By Contact" },
     ],
   },
 ];
@@ -53,4 +62,87 @@ export const inspectionBtnList = [
   { id: 1, name: "Existing Property", icon: HomeIcon },
   { id: 2, name: "New Property", icon: AddHomeIcon },
   { id: 3, name: "Import", icon: ImportIcon },
+];
+
+export const inspectionColors = ["#00BB54", "#EE9300", "#0182FC"];
+
+export const inspectionListDummy = [
+  {
+    id: 1,
+    status: 1,
+    buildingStatus: 1,
+    address:
+      "115-116, Beaverbrook Town House, Sloane St, London SW16 9PJ, United Kingdom",
+    beds: 3,
+    baths: 3,
+    buildingType: "Zeltra",
+    contact: "Kumar Raja",
+    barCodeNum: 23456789,
+    date: "2025-01-04T10:15:00Z",
+  },
+  {
+    id: 2,
+    status: 2,
+    buildingStatus: 2,
+    address:
+      "115-116, Beaverbrook Town House, Sloane St, London SW16 9PJ, United Kingdom",
+    beds: 3,
+    baths: 3,
+    buildingType: "Zeltra",
+    contact: "Kumar Raja",
+    barCodeNum: 23456789,
+    date: "2025-01-04T10:15:00Z",
+  },
+  {
+    id: 3,
+    status: 3,
+    buildingStatus: 3,
+    address:
+      "115-116, Beaverbrook Town House, Sloane St, London SW16 9PJ, United Kingdom",
+    beds: 3,
+    baths: 3,
+    buildingType: "Zeltra",
+    contact: "Kumar Raja",
+    barCodeNum: 23456789,
+    date: "2025-01-04T10:15:00Z",
+  },
+  {
+    id: 4,
+    status: 1,
+    buildingStatus: 1,
+    address:
+      "115-116, Beaverbrook Town House, Sloane St, London SW16 9PJ, United Kingdom",
+    beds: 3,
+    baths: 3,
+    buildingType: "Zeltra",
+    contact: "Kumar Raja",
+    barCodeNum: 23456789,
+    date: "2025-01-04T10:15:00Z",
+  },
+  {
+    id: 3,
+    status: 3,
+    buildingStatus: 3,
+    address:
+      "115-116, Beaverbrook Town House, Sloane St, London SW16 9PJ, United Kingdom",
+    beds: 3,
+    baths: 3,
+    buildingType: "Zeltra",
+    contact: "Kumar Raja",
+    barCodeNum: 23456789,
+    date: "2025-01-04T10:15:00Z",
+  },
+  {
+    id: 4,
+    status: 1,
+    buildingStatus: 1,
+    address:
+      "115-116, Beaverbrook Town House, Sloane St, London SW16 9PJ, United Kingdom",
+    beds: 3,
+    baths: 3,
+    buildingType: "Zeltra",
+    contact: "Kumar Raja",
+    barCodeNum: 23456789,
+    date: "2025-01-04T10:15:00Z",
+  },
 ];

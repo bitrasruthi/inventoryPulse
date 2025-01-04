@@ -15,7 +15,7 @@ const StyledSelect = styled(Select)(({ theme }) => ({
     borderColor: theme.palette.primary.main,
   },
   "& .MuiInputBase-input": {
-    fontWeight: 600,
+    fontFamily: "roboto-bold",
   },
 }));
 

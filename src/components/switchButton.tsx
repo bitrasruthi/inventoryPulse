@@ -67,7 +67,6 @@ const SwitchButton: React.FC<IProps> = (props) => {
           background: "#f8f8f8",
           p: 1,
           borderRadius: 2,
-          fontWeight: 600,
           height: 52,
         }}
       >

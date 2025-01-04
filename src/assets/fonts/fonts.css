@@ -1,31 +1,31 @@
 /* // All fonts to be added here.. */
 @font-face {
     font-family: roboto-black;
-    src: url('./Roboto-Black.ttf');
+    src: url('./Roboto/Roboto-Black.ttf');
 }
 
 @font-face {
     font-family: roboto-bold;
-        src: url('./Roboto-Bold.ttf');
-}
-
-@font-face {
-    font-family: roboto-light;
-    src: url('./Roboto-Light.ttf');
+    src: url('./Roboto/Roboto-Bold.ttf');
 }
 
 @font-face {
     font-family: roboto-medium;
-    src: url('./Roboto-Medium.ttf');
+    src: url('./Roboto/Roboto-Medium.ttf');
 }
 
 @font-face {
     font-family: roboto-regular;
-    src: url('./Roboto-Regular.ttf');
+    src: url('./Roboto/Roboto-Regular.ttf');
+}
+
+@font-face {
+    font-family: roboto-light;
+    src: url('./Roboto/Roboto-Light.ttf');
 }
 
 @font-face {
     font-family: roboto-thin;
-    src: url('./Roboto-Thin.ttf');
+    src: url('./Roboto/Roboto-Thin.ttf');
 }
 
