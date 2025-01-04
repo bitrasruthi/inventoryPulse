@@ -17,13 +17,13 @@ const Inspections = () => {
 
   const inspectionListContent = (
     <Grid container spacing={0}>
-      <Grid size={3}>
+      <Grid size={{ md: 3 }} display={{ xs: "none", md: "block" }}>
         <Filters filters={inspectionFilters} />
       </Grid>
       <Grid size={0}>
         <Divider orientation="vertical" />
       </Grid>
-      <Grid size={9}>
+      <Grid size={{ xs: 12, md: 9 }}>
         <InspectionList />
       </Grid>
     </Grid>

@@ -23,10 +23,13 @@
     "clsx": "^2.1.1",
     "date-fns": "^2.29.2",
     "lodash": "^4.17.21",
+    "moment": "^2.30.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.1.1",
-    "rsuite": "^5.76.0"
+    "rsuite": "^5.76.0",
+    "zustand": "^4.5.2",
+    "zustand-persist": "^0.4.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.15.0",

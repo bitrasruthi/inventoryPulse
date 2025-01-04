@@ -1,13 +1,12 @@
-import { Box, Grid2 as Grid } from "@mui/material";
+import { Box } from "@mui/material";
 import React, { useState } from "react";
 import ContentWrapper from "../../components/contentWrapper";
-import OutlinedTextField from "../../components/outlinedTextField";
-import SwitchButton from "../../components/switchButton";
-import SelectField from "../../components/selectField";
-import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
-import AdUnitsIcon from "@mui/icons-material/AdUnits";
 import useDebounce from "../../helpers/UseDebounce";
-import Fieldset from "../../components/fieldSet";
+import FiltersStore from "../../store/filterStore";
+import ChipCommon from "../../components/chipCommon";
+import CardCommon from "../../components/cardCommon";
+import { inspectionListDummy } from "../../constants/constants";
+import { CardTypeEnum } from "../../constants/enum";
 
 type Props = {};
 
@@ -20,6 +19,7 @@ const options = [
 const InspectionList = (props: Props) => {
   const [selectedValue, setSelectedValue] = useState<string>(options[0]?.value);
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const { selectedFilterItemList } = FiltersStore();
 
   const debouncedSearch = useDebounce(searchTerm, 500);
 
@@ -33,117 +33,20 @@ const InspectionList = (props: Props) => {
     setSearchTerm(event.target.value as string);
   };
 
-  return (
-    <ContentWrapper>
-      <Box p={1}>InspectionList</Box>
-      <Grid container spacing={4}>
-        <Grid size={6}>
-          <Fieldset title={<div>User Info</div>}>
-            <Grid>
-              <SelectField
-                value={selectedValue}
-                onChange={handleSelectChange}
-                options={options}
-                label={"Property Type"}
-                required={true}
-              />
-            </Grid>
-            <Grid>
-              <OutlinedTextField
-                variant="outlined"
-                startAdormentIcon={AccountBalanceIcon}
-                endAdormentIcon={AdUnitsIcon}
-                onChange={handleTextFieldChange}
-                required={true}
-                label={"First Name"}
-              />
-            </Grid>
-            <Grid>
-              <SwitchButton
-                label={"Garage"}
-                defaultChecked
-                onChange={(e) => console.log(e)}
-              />
-            </Grid>
-          </Fieldset>
-        </Grid>
-        <Grid size={6}>
-          <Fieldset title={<div>User Info</div>}>
-            <Grid>
-              <SelectField
-                value={selectedValue}
-                onChange={handleSelectChange}
-                options={options}
-                label={"Property Type"}
-                required={true}
-              />
-            </Grid>
-            <Grid>
-              <OutlinedTextField
-                variant="outlined"
-                startAdormentIcon={AccountBalanceIcon}
-                endAdormentIcon={AdUnitsIcon}
-                onChange={handleTextFieldChange}
-                required={true}
-                label={"First Name"}
-              />
-            </Grid>
-            <Grid>
-              <SwitchButton
-                label={"Garage"}
-                defaultChecked
-                onChange={(e) => console.log(e)}
-              />
-            </Grid>
-          </Fieldset>
-        </Grid>
-      </Grid>
-      <Fieldset title={<div>Address</div>}>
-        <SelectField
-          value={selectedValue}
-          onChange={handleSelectChange}
-          options={options}
-          label={"Property Type"}
-          required={true}
-        />
-        <OutlinedTextField
-          variant="outlined"
-          startAdormentIcon={AccountBalanceIcon}
-          //endAdormentIcon={AdUnitsIcon}
-          onChange={handleTextFieldChange}
-          required={true}
-          label={"First Name"}
-        />
-        <SwitchButton
-          label={"Is Working?"}
-          defaultChecked
-          onChange={(e) => console.log(e)}
-        />
-      </Fieldset>
+  console.log(selectedFilterItemList);
 
-      <Fieldset title={<div>Address</div>}>
-        <SelectField
-          value={selectedValue}
-          onChange={handleSelectChange}
-          options={options}
-          label={"Property Type"}
-          required={true}
-        />
-        <OutlinedTextField
-          variant="outlined"
-          startAdormentIcon={AccountBalanceIcon}
-          //endAdormentIcon={AdUnitsIcon}
-          onChange={handleTextFieldChange}
-          required={true}
-          label={"First Name"}
-        />
-        <SwitchButton
-          label={"Is Working?"}
-          defaultChecked
-          onChange={(e) => console.log(e)}
-        />
-      </Fieldset>
-    </ContentWrapper>
+  return (
+    <>
+      <ChipCommon list={selectedFilterItemList} />
+      <ContentWrapper>
+        <Box>
+          <CardCommon
+            list={inspectionListDummy}
+            type={CardTypeEnum.Inspection}
+          />
+        </Box>
+      </ContentWrapper>
+    </>
   );
 };
 
