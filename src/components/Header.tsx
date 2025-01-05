@@ -23,7 +23,7 @@ const pages = [
   { name: "Dashboard", path: paths.HOME },
   { name: "Inspections", path: paths.INSPECTIONS },
   { name: "Properties", path: paths.PROPERTIES },
-  { name: "Team", path: paths.TEAM },
+  { name: "Users", path: paths.USERS },
   { name: "Clients", path: paths.CLIENTS },
 ];
 const settings = ["Profile", "Logout"];
@@ -40,6 +40,16 @@ function Header() {
 
   React.useEffect(() => {
     if (window.location?.pathname === "/") {
+      setSelectedMenu(pages[0]?.name);
+    } else if (window.location?.pathname === "/inspections") {
+      setSelectedMenu(pages[1]?.name);
+    } else if (window.location?.pathname === "/properties") {
+      setSelectedMenu(pages[2]?.name);
+    } else if (window.location?.pathname === "/users") {
+      setSelectedMenu(pages[3]?.name);
+    } else if (window.location?.pathname === "/clients") {
+      setSelectedMenu(pages[4]?.name);
+    } else {
       setSelectedMenu(pages[0]?.name);
     }
   }, [window.location?.pathname]);

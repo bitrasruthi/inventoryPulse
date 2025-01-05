@@ -3,6 +3,6 @@ export enum paths {
   LOGIN = "/login",
   INSPECTIONS = "/inspections",
   PROPERTIES = "/properties",
-  TEAM = "/team",
+  USERS = "/users",
   CLIENTS = "/clients",
 }

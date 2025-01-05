@@ -19,10 +19,11 @@ export const StyledChip = styled(Chip)(({ theme }) => ({
 
 const ChipCommon: React.FC<IProps> = (props) => {
   const { list } = props;
-  const { updateFilters } = FiltersStore();
+  const { updateFilters, removeDateRangeFilter } = FiltersStore();
 
   const handleDelete = (item: { id: number; name: string }) => {
     updateFilters(item);
+    removeDateRangeFilter();
   };
 
   return (

@@ -3,8 +3,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import routes from "./routes";
 
 const MainRouter: FC = () => {
-  console.log(routes);
-
   return (
     <BrowserRouter>
       <Routes>

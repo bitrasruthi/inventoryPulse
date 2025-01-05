@@ -146,3 +146,42 @@ export const inspectionListDummy = [
     date: "2025-01-04T10:15:00Z",
   },
 ];
+
+export const userListDummy = [
+  {
+    id: 1,
+    status: 1,
+    name: "Oliver Smith",
+    phone: "+44 7911 123456",
+    email: "johnmathew@mail.com",
+    jobType: "Full Time",
+    role: "Manager",
+  },
+  {
+    id: 2,
+    status: 1,
+    name: "Oliver Smith",
+    phone: "+44 7911 123456",
+    email: "johnmathew@mail.com",
+    jobType: "Full Time",
+    role: "Admin",
+  },
+  {
+    id: 3,
+    status: 1,
+    name: "Oliver Smith",
+    phone: "+44 7911 123456",
+    email: "johnmathew@mail.com",
+    jobType: "Full Time",
+    role: "Clerk",
+  },
+  {
+    id: 4,
+    status: 1,
+    name: "Oliver Smith",
+    phone: "+44 7911 123456",
+    email: "johnmathew@mail.com",
+    jobType: "Full Time",
+    role: "Manager",
+  },
+];

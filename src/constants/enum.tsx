@@ -1,6 +1,7 @@
 export enum MenuTypeEnum {
   Inspections = 1,
   Properties = 2,
+  Users = 3,
 }
 
 export enum FilterTypeEnum {

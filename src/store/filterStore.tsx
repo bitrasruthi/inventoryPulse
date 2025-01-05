@@ -13,6 +13,21 @@ const FiltersStore = create<any>(
   persist(
     (set) => ({
       selectedFilterItemList: [],
+      dateRangeFilter: { from: "", to: "" },
+      setDateRangeFilter: (fromDate: string, toDate: string) => {
+        set({
+          dateRangeFilter: {
+            from: fromDate,
+            to: toDate,
+          },
+        });
+      },
+      removeDateRangeFilter: () => {
+        set({
+          from: "",
+          to: "",
+        });
+      },
       updateFilters: (filterItem: { id: number; name: string }) => {
         set((state: any) => {
           const itemExists = state.selectedFilterItemList?.some(
@@ -25,6 +40,8 @@ const FiltersStore = create<any>(
               selectedFilterItemList: state.selectedFilterItemList.filter(
                 (item: any) => item.id !== filterItem?.id
               ),
+              selectedFromDate: state.selectedFromDate,
+              selectedToDate: state.selectedToDate,
             };
           } else {
             return {
@@ -33,6 +50,8 @@ const FiltersStore = create<any>(
                 ...state.selectedFilterItemList,
                 filterItem,
               ],
+              selectedFromDate: state.selectedFromDate,
+              selectedToDate: state.selectedToDate,
             };
           }
         });

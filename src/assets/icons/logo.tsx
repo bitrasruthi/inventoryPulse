@@ -11,114 +11,114 @@ const Logo = () => {
         <path
           d="M48.1753 27.6702C48.1753 24.2062 48.1753 20.7423 48.1753 17.2784C48.1753 16.9485 48.0104 16.6186 47.6805 16.4537C45.2063 14.6392 42.5671 12.8248 40.0929 11.0104C39.763 10.6805 39.2681 10.6805 38.9382 11.0104C36.299 12.9897 33.6599 14.8042 31.0207 16.6186C30.8557 16.7836 30.6908 16.7836 30.6908 17.1135C30.6908 20.5774 30.6908 24.0413 30.6908 27.5052C30.6908 27.5052 30.8557 27.6702 30.6908 27.8351C32.6702 27.8351 34.4846 27.8351 36.464 27.8351C36.6289 27.5052 36.6289 27.1753 36.6289 27.0104C36.6289 22.7217 36.6289 18.2681 36.6289 13.9794C36.6289 13.6495 36.6289 13.3196 36.464 13.1547"
           stroke="url(#paint0_linear_512_209)"
-          stroke-width="1.5"
-          stroke-miterlimit="10"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M12.7113 12.9897C12.5464 13.1547 12.5464 13.3196 12.5464 13.6495C12.5464 18.1031 12.5464 22.7217 12.5464 27.1753C12.5464 27.3403 12.5464 27.5052 12.7113 27.8351C14.5258 27.8351 16.5052 27.8351 18.3196 27.8351C18.4845 27.6702 18.4845 27.3403 18.4845 27.1753C18.4845 23.8763 18.4845 20.7423 18.4845 17.4434C18.4845 16.9485 18.3196 16.6186 17.8247 16.4537C16.1753 15.299 14.5258 14.1444 12.8763 12.9897C12.0515 12.3299 11.0619 11.8351 10.2371 11.0104C9.90722 10.6805 9.57732 10.6805 9.08247 11.0104C6.60825 12.8248 4.13402 14.6392 1.65979 16.2887C1.16495 16.6186 1 17.1135 1 17.7732C1 20.9073 1 24.0413 1 27.1753C1 27.5052 1 27.6702 1 28.0001"
           stroke="url(#paint1_linear_512_209)"
-          stroke-width="1.5"
-          stroke-miterlimit="10"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M24.5876 17.9382C23.7629 17.6083 22.7732 17.7733 21.9484 17.7733C21.7835 17.7733 21.6185 17.9382 21.6185 18.2681C21.6185 21.5671 21.6185 24.7011 21.6185 28.0001C23.5979 28.0001 25.5773 28.0001 27.5567 28.0001C27.5567 24.5362 27.5567 21.2372 27.5567 17.7733C26.7319 17.6083 25.7422 17.6083 24.5876 17.9382Z"
           stroke="url(#paint2_linear_512_209)"
-          stroke-width="1.5"
-          stroke-miterlimit="10"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M36.4639 12.3299C33.6598 10.3505 30.8556 8.37113 28.0515 6.39175C27.0618 5.73196 26.0721 4.90722 25.0824 4.24742C24.7525 3.91753 24.4226 3.91753 23.9278 4.24742C21.9484 5.89691 19.6391 7.2165 17.6598 8.86598C16.0103 10.0206 14.3608 11.1753 12.7113 12.4948"
           stroke="url(#paint3_linear_512_209)"
-          stroke-width="1.5"
-          stroke-miterlimit="10"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M9.08248 26.0207C9.57733 25.1959 9.74228 24.3712 9.57733 23.3815C9.57733 23.0516 9.24743 22.8866 9.08248 22.8866C7.59795 22.3918 6.11341 22.3918 4.62887 22.8866C3.96908 23.0516 3.63918 24.0413 3.96908 24.5361C3.96908 24.7011 4.13403 24.7011 4.13403 24.866C4.13403 25.3609 4.13403 26.0207 4.62887 26.1856C4.95877 26.3506 5.45362 26.1856 5.94846 26.1856C6.93815 26.0207 7.92784 26.3506 8.75259 26.1856"
           stroke="url(#paint4_linear_512_209)"
-          stroke-width="1.5"
-          stroke-miterlimit="10"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M45.7011 25.0309C46.031 24.2062 45.7011 23.3814 45.866 22.3917C43.3918 22.3917 41.0825 22.3917 38.6083 22.3917C38.6083 24.2062 38.6083 25.8556 38.6083 27.6701C41.0825 27.6701 43.3918 27.6701 45.866 27.6701C45.866 26.8453 46.031 26.0206 45.7011 25.0309Z"
           stroke="url(#paint5_linear_512_209)"
-          stroke-width="1.5"
-          stroke-miterlimit="10"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M24.5877 17.9381C24.7526 18.268 24.5877 18.5979 24.5877 18.9278C24.5877 21.7319 24.5877 24.536 24.5877 27.3402C24.5877 27.5051 24.5877 27.5051 24.4227 27.6701"
           stroke="url(#paint6_linear_512_209)"
-          stroke-width="1.5"
-          stroke-miterlimit="10"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M45.536 25.0309C43.3917 25.0309 41.0824 25.0309 38.9381 25.0309"
           stroke="url(#paint7_linear_512_209)"
-          stroke-width="1.5"
-          stroke-miterlimit="10"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M9.41239 27.3401C7.7629 27.3401 6.27837 27.1752 4.62888 27.3401C3.80414 27.3401 3.47425 27.1752 3.3093 26.3504C3.3093 26.0205 3.14435 25.6906 3.14435 25.3607"
           stroke="url(#paint8_linear_512_209)"
-          stroke-width="1.5"
-          stroke-miterlimit="10"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M42.2371 22.7217C42.4021 24.3712 42.2371 26.0206 42.4021 27.6701"
           stroke="url(#paint9_linear_512_209)"
-          stroke-width="1.5"
-          stroke-miterlimit="10"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M10.2372 24.8661C10.4021 25.3609 10.2372 26.0207 10.2372 26.5156C10.2372 27.0104 9.90726 27.1754 9.41241 27.3403C9.41241 27.3403 9.41241 27.3403 9.41241 27.5053"
           stroke="url(#paint10_linear_512_209)"
-          stroke-width="1.5"
-          stroke-miterlimit="10"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M3.80405 24.2062C3.3092 23.8763 2.81436 24.2062 2.81436 24.701C2.64941 25.0309 2.64941 25.5257 3.3092 25.6907"
           stroke="url(#paint11_linear_512_209)"
-          stroke-width="1.5"
-          stroke-miterlimit="10"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M10.402 25.5258C11.0618 25.3609 10.8969 25.031 10.8969 24.5361C10.7319 23.8763 10.2371 24.0413 9.74225 24.0413"
           stroke="url(#paint12_linear_512_209)"
-          stroke-width="1.5"
-          stroke-miterlimit="10"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M43.3918 26.3505C43.0619 26.3505 42.732 26.3505 42.2371 26.3505"
           stroke="url(#paint13_linear_512_209)"
-          stroke-width="1.5"
-          stroke-miterlimit="10"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M58.848 4.784C60.72 4.784 61.984 6.128 61.984 8.112C61.984 10.064 60.72 11.36 58.864 11.36H56.896C56.848 11.36 56.816 11.392 56.816 11.44V15.808C56.816 15.92 56.736 16 56.624 16H55.152C55.04 16 54.96 15.92 54.96 15.808V4.976C54.96 4.864 55.04 4.784 55.152 4.784H58.848ZM58.576 9.872C59.504 9.872 60.128 9.2 60.128 8.144C60.128 7.072 59.504 6.384 58.576 6.384H56.896C56.848 6.384 56.816 6.416 56.816 6.464V9.792C56.816 9.84 56.848 9.872 56.896 9.872H58.576ZM68.7899 16C68.6779 16 68.5979 15.936 68.5659 15.84L66.8219 11.232C66.8059 11.2 66.7739 11.168 66.7419 11.168H65.3819C65.3339 11.168 65.3019 11.2 65.3019 11.248V15.808C65.3019 15.92 65.2219 16 65.1099 16H63.6379C63.5259 16 63.4459 15.92 63.4459 15.808V4.976C63.4459 4.864 63.5259 4.784 63.6379 4.784H67.3339C69.1899 4.784 70.4219 6.112 70.4219 8.048C70.4219 9.472 69.7339 10.512 68.6299 10.944C68.5819 10.96 68.5659 11.008 68.5819 11.056L70.4699 15.776C70.5179 15.904 70.4699 16 70.3259 16H68.7899ZM65.3819 6.384C65.3339 6.384 65.3019 6.416 65.3019 6.464V9.648C65.3019 9.696 65.3339 9.728 65.3819 9.728H67.0619C67.9579 9.728 68.5659 9.088 68.5659 8.08C68.5659 7.04 67.9579 6.384 67.0619 6.384H65.3819ZM75.3516 16.144C73.2236 16.144 71.7996 14.752 71.7996 12.656V8.144C71.7996 6.064 73.2236 4.672 75.3516 4.672C77.5116 4.672 78.9356 6.064 78.9356 8.144V12.656C78.9356 14.752 77.5116 16.144 75.3516 16.144ZM75.3516 14.544C76.3916 14.544 77.0796 13.808 77.0796 12.736V8.096C77.0796 7.008 76.3916 6.272 75.3516 6.272C74.3276 6.272 73.6556 7.008 73.6556 8.096V12.736C73.6556 13.808 74.3276 14.544 75.3516 14.544ZM84.5668 4.784C86.4388 4.784 87.7028 6.128 87.7028 8.112C87.7028 10.064 86.4388 11.36 84.5828 11.36H82.6148C82.5668 11.36 82.5348 11.392 82.5348 11.44V15.808C82.5348 15.92 82.4548 16 82.3428 16H80.8708C80.7588 16 80.6788 15.92 80.6788 15.808V4.976C80.6788 4.864 80.7588 4.784 80.8708 4.784H84.5668ZM84.2948 9.872C85.2228 9.872 85.8468 9.2 85.8468 8.144C85.8468 7.072 85.2228 6.384 84.2948 6.384H82.6148C82.5668 6.384 82.5348 6.416 82.5348 6.464V9.792C82.5348 9.84 82.5668 9.872 82.6148 9.872H84.2948ZM95.7406 6.208C95.7406 6.32 95.6606 6.4 95.5486 6.4H91.1006C91.0526 6.4 91.0206 6.432 91.0206 6.48V9.488C91.0206 9.536 91.0526 9.568 91.1006 9.568H93.9486C94.0606 9.568 94.1406 9.648 94.1406 9.76V10.976C94.1406 11.088 94.0606 11.168 93.9486 11.168H91.1006C91.0526 11.168 91.0206 11.2 91.0206 11.248V14.32C91.0206 14.368 91.0526 14.4 91.1006 14.4H95.5486C95.6606 14.4 95.7406 14.48 95.7406 14.592V15.808C95.7406 15.92 95.6606 16 95.5486 16H89.3566C89.2446 16 89.1646 15.92 89.1646 15.808V4.992C89.1646 4.88 89.2446 4.8 89.3566 4.8H95.5486C95.6606 4.8 95.7406 4.88 95.7406 4.992V6.208ZM102.712 16C102.6 16 102.52 15.936 102.488 15.84L100.744 11.232C100.728 11.2 100.696 11.168 100.664 11.168H99.3038C99.2558 11.168 99.2238 11.2 99.2238 11.248V15.808C99.2238 15.92 99.1438 16 99.0318 16H97.5598C97.4478 16 97.3678 15.92 97.3678 15.808V4.976C97.3678 4.864 97.4478 4.784 97.5598 4.784H101.256C103.112 4.784 104.344 6.112 104.344 8.048C104.344 9.472 103.656 10.512 102.552 10.944C102.504 10.96 102.488 11.008 102.504 11.056L104.392 15.776C104.44 15.904 104.392 16 104.248 16H102.712ZM99.3038 6.384C99.2558 6.384 99.2238 6.416 99.2238 6.464V9.648C99.2238 9.696 99.2558 9.728 99.3038 9.728H100.984C101.88 9.728 102.488 9.088 102.488 8.08C102.488 7.04 101.88 6.384 100.984 6.384H99.3038ZM112.49 4.8C112.602 4.8 112.682 4.88 112.682 4.992V6.224C112.682 6.336 112.602 6.416 112.49 6.416H110.01C109.962 6.416 109.93 6.448 109.93 6.496V15.808C109.93 15.92 109.85 16 109.738 16H108.266C108.154 16 108.074 15.92 108.074 15.808V6.496C108.074 6.448 108.042 6.416 107.994 6.416H105.61C105.498 6.416 105.418 6.336 105.418 6.224V4.992C105.418 4.88 105.498 4.8 105.61 4.8H112.49ZM116.66 15.984C116.548 15.984 116.468 15.904 116.468 15.792V11.472C116.468 11.44 116.468 11.424 116.452 11.376L113.684 5.024C113.636 4.896 113.684 4.8 113.828 4.8H115.396C115.492 4.8 115.588 4.848 115.62 4.944L117.348 9.264C117.38 9.344 117.412 9.344 117.444 9.264L119.156 4.944C119.188 4.848 119.268 4.8 119.38 4.8H120.964C121.108 4.8 121.156 4.896 121.108 5.024L118.324 11.376C118.308 11.424 118.308 11.44 118.308 11.472V15.792C118.308 15.904 118.228 15.984 118.116 15.984H116.66Z"
@@ -141,8 +141,8 @@ const Logo = () => {
             y2="27.8351"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#8542E9" />
-            <stop offset="1" stop-color="#B442E9" />
+            <stop stopColor="#8542E9" />
+            <stop offset="1" stopColor="#B442E9" />
           </linearGradient>
           <linearGradient
             id="paint1_linear_512_209"
@@ -152,8 +152,8 @@ const Logo = () => {
             y2="28.0001"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#8542E9" />
-            <stop offset="1" stop-color="#B442E9" />
+            <stop stopColor="#8542E9" />
+            <stop offset="1" stopColor="#B442E9" />
           </linearGradient>
           <linearGradient
             id="paint2_linear_512_209"
@@ -163,8 +163,8 @@ const Logo = () => {
             y2="28.0001"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#8542E9" />
-            <stop offset="1" stop-color="#B442E9" />
+            <stop stopColor="#8542E9" />
+            <stop offset="1" stopColor="#B442E9" />
           </linearGradient>
           <linearGradient
             id="paint3_linear_512_209"
@@ -174,8 +174,8 @@ const Logo = () => {
             y2="12.4948"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#8542E9" />
-            <stop offset="1" stop-color="#B442E9" />
+            <stop stopColor="#8542E9" />
+            <stop offset="1" stopColor="#B442E9" />
           </linearGradient>
           <linearGradient
             id="paint4_linear_512_209"
@@ -185,8 +185,8 @@ const Logo = () => {
             y2="26.2589"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#8542E9" />
-            <stop offset="1" stop-color="#B442E9" />
+            <stop stopColor="#8542E9" />
+            <stop offset="1" stopColor="#B442E9" />
           </linearGradient>
           <linearGradient
             id="paint5_linear_512_209"
@@ -196,8 +196,8 @@ const Logo = () => {
             y2="27.6701"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#8542E9" />
-            <stop offset="1" stop-color="#B442E9" />
+            <stop stopColor="#8542E9" />
+            <stop offset="1" stopColor="#B442E9" />
           </linearGradient>
           <linearGradient
             id="paint6_linear_512_209"
@@ -207,8 +207,8 @@ const Logo = () => {
             y2="27.6701"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#8542E9" />
-            <stop offset="1" stop-color="#B442E9" />
+            <stop stopColor="#8542E9" />
+            <stop offset="1" stopColor="#B442E9" />
           </linearGradient>
           <linearGradient
             id="paint7_linear_512_209"
@@ -218,8 +218,8 @@ const Logo = () => {
             y2="26.0309"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#8542E9" />
-            <stop offset="1" stop-color="#B442E9" />
+            <stop stopColor="#8542E9" />
+            <stop offset="1" stopColor="#B442E9" />
           </linearGradient>
           <linearGradient
             id="paint8_linear_512_209"
@@ -229,8 +229,8 @@ const Logo = () => {
             y2="27.3401"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#8542E9" />
-            <stop offset="1" stop-color="#B442E9" />
+            <stop stopColor="#8542E9" />
+            <stop offset="1" stopColor="#B442E9" />
           </linearGradient>
           <linearGradient
             id="paint9_linear_512_209"
@@ -240,8 +240,8 @@ const Logo = () => {
             y2="27.6701"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#8542E9" />
-            <stop offset="1" stop-color="#B442E9" />
+            <stop stopColor="#8542E9" />
+            <stop offset="1" stopColor="#B442E9" />
           </linearGradient>
           <linearGradient
             id="paint10_linear_512_209"
@@ -251,8 +251,8 @@ const Logo = () => {
             y2="27.5053"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#8542E9" />
-            <stop offset="1" stop-color="#B442E9" />
+            <stop stopColor="#8542E9" />
+            <stop offset="1" stopColor="#B442E9" />
           </linearGradient>
           <linearGradient
             id="paint11_linear_512_209"
@@ -262,8 +262,8 @@ const Logo = () => {
             y2="25.6907"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#8542E9" />
-            <stop offset="1" stop-color="#B442E9" />
+            <stop stopColor="#8542E9" />
+            <stop offset="1" stopColor="#B442E9" />
           </linearGradient>
           <linearGradient
             id="paint12_linear_512_209"
@@ -273,8 +273,8 @@ const Logo = () => {
             y2="25.5258"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#8542E9" />
-            <stop offset="1" stop-color="#B442E9" />
+            <stop stopColor="#8542E9" />
+            <stop offset="1" stopColor="#B442E9" />
           </linearGradient>
           <linearGradient
             id="paint13_linear_512_209"
@@ -284,8 +284,8 @@ const Logo = () => {
             y2="27.3505"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#8542E9" />
-            <stop offset="1" stop-color="#B442E9" />
+            <stop stopColor="#8542E9" />
+            <stop offset="1" stopColor="#B442E9" />
           </linearGradient>
         </defs>
       </svg>

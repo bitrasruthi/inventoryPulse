@@ -5,7 +5,7 @@ import Clients from "../pages/Clients/clients";
 import Dashboard from "../pages/Dashboard/dashboard";
 import Inspections from "../pages/Inspections";
 import Properties from "../pages/Properties";
-import Team from "../pages/Teams/team";
+import Users from "../pages/Users/Users";
 import { paths } from "./paths";
 
 const routes = [
@@ -34,9 +34,9 @@ const routes = [
     withoutLogin: true,
   },
   {
-    component: Team,
+    component: Users,
     layout: Layout,
-    path: paths.TEAM,
+    path: paths.USERS,
     withoutLogin: true,
   },
   {

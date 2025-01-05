@@ -29,8 +29,8 @@ const AddHomeIcon = () => {
             y2="12.0004"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#AC42E9" />
-            <stop offset="1" stop-color="#8542E9" />
+            <stop stopColor="#AC42E9" />
+            <stop offset="1" stopColor="#8542E9" />
           </linearGradient>
           <linearGradient
             id="paint1_linear_446_4305"
@@ -40,8 +40,8 @@ const AddHomeIcon = () => {
             y2="14.0009"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#AC42E9" />
-            <stop offset="1" stop-color="#8542E9" />
+            <stop stopColor="#AC42E9" />
+            <stop offset="1" stopColor="#8542E9" />
           </linearGradient>
           <linearGradient
             id="paint2_linear_446_4305"
@@ -51,8 +51,8 @@ const AddHomeIcon = () => {
             y2="16.0004"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#AC42E9" />
-            <stop offset="1" stop-color="#8542E9" />
+            <stop stopColor="#AC42E9" />
+            <stop offset="1" stopColor="#8542E9" />
           </linearGradient>
         </defs>
       </svg>

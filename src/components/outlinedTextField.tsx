@@ -12,18 +12,17 @@ import LabelCommon from "./labelCommon";
 interface IProps extends OutlinedTextFieldProps {
   startAdormentIcon?: React.ElementType;
   endAdormentIcon?: React.ElementType;
+  isNotBoldText?: boolean;
 }
 
 export const StyledTextField = styled(TextField)(({ theme }) => ({
   "& .MuiInputBase-root": {
+    borderRadius: 10,
     "&:hover .MuiOutlinedInput-notchedOutline": {
       borderColor: theme.palette.primary.main,
     },
     "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
       borderColor: theme.palette.primary.main,
-    },
-    "& .MuiInputBase-input": {
-      fontFamily: "roboto-bold",
     },
   },
 }));
@@ -34,15 +33,21 @@ const OutlinedTextField: React.FC<IProps> = (props) => {
     endAdormentIcon: EndAdormentIcon,
     label,
     required,
+    isNotBoldText,
   } = props;
   return (
-    <Box mb={3}>
+    <Box>
       <LabelCommon fieldName={label} isRequired={required} />
       <StyledTextField
         fullWidth
         size="small"
         {...props}
         label={""}
+        sx={{
+          "& .MuiInputBase-input": {
+            fontFamily: isNotBoldText ? "roboto-regular" : "roboto-bold",
+          },
+        }}
         slotProps={{
           input: {
             startAdornment: (
