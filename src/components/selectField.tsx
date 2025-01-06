@@ -23,7 +23,7 @@ const SelectField: React.FC<IProps> = (props) => {
   const { options, required, label, isNotBoldText, marginBottom } = props;
 
   return (
-    <Box mb={marginBottom}>
+    <Box mb={marginBottom} pb={2}>
       <LabelCommon fieldName={label} isRequired={required} />
       <StyledSelect
         {...props}

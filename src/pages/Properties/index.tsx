@@ -1,9 +1,13 @@
-import { Box } from "@mui/material";
-
+import ContentWrapper from "../../components/contentWrapper";
+import SaveProperty from "./saveProperty";
 type Props = {};
 
 const Properties = (props: Props) => {
-  return <Box>Properties</Box>;
+  return (
+    <ContentWrapper>
+      <SaveProperty />
+    </ContentWrapper>
+  );
 };
 
 export default Properties;

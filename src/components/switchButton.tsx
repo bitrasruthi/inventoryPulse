@@ -57,7 +57,7 @@ interface IProps extends SwitchProps {
 const SwitchButton: React.FC<IProps> = (props) => {
   const { label } = props;
   return (
-    <>
+    <Box pb={2}>
       <Box
         display={"flex"}
         justifyContent={"space-between"}
@@ -73,7 +73,7 @@ const SwitchButton: React.FC<IProps> = (props) => {
         <Typography>{label}</Typography>
         <StyledSwitch sx={{ m: 1 }} {...props} />
       </Box>
-    </>
+    </Box>
   );
 };
 

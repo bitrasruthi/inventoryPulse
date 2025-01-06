@@ -36,7 +36,7 @@ const OutlinedTextField: React.FC<IProps> = (props) => {
     isNotBoldText,
   } = props;
   return (
-    <Box>
+    <Box pb={2}>
       <LabelCommon fieldName={label} isRequired={required} />
       <StyledTextField
         fullWidth
