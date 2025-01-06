@@ -6,14 +6,11 @@ import SelectField from "../../components/selectField";
 import SwitchButton from "../../components/switchButton";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import theme from "../../styles/theme";
-
-interface options {
-  label: string;
-  value: string;
-}
+import { ClientOptions } from "../../types/type";
+import AddressCommon from "../../components/addressCommon";
 
 const SaveProperty = () => {
-  const client: options[] = [
+  const client: ClientOptions[] = [
     { label: "name", value: "value" },
     { label: "name", value: "value" },
     { label: "name", value: "value" },
@@ -24,32 +21,8 @@ const SaveProperty = () => {
       <Grid2 spacing={4} container size={{ sm: 12, md: 6 }}>
         <Grid2 size={{ sm: 12, md: 6 }} rowSpacing={4}>
           <Fieldset title="Address" key={"address"}>
-            <OutlinedTextField
-              label="Address Line 1"
-              variant="outlined"
-              required={true}
-            />
-            <OutlinedTextField label="Address Line 2" variant="outlined" />
-            <Grid2 container spacing={{ xs: 0, md: 2 }}>
-              <Grid2 size={{ xs: 12, md: 6 }}>
-                <OutlinedTextField label="City" variant="outlined" />
-              </Grid2>
-              <Grid2 size={{ xs: 12, md: 6 }}>
-                <OutlinedTextField label="Country" variant="outlined" />
-              </Grid2>
-            </Grid2>
-            <Grid2 container spacing={{ xs: 0, md: 2 }}>
-              <Grid2 size={{ xs: 12, md: 6 }}>
-                <OutlinedTextField
-                  variant="outlined"
-                  label="Postal Code"
-                  fullWidth
-                />
-              </Grid2>
-              <Grid2 size={{ xs: 12, md: 6 }}>
-                <SelectField options={client} label="Client" />
-              </Grid2>
-            </Grid2>
+            <AddressCommon />
+            <SelectField options={client} label="Client" />
           </Fieldset>
           <Fieldset title="Transfer Past Inspections" key={"Inspections"}>
             <FormGroup sx={{ pb: 2 }}>

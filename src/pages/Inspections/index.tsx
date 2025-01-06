@@ -83,29 +83,31 @@ const Inspections = () => {
         hasMenu={true}
         handleDialogOpen={handleOpenDialog}
       />
-      <FullScreenDialog
-        open={dialogOpen}
-        onClose={handleCloseDialog}
-        title="Add Inspection"
-        buttons={
-          [
-            {
-              label: "Cancel",
-              variant: "outlined",
-              onClick: () => console.log("canceled"),
-            },
-            {
-              label: "Confirm",
-              variant: "contained",
-              onClick: () => console.log("Confirm"),
-            },
-          ] as CustomButtonProps[]
-        }
-      >
-        <Typography variant="body1" sx={{ p: 2 }}>
-          <SaveProperty />
-        </Typography>
-      </FullScreenDialog>
+      {dialogOpen && (
+        <FullScreenDialog
+          open={dialogOpen}
+          onClose={handleCloseDialog}
+          title="Add Inspection"
+          buttons={
+            [
+              {
+                label: "Cancel",
+                variant: "outlined",
+                onClick: () => console.log("canceled"),
+              },
+              {
+                label: "Confirm",
+                variant: "contained",
+                onClick: () => console.log("Confirm"),
+              },
+            ] as CustomButtonProps[]
+          }
+        >
+          <Typography variant="body1" sx={{ p: 2 }}>
+            <SaveProperty />
+          </Typography>
+        </FullScreenDialog>
+      )}
     </Box>
   );
 };
