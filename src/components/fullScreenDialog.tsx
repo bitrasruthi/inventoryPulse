@@ -1,16 +1,16 @@
-import React from 'react';
-import Dialog from '@mui/material/Dialog';
-import Button, { ButtonProps } from '@mui/material/Button';
-import Slide from '@mui/material/Slide';
-import { TransitionProps } from '@mui/material/transitions';
-import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import DialogTitleCommon from './dialogTitleCommon';
+import React from "react";
+import Dialog from "@mui/material/Dialog";
+import Button, { ButtonProps } from "@mui/material/Button";
+import Slide from "@mui/material/Slide";
+import { TransitionProps } from "@mui/material/transitions";
+import { DialogActions, DialogContent, DialogTitle } from "@mui/material";
+import DialogTitleCommon from "./dialogTitleCommon";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & { children: React.ReactElement },
   ref: React.Ref<unknown>
 ) {
-  return <Slide direction='left' ref={ref} {...props} />;
+  return <Slide direction="left" ref={ref} {...props} />;
 });
 
 export interface CustomButtonProps extends ButtonProps {
@@ -35,25 +35,25 @@ const FullScreenDialog: React.FC<FullScreenDialogProps> = ({
   return (
     <Dialog
       fullScreen
-      open={true}
+      open={open}
       onClose={onClose}
       TransitionComponent={Transition}
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
+        display: "flex",
+        flexDirection: "column",
       }}
     >
-      <DialogTitle sx={{ display: 'flex', alignItems: 'center', px: 4 }}>
+      <DialogTitle sx={{ display: "flex", alignItems: "center", px: 4 }}>
         <DialogTitleCommon title={title} onClose={onClose} />
       </DialogTitle>
-      <DialogContent sx={{ flex: 1, overflowY: 'auto', p: 2 }}>
+      <DialogContent sx={{ flex: 1, overflowY: "auto", p: 2 }}>
         {children}
       </DialogContent>
       <DialogActions
         sx={{
-          position: 'sticky',
+          position: "sticky",
           px: 4,
-          display: 'flex',
+          display: "flex",
           gap: 2,
         }}
       >

@@ -7,6 +7,7 @@ interface Props {
   menuList: any;
   isGradient: boolean;
   hasMenu: boolean;
+  handleDialogOpen: () => void;
 }
 
 const GradientButton: React.FC<Props> = ({
@@ -14,6 +15,7 @@ const GradientButton: React.FC<Props> = ({
   menuList,
   isGradient,
   hasMenu,
+  handleDialogOpen,
 }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -66,6 +68,11 @@ const GradientButton: React.FC<Props> = ({
             <MenuItem
               key={index}
               sx={{ display: "flex", alignItems: "center" }}
+              onClick={() => {
+                if (item.name === "New Property") {
+                  handleDialogOpen();
+                }
+              }}
             >
               {item?.icon && <item.icon />}{" "}
               <Typography fontSize={12} pl={1}>

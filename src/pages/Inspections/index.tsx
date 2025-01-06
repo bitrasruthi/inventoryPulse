@@ -1,4 +1,4 @@
-import { Box, Divider, Grid2 as Grid } from "@mui/material";
+import { Box, Divider, Grid2 as Grid, Typography } from "@mui/material";
 import { useState } from "react";
 import { MenuTypeEnum } from "../../constants/enum";
 import Filters from "../../components/filters";
@@ -9,10 +9,23 @@ import {
   tabMenuList,
 } from "../../constants/constants";
 import GradientButton from "../../components/gradientButton";
+import FullScreenDialog, {
+  CustomButtonProps,
+} from "../../components/fullScreenDialog";
+import SaveProperty from "../Properties/saveProperty";
 import TabsCommon from "../../components/tabsCommon";
 
 const Inspections = () => {
   const [activeTab, setActiveTab] = useState<string>(tabMenuList[0]?.value);
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  const handleOpenDialog = () => {
+    setDialogOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setDialogOpen(false);
+  };
 
   const inspectionListContent = (
     <Grid container spacing={0}>
@@ -68,7 +81,31 @@ const Inspections = () => {
         menuList={inspectionBtnList}
         isGradient={true}
         hasMenu={true}
+        handleDialogOpen={handleOpenDialog}
       />
+      <FullScreenDialog
+        open={dialogOpen}
+        onClose={handleCloseDialog}
+        title="Add Inspection"
+        buttons={
+          [
+            {
+              label: "Cancel",
+              variant: "outlined",
+              onClick: () => console.log("canceled"),
+            },
+            {
+              label: "Confirm",
+              variant: "contained",
+              onClick: () => console.log("Confirm"),
+            },
+          ] as CustomButtonProps[]
+        }
+      >
+        <Typography variant="body1" sx={{ p: 2 }}>
+          <SaveProperty />
+        </Typography>
+      </FullScreenDialog>
     </Box>
   );
 };
