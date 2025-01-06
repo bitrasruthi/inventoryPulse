@@ -38,12 +38,10 @@ const FullScreenDialog: React.FC<FullScreenDialogProps> = ({
       open={open}
       onClose={onClose}
       TransitionComponent={Transition}
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-      }}
     >
-      <DialogTitle sx={{ display: "flex", alignItems: "center", px: 4 }}>
+      <DialogTitle
+        sx={{ display: "flex", alignItems: "center", px: 4, boxShadow: 1 }}
+      >
         <DialogTitleCommon title={title} onClose={onClose} />
       </DialogTitle>
       <DialogContent sx={{ flex: 1, overflowY: "auto", p: 2 }}>
@@ -55,6 +53,8 @@ const FullScreenDialog: React.FC<FullScreenDialogProps> = ({
           px: 4,
           display: "flex",
           gap: 2,
+          borderTop: 0.5,
+          borderColor: "lightgray",
         }}
       >
         {buttons.map((button, index) => (

@@ -26,9 +26,7 @@ const Clients = (props: Props) => {
     >
       <GradientButton
         label="Add Client"
-        menuList={[""]}
         isGradient={true}
-        hasMenu={false}
         handleDialogOpen={handleOpenDialog}
       />
       {dialogOpen && (

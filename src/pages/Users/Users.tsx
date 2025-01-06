@@ -46,9 +46,7 @@ const Users = (props: Props) => {
       />
       <GradientButton
         label="Add User"
-        menuList={[""]}
         isGradient={true}
-        hasMenu={false}
         handleDialogOpen={handleOpenDialog}
       />
       {dialogOpen && (

@@ -4,17 +4,15 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 interface Props {
   label: string;
-  menuList: any;
+  menuList?: any;
   isGradient: boolean;
-  hasMenu: boolean;
   handleDialogOpen: () => void;
 }
 
 const GradientButton: React.FC<Props> = ({
   label,
-  menuList,
+  menuList = [],
   isGradient,
-  hasMenu,
   handleDialogOpen,
 }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -40,21 +38,23 @@ const GradientButton: React.FC<Props> = ({
           color: "#fff",
           textTransform: "none",
           minWidth: 150,
-          borderRadius: "10px",
-          height: 30,
+          borderRadius: 3,
           fontSize: 13,
         }}
         size="medium"
-        disableRipple
-        onClick={hasMenu ? handleClick : handleDialogOpen}
+        onClick={
+          menuList && menuList.length > 0 ? handleClick : handleDialogOpen
+        }
       >
         {label}
-        <KeyboardArrowDownIcon
-          sx={{ color: "#fff", ml: 1, width: 20, height: 20 }}
-        />
+        {menuList && menuList.length > 0 && (
+          <KeyboardArrowDownIcon
+            sx={{ color: "#fff", ml: 1, width: 20, height: 20 }}
+          />
+        )}
       </Button>
 
-      {hasMenu && (
+      {menuList && (
         <Menu
           id="basic-menu"
           anchorEl={anchorEl}
