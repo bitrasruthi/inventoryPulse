@@ -9,7 +9,6 @@ import GradientButton from "../../components/gradientButton";
 import FullScreenDialog, {
   CustomButtonProps,
 } from "../../components/fullScreenDialog";
-import SaveProperty from "../Properties/saveProperty";
 import AddUser from "./addUser";
 
 type Props = {};
