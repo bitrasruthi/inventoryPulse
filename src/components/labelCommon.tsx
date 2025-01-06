@@ -10,7 +10,7 @@ const LabelCommon: React.FC<IProps> = (props) => {
   const { fieldName, isRequired } = props;
   return (
     <>
-      <Typography sx={{ color: "grey" }}>
+      <Typography>
         {fieldName}
         {isRequired && <span style={{ color: "red" }}> * </span>}
       </Typography>

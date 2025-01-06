@@ -14,6 +14,7 @@ import FullScreenDialog, {
 } from "../../components/fullScreenDialog";
 import SaveProperty from "../Properties/saveProperty";
 import TabsCommon from "../../components/tabsCommon";
+// import Calendar from "./InspectionCalender";
 
 const Inspections = () => {
   const [activeTab, setActiveTab] = useState<string>(tabMenuList[0]?.value);
