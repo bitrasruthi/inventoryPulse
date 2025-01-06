@@ -46,9 +46,9 @@ const GradientButton: React.FC<Props> = ({
         }}
         size="medium"
         disableRipple
-        onClick={handleClick}
+        onClick={hasMenu ? handleClick : handleDialogOpen}
       >
-        {label}{" "}
+        {label}
         <KeyboardArrowDownIcon
           sx={{ color: "#fff", ml: 1, width: 20, height: 20 }}
         />
@@ -69,9 +69,7 @@ const GradientButton: React.FC<Props> = ({
               key={index}
               sx={{ display: "flex", alignItems: "center" }}
               onClick={() => {
-                if (item.name === "New Property") {
-                  handleDialogOpen();
-                }
+                handleDialogOpen();
               }}
             >
               {item?.icon && <item.icon />}{" "}
