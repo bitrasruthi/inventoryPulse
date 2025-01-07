@@ -6,6 +6,7 @@ import SelectField from "../../components/selectField";
 import { ClientOptions } from "../../types/type";
 import OutlinedTextField from "../../components/outlinedTextField";
 import SwitchButton from "../../components/switchButton";
+import ProfileUpload from "../../components/profileUpload";
 
 const AddClient = () => {
   const client: ClientOptions[] = [
@@ -21,16 +22,7 @@ const AddClient = () => {
           <Fieldset title="Basic Info" key={"basic_info"}>
             <Grid2 container spacing={{ xs: 0, md: 2 }}>
               <Grid2 size={{ xs: 12, md: 6 }}>
-                <Box
-                  sx={{
-                    border: "1px solid #ccc",
-                    padding: 2,
-                    height: 150,
-                    mb: 2,
-                  }}
-                >
-                  Left Side Content
-                </Box>
+                <ProfileUpload />
               </Grid2>
               <Grid2 size={{ xs: 12, md: 6 }}>
                 <OutlinedTextField
