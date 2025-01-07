@@ -1,4 +1,4 @@
-import { Avatar, Box, Grid2, Link } from "@mui/material";
+import { Grid2 } from "@mui/material";
 import ContentWrapper from "../../components/contentWrapper";
 import Fieldset from "../../components/fieldSet";
 import AddressCommon from "../../components/addressCommon";
@@ -6,12 +6,9 @@ import SelectField from "../../components/selectField";
 import { ClientOptions } from "../../types/type";
 import OutlinedTextField from "../../components/outlinedTextField";
 import SwitchButton from "../../components/switchButton";
-import { useRef, useState } from "react";
 import ProfileUpload from "../../components/profileUpload";
 
 const AddUser = () => {
-  const [profileImage, setProfileImage] = useState(null);
-
   const client: ClientOptions[] = [
     { label: "name", value: "value" },
     { label: "name", value: "value" },
