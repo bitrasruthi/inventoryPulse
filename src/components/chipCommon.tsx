@@ -22,19 +22,22 @@ const ChipCommon: React.FC<IProps> = (props) => {
   const { updateFilters, removeDateRangeFilter } = FiltersStore();
 
   const handleDelete = (item: { id: number; name: string }) => {
-    updateFilters(item);
-    removeDateRangeFilter();
+    if (item?.id == -1) {
+      removeDateRangeFilter();
+    } else {
+      updateFilters(item);
+    }
   };
 
   return (
-    <Stack direction="row" spacing={1} p={2}>
+    <Stack direction="row" spacing={1} p={2} flexWrap={"wrap"} gap={1}>
       {list?.length > 0 &&
         list?.map((item: any, index: number) => (
           <StyledChip
+            {...props}
             key={index}
             deleteIcon={<ClearIcon />}
             onDelete={() => handleDelete(item)}
-            {...props}
             label={item?.name}
           />
         ))}

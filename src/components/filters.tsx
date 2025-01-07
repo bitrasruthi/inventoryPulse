@@ -9,7 +9,7 @@ import {
   Grid2 as Grid,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import theme from "../styles/theme";
 import ContentWrapper from "./contentWrapper";
@@ -19,7 +19,6 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DateRangePicker from "@mui/lab/DateRangePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import OutlinedTextField from "./outlinedTextField";
-import moment from "moment";
 
 interface Props {
   filters: any;
@@ -28,10 +27,13 @@ interface Props {
 const options = [{ label: "Date Created", value: "option1" }];
 
 const Filters: React.FC<Props> = ({ filters }) => {
-  const { updateFilters, selectedFilterItemList, setDateRangeFilter } =
-    FiltersStore();
+  const {
+    updateFilters,
+    selectedFilterItemList,
+    setDateRangeFilter,
+    dateRangeFilter,
+  } = FiltersStore();
   const [selectedValue, setSelectedValue] = useState<string>(options[0]?.value);
-  const [selectedDate, setSelectedDate] = useState<any>([null, null]);
 
   const handleCheckBox = (filterItem: { id: number; name: string }) => {
     updateFilters(filterItem);
@@ -49,7 +51,7 @@ const Filters: React.FC<Props> = ({ filters }) => {
             defaultExpanded
             key={index}
             elevation={0}
-            sx={{ p: 1, pt: 0, pb: 0 }}
+            sx={{ p: 1, pt: 0, pb: 0, }}
           >
             <AccordionSummary
               sx={{ p: 0 }}
@@ -73,54 +75,47 @@ const Filters: React.FC<Props> = ({ filters }) => {
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <DateRangePicker
                     label=""
-                    value={selectedDate}
+                    value={dateRangeFilter}
                     disableFuture={true}
                     inputFormat="dd/MM/yyyy"
                     onChange={(newValue) => {
-                      setSelectedDate(newValue);
                       if (newValue) {
-                        setDateRangeFilter(
-                          newValue[0] && moment(newValue[0]).isValid()
-                            ? moment(newValue[0]).format("DD MMM YYYY")
-                            : "",
-                          newValue[1] && moment(newValue[1]).isValid()
-                            ? moment(newValue[1]).format("DD MMM YYYY")
-                            : ""
-                        );
+                        setDateRangeFilter(newValue);
                       }
                     }}
-                    renderInput={(startProps, endProps) => (
-                      <Grid container spacing={2}>
-                        <Grid size={6}>
-                          <OutlinedTextField
-                            {...startProps}
-                            slotProps={{
-                              input: {
-                                readOnly: true,
-                              },
-                            }}
-                            isNotBoldText={true}
-                            variant="outlined"
-                            placeholder="From:dd/mm/yy"
-                            label=""
-                          />
+                    renderInput={(startProps, endProps) => {
+                      startProps.inputProps = {
+                        ...startProps.inputProps,
+                        placeholder: "From:dd/mm/yy",
+                        readOnly: true,
+                      };
+
+                      endProps.inputProps = {
+                        ...endProps.inputProps,
+                        placeholder: "To:dd/mm/yy",
+                        readOnly: true,
+                      };
+                      return (
+                        <Grid container spacing={2}>
+                          <Grid size={6}>
+                            <OutlinedTextField
+                              {...startProps}
+                              isNotBoldText={true}
+                              variant="outlined"
+                              label=""
+                            />
+                          </Grid>
+                          <Grid size={6}>
+                            <OutlinedTextField
+                              {...endProps}
+                              isNotBoldText={true}
+                              variant="outlined"
+                              label=""
+                            />
+                          </Grid>
                         </Grid>
-                        <Grid size={6}>
-                          <OutlinedTextField
-                            {...endProps}
-                            slotProps={{
-                              input: {
-                                readOnly: true,
-                              },
-                            }}
-                            isNotBoldText={true}
-                            variant="outlined"
-                            placeholder="To:dd/mm/yy"
-                            label=""
-                          />
-                        </Grid>
-                      </Grid>
-                    )}
+                      );
+                    }}
                   />
                 </LocalizationProvider>
               </AccordionDetails>
@@ -162,3 +157,5 @@ const Filters: React.FC<Props> = ({ filters }) => {
 };
 
 export default Filters;
+
+

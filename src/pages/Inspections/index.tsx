@@ -30,7 +30,11 @@ const Inspections = () => {
 
   const inspectionListContent = (
     <Grid container spacing={0}>
-      <Grid size={{ md: 3 }} display={{ xs: "none", md: "block" }}>
+      <Grid
+        size={{ md: 3 }}
+        display={{ xs: "none", md: "block" }}
+        sx={{ overflowY: "auto", height: "85vh" }}
+      >
         <Filters filters={inspectionFilters} />
       </Grid>
       <Grid size={0}>
