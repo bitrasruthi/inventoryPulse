@@ -81,7 +81,6 @@ const Inspections = () => {
         label="Add Inspection"
         menuList={inspectionBtnList}
         isGradient={true}
-        hasMenu={true}
         handleDialogOpen={handleOpenDialog}
       />
       {dialogOpen && (

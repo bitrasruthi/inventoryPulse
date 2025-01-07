@@ -20,6 +20,20 @@ const theme = createTheme({
   },
   components: {
     MuiButton: {},
+    MuiMenu: {
+      styleOverrides: {
+        paper: {
+          borderRadius: "10px",
+        },
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          fontFamily: "roboto-bold !important",
+        },
+      },
+    },
   },
 });
 

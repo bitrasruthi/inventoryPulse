@@ -72,7 +72,7 @@ const GradientButton: React.FC<Props> = ({
                 handleDialogOpen();
               }}
             >
-              {item?.icon && <item.icon />}{" "}
+              {item?.icon && <item.icon />}
               <Typography fontSize={12} pl={1}>
                 {item?.name}
               </Typography>
