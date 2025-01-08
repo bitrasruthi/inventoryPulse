@@ -1,7 +1,7 @@
 import React from "react";
 import { Chip, ChipProps, Stack, styled } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
-import FiltersStore from "../store/filterStore";
+import useFiltersStore from "../store/filterStore";
 
 interface IProps extends ChipProps {
   list: [{ id: number; name: string }];
@@ -19,7 +19,7 @@ export const StyledChip = styled(Chip)(({ theme }) => ({
 
 const ChipCommon: React.FC<IProps> = (props) => {
   const { list } = props;
-  const { updateFilters, removeDateRangeFilter } = FiltersStore();
+  const { updateFilters, removeDateRangeFilter } = useFiltersStore();
 
   const handleDelete = (item: { id: number; name: string }) => {
     if (item?.id == -1) {

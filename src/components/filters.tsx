@@ -13,7 +13,7 @@ import React, { useEffect, useState } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import theme from "../styles/theme";
 import ContentWrapper from "./contentWrapper";
-import FiltersStore from "../store/filterStore";
+import useFiltersStore from "../store/filterStore";
 import SelectField from "./selectField";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DateRangePicker from "@mui/lab/DateRangePicker";
@@ -32,7 +32,7 @@ const Filters: React.FC<Props> = ({ filters }) => {
     selectedFilterItemList,
     setDateRangeFilter,
     dateRangeFilter,
-  } = FiltersStore();
+  } = useFiltersStore();
   const [selectedValue, setSelectedValue] = useState<string>(options[0]?.value);
 
   const handleCheckBox = (filterItem: { id: number; name: string }) => {
@@ -51,7 +51,7 @@ const Filters: React.FC<Props> = ({ filters }) => {
             defaultExpanded
             key={index}
             elevation={0}
-            sx={{ p: 1, pt: 0, pb: 0, }}
+            sx={{ p: 1, pt: 0, pb: 0 }}
           >
             <AccordionSummary
               sx={{ p: 0 }}
@@ -157,5 +157,3 @@ const Filters: React.FC<Props> = ({ filters }) => {
 };
 
 export default Filters;
-
-

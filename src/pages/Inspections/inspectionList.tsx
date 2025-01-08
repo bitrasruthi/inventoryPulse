@@ -2,7 +2,7 @@ import { Box, Divider } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import ContentWrapper from "../../components/contentWrapper";
 import useDebounce from "../../helpers/UseDebounce";
-import FiltersStore from "../../store/filterStore";
+import useFiltersStore from "../../store/filterStore";
 import ChipCommon from "../../components/chipCommon";
 import CardCommon from "../../components/cardCommon";
 import { inspectionListDummy } from "../../constants/constants";
@@ -14,7 +14,7 @@ type Props = {};
 
 const InspectionList = (props: Props) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const { selectedFilterItemList, dateRangeFilter } = FiltersStore();
+  const { selectedFilterItemList, dateRangeFilter } = useFiltersStore();
   const [page, setPage] = React.useState(2);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const { chipList, getChipList } = userCommon();
