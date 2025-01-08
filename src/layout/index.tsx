@@ -14,7 +14,6 @@ const Layout: FC = () => {
   return (
     <Box
       position={"relative"}
-      height={"100vh"}
       sx={{
         backgroundColor: "#f0f0f0",
       }}

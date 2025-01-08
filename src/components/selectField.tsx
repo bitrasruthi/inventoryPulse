@@ -20,10 +20,10 @@ const StyledSelect = styled(Select)(({ theme }) => ({
 }));
 
 const SelectField: React.FC<IProps> = (props) => {
-  const { options, required, label, isNotBoldText, marginBottom } = props;
+  const { options, required, label, isNotBoldText, marginBottom, type } = props;
 
   return (
-    <Box mb={marginBottom} pb={2}>
+    <Box mb={marginBottom} pb={type === "pagination" ? 0 : 2} width={"100%"}>
       <LabelCommon fieldName={label} isRequired={required} />
       <StyledSelect
         {...props}

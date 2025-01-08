@@ -15,8 +15,6 @@ const ContentWrapper: React.FC<Props> = ({
   return (
     <Box
       sx={{
-        // height: "75vh !important",
-        overflowY: "auto",
         px: paddingX,
         py: paddingY,
       }}

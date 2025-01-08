@@ -130,7 +130,7 @@ const CardCommon: React.FC<IProps> = (props) => {
 
   return (
     <>
-      <Grid container spacing={2}>
+      <Grid container spacing={type === CardTypeEnum.Inspection ? 0 : 2} m={0}>
         {list?.length > 0
           ? list?.map((item: any, index: number) =>
               type === CardTypeEnum.Inspection ? (
@@ -155,13 +155,17 @@ const CardCommon: React.FC<IProps> = (props) => {
                         bottom: 0,
                       }}
                     ></Box>
-                    <Grid p={3} container spacing={1}>
-                      <Grid size={10}>
+                    <Grid p={2} container spacing={1}>
+                      <Grid size={{ xs: 12, lg: 10 }}>
                         <Typography className="roboto-bold" variant="h5">
                           {getNameByBuildingStatus(item?.buildingStatus)}
                         </Typography>
                         <Typography>{item?.address}</Typography>
-                        <Box display={"flex"} gap={5}>
+                        <Box
+                          display={"flex"}
+                          gap={{ xs: 1, lg: 5 }}
+                          flexWrap={"wrap"}
+                        >
                           <Box display={"flex"} py={1} alignItems={"center"}>
                             <BedIcon />
                             <Typography pl={1}>{item?.beds}</Typography>
@@ -184,7 +188,10 @@ const CardCommon: React.FC<IProps> = (props) => {
                           </Box>
                         </Box>
                       </Grid>
-                      <Grid size={2} textAlign={"right"}>
+                      <Grid
+                        size={{ xs: 12, lg: 2 }}
+                        textAlign={{ xs: "left", lg: "right" }}
+                      >
                         <Typography fontSize={16} className="roboto-medium">
                           {moment(item?.date)?.format("DD MMM YYYY")}
                         </Typography>

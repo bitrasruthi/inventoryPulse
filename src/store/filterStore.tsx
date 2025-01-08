@@ -1,5 +1,7 @@
+import { DateRange } from "@mui/lab";
 import create from "zustand";
 import { persist } from "zustand/middleware";
+import { momentDateFormatUtil } from "../helpers/Util";
 
 const createCustomStorage = (storage: Storage) => {
   return {
@@ -13,21 +15,36 @@ const FiltersStore = create<any>(
   persist(
     (set) => ({
       selectedFilterItemList: [],
-      dateRangeFilter: { from: "", to: "" },
-      setDateRangeFilter: (fromDate: string, toDate: string) => {
+      dateRangeFilter: [null, null],
+      setDateRangeFilter: (dateRangeFilter: DateRange<unknown>) => {
         set({
-          dateRangeFilter: {
-            from: fromDate,
-            to: toDate,
-          },
+          dateRangeFilter,
         });
       },
       removeDateRangeFilter: () => {
-        set({
-          from: "",
-          to: "",
-        });
+        set({ dateRangeFilter: [null, null] });
       },
+      // getChipListWithDateRange: () => {
+      //   set((state: any) => {
+      //     if (
+      //       state.dateRangeFilter[0] !== null &&
+      //       state.dateRangeFilter[1] !== null
+      //     ) {
+      //       const dateRange = {
+      //         id: -1,
+      //         name: `from: ${momentDateFormatUtil(
+      //           state.dateRangeFilter[0]
+      //         )} - to: ${momentDateFormatUtil(state.dateRangeFilter[1])}`,
+      //       };
+
+      //       return [...state.selectedFilterItemList, dateRange] as [
+      //         { id: number; name: string }
+      //       ];
+      //     } else {
+      //       return state.selectedFilterItemList;
+      //     }
+      //   });
+      // },
       updateFilters: (filterItem: { id: number; name: string }) => {
         set((state: any) => {
           const itemExists = state.selectedFilterItemList?.some(
@@ -40,8 +57,6 @@ const FiltersStore = create<any>(
               selectedFilterItemList: state.selectedFilterItemList.filter(
                 (item: any) => item.id !== filterItem?.id
               ),
-              selectedFromDate: state.selectedFromDate,
-              selectedToDate: state.selectedToDate,
             };
           } else {
             return {
@@ -50,8 +65,6 @@ const FiltersStore = create<any>(
                 ...state.selectedFilterItemList,
                 filterItem,
               ],
-              selectedFromDate: state.selectedFromDate,
-              selectedToDate: state.selectedToDate,
             };
           }
         });

@@ -34,9 +34,10 @@ const OutlinedTextField: React.FC<IProps> = (props) => {
     label,
     required,
     isNotBoldText,
+    type,
   } = props;
   return (
-    <Box pb={2}>
+    <Box pb={type === "pagination" ? 0 : 2} width={"100%"}>
       <LabelCommon fieldName={label} isRequired={required} />
       <StyledTextField
         fullWidth

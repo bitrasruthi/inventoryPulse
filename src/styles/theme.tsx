@@ -19,7 +19,30 @@ const theme = createTheme({
     fontFamily: "roboto-regular, sans-serif",
   },
   components: {
-    MuiButton: {},
+    MuiButton: {
+      variants: [
+        {
+          props: { variant: "contained" },
+          style: {
+            background: "linear-gradient(180deg, #ac42e9, #8542e9) !important",
+            color: "#FFFFFF",
+          },
+        },
+        {
+          props: { variant: "outlined" },
+          style: {
+            background: "grey",
+            color: "#FFFFFF",
+            border: "none",
+          },
+        },
+      ],
+      styleOverrides: {
+        root: {
+          textTransform: "none",
+        },
+      },
+    },
     MuiMenu: {
       styleOverrides: {
         paper: {
