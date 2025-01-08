@@ -15,6 +15,7 @@ import FullScreenDialog, {
 import SaveProperty from "../Properties/saveProperty";
 import TabsCommon from "../../components/tabsCommon";
 import Calendar from "./InspectionCalender";
+import ContentWrapper from "../../components/contentWrapper";
 
 const Inspections = () => {
   const [activeTab, setActiveTab] = useState<string>(tabMenuList[0]?.value);
@@ -55,7 +56,9 @@ const Inspections = () => {
         <Divider orientation="vertical" />
       </Grid>
       <Grid size={9}>
-        <Calendar />
+        <Box height={"85vh"} sx={{ overflowY: "auto" }}>
+          <Calendar />
+        </Box>
       </Grid>
     </Grid>
   );
