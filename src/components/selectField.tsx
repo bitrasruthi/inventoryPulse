@@ -38,7 +38,11 @@ const SelectField: React.FC<IProps> = (props) => {
         }}
       >
         {options?.map((option) => (
-          <MenuItem key={option?.value} value={option?.value}>
+          <MenuItem
+            key={option?.value}
+            value={option?.value}
+            sx={{ fontFamily: "roboto-regular !important" }}
+          >
             {option?.label}
           </MenuItem>
         ))}

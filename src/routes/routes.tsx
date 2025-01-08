@@ -5,7 +5,7 @@ import Clients from "../pages/Clients/clients";
 import Dashboard from "../pages/Dashboard/dashboard";
 import Inspections from "../pages/Inspections";
 import Properties from "../pages/Properties";
-import Users from "../pages/Users/Users";
+import Users from "../pages/Users/users";
 import { paths } from "./paths";
 
 const routes = [

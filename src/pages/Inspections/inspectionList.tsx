@@ -1,19 +1,14 @@
 import { Box, Divider } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import ContentWrapper from "../../components/contentWrapper";
-import useDebounce from "../../helpers/UseDebounce";
 import useFiltersStore from "../../store/filterStore";
 import ChipCommon from "../../components/chipCommon";
-import CardCommon from "../../components/cardCommon";
 import { inspectionListDummy } from "../../constants/constants";
-import { CardTypeEnum } from "../../constants/enum";
 import Pagination from "../../components/pagination";
-import { momentDateFormatUtil } from "../../helpers/Util";
 import { userCommon } from "../../context/CommonContext";
-type Props = {};
+import InspectionCard from "../../components/inspectionCard";
 
-const InspectionList = (props: Props) => {
-  const [searchTerm, setSearchTerm] = useState<string>("");
+const InspectionList = () => {
   const { selectedFilterItemList, dateRangeFilter } = useFiltersStore();
   const [page, setPage] = React.useState(2);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -37,22 +32,14 @@ const InspectionList = (props: Props) => {
     getChipList(dateRangeFilter, selectedFilterItemList);
   }, [dateRangeFilter, selectedFilterItemList]);
 
-  const debouncedSearch = useDebounce(searchTerm, 500);
-
-  const handleTextFieldChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setSearchTerm(event.target.value as string);
-  };
-
   return (
     <>
-      {
+      {chipList?.length > 0 && (
         <>
           <ChipCommon list={chipList} />
           <Divider />
         </>
-      }
+      )}
       <Box
         display={"flex"}
         justifyContent={"space-between"}
@@ -69,10 +56,7 @@ const InspectionList = (props: Props) => {
       </Box>
       <ContentWrapper paddingY={0}>
         <Box height={"69vh"} sx={{ overflowY: "auto" }}>
-          <CardCommon
-            list={inspectionListDummy}
-            type={CardTypeEnum.Inspection}
-          />
+          <InspectionCard list={inspectionListDummy} />
         </Box>
       </ContentWrapper>
     </>

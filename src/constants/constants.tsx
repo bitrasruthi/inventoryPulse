@@ -3,6 +3,9 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import HomeIcon from "../assets/icons/homeIcon";
 import AddHomeIcon from "../assets/icons/addHomeIcon";
 import ImportIcon from "../assets/icons/ImportIcon";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 
 export const tabMenuList = [
   {
@@ -183,5 +186,97 @@ export const userListDummy = [
     email: "johnmathew@mail.com",
     jobType: "Full Time",
     role: "Manager",
+  },
+];
+
+export const clientListDummy = [
+  {
+    id: 1,
+    status: 1,
+    name: "David Lee",
+    companyName: "Land Securities Group plc",
+    phone: "+44 7911 123456",
+    email: "johnmathew@mail.com",
+    address: "Aldwych, London WC2B 4DD, United Kingdom",
+  },
+  {
+    id: 2,
+    status: 1,
+    name: "David Lee",
+    companyName: "Land Securities Group plc",
+    phone: "+44 7911 123456",
+    email: "johnmathew@mail.com",
+    address: "Aldwych, London WC2B 4DD, United Kingdom",
+  },
+  {
+    id: 3,
+    status: 1,
+    name: "David Lee",
+    companyName: "Land Securities Group plc",
+    phone: "+44 7911 123456",
+    email: "johnmathew@mail.com",
+    address: "Aldwych, London WC2B 4DD, United Kingdom",
+  },
+  {
+    id: 4,
+    status: 1,
+    name: "David Lee",
+    companyName: "Land Securities Group plc",
+    phone: "+44 7911 123456",
+    email: "johnmathew@mail.com",
+    address: "Aldwych, London WC2B 4DD, United Kingdom",
+  },
+];
+
+export const contactListDummy = [
+  {
+    id: 1,
+    status: 1,
+    name: "David Lee",
+    phone: "+44 7911 123456",
+    email: "johnmathew@mail.com",
+    role: "Manager",
+  },
+  {
+    id: 2,
+    status: 1,
+    name: "David Lee",
+    phone: "+44 7911 123456",
+    email: "johnmathew@mail.com",
+    role: "Manager",
+  },
+  {
+    id: 3,
+    status: 1,
+    name: "David Lee",
+    phone: "+44 7911 123456",
+    email: "johnmathew@mail.com",
+    role: "Manager",
+  },
+  {
+    id: 4,
+    status: 1,
+    name: "David Lee",
+    phone: "+44 7911 123456",
+    email: "johnmathew@mail.com",
+    role: "Manager",
+  },
+];
+
+export const userMenuList = [
+  {
+    id: 1,
+    label: "View",
+    icon: VisibilityOutlinedIcon,
+  },
+  {
+    id: 2,
+    label: "Edit",
+    icon: EditOutlinedIcon,
+  },
+  {
+    id: 3,
+    label: "Delete",
+    icon: DeleteOutlineIcon,
   },
 ];
