@@ -63,6 +63,7 @@ const TabsCommon: React.FC<Props> = ({
           >
             {tabMenuList?.map((item) => (
               <Tab
+                key={item.label}
                 label={
                   <Typography sx={{ fontFamily: "roboto-bold" }}>
                     {item?.label}

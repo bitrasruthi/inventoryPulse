@@ -1,22 +1,39 @@
 import { DateRange } from "@mui/lab";
-import create from "zustand";
+import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { momentDateFormatUtil } from "../helpers/Util";
 
-const createCustomStorage = (storage: Storage) => {
+const customStorage = (storage: Storage) => {
   return {
-    getItem: (name: string) => storage.getItem(name),
-    setItem: (name: string, value: string) => storage.setItem(name, value),
-    removeItem: (name: string) => storage.removeItem(name),
+    getItem: (name: string) => {
+      const value = storage.getItem(name);
+      return value ? JSON.parse(value) : null;
+    },
+    setItem: (name: string, value: any) => {
+      storage.setItem(name, JSON.stringify(value));
+    },
+    removeItem: (name: string) => {
+      storage.removeItem(name);
+    },
   };
 };
 
-const FiltersStore = create<any>(
+type State = {
+  selectedFilterItemList: [];
+  dateRangeFilter: [Date | null, Date | null];
+};
+
+type Actions = {
+  updateFilters: (filterItem: { id: number; name: string }) => void;
+  setDateRangeFilter: (dateRangeFilter: DateRange<Date>) => void;
+  removeDateRangeFilter: () => void;
+};
+
+const useFiltersStore = create<State & Actions>()(
   persist(
     (set) => ({
       selectedFilterItemList: [],
       dateRangeFilter: [null, null],
-      setDateRangeFilter: (dateRangeFilter: DateRange<unknown>) => {
+      setDateRangeFilter: (dateRangeFilter: DateRange<Date>) => {
         set({
           dateRangeFilter,
         });
@@ -72,9 +89,9 @@ const FiltersStore = create<any>(
     }),
     {
       name: "filters",
-      getStorage: () => createCustomStorage(localStorage),
+      storage: customStorage(sessionStorage),
     }
   )
 );
 
-export default FiltersStore;
+export default useFiltersStore;

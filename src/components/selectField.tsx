@@ -5,7 +5,7 @@ import LabelCommon from "./labelCommon";
 
 interface IProps extends BaseSelectProps {
   options: { label: string; value: string }[];
-  isNotBoldText?: boolean;
+  isnotboldtext?: boolean;
   marginBottom?: number;
 }
 
@@ -20,7 +20,7 @@ const StyledSelect = styled(Select)(({ theme }) => ({
 }));
 
 const SelectField: React.FC<IProps> = (props) => {
-  const { options, required, label, isNotBoldText, marginBottom, type } = props;
+  const { options, required, label, isnotboldtext, marginBottom, type } = props;
 
   return (
     <Box mb={marginBottom} pb={type === "pagination" ? 0 : 2} width={"100%"}>
@@ -33,7 +33,7 @@ const SelectField: React.FC<IProps> = (props) => {
         label={""}
         sx={{
           "& .MuiInputBase-input": {
-            fontFamily: isNotBoldText ? "roboto-regular" : "roboto-bold",
+            fontFamily: isnotboldtext ? "roboto-regular" : "roboto-bold",
           },
         }}
       >
