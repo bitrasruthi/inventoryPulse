@@ -1,4 +1,5 @@
 import React from "react";
+import "@fullcalendar/react/dist/vdom";
 import FullCalendar, {
   DateSelectArg,
   EventClickArg,
@@ -12,7 +13,6 @@ import { INITIAL_EVENTS } from "./event-utils";
 import { Popover, Whisper } from "rsuite";
 import { format } from "date-fns";
 import ContentWrapper from "../../components/contentWrapper";
-import "@fullcalendar/react/dist/vdom";
 import "./styles.css";
 
 const Calendar = () => {

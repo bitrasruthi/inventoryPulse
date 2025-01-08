@@ -69,7 +69,7 @@ const SaveProperty = () => {
                 <OutlinedTextField
                   label="Bedrooms"
                   variant="outlined"
-                  isNotBoldText={false}
+                  isnotboldtext={false}
                 />
               </Grid2>
             </Grid2>

@@ -20,12 +20,15 @@ const customStorage = (storage: Storage) => {
 type State = {
   selectedFilterItemList: [];
   dateRangeFilter: [Date | null, Date | null];
+};
+
+type Actions = {
   updateFilters: (filterItem: { id: number; name: string }) => void;
   setDateRangeFilter: (dateRangeFilter: DateRange<Date>) => void;
   removeDateRangeFilter: () => void;
 };
 
-const useFiltersStore = create<State>()(
+const useFiltersStore = create<State & Actions>()(
   persist(
     (set) => ({
       selectedFilterItemList: [],
@@ -86,7 +89,7 @@ const useFiltersStore = create<State>()(
     }),
     {
       name: "filters",
-      storage: customStorage(localStorage),
+      storage: customStorage(sessionStorage),
     }
   )
 );

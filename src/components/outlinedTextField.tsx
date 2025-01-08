@@ -12,7 +12,7 @@ import LabelCommon from "./labelCommon";
 interface IProps extends OutlinedTextFieldProps {
   startAdormentIcon?: React.ElementType;
   endAdormentIcon?: React.ElementType;
-  isNotBoldText?: boolean;
+  isnotboldtext?: boolean;
 }
 
 export const StyledTextField = styled(TextField)(({ theme }) => ({
@@ -33,7 +33,7 @@ const OutlinedTextField: React.FC<IProps> = (props) => {
     endAdormentIcon: EndAdormentIcon,
     label,
     required,
-    isNotBoldText,
+    isnotboldtext,
     type,
   } = props;
   return (
@@ -46,7 +46,7 @@ const OutlinedTextField: React.FC<IProps> = (props) => {
         label={""}
         sx={{
           "& .MuiInputBase-input": {
-            fontFamily: isNotBoldText ? "roboto-regular" : "roboto-bold",
+            fontFamily: isnotboldtext ? "roboto-regular" : "roboto-bold",
           },
         }}
         slotProps={{

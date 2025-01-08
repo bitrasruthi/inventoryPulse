@@ -69,7 +69,7 @@ const Filters: React.FC<Props> = ({ filters }) => {
                   value={selectedValue}
                   onChange={handleSelectChange}
                   options={options}
-                  isNotBoldText={true}
+                  isnotboldtext={true}
                   marginBottom={2}
                 />
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -100,7 +100,7 @@ const Filters: React.FC<Props> = ({ filters }) => {
                           <Grid size={6}>
                             <OutlinedTextField
                               {...startProps}
-                              isNotBoldText={true}
+                              isnotboldtext={true}
                               variant="outlined"
                               label=""
                             />
@@ -108,7 +108,7 @@ const Filters: React.FC<Props> = ({ filters }) => {
                           <Grid size={6}>
                             <OutlinedTextField
                               {...endProps}
-                              isNotBoldText={true}
+                              isnotboldtext={true}
                               variant="outlined"
                               label=""
                             />

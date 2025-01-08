@@ -14,7 +14,7 @@ import FullScreenDialog, {
 } from "../../components/fullScreenDialog";
 import SaveProperty from "../Properties/saveProperty";
 import TabsCommon from "../../components/tabsCommon";
-// import Calendar from "./InspectionCalender";
+import Calendar from "./InspectionCalender";
 
 const Inspections = () => {
   const [activeTab, setActiveTab] = useState<string>(tabMenuList[0]?.value);
@@ -54,7 +54,9 @@ const Inspections = () => {
       <Grid size={0}>
         <Divider orientation="vertical" />
       </Grid>
-      <Grid size={9}>{/* <Calendar /> */}</Grid>
+      <Grid size={9}>
+        <Calendar />
+      </Grid>
     </Grid>
   );
 

@@ -1,5 +1,3 @@
-@import "rsuite/dist/rsuite.min.css";
-
 .fc .fc-button {
   display: inline-block;
   margin-bottom: 0;
@@ -13,7 +11,7 @@
   user-select: none;
   text-decoration: none;
   color: var(--rs-btn-default-text);
-  background-color: var(--rs-btn-default-bg);
+  background-color: var(--rs-primary-300);
   border-radius: 6px;
   box-shadow: none !important;
   text-transform: capitalize;
@@ -52,7 +50,7 @@
 }
 .fc .fc-scrollgrid td,
 .fc .fc-scrollgrid th {
-  color: red;
+  color: black;
   border: 1px solid var(--rs-border-secondary);
 }
 .fc .fc-scrollgrid th {
