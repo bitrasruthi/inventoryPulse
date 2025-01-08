@@ -85,3 +85,9 @@ html {
 .roboto-thin {
   font-family: "roboto-thin", sans-serif !important;
 }
+
+
+.flex-align-center{
+ display: flex;
+ align-items: center;
+}

@@ -110,8 +110,9 @@ const Pagination: React.FC<IProps> = (props) => {
             <OutlinedTextField
               variant="outlined"
               startAdormentIcon={SearchIcon}
-              placeholder="Search by address"
+              placeholder="Search"
               type="pagination"
+              isnotboldtext={true}
             />
           </Grid2>
         </Grid2>

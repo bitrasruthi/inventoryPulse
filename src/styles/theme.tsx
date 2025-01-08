@@ -40,6 +40,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           textTransform: "none",
+          borderRadius: "10px",
         },
       },
     },
@@ -47,6 +48,7 @@ const theme = createTheme({
       styleOverrides: {
         paper: {
           borderRadius: "10px",
+          minWidth: 140,
         },
       },
     },
