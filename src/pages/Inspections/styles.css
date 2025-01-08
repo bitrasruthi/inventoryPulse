@@ -7,22 +7,23 @@
   cursor: pointer;
   white-space: nowrap;
   transition: color 0.15s ease-out, background-color 0.15s ease-out;
-  border: var(--rs-btn-default-border, none);
+  border: 1px solid rgba(0, 0, 0, 0.408);
   user-select: none;
   text-decoration: none;
-  color: var(--rs-btn-default-text);
-  background-color: var(--rs-primary-300);
-  border-radius: 6px;
+  color: black;
+  background-color: white;
+  border-radius: 12px;
   box-shadow: none !important;
   text-transform: capitalize;
   font-size: 14px;
   line-height: 20px;
-  padding: 8px 12px;
+  padding: 6px 12px;
 }
 
 .fc .fc-button .button-activated {
   color: var(--rs-btn-default-hover-text);
-  background-color: var(--rs-btn-default-hover-bg);
+  background-color: var(--rs-primary-300);
+  border-radius: 6px;
   text-decoration: none;
 }
 .fc .fc-button .button-pressed {
@@ -30,13 +31,12 @@
   background-color: var(--rs-btn-default-active-bg);
 }
 .fc .fc-button .button-disabled {
-  cursor: var(--rs-primary-600);
   color: var(--rs-btn-default-disabled-text);
   background-color: var(--rs-btn-default-disabled-bg);
 }
 .fc .fc-button.fc-button-active {
-  color: var(--rs-btn-default-active-text) !important;
-  background-color: var(--rs-btn-default-active-bg) !important;
+  color: white !important;
+  background-color: var(--rs-primary-500) !important;
 }
 .fc .fc-col-header-cell-cushion {
   font-weight: 500;
@@ -51,7 +51,7 @@
 .fc .fc-scrollgrid td,
 .fc .fc-scrollgrid th {
   color: black;
-  border: 1px solid var(--rs-border-secondary);
+  border: 1px solid var(--rs-border-primary);
 }
 .fc .fc-scrollgrid th {
   height: 36px;
@@ -62,6 +62,7 @@
 }
 .fc .fc-daygrid-dot-event {
   padding: 4px;
+  margin: 2px 6px !important;
   background-color: var(--rs-btn-default-bg);
   color: var(--rs-text-primary);
 }
@@ -79,8 +80,25 @@
 }
 
 .fc .fc-button:hover,
-.fc .fc-button:focus {
-  color: var(--rs-btn-default-hover-text);
-  background-color: var(--rs-btn-default-hover-bg);
+.fc .fc-button:focus,
+.fc .fc-button:active,
+.fc .fc-button-primary:disabled {
+  color: white;
+  background-color: var(--rs-primary-500) !important;
   text-decoration: none;
+}
+
+.fc .fc-button:disabled {
+  opacity: 1;
+}
+
+.fc .fc-daygrid-day-top {
+  display: flex;
+  flex-direction: row;
+  margin-left: 6px !important;
+}
+
+.fc .fc-highlight {
+  background-color: var(--rs-btn-default-disabled-bg) !important;
+  z-index: 3;
 }
