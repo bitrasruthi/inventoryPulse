@@ -7,6 +7,8 @@ import { inspectionListDummy } from "../../constants/constants";
 import Pagination from "../../components/pagination";
 import { userCommon } from "../../context/CommonContext";
 import InspectionCard from "../../components/inspectionCard";
+import StepperCommon from "../../components/stepper";
+import DatePickerCommon from "../../components/datePickerCommon";
 
 const InspectionList = () => {
   const { selectedFilterItemList, dateRangeFilter } = useFiltersStore();
@@ -15,7 +17,7 @@ const InspectionList = () => {
   const { chipList, getChipList } = userCommon();
 
   const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
+    _event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number
   ) => {
     setPage(newPage);
@@ -55,6 +57,8 @@ const InspectionList = () => {
         />
       </Box>
       <ContentWrapper paddingY={0}>
+        {/* <StepperCommon /> */}
+
         <Box height={"69vh"} sx={{ overflowY: "auto" }}>
           <InspectionCard list={inspectionListDummy} />
         </Box>

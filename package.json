@@ -20,6 +20,7 @@
     "@mui/lab": "5.0.0-alpha.59",
     "@mui/material": "^6.2.1",
     "@mui/styles": "^6.2.1",
+    "@mui/x-date-pickers": "^7.23.3",
     "@rsuite/icons": "^1.0.2",
     "clsx": "^2.1.1",
     "date-fns": "^2.29.2",
