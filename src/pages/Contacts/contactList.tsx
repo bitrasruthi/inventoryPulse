@@ -6,15 +6,13 @@ import {
   Typography,
   Grid2 as Grid,
   Avatar,
-  IconButton,
 } from "@mui/material";
-import React, { useState } from "react";
-import { inspectionColors, userMenuList } from "../constants/constants";
-import PhoneIcon from "../assets/icons/phoneIcon";
-import EmailIcon from "../assets/icons/emailIcon";
-import JobTypeIcon from "../assets/icons/jobTypeIcon";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import MenuCommon from "./menuCommon";
+import React from "react";
+import { inspectionColors } from "../../constants/constants";
+import PhoneIcon from "../../assets/icons/phoneIcon";
+import EmailIcon from "../../assets/icons/emailIcon";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import DeleteIcon from "../../assets/icons/deleteIcon";
 
 interface IProps extends CardProps {
   list: any;
@@ -30,14 +28,8 @@ export const StyledCard = styled(Card)(() => ({
   boxShadow: " rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
 }));
 
-const UserCard: React.FC<IProps> = (props) => {
+const ContactList: React.FC<IProps> = (props) => {
   const { list } = props;
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
 
   return (
     <>
@@ -106,9 +98,40 @@ const UserCard: React.FC<IProps> = (props) => {
                             <EmailIcon />
                             <Typography pl={1}>{item?.email}</Typography>
                           </Box>
-                          <Box display={"flex"} py={1} alignItems={"center"}>
-                            <JobTypeIcon />
-                            <Typography pl={1}>{item?.jobType}</Typography>
+                        </Box>
+                        <Box display={"flex"} gap={3}>
+                          <Box className={"flex-align-center"}>
+                            <CheckCircleIcon
+                              sx={{
+                                width: 18,
+                                height: 18,
+                                color: "primary.main",
+                                mr: 0.5,
+                              }}
+                            />{" "}
+                            Signee
+                          </Box>
+                          <Box className={"flex-align-center"}>
+                            <CheckCircleIcon
+                              sx={{
+                                width: 18,
+                                height: 18,
+                                color: "primary.main",
+                                mr: 0.5,
+                              }}
+                            />{" "}
+                            Notify of conduct date
+                          </Box>
+                          <Box className={"flex-align-center"}>
+                            <CheckCircleIcon
+                              sx={{
+                                width: 18,
+                                height: 18,
+                                color: "primary.main",
+                                mr: 0.5,
+                              }}
+                            />{" "}
+                            Deliver completed report
                           </Box>
                         </Box>
                       </Box>
@@ -119,24 +142,16 @@ const UserCard: React.FC<IProps> = (props) => {
                       display={"flex"}
                       alignItems={"center"}
                     >
-                      <IconButton disableRipple onClick={handleClick}>
-                        <MoreVertIcon sx={{ width: 20, height: 20 }} />
-                      </IconButton>
+                      <DeleteIcon />
                     </Grid>
                   </Grid>
                 </StyledCard>
               </Grid>
             ))
           : "No data"}
-        <MenuCommon
-          anchor={anchorEl}
-          menuList={userMenuList}
-          setAnchor={setAnchorEl}
-          open={open}
-        ></MenuCommon>
       </Grid>
     </>
   );
 };
 
-export default UserCard;
+export default ContactList;

@@ -9,7 +9,7 @@ import FullScreenDialog, {
   CustomButtonProps,
 } from "../../components/fullScreenDialog";
 import AddUser from "./addUser";
-import UserCard from "../../components/userCard";
+import UserCard from "./userList";
 import Pagination from "../../components/pagination";
 
 const Users = () => {

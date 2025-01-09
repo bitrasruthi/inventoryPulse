@@ -14,19 +14,19 @@ import {
 import ContentWrapper from "../../components/contentWrapper";
 import TabsCommon from "../../components/tabsCommon";
 import Pagination from "../../components/pagination";
-import ContactCard from "../../components/contactCard";
-import ClientCard from "../../components/clientCard";
+import ClientList from "./clientList";
+import ContactList from "../Contacts/contactList";
 
 type Props = {};
 
-const Clients = (props: Props) => {
+const Clients = (_props: Props) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<string>(tabMenuList[0]?.value);
   const [page, setPage] = useState(2);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
+    _event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number
   ) => {
     setPage(newPage);
@@ -57,8 +57,8 @@ const Clients = (props: Props) => {
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
-        {/* <ContactCard list={contactListDummy} /> */}
-        <ClientCard list={clientListDummy} />
+        <ContactList list={contactListDummy} />
+        {/* <ClientList list={clientListDummy} /> */}
       </Box>
     </ContentWrapper>
   );

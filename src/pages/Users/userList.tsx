@@ -6,13 +6,19 @@ import {
   Typography,
   Grid2 as Grid,
   Avatar,
+  IconButton,
 } from "@mui/material";
-import React from "react";
-import { inspectionColors } from "../constants/constants";
-import PhoneIcon from "../assets/icons/phoneIcon";
-import EmailIcon from "../assets/icons/emailIcon";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import DeleteIcon from "../assets/icons/deleteIcon";
+import React, { useState } from "react";
+import { inspectionColors } from "../../constants/constants";
+import PhoneIcon from "../../assets/icons/phoneIcon";
+import EmailIcon from "../../assets/icons/emailIcon";
+import JobTypeIcon from "../../assets/icons/jobTypeIcon";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import MenuCommon from "../../components/menuCommon";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+import { IMenuItemExtendProps } from "../../helpers/Interfaces";
 
 interface IProps extends CardProps {
   list: any;
@@ -28,8 +34,48 @@ export const StyledCard = styled(Card)(() => ({
   boxShadow: " rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
 }));
 
-const ContactCard: React.FC<IProps> = (props) => {
+const UserList: React.FC<IProps> = (props) => {
   const { list } = props;
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const [selectedUser, setSelectedUser] = useState<any>();
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClickView = () => {
+    console.log("view", selectedUser);
+  };
+
+  const handleClickEdit = () => {
+    console.log("edit", selectedUser);
+  };
+
+  const handleClickDelete = () => {
+    console.log("delete", selectedUser);
+  };
+
+  const userMenuList: IMenuItemExtendProps[] = [
+    {
+      key: 1,
+      label: "View",
+      icon: VisibilityOutlinedIcon,
+      onClick: (_e) => handleClickView(),
+    },
+    {
+      key: 2,
+      label: "Edit",
+      icon: EditOutlinedIcon,
+      onClick: (_e) => handleClickEdit(),
+    },
+    {
+      key: 3,
+      label: "Delete",
+      icon: DeleteOutlineIcon,
+      onClick: (_e) => handleClickDelete(),
+    },
+  ];
 
   return (
     <>
@@ -98,40 +144,9 @@ const ContactCard: React.FC<IProps> = (props) => {
                             <EmailIcon />
                             <Typography pl={1}>{item?.email}</Typography>
                           </Box>
-                        </Box>
-                        <Box display={"flex"} gap={3}>
-                          <Box className={"flex-align-center"}>
-                            <CheckCircleIcon
-                              sx={{
-                                width: 18,
-                                height: 18,
-                                color: "primary.main",
-                                mr: 0.5,
-                              }}
-                            />{" "}
-                            Signee
-                          </Box>
-                          <Box className={"flex-align-center"}>
-                            <CheckCircleIcon
-                              sx={{
-                                width: 18,
-                                height: 18,
-                                color: "primary.main",
-                                mr: 0.5,
-                              }}
-                            />{" "}
-                            Notify of conduct date
-                          </Box>
-                          <Box className={"flex-align-center"}>
-                            <CheckCircleIcon
-                              sx={{
-                                width: 18,
-                                height: 18,
-                                color: "primary.main",
-                                mr: 0.5,
-                              }}
-                            />{" "}
-                            Deliver completed report
+                          <Box display={"flex"} py={1} alignItems={"center"}>
+                            <JobTypeIcon />
+                            <Typography pl={1}>{item?.jobType}</Typography>
                           </Box>
                         </Box>
                       </Box>
@@ -142,16 +157,30 @@ const ContactCard: React.FC<IProps> = (props) => {
                       display={"flex"}
                       alignItems={"center"}
                     >
-                      <DeleteIcon />
+                      <IconButton
+                        disableRipple
+                        onClick={(e) => {
+                          setSelectedUser(item);
+                          handleClick(e);
+                        }}
+                      >
+                        <MoreVertIcon sx={{ width: 20, height: 20 }} />
+                      </IconButton>
                     </Grid>
                   </Grid>
                 </StyledCard>
               </Grid>
             ))
           : "No data"}
+        <MenuCommon
+          anchor={anchorEl}
+          menuList={userMenuList}
+          setAnchor={setAnchorEl}
+          open={open}
+        ></MenuCommon>
       </Grid>
     </>
   );
 };
 
-export default ContactCard;
+export default UserList;
