@@ -92,9 +92,7 @@ const Users = () => {
             ] as CustomButtonProps[]
           }
         >
-          <Typography variant="body1" sx={{ p: 2 }}>
-            <AddUser />
-          </Typography>
+          <AddUser />
         </FullScreenDialog>
       )}
     </Box>

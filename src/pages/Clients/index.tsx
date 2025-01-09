@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import FullScreenDialog, {
   CustomButtonProps,
 } from "../../components/fullScreenDialog";
@@ -12,7 +12,6 @@ import {
   tabMenuList,
 } from "../../constants/constants";
 import ContentWrapper from "../../components/contentWrapper";
-import TabsCommon from "../../components/tabsCommon";
 import Pagination from "../../components/pagination";
 import ClientList from "./clientList";
 import ContactList from "../Contacts/contactList";
@@ -100,9 +99,7 @@ const Clients = (_props: Props) => {
             ] as CustomButtonProps[]
           }
         >
-          <Typography variant="body1" sx={{ p: 2 }}>
-            <AddClient />
-          </Typography>
+          <AddClient />
         </FullScreenDialog>
       )}
     </Box>
