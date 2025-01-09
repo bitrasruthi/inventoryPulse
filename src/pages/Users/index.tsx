@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import ContentWrapper from "../../components/contentWrapper";
 import { tabMenuList, userListDummy } from "../../constants/constants";
 import { MenuTypeEnum } from "../../constants/enum";
@@ -92,9 +92,7 @@ const Users = () => {
             ] as CustomButtonProps[]
           }
         >
-          <Typography variant="body1" sx={{ p: 2 }}>
-            <AddUser />
-          </Typography>
+          <AddUser />
         </FullScreenDialog>
       )}
     </Box>

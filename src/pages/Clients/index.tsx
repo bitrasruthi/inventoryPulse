@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import FullScreenDialog, {
   CustomButtonProps,
 } from "../../components/fullScreenDialog";
@@ -100,9 +100,7 @@ const Clients = (_props: Props) => {
             ] as CustomButtonProps[]
           }
         >
-          <Typography variant="body1" sx={{ p: 2 }}>
-            <AddClient />
-          </Typography>
+          <AddClient />
         </FullScreenDialog>
       )}
     </Box>

@@ -19,7 +19,7 @@ const TabsCommon: React.FC<Props> = ({
 }) => {
   const [value, setValue] = React.useState(tabMenuList[0]?.value);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+  const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
     onTabChange(newValue);
   };
