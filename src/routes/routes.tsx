@@ -2,7 +2,7 @@ import Layout from "../layout";
 import EmptyLayout from "../layout/emptyLayout";
 import Login from "../pages/AuthPages/login";
 import Clients from "../pages/Clients";
-import Dashboard from "../pages/Dashboard/dashboard";
+import Dashboard from "../pages/Dashboard";
 import Inspections from "../pages/Inspections";
 import Properties from "../pages/Properties";
 import Users from "../pages/Users";
