@@ -9,12 +9,17 @@ import {
   IconButton,
 } from "@mui/material";
 import React, { useState } from "react";
-import { inspectionColors, userMenuList } from "../constants/constants";
-import PhoneIcon from "../assets/icons/phoneIcon";
-import EmailIcon from "../assets/icons/emailIcon";
+import { inspectionColors } from "../../constants/constants";
+import PhoneIcon from "../../assets/icons/phoneIcon";
+import EmailIcon from "../../assets/icons/emailIcon";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import ContactIcon from "../assets/icons/contactIcon";
-import MenuCommon from "./menuCommon";
+import ContactIcon from "../../assets/icons/contactIcon";
+import MenuCommon from "../../components/menuCommon";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+import { IMenuItemExtendProps } from "../../helpers/Interfaces";
+
 interface IProps extends CardProps {
   list: any;
 }
@@ -29,20 +34,54 @@ export const StyledCard = styled(Card)(() => ({
   boxShadow: " rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
 }));
 
-const ClientCard: React.FC<IProps> = (props) => {
+const ClientList: React.FC<IProps> = (props) => {
   const { list } = props;
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [selectedClient, setSelectedClient] = useState<any>();
   const open = Boolean(anchorEl);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleClickView = () => {
+    console.log("view", selectedClient);
+  };
+
+  const handleClickEdit = () => {
+    console.log("edit", selectedClient);
+  };
+
+  const handleClickDelete = () => {
+    console.log("delete", selectedClient);
+  };
+
+  const userMenuList: IMenuItemExtendProps[] = [
+    {
+      key: 1,
+      label: "View",
+      icon: VisibilityOutlinedIcon,
+      onClick: (_e) => handleClickView(),
+    },
+    {
+      key: 2,
+      label: "Edit",
+      icon: EditOutlinedIcon,
+      onClick: (_e) => handleClickEdit(),
+    },
+    {
+      key: 3,
+      label: "Delete",
+      icon: DeleteOutlineIcon,
+      onClick: (_e) => handleClickDelete(),
+    },
+  ];
+
   return (
     <>
       <Grid container spacing={1} columnSpacing={3} mt={3}>
         {list?.length > 0
-          ? list?.map((item: any, index: number) => (
+          ? list.map((item: any, index: number) => (
               <Grid size={{ xs: 12, lg: 6 }} key={index}>
                 <StyledCard
                   key={index}
@@ -103,7 +142,13 @@ const ClientCard: React.FC<IProps> = (props) => {
                       display={"flex"}
                       alignItems={"center"}
                     >
-                      <IconButton disableRipple onClick={handleClick}>
+                      <IconButton
+                        disableRipple
+                        onClick={(e) => {
+                          setSelectedClient(item);
+                          handleClick(e);
+                        }}
+                      >
                         <MoreVertIcon sx={{ width: 20, height: 20 }} />
                       </IconButton>
                     </Grid>
@@ -123,4 +168,4 @@ const ClientCard: React.FC<IProps> = (props) => {
   );
 };
 
-export default ClientCard;
+export default ClientList;
