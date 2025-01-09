@@ -15,6 +15,7 @@ import ContentWrapper from "../../components/contentWrapper";
 import Pagination from "../../components/pagination";
 import ClientList from "./clientList";
 import ContactList from "../Contacts/contactList";
+import TabsCommon from "../../components/tabsCommon";
 
 type Props = {};
 
