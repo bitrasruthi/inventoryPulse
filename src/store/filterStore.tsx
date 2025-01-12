@@ -1,6 +1,7 @@
 import { DateRange } from "@mui/lab";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { momentDateFormatUtil } from "../helpers/Util";
 
 const customStorage = (storage: Storage) => {
   return {
@@ -18,6 +19,7 @@ const customStorage = (storage: Storage) => {
 };
 
 type State = {
+  chipList: [{ id: number; name: string }] | any;
   selectedFilterItemList: [];
   dateRangeFilter: [Date | null, Date | null];
 };
@@ -26,6 +28,7 @@ type Actions = {
   updateFilters: (filterItem: { id: number; name: string }) => void;
   setDateRangeFilter: (dateRangeFilter: DateRange<Date>) => void;
   removeDateRangeFilter: () => void;
+  getChipListWithDateRange: () => void;
 };
 
 const useFiltersStore = create<State & Actions>()(
@@ -33,6 +36,7 @@ const useFiltersStore = create<State & Actions>()(
     (set) => ({
       selectedFilterItemList: [],
       dateRangeFilter: [null, null],
+      chipList: [],
       setDateRangeFilter: (dateRangeFilter: DateRange<Date>) => {
         set({
           dateRangeFilter,
@@ -41,27 +45,31 @@ const useFiltersStore = create<State & Actions>()(
       removeDateRangeFilter: () => {
         set({ dateRangeFilter: [null, null] });
       },
-      // getChipListWithDateRange: () => {
-      //   set((state: any) => {
-      //     if (
-      //       state.dateRangeFilter[0] !== null &&
-      //       state.dateRangeFilter[1] !== null
-      //     ) {
-      //       const dateRange = {
-      //         id: -1,
-      //         name: `from: ${momentDateFormatUtil(
-      //           state.dateRangeFilter[0]
-      //         )} - to: ${momentDateFormatUtil(state.dateRangeFilter[1])}`,
-      //       };
+      getChipListWithDateRange: () => {
+        set((state: any) => {
+          if (
+            state.dateRangeFilter[0] !== null &&
+            state.dateRangeFilter[1] !== null
+          ) {
+            const dateRange = {
+              id: -1,
+              name: `from: ${momentDateFormatUtil(
+                state.dateRangeFilter[0]
+              )} - to: ${momentDateFormatUtil(state.dateRangeFilter[1])}`,
+            };
 
-      //       return [...state.selectedFilterItemList, dateRange] as [
-      //         { id: number; name: string }
-      //       ];
-      //     } else {
-      //       return state.selectedFilterItemList;
-      //     }
-      //   });
-      // },
+            return {
+              ...state,
+              chipList: [...state.selectedFilterItemList, dateRange],
+            };
+          } else {
+            return {
+              ...state,
+              chipList: [...state.selectedFilterItemList],
+            };
+          }
+        });
+      },
       updateFilters: (filterItem: { id: number; name: string }) => {
         set((state: any) => {
           const itemExists = state.selectedFilterItemList?.some(

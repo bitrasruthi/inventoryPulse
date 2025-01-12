@@ -5,3 +5,9 @@ export const momentDateFormatUtil = (date: any) => {
     return moment(date).isValid() ? moment(date).format("DD MMM YYYY") : "";
   }
 };
+
+export const momentTimeFormatUtil = (time: any) => {
+  if (time) {
+    return moment(time).isValid() ? moment(time).format("hh:mm") : "";
+  }
+};

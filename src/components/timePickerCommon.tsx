@@ -1,24 +1,23 @@
 import React from "react";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker, DatePickerProps } from "@mui/x-date-pickers/DatePicker";
+import { TimePicker, TimePickerProps } from "@mui/x-date-pickers/TimePicker";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import theme from "../styles/theme";
 
-interface IProps extends DatePickerProps<Date> {
-  setSelectedDate: (date: Date | null) => void;
+interface IProps extends TimePickerProps<Date> {
+  setSelectedTime: (time: Date | null) => void;
 }
 
-const DatePickerCommon: React.FC<IProps> = (props) => {
-  const { setSelectedDate } = props;
+const TimePickerCommon: React.FC<IProps> = (props) => {
+  const { setSelectedTime } = props;
 
   const handleChange = (value: Date | null) => {
-    setSelectedDate(value);
+    setSelectedTime(value);
   };
-
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <DatePicker
+        <TimePicker
           {...props}
           onChange={handleChange}
           slotProps={{
@@ -44,4 +43,4 @@ const DatePickerCommon: React.FC<IProps> = (props) => {
   );
 };
 
-export default DatePickerCommon;
+export default TimePickerCommon;
