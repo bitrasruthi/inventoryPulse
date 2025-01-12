@@ -5,16 +5,20 @@ import useFiltersStore from "../../store/filterStore";
 import ChipCommon from "../../components/chipCommon";
 import { inspectionListDummy } from "../../constants/constants";
 import Pagination from "../../components/pagination";
-import { userCommon } from "../../context/CommonContext";
 import InspectionCard from "../../components/inspectionCard";
-import StepperCommon from "../../components/stepper";
-import DatePickerCommon from "../../components/datePickerCommon";
+import useInspectionStore from "../../store/inspectionStore";
 
 const InspectionList = () => {
-  const { selectedFilterItemList, dateRangeFilter } = useFiltersStore();
+  const {
+    selectedFilterItemList,
+    dateRangeFilter,
+    getChipListWithDateRange,
+    chipList,
+  } = useFiltersStore();
+  const { currentStep } = useInspectionStore();
+
   const [page, setPage] = React.useState(2);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const { chipList, getChipList } = userCommon();
 
   const handleChangePage = (
     _event: React.MouseEvent<HTMLButtonElement> | null,
@@ -31,7 +35,7 @@ const InspectionList = () => {
   };
 
   useEffect(() => {
-    getChipList(dateRangeFilter, selectedFilterItemList);
+    getChipListWithDateRange();
   }, [dateRangeFilter, selectedFilterItemList]);
 
   return (
@@ -56,9 +60,8 @@ const InspectionList = () => {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Box>
-      <ContentWrapper paddingY={0}>
-        {/* <StepperCommon /> */}
 
+      <ContentWrapper paddingY={0}>
         <Box height={"69vh"} sx={{ overflowY: "auto" }}>
           <InspectionCard list={inspectionListDummy} />
         </Box>

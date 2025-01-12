@@ -41,3 +41,16 @@ export enum CardTypeEnum {
   Inspection = 1,
   Users = 2,
 }
+
+export enum StepperStepEnum {
+  PropertyDetails = 0,
+  InspectionDetails = 1,
+  Schedule = 2,
+  Contacts = 3,
+}
+
+export enum StepStatusEnum {
+  Pending = 0,
+  CurrentStep = 1,
+  Completed = 2,
+}

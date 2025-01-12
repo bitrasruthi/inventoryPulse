@@ -12,10 +12,9 @@ import GradientButton from "../../components/gradientButton";
 import FullScreenDialog, {
   CustomButtonProps,
 } from "../../components/fullScreenDialog";
-import SaveProperty from "../Properties/saveProperty";
 import TabsCommon from "../../components/tabsCommon";
 import Calendar from "./InspectionCalender";
-import ContentWrapper from "../../components/contentWrapper";
+import StepperCommon from "../../components/stepper";
 
 const Inspections = () => {
   const [activeTab, setActiveTab] = useState<string>(tabMenuList[0]?.value);
@@ -113,7 +112,8 @@ const Inspections = () => {
           }
         >
           <Typography variant="body1" sx={{ p: 2 }}>
-            <SaveProperty />
+            {/* <SaveProperty/> */}
+            <StepperCommon />
           </Typography>
         </FullScreenDialog>
       )}
