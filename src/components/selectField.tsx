@@ -1,4 +1,10 @@
-import { Select, MenuItem, BaseSelectProps, Box } from "@mui/material";
+import {
+  Select,
+  MenuItem,
+  BaseSelectProps,
+  Box,
+  FormHelperText,
+} from "@mui/material";
 import React from "react";
 import { styled } from "@mui/material/styles";
 import LabelCommon from "./labelCommon";
@@ -7,6 +13,7 @@ interface IProps extends BaseSelectProps {
   options: { label: string; value: string }[];
   isnotboldtext?: boolean;
   marginBottom?: number;
+  helperText?: React.ReactNode;
 }
 
 const StyledSelect = styled(Select)(({ theme }) => ({
@@ -20,7 +27,15 @@ const StyledSelect = styled(Select)(({ theme }) => ({
 }));
 
 const SelectField: React.FC<IProps> = (props) => {
-  const { options, required, label, isnotboldtext, marginBottom, type } = props;
+  const {
+    options,
+    required,
+    label,
+    isnotboldtext,
+    marginBottom,
+    type,
+    helperText,
+  } = props;
 
   return (
     <Box mb={marginBottom} pb={type === "pagination" ? 0 : 2} width={"100%"}>
@@ -37,9 +52,9 @@ const SelectField: React.FC<IProps> = (props) => {
           },
         }}
       >
-        {options?.map((option) => (
+        {options?.map((option, index) => (
           <MenuItem
-            key={option?.value}
+            key={index}
             value={option?.value}
             sx={{ fontFamily: "roboto-regular !important" }}
           >
@@ -47,6 +62,9 @@ const SelectField: React.FC<IProps> = (props) => {
           </MenuItem>
         ))}
       </StyledSelect>
+      <FormHelperText sx={{ fontSize: 12, color: "#FF1744" }}>
+        {helperText}
+      </FormHelperText>
     </Box>
   );
 };

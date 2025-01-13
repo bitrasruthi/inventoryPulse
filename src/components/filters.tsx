@@ -9,7 +9,7 @@ import {
   Grid2 as Grid,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import theme from "../styles/theme";
 import ContentWrapper from "./contentWrapper";

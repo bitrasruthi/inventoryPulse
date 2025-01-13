@@ -6,6 +6,7 @@ import ImportIcon from "../assets/icons/ImportIcon";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+import { StepperStepEnum } from "./enum";
 
 export const tabMenuList = [
   {
@@ -279,4 +280,19 @@ export const userMenuList = [
     label: "Delete",
     icon: DeleteOutlineIcon,
   },
+];
+
+export const steps = [
+  {
+    enum: StepperStepEnum.PropertyDetails,
+    label: "Property Details",
+    status: 0,
+  },
+  {
+    enum: StepperStepEnum.InspectionDetails,
+    label: "Inspection Details",
+    status: 0,
+  },
+  { enum: StepperStepEnum.Schedule, label: "Schedule", status: 0 },
+  { enum: StepperStepEnum.Contacts, label: "Contacts", status: 0 },
 ];
