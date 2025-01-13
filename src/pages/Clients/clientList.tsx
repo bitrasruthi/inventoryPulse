@@ -120,16 +120,21 @@ const ClientList: React.FC<IProps> = (props) => {
                           </Typography>
                         </Box>
                         <Typography>{item?.address}</Typography>
-                        <Box display={"flex"} gap={2}>
-                          <Box display={"flex"} py={1} alignItems={"center"}>
+                        <Box
+                          display={"flex"}
+                          flexWrap={"wrap"}
+                          gap={{ xs: 1, md: 2 }}
+                          py={1}
+                        >
+                          <Box display={"flex"} alignItems={"center"}>
                             <ContactIcon />
                             <Typography pl={1}>{item?.name}</Typography>
                           </Box>
-                          <Box display={"flex"} py={1} alignItems={"center"}>
+                          <Box display={"flex"} alignItems={"center"}>
                             <PhoneIcon />
                             <Typography pl={1}>{item?.phone}</Typography>
                           </Box>
-                          <Box display={"flex"} py={1} alignItems={"center"}>
+                          <Box display={"flex"} alignItems={"center"}>
                             <EmailIcon />
                             <Typography pl={1}>{item?.email}</Typography>
                           </Box>

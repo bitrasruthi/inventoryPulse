@@ -8,8 +8,9 @@ import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import theme from "../../styles/theme";
 import { ClientOptions } from "../../types/type";
 import AddressCommon from "../../components/addressCommon";
+import { FormCommonProps } from "../../helpers/Interfaces";
 
-const SaveProperty = () => {
+const SaveProperty: React.FC<FormCommonProps> = ({ register, errors }) => {
   const client: ClientOptions[] = [
     { label: "name", value: "value" },
     { label: "name", value: "value" },
@@ -21,7 +22,7 @@ const SaveProperty = () => {
       <Grid2 spacing={4} container size={{ sm: 12, md: 6 }}>
         <Grid2 size={{ sm: 12, md: 6 }} rowSpacing={4}>
           <Fieldset title="Address" key={"address"}>
-            <AddressCommon />
+            <AddressCommon register={register} errors={errors} />
             <SelectField options={client} label="Client" />
           </Fieldset>
           <Fieldset title="Transfer Past Inspections" key={"Inspections"}>
@@ -55,7 +56,13 @@ const SaveProperty = () => {
           <Fieldset title="Property Details" key={"address"}>
             <Grid2 container spacing={{ xs: 0, md: 2 }}>
               <Grid2 size={{ xs: 12, md: 6 }}>
-                <SelectField options={client} label="Type" />
+                <SelectField
+                  options={client}
+                  label="Type"
+                  error={!!errors.property?.type}
+                  helperText={errors?.property?.type?.message}
+                  {...register("property.type")}
+                />
               </Grid2>
               <Grid2 size={{ xs: 12, md: 6 }}>
                 <SelectField options={client} label="Detachement/ Style" />
@@ -70,6 +77,9 @@ const SaveProperty = () => {
                   label="Bedrooms"
                   variant="outlined"
                   isnotboldtext={false}
+                  error={!!errors.property?.bedrooms}
+                  helperText={errors?.property?.bedrooms?.message}
+                  formProps={register("property.bedrooms")}
                 />
               </Grid2>
             </Grid2>

@@ -6,11 +6,8 @@ import {
   Stepper,
   StepConnector,
   stepConnectorClasses,
-  Box,
-  Button,
   IconButton,
   Container,
-  Grid2,
 } from "@mui/material";
 import React from "react";
 import PropertyDetailsIcon from "../assets/icons/propertyDetailsIcon";
@@ -20,42 +17,13 @@ import ContactsIcon from "../assets/icons/contactsIcon";
 import theme from "../styles/theme";
 import { StepperStepEnum, StepStatusEnum } from "../constants/enum";
 import useInspectionStore from "../store/inspectionStore";
-import { contactListDummy } from "../constants/constants";
+import { contactListDummy, steps } from "../constants/constants";
 import ContactList from "../pages/Contacts/contactList";
-import InspectionList from "../pages/Inspections/inspectionList";
 import SaveProperty from "../pages/Properties/saveProperty";
-import DatePickerCommon from "./datePickerCommon";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import TimePickerCommon from "./timePickerCommon";
-import { momentDateFormatUtil, momentTimeFormatUtil } from "../helpers/Util";
-import LabelCommon from "./labelCommon";
-import SelectField from "./selectField";
-import { ClientOptions } from "../types/type";
-
-const DurationOptions: ClientOptions[] = [{ label: "30 min", value: "30" }];
-const clerkOptions: ClientOptions[] = [
-  { label: "name", value: "value" },
-  { label: "name", value: "value" },
-  { label: "name", value: "value" },
-  { label: "name", value: "value" },
-];
-
-type Props = {};
-
-const steps = [
-  {
-    enum: StepperStepEnum.PropertyDetails,
-    label: "Property Details",
-    status: 0,
-  },
-  {
-    enum: StepperStepEnum.InspectionDetails,
-    label: "Inspection Details",
-    status: 0,
-  },
-  { enum: StepperStepEnum.Schedule, label: "Schedule", status: 0 },
-  { enum: StepperStepEnum.Contacts, label: "Contacts", status: 0 },
-];
+import AddInspection from "../pages/Inspections/addInspection";
+import { FormCommonProps } from "../helpers/Interfaces";
+import Schedule from "../pages/Inspections/schedule";
 
 const CustomStepLabel = styled(StepLabel)(({ theme }) => ({
   "& .MuiStepLabel-label": {
@@ -88,29 +56,33 @@ const ColorlibStepIconRoot = styled("div")<{
   }),
 }));
 
-const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
+const ColorlibConnector = styled(StepConnector)(() => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
     top: 10,
   },
+
   [`&.${stepConnectorClasses.active}`]: {
     [`& .${stepConnectorClasses.line}`]: {
       backgroundImage:
         "linear-gradient(120deg, rgba(133,66,233,1) 0%, rgba(172,66,233,1) 50%, rgba(201,66,233,1) 100%)",
+      border: 0,
     },
   },
+
   [`&.${stepConnectorClasses.completed}`]: {
     [`& .${stepConnectorClasses.line}`]: {
       backgroundImage:
         "linear-gradient(120deg, rgba(133,66,233,1) 0%, rgba(172,66,233,1) 50%, rgba(201,66,233,1) 100%)",
+      border: 0,
     },
   },
+
   [`& .${stepConnectorClasses.line}`]: {
     height: 3,
     border: 0,
     borderRadius: 1,
-    ...theme.applyStyles("dark", {
-      backgroundColor: theme.palette.grey[800],
-    }),
+    borderBottom: "3px dotted #eaeaf0",
+    backgroundColor: "transparent",
   },
 }));
 
@@ -183,41 +155,16 @@ const ColorlibStepIcon = (props: StepIconProps) => {
   );
 };
 
-const StepperCommon = (_props: Props) => {
+const StepperCommon: React.FC<FormCommonProps> = ({ register, errors }) => {
   const { currentStep, setCurrentStep } = useInspectionStore();
-  const [selectedDate, setSelectedDate] = React.useState<Date | null>(null);
-  const [selectedTime, setSelectedTime] = React.useState<Date | null>(null);
-
-  const totalSteps = () => {
-    return steps.length - 1;
-  };
-
-  const isLastStep = () => {
-    return currentStep === totalSteps();
-  };
-
-  const handleNext = () => {
-    if (currentStep < steps.length - 1) setCurrentStep(currentStep + 1);
-  };
-
-  const handleBack = () => {
-    if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
-    }
-  };
 
   const handleStep = (step: number) => () => {
     setCurrentStep(step);
   };
 
-  console.log(
-    momentDateFormatUtil(selectedDate),
-    momentTimeFormatUtil(selectedTime)
-  );
-
   return (
     <>
-      <Container>
+      <Container sx={{ mb: 5 }}>
         <Stepper
           alternativeLabel
           activeStep={currentStep}
@@ -248,43 +195,12 @@ const StepperCommon = (_props: Props) => {
           })}
         </Stepper>
       </Container>
-      <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-        <Button
-          color="inherit"
-          disabled={currentStep === 0}
-          onClick={handleBack}
-          sx={{ mr: 1 }}
-        >
-          Back
-        </Button>
-        <Box sx={{ flex: "1 1 auto" }} />
-        <Button onClick={handleNext} sx={{ mr: 1 }}>
-          {isLastStep() ? "Complete" : "Next"}
-        </Button>
-      </Box>
       {currentStep === StepperStepEnum.PropertyDetails ? (
-        <SaveProperty />
+        <SaveProperty register={register} errors={errors} />
       ) : currentStep === StepperStepEnum.InspectionDetails ? (
-        <InspectionList />
+        <AddInspection />
       ) : currentStep === StepperStepEnum.Schedule ? (
-        <Grid2 container spacing={2}>
-          <Grid2 size={3}>
-            <LabelCommon fieldName="Date" />
-            <DatePickerCommon setSelectedDate={setSelectedDate} />
-          </Grid2>
-          <Grid2 size={3}>
-            <LabelCommon fieldName="Time" />
-            <TimePickerCommon setSelectedTime={setSelectedTime} />
-          </Grid2>
-          <Grid2 size={3}>
-            <LabelCommon fieldName="Estimated Duration" />
-            <SelectField options={DurationOptions} />
-          </Grid2>
-          <Grid2 size={3}>
-            <LabelCommon fieldName="Clerk" />
-            <SelectField options={clerkOptions} />
-          </Grid2>
-        </Grid2>
+        <Schedule />
       ) : currentStep === StepperStepEnum.Contacts ? (
         <ContactList list={contactListDummy} />
       ) : (

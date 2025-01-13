@@ -6,6 +6,7 @@ import InspectionList from "./inspectionList";
 import {
   inspectionBtnList,
   inspectionFilters,
+  steps,
   tabMenuList,
 } from "../../constants/constants";
 import GradientButton from "../../components/gradientButton";
@@ -15,10 +16,20 @@ import FullScreenDialog, {
 import TabsCommon from "../../components/tabsCommon";
 import Calendar from "./InspectionCalender";
 import StepperCommon from "../../components/stepper";
+import useInspectionStore from "../../store/inspectionStore";
+import { getBtnTextByCurrentStep } from "../../helpers/Util";
+import validate from "../../helpers/validations";
+import { useFormHook } from "../../hooks/useFormHook";
+import { propertyDetailsInterface } from "../../helpers/Interfaces";
 
 const Inspections = () => {
   const [activeTab, setActiveTab] = useState<string>(tabMenuList[0]?.value);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const { currentStep, setCurrentStep } = useInspectionStore();
+
+  const { register, handleSubmit, errors, reset } = useFormHook(
+    validate.propertyDetailsSchema
+  );
 
   const handleOpenDialog = () => {
     setDialogOpen(true);
@@ -26,6 +37,7 @@ const Inspections = () => {
 
   const handleCloseDialog = () => {
     setDialogOpen(false);
+    reset();
   };
 
   const inspectionListContent = (
@@ -73,6 +85,20 @@ const Inspections = () => {
     }
   };
 
+  const handleNext = () => {
+    if (currentStep < steps.length - 1) setCurrentStep(currentStep + 1);
+  };
+
+  const handleBack = () => {
+    if (currentStep > 0) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
+
+  const onSubmit = (data: propertyDetailsInterface) => {
+    console.log("submitted", data);
+  };
+
   return (
     <Box
       sx={{
@@ -91,32 +117,38 @@ const Inspections = () => {
         isGradient={true}
         handleDialogOpen={handleOpenDialog}
       />
-      {dialogOpen && (
-        <FullScreenDialog
-          open={dialogOpen}
-          onClose={handleCloseDialog}
-          title="Add Inspection"
-          buttons={
-            [
-              {
-                label: "Cancel",
-                variant: "outlined",
-                onClick: () => console.log("canceled"),
-              },
-              {
-                label: "Confirm",
-                variant: "contained",
-                onClick: () => console.log("Confirm"),
-              },
-            ] as CustomButtonProps[]
-          }
-        >
-          <Typography variant="body1" sx={{ p: 2 }}>
-            {/* <SaveProperty/> */}
-            <StepperCommon />
-          </Typography>
-        </FullScreenDialog>
-      )}
+      <form onSubmit={handleSubmit(onSubmit)} id={"inspection-form"}>
+        {dialogOpen && (
+          <FullScreenDialog
+            open={dialogOpen}
+            onClose={handleCloseDialog}
+            title="Add Inspection"
+            buttons={
+              [
+                {
+                  label: "Back",
+                  variant: "outlined",
+                  onClick: () => handleBack(),
+                },
+                {
+                  label: getBtnTextByCurrentStep(currentStep),
+                  variant: "contained",
+                  onClick: () =>
+                    document
+                      .getElementById("inspection-form")
+                      ?.dispatchEvent(
+                        new Event("submit", { cancelable: true, bubbles: true })
+                      ),
+                },
+              ] as CustomButtonProps[]
+            }
+          >
+            <Typography variant="body1" sx={{ p: 2 }}>
+              <StepperCommon register={register} errors={errors} />
+            </Typography>
+          </FullScreenDialog>
+        )}
+      </form>
     </Box>
   );
 };

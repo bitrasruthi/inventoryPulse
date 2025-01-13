@@ -38,9 +38,7 @@ const FullScreenDialog: React.FC<FullScreenDialogProps> = ({
       open={open}
       onClose={onClose}
       TransitionComponent={Transition}
-      sx={{
-        mt: 7.5,
-      }}
+      sx={{ mt: 7.5 }}
       PaperProps={{
         sx: {
           boxShadow: "none",
@@ -67,7 +65,7 @@ const FullScreenDialog: React.FC<FullScreenDialogProps> = ({
         }}
       >
         {buttons.map((button, index) => (
-          <Button key={index} onClick={button.onClick} {...button}>
+          <Button {...button} key={index} onClick={button.onClick}>
             {button.label}
           </Button>
         ))}
