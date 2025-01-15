@@ -22,7 +22,7 @@ import ContactList from "../pages/Contacts/contactList";
 import SaveProperty from "../pages/Properties/saveProperty";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AddInspection from "../pages/Inspections/addInspection";
-import { FormCommonProps } from "../helpers/Interfaces";
+import { FormProps, PropertyDetailsFormValues } from "../helpers/Interfaces";
 import Schedule from "../pages/Inspections/schedule";
 
 const CustomStepLabel = styled(StepLabel)(({ theme }) => ({
@@ -155,7 +155,11 @@ const ColorlibStepIcon = (props: StepIconProps) => {
   );
 };
 
-const StepperCommon: React.FC<FormCommonProps> = ({ register, errors }) => {
+interface IProps {
+  formProps: FormProps<PropertyDetailsFormValues>;
+}
+
+const StepperCommon: React.FC<IProps> = ({ formProps }) => {
   const { currentStep, setCurrentStep } = useInspectionStore();
 
   const handleStep = (step: number) => () => {
@@ -196,7 +200,7 @@ const StepperCommon: React.FC<FormCommonProps> = ({ register, errors }) => {
         </Stepper>
       </Container>
       {currentStep === StepperStepEnum.PropertyDetails ? (
-        <SaveProperty register={register} errors={errors} />
+        <SaveProperty formProps={formProps} />
       ) : currentStep === StepperStepEnum.InspectionDetails ? (
         <AddInspection />
       ) : currentStep === StepperStepEnum.Schedule ? (

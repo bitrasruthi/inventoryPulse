@@ -2,9 +2,14 @@ import { Grid2 } from "@mui/material";
 import OutlinedTextField from "./outlinedTextField";
 import SelectField from "./selectField";
 import { ClientOptions } from "../types/type";
-import { FormCommonProps } from "../helpers/Interfaces";
+import { PropertyDetailsFormValues, FormProps } from "../helpers/Interfaces";
 
-const AddressCommon: React.FC<FormCommonProps> = ({ register, errors }) => {
+interface IProps {
+  formProps: FormProps<PropertyDetailsFormValues>;
+}
+
+const AddressCommon: React.FC<IProps> = ({ formProps }) => {
+  const { register, errors } = formProps;
   const client: ClientOptions[] = [
     { label: "name", value: "value" },
     { label: "name", value: "value" },

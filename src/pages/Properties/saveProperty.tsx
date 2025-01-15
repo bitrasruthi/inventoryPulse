@@ -8,9 +8,15 @@ import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import theme from "../../styles/theme";
 import { ClientOptions } from "../../types/type";
 import AddressCommon from "../../components/addressCommon";
-import { FormCommonProps } from "../../helpers/Interfaces";
+import { FormProps, PropertyDetailsFormValues } from "../../helpers/Interfaces";
 
-const SaveProperty: React.FC<FormCommonProps> = ({ register, errors }) => {
+interface IProps {
+  formProps: FormProps<PropertyDetailsFormValues>;
+}
+
+const SaveProperty: React.FC<IProps> = ({ formProps }) => {
+  const { register, errors } = formProps;
+
   const client: ClientOptions[] = [
     { label: "name", value: "value" },
     { label: "name", value: "value" },
@@ -22,7 +28,7 @@ const SaveProperty: React.FC<FormCommonProps> = ({ register, errors }) => {
       <Grid2 spacing={4} container size={{ sm: 12, md: 6 }}>
         <Grid2 size={{ sm: 12, md: 6 }} rowSpacing={4}>
           <Fieldset title="Address" key={"address"}>
-            <AddressCommon register={register} errors={errors} />
+            <AddressCommon formProps={formProps} />
             <SelectField options={client} label="Client" />
           </Fieldset>
           <Fieldset title="Transfer Past Inspections" key={"Inspections"}>
@@ -59,9 +65,9 @@ const SaveProperty: React.FC<FormCommonProps> = ({ register, errors }) => {
                 <SelectField
                   options={client}
                   label="Type"
-                  error={!!errors.property?.type}
-                  helperText={errors?.property?.type?.message}
-                  {...register("property.type")}
+                  error={!!errors.property?.propertyType}
+                  helperText={errors?.property?.propertyType?.message}
+                  {...register("property.propertyType")}
                 />
               </Grid2>
               <Grid2 size={{ xs: 12, md: 6 }}>
