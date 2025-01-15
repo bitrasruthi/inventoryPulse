@@ -20,7 +20,7 @@ import useInspectionStore from "../../store/inspectionStore";
 import { getBtnTextByCurrentStep } from "../../helpers/Util";
 import validate from "../../helpers/validations";
 import { useFormHook } from "../../hooks/useFormHook";
-import { propertyDetailsInterface } from "../../helpers/Interfaces";
+import { FormProps, PropertyDetailsFormValues } from "../../helpers/Interfaces";
 
 const Inspections = () => {
   const [activeTab, setActiveTab] = useState<string>(tabMenuList[0]?.value);
@@ -30,6 +30,13 @@ const Inspections = () => {
   const { register, handleSubmit, errors, reset } = useFormHook(
     validate.propertyDetailsSchema
   );
+
+  const formProps: FormProps<PropertyDetailsFormValues> = {
+    register,
+    handleSubmit,
+    errors,
+    reset,
+  };
 
   const handleOpenDialog = () => {
     setDialogOpen(true);
@@ -95,9 +102,11 @@ const Inspections = () => {
     }
   };
 
-  const onSubmit = (data: propertyDetailsInterface) => {
+  const onSubmit = (data: PropertyDetailsFormValues) => {
     console.log("submitted", data);
   };
+
+  console.log(errors);
 
   return (
     <Box
@@ -133,18 +142,13 @@ const Inspections = () => {
                 {
                   label: getBtnTextByCurrentStep(currentStep),
                   variant: "contained",
-                  onClick: () =>
-                    document
-                      .getElementById("inspection-form")
-                      ?.dispatchEvent(
-                        new Event("submit", { cancelable: true, bubbles: true })
-                      ),
+                  onClick: () => handleSubmit(onSubmit)(),
                 },
               ] as CustomButtonProps[]
             }
           >
             <Typography variant="body1" sx={{ p: 2 }}>
-              <StepperCommon register={register} errors={errors} />
+              <StepperCommon formProps={formProps} />
             </Typography>
           </FullScreenDialog>
         )}
