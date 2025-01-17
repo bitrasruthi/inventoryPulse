@@ -20,6 +20,8 @@ interface IProps extends OutlinedTextFieldProps {
 export const StyledTextField = styled(TextField)<{ props?: IProps }>(
   ({ theme, props }) => ({
     "& .MuiInputBase-root": {
+      paddingLeft: 2,
+      paddingRight: 2,
       fontFamily: props?.isnotboldtext ? "roboto-regular" : "roboto-bold",
       borderRadius: 10,
       "&:hover .MuiOutlinedInput-notchedOutline": {

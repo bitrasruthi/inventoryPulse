@@ -70,7 +70,6 @@ const Clients = (_props: Props) => {
       }}
     >
       <TabsCommon
-        type={MenuTypeEnum.Users}
         tabMenuList={[tabMenuList[0]]}
         onTabChange={(value) => setActiveTab(value)}
         tabContent={ClientTabContent}
