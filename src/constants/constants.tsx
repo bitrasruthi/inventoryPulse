@@ -6,6 +6,10 @@ import ImportIcon from "../assets/icons/ImportIcon";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import EventNoteOutlinedIcon from "@mui/icons-material/EventNoteOutlined";
+import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { StepperStepEnum } from "./enum";
 
 export const tabMenuList = [
@@ -296,3 +300,41 @@ export const steps = [
   { enum: StepperStepEnum.Schedule, label: "Schedule", status: 0 },
   { enum: StepperStepEnum.Contacts, label: "Contacts", status: 0 },
 ];
+
+export const inspectionsDetailsMenuList = [
+  {
+    id: 1,
+    label: "Info",
+    isActive: true,
+    value: "1",
+    icon: <InfoOutlinedIcon />,
+  },
+  {
+    id: 2,
+    label: "Report",
+    isActive: false,
+    value: "2",
+    icon: <EventNoteOutlinedIcon />,
+  },
+  {
+    id: 3,
+    label: "Upload",
+    isActive: false,
+    value: "3",
+    icon: <CloudUploadOutlinedIcon />,
+  },
+  {
+    id: 4,
+    label: "Settings",
+    isActive: false,
+    value: "4",
+    icon: <SettingsOutlinedIcon />,
+  },
+  {
+    id: 5,
+    label: "Activity",
+    isActive: false,
+    value: "5",
+    icon: <CalendarMonthIcon />,
+  },
+] as any;
