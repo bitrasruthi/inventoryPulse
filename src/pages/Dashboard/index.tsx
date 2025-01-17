@@ -3,6 +3,7 @@ import { Button } from "rsuite";
 import LabelValueCommon from "../../components/labelValueCommon";
 import SectionTitleCommon from "../../components/sectionTitleCommon";
 import InspectionContactCommon from "../../components/inspectionContactCommon";
+import DateTimeCard from "../../components/dateTimeCardCommon";
 
 const Dashboard = () => {
   // const actionButtons = [
@@ -27,6 +28,7 @@ const Dashboard = () => {
         value="987654323"
         type={2}
       />
+      <DateTimeCard date="15 Dec 2024" time="10:30am" />
     </Container>
   );
 };
