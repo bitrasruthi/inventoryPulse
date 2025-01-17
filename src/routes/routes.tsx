@@ -4,6 +4,7 @@ import Login from "../pages/AuthPages/login";
 import Clients from "../pages/Clients";
 import Dashboard from "../pages/Dashboard";
 import Inspections from "../pages/Inspections";
+import InspectionDetails from "../pages/Inspections/InspectionDetails";
 import Properties from "../pages/Properties";
 import Users from "../pages/Users";
 import { paths } from "./paths";
@@ -25,6 +26,12 @@ const routes = [
     component: Inspections,
     layout: Layout,
     path: paths.INSPECTIONS,
+    withoutLogin: true,
+  },
+  {
+    component: InspectionDetails,
+    layout: Layout,
+    path: paths.INSPECTIONSDETAILS,
     withoutLogin: true,
   },
   {
