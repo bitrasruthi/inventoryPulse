@@ -1,5 +1,8 @@
 import { Container } from "@mui/material";
 import { Button } from "rsuite";
+import LabelValueCommon from "../../components/labelValueCommon";
+import SectionTitleCommon from "../../components/sectionTitleCommon";
+import InspectionContactCommon from "../../components/inspectionContactCommon";
 
 const Dashboard = () => {
   // const actionButtons = [
@@ -11,6 +14,19 @@ const Dashboard = () => {
     <Container>
       <h1>Dashboard</h1>
       <Button appearance="primary">Primary</Button>
+      <LabelValueCommon fieldName="Inpection Type" value="Check In" type={1} />
+      <LabelValueCommon fieldName="Inpection Type" value="Check In" type={2} />
+      <SectionTitleCommon title="Properties Details" />
+      <InspectionContactCommon
+        fieldName="Kavipriya L"
+        value="987654323"
+        type={2}
+      />
+      <InspectionContactCommon
+        fieldName="Mohith Kavi"
+        value="987654323"
+        type={2}
+      />
     </Container>
   );
 };

@@ -23,7 +23,10 @@ const AddUser = () => {
           <Fieldset title="Basic Info" key={"basic_info"}>
             <Grid2 container spacing={{ xs: 0, md: 2 }}>
               <Grid2 size={{ xs: 12, md: 6 }}>
-                <ProfileUpload />
+                <ProfileUpload
+                  title="Choose Profile Picture"
+                  image="/broken-image.jpg"
+                />
               </Grid2>
               <Grid2 size={{ xs: 12, md: 6 }}>
                 <SelectField label="Title" options={client} />
