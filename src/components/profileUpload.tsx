@@ -1,7 +1,13 @@
 import { Avatar, Box, Link } from "@mui/material";
 import React, { useRef, useState } from "react";
 
-const ProfileUpload = () => {
+interface IProps {
+  title: React.ReactNode;
+  image: string;
+}
+
+const ProfileUpload: React.FC<IProps> = (props) => {
+  const { title, image } = props;
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [profilePicture, setProfilePicture] = useState<string | null>(null);
 
@@ -16,6 +22,7 @@ const ProfileUpload = () => {
   const handleUploadClick = () => {
     fileInputRef.current?.click();
   };
+
   return (
     <Box
       sx={{
@@ -31,10 +38,7 @@ const ProfileUpload = () => {
         gap: 2,
       }}
     >
-      <Avatar
-        src={profilePicture || "/broken-image.jpg"}
-        sx={{ width: 60, height: 60 }}
-      />
+      <Avatar src={profilePicture || image} sx={{ width: 60, height: 60 }} />
       <Link
         sx={{ cursor: "pointer" }}
         onClick={(e) => {
@@ -42,7 +46,7 @@ const ProfileUpload = () => {
           handleUploadClick();
         }}
       >
-        Choose Profile Picture
+        {title}
       </Link>
       <input
         type="file"
