@@ -15,18 +15,17 @@ import FullScreenDialog, {
 } from "../../components/fullScreenDialog";
 import TabsCommon from "../../components/tabsCommon";
 import Calendar from "./InspectionCalender";
-import StepperCommon from "../../components/stepper";
 import useInspectionStore from "../../store/inspectionStore";
 import { getBtnTextByCurrentStep } from "../../helpers/Util";
 import validate from "../../helpers/validations";
 import { useFormHook } from "../../hooks/useFormHook";
 import { FormProps, PropertyDetailsFormValues } from "../../helpers/Interfaces";
+import InspectionStepper from "./inspectionStepper";
 
 const Inspections = () => {
   const [activeTab, setActiveTab] = useState<string>(tabMenuList[0]?.value);
   const [dialogOpen, setDialogOpen] = useState(false);
   const { currentStep, setCurrentStep } = useInspectionStore();
-
   const { register, handleSubmit, errors, reset } = useFormHook(
     validate.propertyDetailsSchema
   );
@@ -104,6 +103,7 @@ const Inspections = () => {
 
   const onSubmit = (data: PropertyDetailsFormValues) => {
     console.log("submitted", data);
+    handleNext();
   };
 
   console.log(errors);
@@ -115,7 +115,6 @@ const Inspections = () => {
       }}
     >
       <TabsCommon
-        type={MenuTypeEnum.Inspections}
         tabMenuList={tabMenuList}
         onTabChange={(value) => setActiveTab(value)}
         tabContent={GetTabContentByActiveTab()}
@@ -148,7 +147,7 @@ const Inspections = () => {
             }
           >
             <Typography variant="body1" sx={{ p: 2 }}>
-              <StepperCommon formProps={formProps} />
+              <InspectionStepper formProps={formProps} />
             </Typography>
           </FullScreenDialog>
         )}

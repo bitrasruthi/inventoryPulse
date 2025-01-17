@@ -13,7 +13,7 @@ export default function useSnackbarService() {
     } else {
       message = error ?? "";
     }
-    enqueueSnackbar(message, {
+    enqueueSnackbar(error, {
       variant: "error",
       action: (key) => (
         <IconButton onClick={() => closeSnackbar(key)} sx={{ color: "#FFF" }}>

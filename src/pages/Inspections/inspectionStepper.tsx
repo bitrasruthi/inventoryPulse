@@ -10,20 +10,20 @@ import {
   Container,
 } from "@mui/material";
 import React from "react";
-import PropertyDetailsIcon from "../assets/icons/propertyDetailsIcon";
-import InspectionDetailsIcon from "../assets/icons/inspectionDetailsIcon";
-import ScheduleIcon from "../assets/icons/scheduleIcon";
-import ContactsIcon from "../assets/icons/contactsIcon";
-import theme from "../styles/theme";
-import { StepperStepEnum, StepStatusEnum } from "../constants/enum";
-import useInspectionStore from "../store/inspectionStore";
-import { contactListDummy, steps } from "../constants/constants";
-import ContactList from "../pages/Contacts/contactList";
-import SaveProperty from "../pages/Properties/saveProperty";
+import ContactsIcon from "../../assets/icons/contactsIcon";
+import InspectionDetailsIcon from "../../assets/icons/inspectionDetailsIcon";
+import PropertyDetailsIcon from "../../assets/icons/propertyDetailsIcon";
+import ScheduleIcon from "../../assets/icons/scheduleIcon";
+import { steps, contactListDummy } from "../../constants/constants";
+import { StepStatusEnum, StepperStepEnum } from "../../constants/enum";
+import { PropertyDetailsFormValues, FormProps } from "../../helpers/Interfaces";
+import useInspectionStore from "../../store/inspectionStore";
+import theme from "../../styles/theme";
+import ContactList from "../Contacts/contactList";
+import SaveProperty from "../Properties/saveProperty";
+import AddInspection from "./addInspection";
+import Schedule from "./schedule";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import AddInspection from "../pages/Inspections/addInspection";
-import { FormProps, PropertyDetailsFormValues } from "../helpers/Interfaces";
-import Schedule from "../pages/Inspections/schedule";
 
 const CustomStepLabel = styled(StepLabel)(({ theme }) => ({
   "& .MuiStepLabel-label": {
@@ -159,7 +159,7 @@ interface IProps {
   formProps: FormProps<PropertyDetailsFormValues>;
 }
 
-const StepperCommon: React.FC<IProps> = ({ formProps }) => {
+const InspectionStepper: React.FC<IProps> = ({ formProps }) => {
   const { currentStep, setCurrentStep } = useInspectionStore();
 
   const handleStep = (step: number) => () => {
@@ -214,4 +214,4 @@ const StepperCommon: React.FC<IProps> = ({ formProps }) => {
   );
 };
 
-export default StepperCommon;
+export default InspectionStepper;

@@ -7,7 +7,6 @@ interface Props {
   tabMenuList: [
     { id: number; label: string; isActive: boolean; value: string; icon: any }
   ];
-  type: number;
   onTabChange: (value: string) => void;
   tabContent: JSX.Element;
 }
