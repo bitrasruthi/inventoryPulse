@@ -67,11 +67,13 @@ function InspectionStatusStepper() {
               <StepLabel
                 sx={{
                   "& .MuiStepLabel-label": {
-                    fontWeight: activeStep === step.value ? "bold" : "normal",
+                    fontSize: "14px",
+                    fontFamily:
+                      activeStep === step.value ? "Roboto-bold" : "Roboto",
                     color:
                       activeStep === step.value
                         ? (theme) => theme.palette.primary.main
-                        : "inherit", 
+                        : "inherit",
                   },
                 }}
                 slots={{
@@ -89,7 +91,7 @@ function InspectionStatusStepper() {
               </StepLabel>
 
               <StepContent>
-                <Typography>{step.description}</Typography>
+                <Typography sx={{fontSize:"14px"}}>{step.description}</Typography>
               </StepContent>
             </Step>
           ))}
