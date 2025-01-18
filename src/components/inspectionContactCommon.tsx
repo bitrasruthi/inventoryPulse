@@ -37,7 +37,7 @@ const InspectionContactCommon: React.FC<IProps> = (props) => {
   }
 
   return (
-    <Grid2 container spacing={1}>
+    <Grid2 container spacing={2} paddingY={"4px"}>
       <Grid2>
         <Avatar
           {...stringAvatar(fieldName)}
@@ -53,7 +53,7 @@ const InspectionContactCommon: React.FC<IProps> = (props) => {
           fieldName={fieldName}
           value={value}
           type={type}
-          fontSize={"16px"}
+          fontSize={"14px"}
         />
       </Grid2>
     </Grid2>
