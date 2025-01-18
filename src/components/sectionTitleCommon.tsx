@@ -8,7 +8,12 @@ interface IProps {
 const SectionTitleCommon: React.FC<IProps> = (props) => {
   const { title } = props;
   return (
-    <Typography color="#694A96" fontSize={"16px"} fontFamily={"roboto-bold"}>
+    <Typography
+      color="#694A96"
+      fontSize={"16px"}
+      fontFamily={"roboto-bold"}
+      pt={"10px"}
+    >
       {title}
     </Typography>
   );

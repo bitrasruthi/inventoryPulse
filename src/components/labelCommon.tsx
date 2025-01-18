@@ -10,12 +10,10 @@ interface IProps {
 const LabelCommon: React.FC<IProps> = (props) => {
   const { fieldName, isRequired, fontSize = "16px" } = props;
   return (
-    <>
-      <Typography sx={{ fontSize: fontSize }}>
-        {fieldName}
-        {isRequired && <span style={{ color: "red" }}> * </span>}
-      </Typography>
-    </>
+    <Typography sx={{ fontSize: fontSize }}>
+      {fieldName}
+      {isRequired && <span style={{ color: "red" }}> * </span>}
+    </Typography>
   );
 };
 

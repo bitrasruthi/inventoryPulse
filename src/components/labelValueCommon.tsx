@@ -1,10 +1,10 @@
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React from "react";
 import LabelCommon from "./labelCommon";
 
 interface IProps {
   fieldName: React.ReactNode;
-  value: React.ReactNode;
+  value?: React.ReactNode;
   type?: number;
   fontSize?: string;
 }
@@ -12,7 +12,7 @@ interface IProps {
 const LabelValueCommon: React.FC<IProps> = (props) => {
   const { fieldName, value, type = 1, fontSize = "14px" } = props;
   return (
-    <>
+    <Box sx={{ paddingY: "3px" }}>
       {type === 1 && (
         <>
           <LabelCommon fieldName={fieldName} fontSize={fontSize} />
@@ -22,7 +22,7 @@ const LabelValueCommon: React.FC<IProps> = (props) => {
               fontSize: { fontSize },
             }}
           >
-            {value}
+            {value ? value : "-"}
           </Typography>
         </>
       )}
@@ -39,7 +39,7 @@ const LabelValueCommon: React.FC<IProps> = (props) => {
           <LabelCommon fieldName={value} fontSize="14px" />
         </>
       )}
-    </>
+    </Box>
   );
 };
 

@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 
 interface IProps {
   title: React.ReactNode;
-  image: string;
+  image: string | React.ReactNode;
 }
 
 const ProfileUpload: React.FC<IProps> = (props) => {
@@ -38,7 +38,12 @@ const ProfileUpload: React.FC<IProps> = (props) => {
         gap: 2,
       }}
     >
-      <Avatar src={profilePicture || image} sx={{ width: 60, height: 60 }} />
+      {typeof image === "string" ? (
+        <Avatar src={profilePicture || image} sx={{ width: 60, height: 60 }} />
+      ) : (
+        image
+      )}
+
       <Link
         sx={{ cursor: "pointer" }}
         onClick={(e) => {
