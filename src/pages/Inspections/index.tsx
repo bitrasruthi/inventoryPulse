@@ -1,6 +1,5 @@
 import { Box, Divider, Grid2 as Grid, Typography } from "@mui/material";
 import { useState } from "react";
-import { MenuTypeEnum } from "../../constants/enum";
 import Filters from "../../components/filters";
 import InspectionList from "./inspectionList";
 import {
@@ -19,23 +18,21 @@ import useInspectionStore from "../../store/inspectionStore";
 import { getBtnTextByCurrentStep } from "../../helpers/Util";
 import validate from "../../helpers/validations";
 import { useFormHook } from "../../hooks/useFormHook";
-import { FormProps, PropertyDetailsFormValues } from "../../helpers/Interfaces";
+import { PropertyDetailsFormValues } from "../../helpers/Interfaces";
 import InspectionStepper from "./inspectionStepper";
 
 const Inspections = () => {
   const [activeTab, setActiveTab] = useState<string>(tabMenuList[0]?.value);
   const [dialogOpen, setDialogOpen] = useState(false);
   const { currentStep, setCurrentStep } = useInspectionStore();
-  const { register, handleSubmit, errors, reset } = useFormHook(
-    validate.propertyDetailsSchema
-  );
 
-  const formProps: FormProps<PropertyDetailsFormValues> = {
-    register,
+  const { form } = useFormHook(validate.propertyDetailsSchema);
+
+  const {
     handleSubmit,
-    errors,
+    formState: { errors },
     reset,
-  };
+  } = form;
 
   const handleOpenDialog = () => {
     setDialogOpen(true);
@@ -147,7 +144,7 @@ const Inspections = () => {
             }
           >
             <Typography variant="body1" sx={{ p: 2 }}>
-              <InspectionStepper formProps={formProps} />
+              <InspectionStepper formProps={form} />
             </Typography>
           </FullScreenDialog>
         )}
