@@ -1,4 +1,4 @@
-import { Box, Grid2, useTheme } from "@mui/material";
+import { Box, Grid2, Typography, useTheme } from "@mui/material";
 import { useState } from "react";
 import TabsCommon from "../../../components/tabsCommon";
 import { inspectionsDetailsMenuList } from "../../../constants/constants";
@@ -15,12 +15,47 @@ import LabelCommon from "../../../components/labelCommon";
 import InspectionStatusStepper from "./inspectionStatusStepper";
 import InspectionContactCommon from "../../../components/inspectionContactCommon";
 import Divider from "@mui/material/Divider";
+import BathIcon from "../../../assets/icons/bathIcon";
+import BedIcon from "../../../assets/icons/bedIcon";
+import GarageIcon from "../../../assets/icons/garageIcon";
 
 function InspectionDetails() {
   const theme = useTheme();
   const [activeTab, setActiveTab] = useState<string>(
     inspectionsDetailsMenuList[0]?.value
   );
+  const propertyDetails = [
+    {
+      icon: <BedIcon />,
+      value: "03",
+      description: "Bed Room",
+    },
+    {
+      icon: <BathIcon />,
+      value: "03",
+      description: "Bath Room",
+    },
+    {
+      icon: <BathIcon />,
+      value: "-",
+      description: "Additional Areas",
+    },
+    {
+      icon: <GarageIcon />,
+      value: "Yes",
+      description: "Grage",
+    },
+    {
+      icon: <BathIcon />,
+      value: "Yes",
+      description: "Garden",
+    },
+    {
+      icon: <BathIcon />,
+      value: "No",
+      description: "Parking Slot",
+    },
+  ];
   return (
     <>
       <Box
@@ -74,11 +109,45 @@ function InspectionDetails() {
                 image={<BuildingIcon />}
               />
             </Grid2>
-            <Grid2>
-              <ProfileUpload
-                title="Choose Cover Photo"
-                image={<BuildingIcon />}
-              />
+            <Grid2
+              container
+              spacing={{ xs: 0, md: 2 }}
+              sx={{
+                display: "grid",
+                gridTemplateColumns: "repeat(2, 1fr)",
+                gap: 2,
+              }}
+            >
+              {propertyDetails.map((item, index) => (
+                <Box key={index} sx={{ textAlign: "center" }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "flex-start",
+                      gap: 1,
+                    }}
+                  >
+                    <Box sx={{ color: "#8542E9" }}>{item.icon}</Box>{" "}
+                    <Typography
+                      variant="body1"
+                      sx={{ fontFamily: "roboto-black" }}
+                    >
+                      {item.value}
+                    </Typography>
+                  </Box>
+                  <Typography
+                    variant="caption"
+                    sx={{
+                      marginTop: 0.5,
+                      display: "block",
+                      textAlign: "left",
+                    }}
+                  >
+                    {item.description}
+                  </Typography>
+                </Box>
+              ))}
             </Grid2>
             <Grid2>
               <LabelValueCommon
