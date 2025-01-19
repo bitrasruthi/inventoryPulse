@@ -1,12 +1,5 @@
 import { MenuItemProps, SvgIconTypeMap } from "@mui/material";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
-import {
-  UseFormRegister,
-  UseFormHandleSubmit,
-  FieldErrors,
-  UseFormReturn,
-  FieldValues,
-} from "react-hook-form";
 
 export interface viewMenuInterface {
   id: number;
@@ -33,11 +26,4 @@ export interface PropertyDetailsFormValues {
     propertyType: String;
     bedrooms: String;
   };
-}
-
-export interface FormProps<T extends FieldValues> {
-  register: UseFormRegister<T>;
-  handleSubmit: UseFormHandleSubmit<T>;
-  errors: FieldErrors<T>;
-  reset: UseFormReturn<T>["reset"];
 }

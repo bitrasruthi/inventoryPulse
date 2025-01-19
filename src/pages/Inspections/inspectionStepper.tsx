@@ -16,7 +16,7 @@ import PropertyDetailsIcon from "../../assets/icons/propertyDetailsIcon";
 import ScheduleIcon from "../../assets/icons/scheduleIcon";
 import { steps, contactListDummy } from "../../constants/constants";
 import { StepStatusEnum, StepperStepEnum } from "../../constants/enum";
-import { PropertyDetailsFormValues, FormProps } from "../../helpers/Interfaces";
+import { PropertyDetailsFormValues } from "../../helpers/Interfaces";
 import useInspectionStore from "../../store/inspectionStore";
 import theme from "../../styles/theme";
 import ContactList from "../Contacts/contactList";
@@ -24,6 +24,7 @@ import SaveProperty from "../Properties/saveProperty";
 import AddInspection from "./addInspection";
 import Schedule from "./schedule";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { UseFormReturn } from "react-hook-form";
 
 const CustomStepLabel = styled(StepLabel)(({ theme }) => ({
   "& .MuiStepLabel-label": {
@@ -156,7 +157,7 @@ const ColorlibStepIcon = (props: StepIconProps) => {
 };
 
 interface IProps {
-  formProps: FormProps<PropertyDetailsFormValues>;
+  formProps: UseFormReturn<PropertyDetailsFormValues>;
 }
 
 const InspectionStepper: React.FC<IProps> = ({ formProps }) => {

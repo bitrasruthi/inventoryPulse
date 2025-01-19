@@ -2,14 +2,19 @@ import { Grid2 } from "@mui/material";
 import OutlinedTextField from "./outlinedTextField";
 import SelectField from "./selectField";
 import { ClientOptions } from "../types/type";
-import { PropertyDetailsFormValues, FormProps } from "../helpers/Interfaces";
+import { PropertyDetailsFormValues } from "../helpers/Interfaces";
+import { UseFormReturn } from "react-hook-form";
 
 interface IProps {
-  formProps: FormProps<PropertyDetailsFormValues>;
+  formProps: UseFormReturn<PropertyDetailsFormValues>;
 }
 
 const AddressCommon: React.FC<IProps> = ({ formProps }) => {
-  const { register, errors } = formProps;
+  const {
+    register,
+    formState: { errors },
+  } = formProps;
+
   const client: ClientOptions[] = [
     { label: "name", value: "value" },
     { label: "name", value: "value" },
