@@ -7,8 +7,14 @@ import { ClientOptions } from "../../types/type";
 import OutlinedTextField from "../../components/outlinedTextField";
 import SwitchButton from "../../components/switchButton";
 import ProfileUpload from "../../components/profileUpload";
+import { UseFormReturn } from "react-hook-form";
+import { PropertyDetailsFormValues } from "../../helpers/Interfaces";
 
-const AddUser = () => {
+interface IProps {
+  formProps: UseFormReturn<PropertyDetailsFormValues>;
+}
+
+const AddUser: React.FC<IProps> = ({ formProps }) => {
   const client: ClientOptions[] = [
     { label: "name", value: "value" },
     { label: "name", value: "value" },
@@ -69,7 +75,7 @@ const AddUser = () => {
         </Grid2>
         <Grid2 size={{ sm: 12, md: 6 }} rowSpacing={2}>
           <Fieldset title="Address" key={"address"}>
-            <AddressCommon />
+            <AddressCommon formProps={formProps} />
           </Fieldset>
           <Fieldset title="Notes" key={"notes"}>
             <SwitchButton label="Login Status" />

@@ -338,3 +338,33 @@ export const inspectionsDetailsMenuList = [
     icon: <CalendarMonthIcon />,
   },
 ] as any;
+
+export const propertiesListDummy = [
+  {
+    id: 1,
+    status: 1,
+    buildingStatus: 1,
+    address:
+      "115-116, Beaverbrook Town House, Sloane St, London SW16 9PJ, United Kingdom",
+    beds: 3,
+    baths: 3,
+    rooms: 3,
+    garage: true,
+    parkingSlot: true,
+    garden: true,
+  },
+  {
+    id: 1,
+    status: 1,
+    buildingStatus: 1,
+    address:
+      "115-116, Beaverbrook Town House, Sloane St, London SW16 9PJ, United Kingdom",
+    beds: 3,
+    baths: 3,
+    rooms: 3,
+
+    garage: true,
+    parkingSlot: true,
+    garden: true,
+  },
+];

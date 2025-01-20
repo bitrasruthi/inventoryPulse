@@ -7,6 +7,7 @@ import { inspectionListDummy } from "../../constants/constants";
 import Pagination from "../../components/pagination";
 import InspectionCard from "../../components/inspectionCard";
 import useInspectionStore from "../../store/inspectionStore";
+import ButtonMenuCommon from "../../components/ButtonMenuCommon";
 
 const InspectionList = () => {
   const {
@@ -42,7 +43,27 @@ const InspectionList = () => {
     <>
       {chipList?.length > 0 && (
         <>
-          <ChipCommon list={chipList} />
+          <Box
+            display={"flex"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+          >
+            <ChipCommon list={chipList} />
+            <Box display={"flex"} flexWrap={"wrap"}>
+              {/* <ButtonMenuCommon
+                label="Add"
+                backgroundColor="#111"
+                color="#fff"
+                // menuList={tabMenuList}
+                Icon={AddIcon}
+              /> */}
+              <ButtonMenuCommon
+                label="Reset Filter"
+                backgroundColor="#fff"
+                color="#111"
+              />
+            </Box>
+          </Box>
           <Divider />
         </>
       )}

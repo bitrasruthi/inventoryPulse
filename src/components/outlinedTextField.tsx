@@ -62,7 +62,7 @@ const OutlinedTextField: React.FC<IProps> = (props) => {
                   <IconButton
                     disableFocusRipple
                     disableRipple
-                    sx={{ padding: 0 }}
+                    sx={{ padding: 0, pl: 1 }}
                   >
                     <StartAdormentIcon fontSize="small" />
                   </IconButton>
