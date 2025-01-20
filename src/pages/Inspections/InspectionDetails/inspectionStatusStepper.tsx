@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined"; // Empty circle icon
 import CheckCircleIcon from "@mui/icons-material/CheckCircle"; // Checkmark icon (optional)
 import ContentWrapper from "../../../components/contentWrapper";
+import LabelValueCommon from "../../../components/labelValueCommon";
 
 const steps = [
   {
@@ -87,11 +88,13 @@ function InspectionStatusStepper() {
                     ),
                 }}
               >
-                {step.label}
+                <LabelValueCommon fieldName={step.label} type={2} />
               </StepLabel>
 
               <StepContent>
-                <Typography sx={{fontSize:"14px"}}>{step.description}</Typography>
+                <Typography sx={{ fontSize: "14px" }}>
+                  {step.description}
+                </Typography>
               </StepContent>
             </Step>
           ))}
