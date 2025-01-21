@@ -11,6 +11,12 @@ import EventNoteOutlinedIcon from "@mui/icons-material/EventNoteOutlined";
 import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { StepperStepEnum } from "./enum";
+import BedIcon from "../assets/icons/bedIcon";
+import BathIcon from "../assets/icons/bathIcon";
+import GarageIcon from "../assets/icons/garageIcon";
+import Garden from "../assets/icons/garden";
+import ParkingSlot from "../assets/icons/parkingSlot";
+import AdditionalAreas from "../assets/icons/additionalAreas";
 
 export const tabMenuList = [
   {
@@ -338,6 +344,39 @@ export const inspectionsDetailsMenuList = [
     icon: <CalendarMonthIcon />,
   },
 ] as any;
+
+export const propertyDetails = [
+  {
+    icon: <BedIcon />,
+    value: "03",
+    description: "Bed Room",
+  },
+  {
+    icon: <BathIcon />,
+    value: "03",
+    description: "Bath Room",
+  },
+  {
+    icon: <AdditionalAreas />,
+    value: "-",
+    description: "Additional Areas",
+  },
+  {
+    icon: <GarageIcon />,
+    value: "Yes",
+    description: "Grage",
+  },
+  {
+    icon: <Garden />,
+    value: "Yes",
+    description: "Garden",
+  },
+  {
+    icon: <ParkingSlot />,
+    value: "No",
+    description: "Parking Slot",
+  }
+]
 
 export const propertiesListDummy = [
   {
