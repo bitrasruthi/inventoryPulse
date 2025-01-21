@@ -7,7 +7,7 @@ import { inspectionListDummy } from "../../constants/constants";
 import Pagination from "../../components/pagination";
 import InspectionCard from "../../components/inspectionCard";
 import useInspectionStore from "../../store/inspectionStore";
-import ButtonMenuCommon from "../../components/ButtonMenuCommon";
+import OutlinedCustomButton from "../../components/outlinedCustomButton";
 
 const InspectionList = () => {
   const {
@@ -49,18 +49,12 @@ const InspectionList = () => {
             alignItems={"center"}
           >
             <ChipCommon list={chipList} />
-            <Box display={"flex"} flexWrap={"wrap"}>
-              {/* <ButtonMenuCommon
-                label="Add"
+            <Box display={"flex"} flexWrap={"wrap"} mx={2}>
+            
+              <OutlinedCustomButton
+                label="Reset Filter"
                 backgroundColor="#111"
                 color="#fff"
-                // menuList={tabMenuList}
-                Icon={AddIcon}
-              /> */}
-              <ButtonMenuCommon
-                label="Reset Filter"
-                backgroundColor="#fff"
-                color="#111"
               />
             </Box>
           </Box>

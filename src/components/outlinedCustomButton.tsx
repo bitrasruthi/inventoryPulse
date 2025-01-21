@@ -7,9 +7,6 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import FullScreenDialog, { CustomButtonProps } from "./fullScreenDialog";
-import Filters from "./filters";
-import { inspectionFilters } from "../constants/constants";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 
 interface Props {
@@ -21,7 +18,7 @@ interface Props {
   Icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">>;
 }
 
-const ButtonMenuCommon: React.FC<Props> = ({
+const OutlinedCustomButton: React.FC<Props> = ({
   label,
   menuList = [],
   handleAction,
@@ -31,11 +28,6 @@ const ButtonMenuCommon: React.FC<Props> = ({
 }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const [dialogOpen, setDialogOpen] = useState(false);
-
-  const handleCloseDialog = () => {
-    setDialogOpen(false);
-  };
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -116,31 +108,8 @@ const ButtonMenuCommon: React.FC<Props> = ({
           ))}
         </Menu>
       )}
-      {dialogOpen && (
-        <FullScreenDialog
-          open={dialogOpen}
-          onClose={handleCloseDialog}
-          title="Filters"
-          buttons={
-            [
-              {
-                label: "Cancel",
-                variant: "outlined",
-                onClick: () => console.log("canceled"),
-              },
-              {
-                label: "Confirm",
-                variant: "contained",
-                onClick: () => console.log("Confirm"),
-              },
-            ] as CustomButtonProps[]
-          }
-        >
-          <Filters filters={inspectionFilters} />
-        </FullScreenDialog>
-      )}
     </>
   );
 };
 
-export default ButtonMenuCommon;
+export default OutlinedCustomButton;
