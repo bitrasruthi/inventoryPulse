@@ -268,7 +268,6 @@ function InspectionDetails() {
         sx={{
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between",
           position: "relative",
         }}
       >

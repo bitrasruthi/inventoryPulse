@@ -90,22 +90,24 @@ const GradientButton: React.FC<Props> = ({
         <AddIcon />
       </Button>
 
-      <Fab
-        sx={{
-          position: "absolute",
-          bottom: 30,
-          right: 16,
-          display: { xs: "block", lg: "none" },
-          background: isGradient
-            ? "linear-gradient(90deg, #ac42e9, #8542e9)"
-            : "#8542e9",
-          color: "#fff",
-        }}
-        aria-label="add"
-        onClick={handleOpenDialog}
-      >
-        <FilterAltIcon />
-      </Fab>
+      {window.location.pathname.includes("inspections") && (
+        <Fab
+          sx={{
+            position: "fixed",
+            bottom: 30,
+            right: 16,
+            display: { xs: "block", lg: "none" },
+            background: isGradient
+              ? "linear-gradient(90deg, #ac42e9, #8542e9)"
+              : "#8542e9",
+            color: "#fff",
+          }}
+          aria-label="add"
+          onClick={handleOpenDialog}
+        >
+          <FilterAltIcon />
+        </Fab>
+      )}
 
       {menuList && (
         <Menu

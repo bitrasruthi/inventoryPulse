@@ -1,37 +1,18 @@
-import { useForm, Controller } from "react-hook-form";
+import { useForm, UseFormReturn } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-export const useFormHook = (schema: yup.ObjectSchema<any>) => {
-  const form = useForm({
+export const useFormHook = <T extends yup.AnyObjectSchema>(
+  schema: T
+): {
+  form: UseFormReturn<yup.InferType<T>>;
+} => {
+  const form = useForm<yup.InferType<T>>({
     mode: "onChange",
     resolver: yupResolver(schema),
   });
-  const {
-    register,
-    handleSubmit,
-    formState,
-    control,
-    reset,
-    getValues,
-    setValue,
-    watch,
-    clearErrors,
-  } = form;
-  const { errors, isSubmitted } = formState;
 
   return {
-    setValue,
-    register,
-    handleSubmit,
-    control,
-    errors,
-    Controller,
-    reset,
-    getValues,
-    watch,
-    clearErrors,
     form,
-    isSubmitted,
   };
 };

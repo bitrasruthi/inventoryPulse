@@ -8,14 +8,18 @@ import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import theme from "../../styles/theme";
 import { ClientOptions } from "../../types/type";
 import AddressCommon from "../../components/addressCommon";
-import { FormProps, PropertyDetailsFormValues } from "../../helpers/Interfaces";
+import { PropertyDetailsFormValues } from "../../helpers/Interfaces";
+import { UseFormReturn } from "react-hook-form";
 
 interface IProps {
-  formProps: FormProps<PropertyDetailsFormValues>;
+  formProps: UseFormReturn<PropertyDetailsFormValues>;
 }
 
 const SaveProperty: React.FC<IProps> = ({ formProps }) => {
-  const { register, errors } = formProps;
+  const {
+    register,
+    formState: { errors },
+  } = formProps;
 
   const client: ClientOptions[] = [
     { label: "name", value: "value" },

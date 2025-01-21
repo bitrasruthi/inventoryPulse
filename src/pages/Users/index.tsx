@@ -11,8 +11,14 @@ import FullScreenDialog, {
 import AddUser from "./addUser";
 import UserCard from "./userList";
 import Pagination from "../../components/pagination";
+import { UseFormReturn } from "react-hook-form";
+import { PropertyDetailsFormValues } from "../../helpers/Interfaces";
 
-const Users = () => {
+interface IProps {
+  formProps: UseFormReturn<PropertyDetailsFormValues>;
+}
+
+const Users: React.FC<IProps> = ({ formProps }) => {
   const [activeTab, setActiveTab] = useState<string>(tabMenuList[0]?.value);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [page, setPage] = useState(2);
@@ -91,7 +97,7 @@ const Users = () => {
             ] as CustomButtonProps[]
           }
         >
-          <AddUser />
+          <AddUser formProps={formProps} />
         </FullScreenDialog>
       )}
     </Box>
