@@ -20,7 +20,7 @@ export interface PropertyDetailsFormValues {
     county: String;
     postCode: String;
     country: String;
-    client: String;
+    client?: String;
   };
   property: {
     propertyType: String;

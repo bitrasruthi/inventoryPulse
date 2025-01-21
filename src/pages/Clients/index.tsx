@@ -5,17 +5,13 @@ import FullScreenDialog, {
 import GradientButton from "../../components/gradientButton";
 import { useState } from "react";
 import AddClient from "./addClient";
-import { MenuTypeEnum } from "../../constants/enum";
-import {
-  clientListDummy,
-  contactListDummy,
-  tabMenuList,
-} from "../../constants/constants";
+import { contactListDummy, tabMenuList } from "../../constants/constants";
 import ContentWrapper from "../../components/contentWrapper";
 import TabsCommon from "../../components/tabsCommon";
 import Pagination from "../../components/pagination";
-import ClientList from "./clientList";
 import ContactList from "../Contacts/contactList";
+import validate from "../../helpers/validations";
+import { useFormHook } from "../../hooks/useFormHook";
 
 type Props = {};
 
@@ -24,6 +20,7 @@ const Clients = (_props: Props) => {
   const [activeTab, setActiveTab] = useState<string>(tabMenuList[0]?.value);
   const [page, setPage] = useState(2);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const { form } = useFormHook(validate.propertyDetailsSchema);
 
   const handleChangePage = (
     _event: React.MouseEvent<HTMLButtonElement> | null,
@@ -99,7 +96,7 @@ const Clients = (_props: Props) => {
             ] as CustomButtonProps[]
           }
         >
-          <AddClient />
+          <AddClient formProps={form} />
         </FullScreenDialog>
       )}
     </Box>
