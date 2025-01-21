@@ -1,7 +1,9 @@
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-import { Box, Tab, Typography } from "@mui/material";
+import { Box, IconButton, Tab, Typography } from "@mui/material";
 import React from "react";
 import theme from "../styles/theme";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   tabMenuList: [
@@ -9,13 +11,18 @@ interface Props {
   ];
   onTabChange: (value: string) => void;
   tabContent: JSX.Element;
+  subMenu?: boolean;
+  previousMenuUrl?: string | undefined;
 }
 
 const TabsCommon: React.FC<Props> = ({
   tabMenuList,
   onTabChange,
   tabContent,
+  subMenu,
+  previousMenuUrl,
 }) => {
+  const navigate = useNavigate();
   const [value, setValue] = React.useState(tabMenuList[0]?.value);
 
   const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
@@ -26,7 +33,28 @@ const TabsCommon: React.FC<Props> = ({
   return (
     <>
       <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Box sx={{ borderBottom: 1, borderColor: "divider", display: "flex",alignItems:"center" }}>
+          {subMenu && (
+            <IconButton
+              sx={{
+                marginLeft: 2,
+                color: "white",
+                backgroundColor: theme.palette.primary.main,
+                borderRadius: 1.5,
+                "&:hover": {
+                  backgroundColor: theme.palette.primary.main,
+                },
+              }}
+              onClick={() => {
+                if (previousMenuUrl) {
+                  navigate(previousMenuUrl);
+                }
+              }}
+            >
+              <ArrowBackIosNewIcon aria-label="close" fontSize="medium" />
+            </IconButton>
+          )}
+
           <TabList
             onChange={handleChange}
             aria-label="lab API tabs example"

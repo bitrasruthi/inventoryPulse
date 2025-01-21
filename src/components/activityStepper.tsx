@@ -8,35 +8,7 @@ import LabelValueCommon from "./labelValueCommon";
 import LabelCommon from "./labelCommon";
 import { Grid2 } from "@mui/material";
 import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
-
-const activities = [
-  {
-    name: "Kumar Raja",
-    status: "changed Inspection Type",
-    timestamp: "today 04:38 PM",
-    action: "Check Out → Check In",
-  },
-  {
-    name: "David Thomas",
-    file: "untitled.pdf",
-    status: "uploaded a document",
-    timestamp: "today 04:30 PM",
-    // action: "",
-  },
-  {
-    name: "Kumar Raja",
-    status: "changed the status",
-    timestamp: "today 04:20 PM",
-    action: "Pending → Assigned",
-  },
-  {
-    name: "Kumar Raja",
-    status: "added an inspection note",
-    timestamp: "today 04:18 PM",
-    action:
-      "The primary objective of the inspection is to assess the current condition of the property, identify any maintenance issues, ensure compliance with safety regulations, and verify that the property is being used as intended. Regular inspections help in maintaining the property's value, ensuring tenant satisfaction, and addressing potential problems before they escalate.",
-  },
-];
+import { activities } from "../constants/constants";
 
 const CustomStepIcon = () => {
   return <CircleOutlinedIcon />;

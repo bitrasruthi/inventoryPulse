@@ -11,6 +11,12 @@ import EventNoteOutlinedIcon from "@mui/icons-material/EventNoteOutlined";
 import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { StepperStepEnum } from "./enum";
+import BedIcon from "../assets/icons/bedIcon";
+import BathIcon from "../assets/icons/bathIcon";
+import GarageIcon from "../assets/icons/garageIcon";
+import Garden from "../assets/icons/garden";
+import ParkingSlot from "../assets/icons/parkingSlot";
+import AdditionalAreas from "../assets/icons/additionalAreas";
 
 export const tabMenuList = [
   {
@@ -339,6 +345,39 @@ export const inspectionsDetailsMenuList = [
   },
 ] as any;
 
+export const propertyDetails = [
+  {
+    icon: <BedIcon />,
+    value: "03",
+    description: "Bed Room",
+  },
+  {
+    icon: <BathIcon />,
+    value: "03",
+    description: "Bath Room",
+  },
+  {
+    icon: <AdditionalAreas />,
+    value: "-",
+    description: "Additional Areas",
+  },
+  {
+    icon: <GarageIcon />,
+    value: "Yes",
+    description: "Grage",
+  },
+  {
+    icon: <Garden />,
+    value: "Yes",
+    description: "Garden",
+  },
+  {
+    icon: <ParkingSlot />,
+    value: "No",
+    description: "Parking Slot",
+  },
+];
+
 export const propertiesListDummy = [
   {
     id: 1,
@@ -366,5 +405,34 @@ export const propertiesListDummy = [
     garage: true,
     parkingSlot: true,
     garden: true,
+  },
+];
+
+export const activities = [
+  {
+    name: "Kumar Raja",
+    status: "changed Inspection Type",
+    timestamp: "today 04:38 PM",
+    action: "Check Out → Check In",
+  },
+  {
+    name: "David Thomas",
+    file: "untitled.pdf",
+    status: "uploaded a document",
+    timestamp: "today 04:30 PM",
+    // action: "",
+  },
+  {
+    name: "Kumar Raja",
+    status: "changed the status",
+    timestamp: "today 04:20 PM",
+    action: "Pending → Assigned",
+  },
+  {
+    name: "Kumar Raja",
+    status: "added an inspection note",
+    timestamp: "today 04:18 PM",
+    action:
+      "The primary objective of the inspection is to assess the current condition of the property, identify any maintenance issues, ensure compliance with safety regulations, and verify that the property is being used as intended. Regular inspections help in maintaining the property's value, ensuring tenant satisfaction, and addressing potential problems before they escalate.",
   },
 ];

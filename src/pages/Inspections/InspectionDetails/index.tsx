@@ -1,7 +1,10 @@
 import { Box, Grid2, Typography, useTheme } from "@mui/material";
 import { useState } from "react";
 import TabsCommon from "../../../components/tabsCommon";
-import { inspectionsDetailsMenuList } from "../../../constants/constants";
+import {
+  inspectionsDetailsMenuList,
+  propertyDetails,
+} from "../../../constants/constants";
 import GradientButton from "../../../components/gradientButton";
 import IconButton from "@mui/material/IconButton";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
@@ -15,49 +18,15 @@ import LabelCommon from "../../../components/labelCommon";
 import InspectionStatusStepper from "./inspectionStatusStepper";
 import InspectionContactCommon from "../../../components/inspectionContactCommon";
 import Divider from "@mui/material/Divider";
-import BathIcon from "../../../assets/icons/bathIcon";
-import BedIcon from "../../../assets/icons/bedIcon";
-import GarageIcon from "../../../assets/icons/garageIcon";
+import { paths } from "../../../routes/paths";
 
 function InspectionDetails() {
   const theme = useTheme();
   const [activeTab, setActiveTab] = useState<string>(
     inspectionsDetailsMenuList[0]?.value
   );
-  const propertyDetails = [
-    {
-      icon: <BedIcon />,
-      value: "03",
-      description: "Bed Room",
-    },
-    {
-      icon: <BathIcon />,
-      value: "03",
-      description: "Bath Room",
-    },
-    {
-      icon: <BathIcon />,
-      value: "-",
-      description: "Additional Areas",
-    },
-    {
-      icon: <GarageIcon />,
-      value: "Yes",
-      description: "Grage",
-    },
-    {
-      icon: <BathIcon />,
-      value: "Yes",
-      description: "Garden",
-    },
-    {
-      icon: <BathIcon />,
-      value: "No",
-      description: "Parking Slot",
-    },
-  ];
 
-  const tabContent = (
+  const infoContent = (
     <ContentWrapper>
       <SectionTitleCommon title="Properties Details" />
       <Grid2 container spacing={{ xs: 0, md: 2 }}>
@@ -75,6 +44,7 @@ function InspectionDetails() {
               display: "grid",
               gridTemplateColumns: "repeat(2, 1fr)",
               gap: 2,
+              mb: 2,
             }}
           >
             {propertyDetails.map((item, index) => (
@@ -87,7 +57,7 @@ function InspectionDetails() {
                     gap: 1,
                   }}
                 >
-                  <Box sx={{ color: "#8542E9" }}>{item.icon}</Box>{" "}
+                  <Box sx={{ color: "#8542E9" }}>{item.icon}</Box>
                   <Typography
                     variant="body1"
                     sx={{ fontFamily: "roboto-black" }}
@@ -258,6 +228,7 @@ function InspectionDetails() {
             <InspectionStatusStepper />
           </Grid2>
           <Divider />
+          <SectionTitleCommon title="Contacts" />
           <Grid2>
             <InspectionContactCommon
               fieldName="Amelia Davies"
@@ -280,6 +251,17 @@ function InspectionDetails() {
     </ContentWrapper>
   );
 
+  const GetTabContentByActiveTab = (): JSX.Element => {
+    switch (activeTab) {
+      case "1":
+        return <>{infoContent}</>;
+      case "2":
+        return <></>;
+      default:
+        return <></>;
+    }
+  };
+
   return (
     <>
       <Box
@@ -289,19 +271,15 @@ function InspectionDetails() {
           position: "relative",
         }}
       >
-        <IconButton
-          sx={{
-            marginLeft: 2,
-            color: "white",
-            backgroundColor: theme.palette.primary.main,
-            borderRadius: 1.5,
-            "&:hover": {
-              backgroundColor: theme.palette.primary.main,
-            },
-          }}
-        >
-          <ArrowBackIosNewIcon aria-label="close" fontSize="medium" />
-        </IconButton>
+        <Box>
+          <TabsCommon
+            tabMenuList={inspectionsDetailsMenuList}
+            onTabChange={(value) => setActiveTab(value)}
+            tabContent={GetTabContentByActiveTab()}
+            subMenu={true}
+            previousMenuUrl={paths.INSPECTIONS}
+          />
+        </Box>
         <GradientButton
           label="Mark As Complete"
           // menuList={inspectionBtnList}
@@ -309,11 +287,6 @@ function InspectionDetails() {
           // handleDialogOpen={handleOpenDialog}
         />
       </Box>
-      <TabsCommon
-        tabMenuList={inspectionsDetailsMenuList}
-        onTabChange={(value) => setActiveTab(value)}
-        tabContent={tabContent}
-      />
     </>
   );
 }
