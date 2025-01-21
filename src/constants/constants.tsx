@@ -14,9 +14,9 @@ import { StepperStepEnum } from "./enum";
 import BedIcon from "../assets/icons/bedIcon";
 import BathIcon from "../assets/icons/bathIcon";
 import GarageIcon from "../assets/icons/garageIcon";
-import AdditionalAreas from "../assets/icons/garden";
 import Garden from "../assets/icons/garden";
 import ParkingSlot from "../assets/icons/parkingSlot";
+import AdditionalAreas from "../assets/icons/additionalAreas";
 
 export const tabMenuList = [
   {
