@@ -4,6 +4,7 @@ import LabelValueCommon from "../../components/labelValueCommon";
 import SectionTitleCommon from "../../components/sectionTitleCommon";
 import InspectionContactCommon from "../../components/inspectionContactCommon";
 import DateTimeCard from "../../components/dateTimeCardCommon";
+import ActivityStepper from "../../components/activityStepper";
 
 const Dashboard = () => {
   // const actionButtons = [
@@ -23,12 +24,8 @@ const Dashboard = () => {
         value="987654323"
         type={2}
       />
-      <InspectionContactCommon
-        fieldName="Mohith Kavi"
-        value="987654323"
-        type={2}
-      />
       <DateTimeCard date="15 Dec 2024" time="10:30am" />
+      <ActivityStepper />
     </Container>
   );
 };
