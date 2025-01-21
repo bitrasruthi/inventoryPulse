@@ -91,7 +91,9 @@ function InspectionStatusStepper() {
               </StepLabel>
 
               <StepContent>
-                <Typography sx={{fontSize:"14px"}}>{step.description}</Typography>
+                <Typography sx={{ fontSize: "14px" }}>
+                  {step.description}
+                </Typography>
               </StepContent>
             </Step>
           ))}

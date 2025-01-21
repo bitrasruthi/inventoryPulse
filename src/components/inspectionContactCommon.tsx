@@ -4,12 +4,14 @@ import LabelValueCommon from "./labelValueCommon";
 
 interface IProps {
   fieldName: string;
-  value: React.ReactNode;
+  value?: React.ReactNode;
   type?: number;
+  heightWidth?: number;
+  fontSize?: string;
 }
 
 const InspectionContactCommon: React.FC<IProps> = (props) => {
-  const { fieldName, value, type } = props;
+  const { fieldName, value, type, heightWidth, fontSize } = props;
 
   function stringToColor(name: string) {
     let hash = 0;
@@ -42,9 +44,10 @@ const InspectionContactCommon: React.FC<IProps> = (props) => {
         <Avatar
           {...stringAvatar(fieldName)}
           sx={{
-            width: 40,
-            height: 40,
+            width: heightWidth ? heightWidth : 40,
+            height: heightWidth ? heightWidth : 40,
             backgroundColor: stringToColor(fieldName),
+            fontSize: heightWidth ? heightWidth * 0.4 : 16,
           }}
         />
       </Grid2>
@@ -53,7 +56,7 @@ const InspectionContactCommon: React.FC<IProps> = (props) => {
           fieldName={fieldName}
           value={value}
           type={type}
-          fontSize={"14px"}
+          fontSize={fontSize ? fontSize : "14px"}
         />
       </Grid2>
     </Grid2>
