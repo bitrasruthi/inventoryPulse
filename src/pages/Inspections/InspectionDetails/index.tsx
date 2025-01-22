@@ -1,13 +1,10 @@
-import { Box, Grid2, Typography, useTheme } from "@mui/material";
+import { Box, Grid2, Typography } from "@mui/material";
 import { useState } from "react";
 import TabsCommon from "../../../components/tabsCommon";
 import {
   inspectionsDetailsMenuList,
   propertyDetails,
 } from "../../../constants/constants";
-import GradientButton from "../../../components/gradientButton";
-import IconButton from "@mui/material/IconButton";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import SectionTitleCommon from "../../../components/sectionTitleCommon";
 import ContentWrapper from "../../../components/contentWrapper";
 import ProfileUpload from "../../../components/profileUpload";
@@ -21,7 +18,6 @@ import Divider from "@mui/material/Divider";
 import { paths } from "../../../routes/paths";
 
 function InspectionDetails() {
-  const theme = useTheme();
   const [activeTab, setActiveTab] = useState<string>(
     inspectionsDetailsMenuList[0]?.value
   );
@@ -264,29 +260,25 @@ function InspectionDetails() {
 
   return (
     <>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          position: "relative",
-        }}
-      >
-        <Box>
-          <TabsCommon
-            tabMenuList={inspectionsDetailsMenuList}
-            onTabChange={(value) => setActiveTab(value)}
-            tabContent={GetTabContentByActiveTab()}
-            subMenu={true}
-            previousMenuUrl={paths.INSPECTIONS}
-          />
-        </Box>
-        <GradientButton
-          label="Mark As Complete"
-          // menuList={inspectionBtnList}
-          isGradient={true}
-          // handleDialogOpen={handleOpenDialog}
-        />
-      </Box>
+      <TabsCommon
+        tabMenuList={inspectionsDetailsMenuList}
+        onTabChange={(value) => setActiveTab(value)}
+        tabContent={GetTabContentByActiveTab()}
+        buttonList={[
+          {
+            label: "Mark As Complete",
+            isGradient: true,
+          },
+          {
+            label: "Mark As Complete",
+          },
+          {
+            label: "Mark As Complete",
+          },
+        ]}
+        isDetails={true}
+        previousMenuUrl={paths.INSPECTIONS}
+      />
     </>
   );
 }

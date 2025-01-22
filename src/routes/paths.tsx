@@ -2,7 +2,7 @@ export enum paths {
   HOME = "/",
   LOGIN = "/login",
   INSPECTIONS = "/inspections",
-  INSPECTIONSDETAILS = "/inspections/inspectionsDetails/:id",
+  INSPECTIONSDETAILS = "/inspection/:id",
   PROPERTIES = "/properties",
   USERS = "/users",
   CLIENTS = "/clients",

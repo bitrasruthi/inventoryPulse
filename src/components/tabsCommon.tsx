@@ -2,6 +2,8 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Box, IconButton, Tab, Typography } from "@mui/material";
 import React from "react";
 import theme from "../styles/theme";
+import OutlinedCustomButton from "./outlinedCustomButton";
+import GradientButton from "./gradientButton";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { useNavigate } from "react-router-dom";
 
@@ -11,7 +13,8 @@ interface Props {
   ];
   onTabChange: (value: string) => void;
   tabContent: JSX.Element;
-  subMenu?: boolean;
+  buttonList?: any;
+  isDetails?: boolean;
   previousMenuUrl?: string | undefined;
 }
 
@@ -19,7 +22,8 @@ const TabsCommon: React.FC<Props> = ({
   tabMenuList,
   onTabChange,
   tabContent,
-  subMenu,
+  buttonList,
+  isDetails,
   previousMenuUrl,
 }) => {
   const navigate = useNavigate();
@@ -32,29 +36,42 @@ const TabsCommon: React.FC<Props> = ({
 
   return (
     <>
-      <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider", display: "flex",alignItems:"center" }}>
-          {subMenu && (
-            <IconButton
-              sx={{
-                marginLeft: 2,
-                color: "white",
+      <Box
+        display={{ xs: "flex", md: isDetails ? "flex" : "none", lg: "none" }}
+        flexWrap={"wrap"}
+        gap={1}
+        px={2}
+        pb={2}
+      >
+        {isDetails && (
+          <IconButton
+            sx={{
+              color: "white",
+              backgroundColor: theme.palette.primary.main,
+              borderRadius: 1.5,
+              "&:hover": {
                 backgroundColor: theme.palette.primary.main,
-                borderRadius: 1.5,
-                "&:hover": {
-                  backgroundColor: theme.palette.primary.main,
-                },
-              }}
-              onClick={() => {
-                if (previousMenuUrl) {
-                  navigate(previousMenuUrl);
-                }
-              }}
-            >
-              <ArrowBackIosNewIcon aria-label="close" fontSize="medium" />
-            </IconButton>
-          )}
-
+              },
+            }}
+            onClick={() => {
+              if (previousMenuUrl) {
+                navigate(previousMenuUrl);
+              }
+            }}
+          >
+            <ArrowBackIosNewIcon aria-label="close" fontSize="medium" />
+          </IconButton>
+        )}
+        {buttonList?.map((btn: any) =>
+          btn?.isGradient ? (
+            <GradientButton {...btn} handleAction={btn.action} />
+          ) : (
+            <OutlinedCustomButton {...btn} />
+          )
+        )}
+      </Box>
+      <TabContext value={value}>
+        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <TabList
             onChange={handleChange}
             aria-label="lab API tabs example"
@@ -88,6 +105,39 @@ const TabsCommon: React.FC<Props> = ({
               },
             }}
           >
+            {isDetails && (
+              <Box
+                sx={{
+                  display: {
+                    xs: "none",
+                    md: isDetails ? "none" : "flex",
+                    lg: "flex",
+                  },
+                  alignItems: "center",
+                  position: "relative",
+                  right: 15,
+                }}
+              >
+                <IconButton
+                  sx={{
+                    marginLeft: 2,
+                    color: "white",
+                    backgroundColor: theme.palette.primary.main,
+                    borderRadius: 1.5,
+                    "&:hover": {
+                      backgroundColor: theme.palette.primary.main,
+                    },
+                  }}
+                  onClick={() => {
+                    if (previousMenuUrl) {
+                      navigate(previousMenuUrl);
+                    }
+                  }}
+                >
+                  <ArrowBackIosNewIcon aria-label="close" fontSize="medium" />
+                </IconButton>
+              </Box>
+            )}
             {tabMenuList?.map((item) => (
               <Tab
                 key={item.label}
@@ -108,6 +158,29 @@ const TabsCommon: React.FC<Props> = ({
                 }}
               />
             ))}
+
+            <Box
+              sx={{
+                width: "100%",
+                justifyContent: "right",
+                alignItems: "center",
+                display: {
+                  xs: "none",
+                  md: isDetails ? "none" : "flex",
+                  lg: "flex",
+                },
+                px: 1,
+              }}
+              gap={1}
+            >
+              {buttonList?.map((btn: any) =>
+                btn?.isGradient ? (
+                  <GradientButton {...btn} handleAction={btn.action} />
+                ) : (
+                  <OutlinedCustomButton {...btn} />
+                )
+              )}
+            </Box>
           </TabList>
         </Box>
         <TabPanel

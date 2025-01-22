@@ -8,7 +8,6 @@ import {
   steps,
   tabMenuList,
 } from "../../constants/constants";
-import GradientButton from "../../components/gradientButton";
 import FullScreenDialog, {
   CustomButtonProps,
 } from "../../components/fullScreenDialog";
@@ -115,13 +114,26 @@ const Inspections = () => {
         tabMenuList={tabMenuList}
         onTabChange={(value) => setActiveTab(value)}
         tabContent={GetTabContentByActiveTab()}
+        buttonList={[
+          {
+            label: "Add Inspection",
+            menuList: inspectionBtnList,
+            isGradient: true,
+            action: handleOpenDialog,
+          },
+          {
+            label: "Add Inspection",
+            action: handleOpenDialog,
+          },
+          {
+            label: "Add Inspection",
+            menuList: inspectionBtnList,
+            isGradient: true,
+            action: handleOpenDialog,
+          },
+        ]}
       />
-      <GradientButton
-        label="Add Inspection"
-        menuList={inspectionBtnList}
-        isGradient={true}
-        handleDialogOpen={handleOpenDialog}
-      />
+
       <form onSubmit={handleSubmit(onSubmit)} id={"inspection-form"}>
         {dialogOpen && (
           <FullScreenDialog

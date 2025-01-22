@@ -13,8 +13,7 @@ interface Props {
   label: string;
   menuList?: any;
   handleAction?: () => void;
-  backgroundColor?: string;
-  color?: string;
+  fillColor?: boolean;
   Icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">>;
 }
 
@@ -22,8 +21,7 @@ const OutlinedCustomButton: React.FC<Props> = ({
   label,
   menuList = [],
   handleAction,
-  backgroundColor = "#fff",
-  color = "#111",
+  fillColor,
   Icon,
 }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -43,13 +41,16 @@ const OutlinedCustomButton: React.FC<Props> = ({
         <Button
           onClick={handleClick}
           sx={{
-            background: backgroundColor ? backgroundColor : "#111",
-            color: color ? color : "#111",
+            background: fillColor ? "#111" : "#fff",
+            color: fillColor ? "#fff" : "#111",
             border: `1px solid #111`,
             textTransform: "none",
             borderRadius: "10px",
             fontSize: 13,
+            fontFamily: "roboto-medium",
             height: 40,
+            minWidth: 150,
+            width: { xs: "100%", sm: "auto" },
           }}
           size="medium"
           disableRipple
@@ -64,13 +65,15 @@ const OutlinedCustomButton: React.FC<Props> = ({
         <Button
           onClick={handleAction}
           sx={{
-            background: backgroundColor ? backgroundColor : "#111",
-            color: color ? color : "#111",
+            mr: 1,
+            background: fillColor ? "#111" : "#fff",
+            color: fillColor ? "#fff" : "#111",
             border: `1px solid #111`,
             textTransform: "none",
             borderRadius: "10px",
             fontSize: 13,
-            height: 40,
+            fontFamily: "roboto-medium",
+            width: { xs: "100%", sm: "auto" },
           }}
           size="medium"
           disableRipple

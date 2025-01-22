@@ -3,7 +3,6 @@ import ContentWrapper from "../../components/contentWrapper";
 import { propertiesListDummy, tabMenuList } from "../../constants/constants";
 import TabsCommon from "../../components/tabsCommon";
 import { useState } from "react";
-import GradientButton from "../../components/gradientButton";
 import FullScreenDialog, {
   CustomButtonProps,
 } from "../../components/fullScreenDialog";
@@ -74,12 +73,15 @@ const Properties = () => {
         tabMenuList={[tabMenuList[0]]}
         onTabChange={(value) => setActiveTab(value)}
         tabContent={UserTabContent}
+        buttonList={[
+          {
+            label: "Add Property",
+            isGradient: true,
+            action: handleOpenDialog,
+          },
+        ]}
       />
-      <GradientButton
-        label="Add Property"
-        isGradient={true}
-        handleDialogOpen={handleOpenDialog}
-      />
+
       {dialogOpen && (
         <FullScreenDialog
           open={dialogOpen}

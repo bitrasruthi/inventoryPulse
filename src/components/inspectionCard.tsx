@@ -23,6 +23,7 @@ import moment from "moment";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import PendingIcon from "../assets/icons/pendingIcon";
 import ReviewIcon from "../assets/icons/reviewIcon";
+import { useNavigate } from "react-router-dom";
 interface IProps extends CardProps {
   list: any;
 }
@@ -38,6 +39,7 @@ export const StyledCard = styled(Card)(() => ({
 
 const InspectionCard: React.FC<IProps> = (props) => {
   const { list } = props;
+  const navigate = useNavigate();
 
   const getNameByBuildingStatus = (status: number) => {
     switch (status) {
@@ -125,7 +127,13 @@ const InspectionCard: React.FC<IProps> = (props) => {
       <Grid container spacing={0}>
         {list?.length > 0
           ? list?.map((item: any, index: number) => (
-              <Grid size={12}>
+              <Grid
+                size={12}
+                onClick={() => {
+                  navigate(`/inspection/${item?.id}`);
+                }}
+                sx={{ cursor: "pointer" }}
+              >
                 <StyledCard
                   key={index}
                   elevation={0}

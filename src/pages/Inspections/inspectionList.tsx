@@ -50,11 +50,10 @@ const InspectionList = () => {
           >
             <ChipCommon list={chipList} />
             <Box display={"flex"} flexWrap={"wrap"} mx={2}>
-            
               <OutlinedCustomButton
                 label="Reset Filter"
-                backgroundColor="#111"
-                color="#fff"
+                fillColor={true}
+                // menuList={tabMenuList}
               />
             </Box>
           </Box>

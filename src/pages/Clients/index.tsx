@@ -2,7 +2,6 @@ import { Box } from "@mui/material";
 import FullScreenDialog, {
   CustomButtonProps,
 } from "../../components/fullScreenDialog";
-import GradientButton from "../../components/gradientButton";
 import { useState } from "react";
 import AddClient from "./addClient";
 import { contactListDummy, tabMenuList } from "../../constants/constants";
@@ -70,12 +69,15 @@ const Clients = (_props: Props) => {
         tabMenuList={[tabMenuList[0]]}
         onTabChange={(value) => setActiveTab(value)}
         tabContent={ClientTabContent}
+        buttonList={[
+          {
+            label: "Add Client",
+            isGradient: true,
+            action: handleOpenDialog,
+          },
+        ]}
       />
-      <GradientButton
-        label="Add Client"
-        isGradient={true}
-        handleDialogOpen={handleOpenDialog}
-      />
+
       {dialogOpen && (
         <FullScreenDialog
           open={dialogOpen}
