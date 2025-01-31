@@ -5,6 +5,9 @@ import SectionTitleCommon from "../../components/sectionTitleCommon";
 import InspectionContactCommon from "../../components/inspectionContactCommon";
 import DateTimeCard from "../../components/dateTimeCardCommon";
 import ActivityStepper from "../../components/activityStepper";
+import { DndProvider } from "react-dnd";
+import DragAndDrop from "../../components/dragAndDrop";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 const Dashboard = () => {
   // const actionButtons = [
@@ -26,6 +29,9 @@ const Dashboard = () => {
       />
       <DateTimeCard date="15 Dec 2024" time="10:30am" />
       <ActivityStepper />
+      <DndProvider backend={HTML5Backend}>
+        <DragAndDrop />
+      </DndProvider>
     </Container>
   );
 };
