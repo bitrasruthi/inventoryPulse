@@ -26,7 +26,6 @@ const theme = createTheme({
           style: {
             background: "linear-gradient(180deg, #ac42e9, #8542e9) !important",
             color: "#FFFFFF",
-            fontSize: 14,
           },
         },
         {
@@ -35,7 +34,6 @@ const theme = createTheme({
             background: "grey",
             color: "#FFFFFF",
             border: "none",
-            fontSize: 14,
           },
         },
       ],
@@ -43,6 +41,7 @@ const theme = createTheme({
         root: {
           textTransform: "none",
           borderRadius: "10px",
+          fontSize: "16px !important",
         },
       },
     },

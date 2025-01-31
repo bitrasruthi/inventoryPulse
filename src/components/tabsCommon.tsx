@@ -1,5 +1,5 @@
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-import { Box, IconButton, Tab, Typography } from "@mui/material";
+import { Box, IconButton, Tab, Typography, useMediaQuery } from "@mui/material";
 import React from "react";
 import theme from "../styles/theme";
 import OutlinedCustomButton from "./outlinedCustomButton";
@@ -14,7 +14,7 @@ interface Props {
   onTabChange: (value: string) => void;
   tabContent: JSX.Element;
   buttonList?: any;
-  isDetails?: boolean;
+  showBackButton?: boolean;
   previousMenuUrl?: string | undefined;
 }
 
@@ -23,10 +23,13 @@ const TabsCommon: React.FC<Props> = ({
   onTabChange,
   tabContent,
   buttonList,
-  isDetails,
+  showBackButton,
   previousMenuUrl,
 }) => {
   const navigate = useNavigate();
+  const matches = useMediaQuery((_theme: any) =>
+    _theme?.breakpoints?.down("700")
+  );
   const [value, setValue] = React.useState(tabMenuList[0]?.value);
 
   const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
@@ -37,13 +40,17 @@ const TabsCommon: React.FC<Props> = ({
   return (
     <>
       <Box
-        display={{ xs: "flex", md: isDetails ? "flex" : "none", lg: "none" }}
+        display={{
+          xs: "flex",
+          md: showBackButton ? "flex" : "none",
+          lg: "none",
+        }}
         flexWrap={"wrap"}
         gap={1}
         px={2}
         pb={2}
       >
-        {isDetails && (
+        {showBackButton && (
           <IconButton
             sx={{
               color: "white",
@@ -71,12 +78,18 @@ const TabsCommon: React.FC<Props> = ({
         )}
       </Box>
       <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Box>
           <TabList
+            variant={
+              tabMenuList?.length >= 5 && matches ? "scrollable" : "standard"
+            }
+            scrollButtons
+            allowScrollButtonsMobile
             onChange={handleChange}
             aria-label="lab API tabs example"
             sx={{
               ml: 2,
+
               "& .MuiTabs-indicator": {
                 display: "flex",
                 justifyContent: "center",
@@ -100,17 +113,18 @@ const TabsCommon: React.FC<Props> = ({
               },
 
               "& .Mui-selected": {
+                borderBottom: "none",
                 bgcolor: "#fff",
                 color: `${theme.palette.primary.main} !important`,
               },
             }}
           >
-            {isDetails && (
+            {showBackButton && (
               <Box
                 sx={{
                   display: {
                     xs: "none",
-                    md: isDetails ? "none" : "flex",
+                    md: showBackButton ? "none" : "flex",
                     lg: "flex",
                   },
                   alignItems: "center",
@@ -151,9 +165,11 @@ const TabsCommon: React.FC<Props> = ({
                 value={item?.value}
                 sx={{
                   px: 3,
+                  mr: 1,
                   background: "#fff",
                   borderTopLeftRadius: 12,
                   borderTopRightRadius: 12,
+                  border: "none",
                   textTransform: "none",
                 }}
               />
@@ -164,9 +180,10 @@ const TabsCommon: React.FC<Props> = ({
                 width: "100%",
                 justifyContent: "right",
                 alignItems: "center",
+                pb: 2,
                 display: {
                   xs: "none",
-                  md: isDetails ? "none" : "flex",
+                  md: showBackButton ? "none" : "flex",
                   lg: "flex",
                 },
                 px: 1,

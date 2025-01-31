@@ -52,7 +52,6 @@ const GradientButton: React.FC<Props> = ({
           minWidth: 150,
           width: { xs: "100%", sm: "auto" },
           borderRadius: 3,
-          fontSize: 13,
           height: 40,
         }}
         size="medium"

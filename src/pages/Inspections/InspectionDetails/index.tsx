@@ -16,6 +16,8 @@ import InspectionStatusStepper from "./inspectionStatusStepper";
 import InspectionContactCommon from "../../../components/inspectionContactCommon";
 import Divider from "@mui/material/Divider";
 import { paths } from "../../../routes/paths";
+import Reports from "./reports";
+import ReportsRsuite from "./reportsRsuite";
 
 function InspectionDetails() {
   const [activeTab, setActiveTab] = useState<string>(
@@ -252,7 +254,12 @@ function InspectionDetails() {
       case "1":
         return <>{infoContent}</>;
       case "2":
-        return <></>;
+        return (
+          <>
+            {/* <ReportsRsuite /> */}
+            <Reports />
+          </>
+        );
       default:
         return <></>;
     }
@@ -269,14 +276,8 @@ function InspectionDetails() {
             label: "Mark As Complete",
             isGradient: true,
           },
-          {
-            label: "Mark As Complete",
-          },
-          {
-            label: "Mark As Complete",
-          },
         ]}
-        isDetails={true}
+        showBackButton={true}
         previousMenuUrl={paths.INSPECTIONS}
       />
     </>

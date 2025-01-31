@@ -54,3 +54,15 @@ export enum StepStatusEnum {
   CurrentStep = 1,
   Completed = 2,
 }
+
+export enum TableFieldTypeEnum {
+  TextField = 1,
+  NunberField = 2,
+  TextArea = 3,
+  SingleSelect = 4,
+  MultiSelect = 5,
+  DateTime = 6,
+  Rating = 7,
+  Radio = 8,
+  MultiCheck = 9,
+}

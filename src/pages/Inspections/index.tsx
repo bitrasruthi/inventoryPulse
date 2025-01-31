@@ -121,16 +121,6 @@ const Inspections = () => {
             isGradient: true,
             action: handleOpenDialog,
           },
-          {
-            label: "Add Inspection",
-            action: handleOpenDialog,
-          },
-          {
-            label: "Add Inspection",
-            menuList: inspectionBtnList,
-            isGradient: true,
-            action: handleOpenDialog,
-          },
         ]}
       />
 

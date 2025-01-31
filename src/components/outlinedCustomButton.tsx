@@ -46,7 +46,6 @@ const OutlinedCustomButton: React.FC<Props> = ({
             border: `1px solid #111`,
             textTransform: "none",
             borderRadius: "10px",
-            fontSize: 13,
             fontFamily: "roboto-medium",
             height: 40,
             minWidth: 150,
@@ -71,7 +70,6 @@ const OutlinedCustomButton: React.FC<Props> = ({
             border: `1px solid #111`,
             textTransform: "none",
             borderRadius: "10px",
-            fontSize: 13,
             fontFamily: "roboto-medium",
             width: { xs: "100%", sm: "auto" },
           }}

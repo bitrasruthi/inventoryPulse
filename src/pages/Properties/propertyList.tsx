@@ -9,7 +9,6 @@ import {
   IconButton,
 } from "@mui/material";
 import React, { useState } from "react";
-import { inspectionColors } from "../../constants/constants";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import MenuCommon from "../../components/menuCommon";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
@@ -24,6 +23,7 @@ import BathIcon from "../../assets/icons/bathIcon";
 import HospitalIcon from "../../assets/icons/roomsIcon";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { UseFormReturn } from "react-hook-form";
+import { InspectionColorEnum } from "../../constants/enum";
 
 export const StyledCard = styled(Card)(() => ({
   border: "none",
@@ -97,10 +97,9 @@ const PropertyList: React.FC<IProps> = (props) => {
                   <Box
                     sx={{
                       my: 4,
-                      background:
-                        inspectionColors[index % inspectionColors.length],
-                      width: 7,
-                      opacity: 0.3,
+                      background: InspectionColorEnum.Blue,
+                      width: 5,
+                      opacity: 0.2,
                       position: "absolute",
                       borderRadius: 10,
                       left: 2,
