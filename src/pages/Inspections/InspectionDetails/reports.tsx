@@ -1,27 +1,18 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
-  Table,
-  TableBody,
   TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
   IconButton,
   Collapse,
   Box,
   styled,
   Radio,
-  Typography,
+  Grid2,
 } from "@mui/material";
 import { ExpandMore, ExpandLess, MoreVert } from "@mui/icons-material";
 import OutlinedTextField from "../../../components/outlinedTextField";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import DescriptionIcon from "@mui/icons-material/Description";
-import {
-  inspectionColors2,
-  tableDataDummy2,
-  tabMenuList,
-} from "../../../constants/constants";
+import { tableDataDummy2, tabMenuList } from "../../../constants/constants";
 import SelectField from "../../../components/selectField";
 import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 
@@ -34,6 +25,43 @@ const BorderTableCell = styled(TableCell)({
 
 const Reports = () => {
   const [openSections, setOpenSections] = useState<any>({});
+  const [scrollPosition, setScrollPosition] = useState({
+    left: false,
+    right: false,
+    bothShadows: false,
+  });
+
+  const scrollContainerRef = useRef<any>(null);
+
+  useEffect(() => {
+    const checkScrollPosition = () => {
+      const container = scrollContainerRef?.current;
+      if (container) {
+        const scrollLeft = container.scrollLeft;
+        const scrollWidth = container.scrollWidth;
+        const offsetWidth = container.offsetWidth;
+
+        const left = scrollLeft > 0;
+        const right = scrollLeft < scrollWidth - offsetWidth;
+        const bothShadows = left && right;
+
+        setScrollPosition((prevState) => {
+          if (
+            prevState.left !== left ||
+            prevState.right !== right ||
+            prevState.bothShadows !== bothShadows
+          ) {
+            return { left, right, bothShadows };
+          }
+          return prevState;
+        });
+      }
+    };
+
+    const intervalId = setInterval(checkScrollPosition, 100);
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   const toggleSection = (section: any) => {
     setOpenSections((prev: any) => ({
@@ -57,7 +85,14 @@ const Reports = () => {
       case "SELECT_MULTI":
         return <SelectField options={tabMenuList} />;
       case "SCALE":
-        return <Radio />;
+        return (
+          <>
+            <Radio />
+            <Radio />
+            <Radio />
+            <Radio />
+          </>
+        );
       case "TEXTAREA":
         return (
           <OutlinedTextField
@@ -73,275 +108,250 @@ const Reports = () => {
     }
   };
 
+  const parentActionsIcons = (parentId?: number) => (
+    <Grid2 container spacing={2} sx={{ display: { xs: "block", sm: "flex" } }}>
+      <Grid2
+        size={4}
+        sx={{
+          borderRight: "1px solid  #e0e0e0",
+        }}
+      >
+        <CameraAltIcon />
+      </Grid2>
+      <Grid2 size={4} sx={{ borderRight: "1px solid  #e0e0e0" }}>
+        <DescriptionIcon />
+      </Grid2>
+      <Grid2 size={4} sx={{ borderRight: "1px solid  #e0e0e0" }}>
+        <MoreVert />
+      </Grid2>
+    </Grid2>
+  );
+
+  const childActionsIcons = (childId?: number) => (
+    <Grid2
+      container
+      spacing={0}
+      sx={{
+        height: 100,
+        alignItems: "center",
+      }}
+    >
+      <Grid2
+        size={4}
+        sx={{
+          borderRight: "1px solid #ccc",
+          borderLeft: "1px solid #ccc",
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          boxSizing: "border-box",
+        }}
+      >
+        {" "}
+        <ReportProblemIcon />
+      </Grid2>
+      <Grid2
+        size={4}
+        sx={{
+          borderRight: "1px solid #ccc",
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          boxSizing: "border-box",
+        }}
+      >
+        <DescriptionIcon />
+      </Grid2>
+      <Grid2
+        size={4}
+        sx={{
+          borderRight: "1px solid #ccc",
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          boxSizing: "border-box",
+        }}
+      >
+        {" "}
+        <MoreVert />
+      </Grid2>
+    </Grid2>
+  );
+
   return (
-    <Box sx={{ p: 3 }}>
-      <TableContainer sx={{ overflow: "auto", width: "100%" }}>
-        <Table
-          sx={{
-            minWidth: 1200,
-          }}
-        >
-          <TableBody>
-            {Object.values(tableDataDummy2.rooms).map(
-              (section: any, key: number) => (
-                <Box key={key} sx={{ pb: 3 }}>
-                  <TableRow>
-                    <TableCell
-                      width={"1%"}
-                      sx={{
-                        p: 0,
+    <Box sx={{ p: { xs: 2, lg: 3 } }}>
+      {Object.values(tableDataDummy2.rooms).map((section: any, key: number) => (
+        <Box key={key} sx={{ pb: 3 }}>
+          <Grid2
+            container
+            spacing={0}
+            sx={{
+              border: "1px solid #ddd",
+              borderRadius: "4px",
+            }}
+          >
+            <Grid2
+              size={{ xs: 1, sm: 0.5, lg: 0.3 }}
+              sx={{
+                borderRight: "1px solid #ddd",
+              }}
+            >
+              <IconButton
+                disableRipple
+                sx={{
+                  p: 0,
+                }}
+                onClick={() => toggleSection(section.uuid)}
+              >
+                {openSections[section.uuid] ? <ExpandLess /> : <ExpandMore />}
+              </IconButton>
+            </Grid2>
+            <Grid2 size={{ xs: 11, sm: 11.5, lg: 11.7 }}>
+              <Grid2
+                container
+                spacing={0}
+                sx={{
+                  borderTop: "1px solid #ddd",
+                  borderBottom: "1px solid #ddd",
+                  alignItems: "center",
+                }}
+              >
+                <Grid2
+                  size={0.5}
+                  sx={{
+                    display: { xs: "none", lg: "inherit" },
+                    borderRight: "1px solid #ddd",
+                    p: 1,
+                  }}
+                >
+                  {key + 1}
+                </Grid2>
+                <Grid2 size={{ xs: 10.5, sm: 10 }} p={1}>
+                  <OutlinedTextField
+                    variant="outlined"
+                    placeholder={section.name?.value}
+                    value={section.name?.value}
+                    type={"pagination"}
+                  />
+                </Grid2>
+                <Grid2 size={{ xs: 1.5, sm: 2, lg: 1.5 }}>
+                  {parentActionsIcons()}
+                </Grid2>
+              </Grid2>
 
-                        border: "1px solid #e0e0e0",
-                        position: "sticky",
-                        left: "-1px",
-                        zIndex: 2,
-                        backgroundColor: `${
-                          inspectionColors2[key % inspectionColors2.length]
-                        }`,
-                      }}
-                      rowSpan={section.item_order.length + 2}
-                    >
-                      <IconButton
-                        disableRipple
-                        sx={{
-                          p: 0,
-                        }}
-                        onClick={() => toggleSection(section.uuid)}
-                      >
-                        {openSections[section.uuid] ? (
-                          <ExpandLess />
-                        ) : (
-                          <ExpandMore />
-                        )}
-                      </IconButton>
-                    </TableCell>
-                    <TableCell
-                      width={"2%"}
-                      sx={{
-                        border: "1px solid #e0e0e0",
-                        position: "sticky",
-                        left: "20px",
-                        background: "white !important",
-                        zIndex: 2,
-                        top: 0,
-                        boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-                        transition:
-                          "box-shadow 200ms cubic-bezier(0.33, 1, 0.68, 1) !important",
-                      }}
-                    >
-                      {key + 1}
-                    </TableCell>
-                    {section?.name?.value && (
-                      <TableCell
-                        // width={"90%"}
-                        // colSpan={Object.values(section.items).length}
-                        sx={{
-                          border: "1px solid #e0e0e0",
-                          position: "relative",
-                          zIndex: 0,
-                          padding: "8px",
-                        }}
-                      >
-                        <OutlinedTextField
-                          variant="outlined"
-                          placeholder={section.name?.value}
-                          value={section.name?.value}
-                          type={"pagination"}
-                        />
-                      </TableCell>
+              <Collapse
+                in={openSections[section.uuid]}
+                timeout="auto"
+                unmountOnExit
+              >
+                <Grid2 container spacing={0}>
+                  <Grid2 size={{ xs: 1.5, sm: 0.5, lg: 0.5 }}>
+                    {Object.values(section.items)?.map(
+                      (_item: any, childIndex: number) => (
+                        <Grid2
+                          sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            position: "sticky",
+                            top: 0,
+                            zIndex: 2,
+                            height: "100px",
+                            backgroundColor: "#fff",
+                            boxShadow:
+                              scrollPosition.left || scrollPosition.bothShadows
+                                ? "inset -8px 0 8px -7px rgba(0, 0, 0, 0.2)"
+                                : "none",
+                          }}
+                        >
+                          {key + 1}.{childIndex + 1}
+                        </Grid2>
+                      )
                     )}
-                    <TableCell
-                      width={"2%"}
-                      sx={{
-                        border: "1px solid #e0e0e0",
-                        position: "sticky",
-                        right: "100px",
-                        background: "white !important",
-                        zIndex: 2,
-                        boxShadow:
-                          "0px 5px 10px 0px rgba(0, 0, 0, 0.20) !important",
-                      }}
-                    >
-                      <Box>
-                        <CameraAltIcon />
-                      </Box>
-                    </TableCell>
-                    <TableCell
-                      width={"2%"}
-                      sx={{
-                        border: "1px solid #e0e0e0",
-                        position: "sticky",
-                        right: "50px",
-                        background: "white !important",
-                        zIndex: 2,
-                      }}
-                    >
-                      <DescriptionIcon />
-                    </TableCell>
-                    <TableCell
-                      width={"2%"}
-                      sx={{
-                        border: "1px solid #e0e0e0",
-                        position: "sticky",
-                        right: "0px",
-                        background: "white !important",
-                        zIndex: 2,
-                      }}
-                    >
-                      <MoreVert />
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell colSpan={6} sx={{ padding: "0px !important" }}>
-                      <Collapse
-                        in={openSections[section.uuid]}
-                        timeout="auto"
-                        unmountOnExit
-                      >
-                        <Box>
-                          <Table>
-                            <TableHead
-                              sx={{
-                                backgroundColor: "#e0e0e0 !important",
-                              }}
-                            >
-                              <TableRow>
-                                {/* <TableCell
-                                  sx={{
-                                    position: "sticky",
-                                    left: "0px",
-                                    zIndex: 2,
-                                    background: "white !important",
-                                  }}
-                                  width={"2%"}
-                                >
-                                  <Box
-                                    height={"inherit"}
-                                    sx={{
-                                      background: `${
-                                        inspectionColors2[
-                                          key % inspectionColors2.length
-                                        ]
-                                      }44`,
-                                    }}
-                                  ></Box>
-                                </TableCell> */}
-                                <TableCell
-                                  sx={{
-                                    position: "sticky",
-                                    left: "20px",
-                                    zIndex: 2,
-                                    background: "#e0e0e0 !important",
-                                    border: "none",
-                                  }}
-                                  width={"2%"}
-                                ></TableCell>
+                  </Grid2>
 
-                                {Object.values(section?.fields)?.map(
-                                  (field: any, _key: number) => (
-                                    <>
-                                      <TableCell
-                                        sx={{
-                                          p: 0,
-                                          px: 1,
-                                          borderLeft:
-                                            "1px solid rgba(208, 208, 208, 1)",
-                                          borderRight:
-                                            "1px solid rgba(208, 208, 208, 1)",
-                                        }}
-                                      >
-                                        <Typography
-                                          textTransform={"capitalize"}
-                                        >
-                                          {!field?.name.includes("-")
-                                            ? field?.name
-                                            : ""}
-                                        </Typography>
-                                      </TableCell>
-                                    </>
-                                  )
-                                )}
-                                <TableCell colSpan={3}></TableCell>
-                              </TableRow>
-                            </TableHead>
-                            {Object.values(section.items)?.map((item: any) => (
-                              <TableBody key={item.uuid}>
-                                <TableRow>
-                                  {/* <TableCell
-                                  sx={{
-                                    position: "sticky",
-                                    left: "0px",
-                                    zIndex: 2,
-                                    background: "white !important",
-                                  }}
-                                ></TableCell> */}
-                                  <TableCell
-                                    width={"2%"}
-                                    sx={{
-                                      position: "sticky",
-                                      left: "20px",
-                                      zIndex: 2,
-                                      background: "white !important",
-                                      px: 2.5,
-                                    }}
-                                  ></TableCell>
-                                  {Object.values(section?.fields)?.map(
-                                    (field: any, _rowIndex: number) => (
-                                      <BorderTableCell sx={{ px: 1, py: 1 }}>
-                                        {getBodyByType(field)}
-                                      </BorderTableCell>
-                                    )
-                                  )}
-                                  <TableCell
-                                    width={"2%"}
-                                    sx={{
-                                      border: "1px solid #e0e0e0",
-                                      position: "sticky",
-                                      right: "100px",
-                                      background: "white !important",
-                                      zIndex: 2,
-                                    }}
-                                  >
-                                    <ReportProblemIcon />
-                                  </TableCell>
-                                  <TableCell
-                                    width={"2%"}
-                                    sx={{
-                                      border: "1px solid #e0e0e0",
-                                      position: "sticky",
-                                      right: "50px",
-                                      background: "white !important",
-                                      zIndex: 2,
-                                    }}
-                                  >
-                                    <DescriptionIcon />
-                                  </TableCell>
-                                  <TableCell
-                                    width={"2%"}
-                                    sx={{
-                                      border: "1px solid #e0e0e0",
-                                      position: "sticky",
-                                      right: "0px",
-                                      background: "white !important",
-                                      zIndex: 2,
-                                    }}
-                                  >
-                                    <MoreVert />
-                                  </TableCell>
-                                </TableRow>
-                              </TableBody>
-                            ))}
-                          </Table>
+                  <Grid2
+                    id="scroll-container"
+                    ref={scrollContainerRef}
+                    size={{ xs: 10.5, sm: 9.5, lg: 10 }}
+                    sx={{
+                      overflowX: "auto",
+                      whiteSpace: "nowrap",
+                      position: "relative",
+                      display: "flex",
+                      flexDirection: "column",
+                      maxHeight: "calc(100vh - 100px)",
+                      overflowY: "auto",
+                    }}
+                  >
+                    {Object.values(section.items)?.map(
+                      (_item: any, childIndex: number) => (
+                        <Grid2
+                          container
+                          spacing={0}
+                          sx={{
+                            borderBottom: "1px solid #ddd",
+                            alignItems: "center",
+                            flexWrap: "nowrap",
+                            flexShrink: 0,
+                            height: "auto",
+                            display: { xs: "block", sm: "flex" },
+                          }}
+                          key={childIndex}
+                        >
+                          {Object.values(section?.fields)?.map(
+                            (field: any, _rowIndex: number) => (
+                              <Box
+                                key={_rowIndex}
+                                sx={{
+                                  px: 2,
+                                  py: 1,
+                                  borderRight:
+                                    _rowIndex ===
+                                    Object.values(section?.fields).length - 1
+                                      ? "none"
+                                      : "1px solid #ddd",
+                                  flexShrink: 0,
+                                  width: 200,
+                                  height: "auto",
+                                }}
+                              >
+                                {getBodyByType(field)}
+                              </Box>
+                            )
+                          )}
+                        </Grid2>
+                      )
+                    )}
+                  </Grid2>
+
+                  <Grid2 size={{ xs: 1.5, sm: 2, lg: 1.5 }}>
+                    {Object.values(section.items)?.map(
+                      (_item: any, childIndex: number) => (
+                        <Box
+                          key={childIndex}
+                          sx={{
+                            height: 100,
+                            boxShadow:
+                              scrollPosition.right || scrollPosition.bothShadows
+                                ? "inset 10px 0 8px -8px rgba(0, 0, 0, 0.2)"
+                                : "none",
+                          }}
+                        >
+                          {childActionsIcons()}
                         </Box>
-                      </Collapse>
-                    </TableCell>
-                  </TableRow>
-                </Box>
-              )
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
+                      )
+                    )}
+                  </Grid2>
+                </Grid2>
+              </Collapse>
+            </Grid2>
+          </Grid2>
+        </Box>
+      ))}
     </Box>
   );
 };
