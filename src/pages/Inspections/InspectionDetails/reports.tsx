@@ -219,13 +219,11 @@ const Reports = () => {
                 justifyContent: "center",
                 alignItems: "flex-start",
                 display: "flex",
+                cursor: "pointer",
               }}
+              onClick={() => toggleSection(section.uuid)}
             >
-              <IconButton
-                disableRipple
-                sx={{}}
-                onClick={() => toggleSection(section.uuid)}
-              >
+              <IconButton disableRipple sx={{}}>
                 {openSections[section.uuid] ? <ExpandLess /> : <ExpandMore />}
               </IconButton>
             </Grid2>
