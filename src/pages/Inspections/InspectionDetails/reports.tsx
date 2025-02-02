@@ -109,22 +109,41 @@ const Reports = () => {
   };
 
   const parentActionsIcons = (parentId?: number) => (
-    <Grid2 container spacing={2} sx={{ display: { xs: "block", sm: "flex" } }}>
+    <>
       <Grid2
-        size={4}
+        size={12}
         sx={{
           borderRight: "1px solid  #e0e0e0",
+          justifyContent: "center",
+          display: "flex",
+          alignItems: "center",
         }}
       >
         <CameraAltIcon />
       </Grid2>
-      <Grid2 size={4} sx={{ borderRight: "1px solid  #e0e0e0" }}>
+      <Grid2
+        size={12}
+        sx={{
+          borderRight: "1px solid  #e0e0e0",
+          placeContent: "center",
+          justifyContent: "center",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
         <DescriptionIcon />
       </Grid2>
-      <Grid2 size={4} sx={{ borderRight: "1px solid  #e0e0e0" }}>
+      <Grid2
+        size={12}
+        sx={{
+          justifyContent: "center",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
         <MoreVert />
       </Grid2>
-    </Grid2>
+    </>
   );
 
   const childActionsIcons = (childId?: number) => (
@@ -197,39 +216,37 @@ const Reports = () => {
               size={{ xs: 1, sm: 0.5, lg: 0.3 }}
               sx={{
                 borderRight: "1px solid #ddd",
+                justifyContent: "center",
+                alignItems: "flex-start",
+                display: "flex",
               }}
             >
               <IconButton
                 disableRipple
-                sx={{
-                  p: 0,
-                }}
+                sx={{}}
                 onClick={() => toggleSection(section.uuid)}
               >
                 {openSections[section.uuid] ? <ExpandLess /> : <ExpandMore />}
               </IconButton>
             </Grid2>
             <Grid2 size={{ xs: 11, sm: 11.5, lg: 11.7 }}>
-              <Grid2
-                container
-                spacing={0}
-                sx={{
-                  borderTop: "1px solid #ddd",
-                  borderBottom: "1px solid #ddd",
-                  alignItems: "center",
-                }}
-              >
+              <Grid2 container spacing={0}>
                 <Grid2
-                  size={0.5}
+                  size={0.4}
                   sx={{
-                    display: { xs: "none", lg: "inherit" },
+                    display: { xs: "none", lg: "flex" },
+                    justifyContent: "center",
+                    alignItems: "center",
                     borderRight: "1px solid #ddd",
-                    p: 1,
                   }}
                 >
                   {key + 1}
                 </Grid2>
-                <Grid2 size={{ xs: 10.5, sm: 10 }} p={1}>
+                <Grid2
+                  size={{ xs: 12, sm: 10 }}
+                  p={1}
+                  sx={{ borderRight: "1px solid #ddd" }}
+                >
                   <OutlinedTextField
                     variant="outlined"
                     placeholder={section.name?.value}
@@ -237,7 +254,13 @@ const Reports = () => {
                     type={"pagination"}
                   />
                 </Grid2>
-                <Grid2 size={{ xs: 1.5, sm: 2, lg: 1.5 }}>
+                <Grid2
+                  size={{ xs: 12, sm: 2, lg: 1.6 }}
+                  sx={{
+                    display: { xs: "flex", lg: "flex" },
+                    flexGrow: 1,
+                  }}
+                >
                   {parentActionsIcons()}
                 </Grid2>
               </Grid2>
