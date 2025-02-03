@@ -7,12 +7,18 @@ import {
   styled,
   Radio,
   Grid2,
+  useMediaQuery,
+  Typography,
 } from "@mui/material";
 import { ExpandMore, ExpandLess, MoreVert } from "@mui/icons-material";
 import OutlinedTextField from "../../../components/outlinedTextField";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import DescriptionIcon from "@mui/icons-material/Description";
-import { tableDataDummy2, tabMenuList } from "../../../constants/constants";
+import {
+  inspectionColors2,
+  tableDataDummy2,
+  tabMenuList,
+} from "../../../constants/constants";
 import SelectField from "../../../components/selectField";
 import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 
@@ -25,6 +31,9 @@ const BorderTableCell = styled(TableCell)({
 
 const Reports = () => {
   const [openSections, setOpenSections] = useState<any>({});
+  const matches = useMediaQuery((_theme: any) =>
+    _theme?.breakpoints?.down("700")
+  );
   const [scrollPosition, setScrollPosition] = useState({
     left: false,
     right: false,
@@ -108,100 +117,87 @@ const Reports = () => {
     }
   };
 
+  const reportsParentActionIcons = [
+    {
+      id: 1,
+      icon: CameraAltIcon,
+    },
+    {
+      id: 2,
+      icon: DescriptionIcon,
+    },
+    {
+      id: 3,
+      icon: MoreVert,
+    },
+  ];
+
   const parentActionsIcons = (parentId?: number) => (
     <>
-      <Grid2
-        size={12}
-        sx={{
-          borderRight: "1px solid  #e0e0e0",
-          justifyContent: "center",
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        <CameraAltIcon />
-      </Grid2>
-      <Grid2
-        size={12}
-        sx={{
-          borderRight: "1px solid  #e0e0e0",
-          placeContent: "center",
-          justifyContent: "center",
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        <DescriptionIcon />
-      </Grid2>
-      <Grid2
-        size={12}
-        sx={{
-          justifyContent: "center",
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        <MoreVert />
-      </Grid2>
+      {reportsParentActionIcons.map((icon) => (
+        <Grid2
+          size={12}
+          sx={{
+            borderRight: "1px solid  #e0e0e0",
+            justifyContent: "center",
+            display: "flex",
+            alignItems: "center",
+            pb: { xs: 1, lg: 0 },
+          }}
+        >
+          <icon.icon />
+        </Grid2>
+      ))}
     </>
   );
 
-  const childActionsIcons = (childId?: number) => (
-    <Grid2
-      container
-      spacing={0}
-      sx={{
-        height: 100,
-        alignItems: "center",
-      }}
-    >
-      <Grid2
-        size={4}
-        sx={{
-          borderRight: "1px solid #ccc",
-          borderLeft: "1px solid #ccc",
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          boxSizing: "border-box",
-        }}
-      >
-        {" "}
-        <ReportProblemIcon />
+  const reportsChildActionIcons = [
+    {
+      id: 1,
+      icon: ReportProblemIcon,
+    },
+    {
+      id: 2,
+      icon: DescriptionIcon,
+    },
+    {
+      id: 3,
+      icon: MoreVert,
+    },
+  ];
+
+  const childActionsIcons = (childId?: number) =>
+    matches ? (
+      <Grid2 container spacing={3} textAlign={"center"}>
+        {reportsChildActionIcons.map((icon) => (
+          <Grid2 size={4} pb={2}>
+            <icon.icon />
+          </Grid2>
+        ))}
       </Grid2>
-      <Grid2
-        size={4}
-        sx={{
-          borderRight: "1px solid #ccc",
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          boxSizing: "border-box",
-        }}
-      >
-        <DescriptionIcon />
-      </Grid2>
-      <Grid2
-        size={4}
-        sx={{
-          borderRight: "1px solid #ccc",
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          boxSizing: "border-box",
-        }}
-      >
-        {" "}
-        <MoreVert />
-      </Grid2>
-    </Grid2>
-  );
+    ) : (
+      <>
+        {reportsChildActionIcons.map((icon, index) => (
+          <Grid2
+            size={12}
+            sx={{
+              borderRight:
+                reportsChildActionIcons.length - 1 === index
+                  ? ""
+                  : "1px solid  #e0e0e0",
+              justifyContent: "center",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <icon.icon />
+          </Grid2>
+        ))}
+      </>
+    );
 
   return (
-    <Box sx={{ p: { xs: 2, lg: 3 } }}>
+    <Box sx={{ p: 3 }}>
       {Object.values(tableDataDummy2.rooms).map((section: any, key: number) => (
         <Box key={key} sx={{ pb: 3 }}>
           <Grid2
@@ -216,6 +212,9 @@ const Reports = () => {
               size={{ xs: 1, sm: 0.5, lg: 0.3 }}
               sx={{
                 borderRight: "1px solid #ddd",
+                backgroundColor: `${
+                  inspectionColors2[key % inspectionColors2.length]
+                }`,
                 justifyContent: "center",
                 alignItems: "flex-start",
                 display: "flex",
@@ -228,7 +227,11 @@ const Reports = () => {
               </IconButton>
             </Grid2>
             <Grid2 size={{ xs: 11, sm: 11.5, lg: 11.7 }}>
-              <Grid2 container spacing={0}>
+              <Grid2
+                container
+                spacing={0}
+                sx={{ borderBottom: "1px solid #e0e0e0" }}
+              >
                 <Grid2
                   size={0.4}
                   sx={{
@@ -268,61 +271,15 @@ const Reports = () => {
                 timeout="auto"
                 unmountOnExit
               >
-                <Grid2 container spacing={0}>
-                  <Grid2 size={{ xs: 1.5, sm: 0.5, lg: 0.5 }}>
-                    {Object.values(section.items)?.map(
-                      (_item: any, childIndex: number) => (
-                        <Grid2
-                          sx={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                            position: "sticky",
-                            top: 0,
-                            zIndex: 2,
-                            height: "100px",
-                            backgroundColor: "#fff",
-                            boxShadow:
-                              scrollPosition.left || scrollPosition.bothShadows
-                                ? "inset -8px 0 8px -7px rgba(0, 0, 0, 0.2)"
-                                : "none",
-                          }}
-                        >
+                {matches ? (
+                  Object.values(section.items)?.map(
+                    (_item: any, childIndex: number) => (
+                      <Grid2 container spacing={0}>
+                        <Grid2 size={12} p={1} textAlign={"center"}>
+                          {" "}
                           {key + 1}.{childIndex + 1}
                         </Grid2>
-                      )
-                    )}
-                  </Grid2>
-
-                  <Grid2
-                    id="scroll-container"
-                    ref={scrollContainerRef}
-                    size={{ xs: 10.5, sm: 9.5, lg: 10 }}
-                    sx={{
-                      overflowX: "auto",
-                      whiteSpace: "nowrap",
-                      position: "relative",
-                      display: "flex",
-                      flexDirection: "column",
-                      maxHeight: "calc(100vh - 100px)",
-                      overflowY: "auto",
-                    }}
-                  >
-                    {Object.values(section.items)?.map(
-                      (_item: any, childIndex: number) => (
-                        <Grid2
-                          container
-                          spacing={0}
-                          sx={{
-                            borderBottom: "1px solid #ddd",
-                            alignItems: "center",
-                            flexWrap: "nowrap",
-                            flexShrink: 0,
-                            height: "auto",
-                            display: { xs: "block", sm: "flex" },
-                          }}
-                          key={childIndex}
-                        >
+                        <Grid2 size={12}>
                           {Object.values(section?.fields)?.map(
                             (field: any, _rowIndex: number) => (
                               <Box
@@ -336,8 +293,6 @@ const Reports = () => {
                                       ? "none"
                                       : "1px solid #ddd",
                                   flexShrink: 0,
-                                  width: 200,
-                                  height: "auto",
                                 }}
                               >
                                 {getBodyByType(field)}
@@ -345,29 +300,178 @@ const Reports = () => {
                             )
                           )}
                         </Grid2>
-                      )
-                    )}
-                  </Grid2>
+                        <Grid2 size={12}> {childActionsIcons()}</Grid2>
+                      </Grid2>
+                    )
+                  )
+                ) : (
+                  <>
+                    <Grid2
+                      container
+                      spacing={0}
+                      id="scroll-container"
+                      ref={scrollContainerRef}
+                      sx={{
+                        overflow: "auto",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      {Object.values(section.items)?.map(
+                        (_item: any, childIndex: number) => (
+                          <>
+                            {/* Header row */}
+                            {childIndex === 0 && (
+                              <>
+                                <Grid2
+                                  size={0.4}
+                                  sx={{
+                                    display: { xs: "none", lg: "flex" },
+                                    alignItems: "center",
+                                    backgroundColor: "#f4f4f4",
+                                    borderRight: "1px solid #e0e0e0",
+                                    px: 1,
+                                    fontWeight: "bold",
+                                    borderBottom: "1px solid #e0e0e0",
+                                  }}
+                                ></Grid2>
+                                <Grid2
+                                  size={10}
+                                  sx={{
+                                    display: { xs: "none", lg: "flex" },
+                                    backgroundColor: "#f4f4f4",
+                                    zIndex: 3,
+                                    borderBottom: "1px solid #e0e0e0",
+                                  }}
+                                >
+                                  {Object.values(section?.fields)?.map(
+                                    (field: any, _headerIndex: number) => (
+                                      <Grid2
+                                        size={
+                                          Object.values(section?.fields)
+                                            .length / 12
+                                        }
+                                        key={_headerIndex}
+                                        sx={{
+                                          px: 2,
+                                          py: 1,
+                                          borderRight:
+                                            _headerIndex ===
+                                            Object.values(section?.fields)
+                                              .length -
+                                              1
+                                              ? "none"
+                                              : "1px solid #ddd",
+                                          textAlign: "center",
+                                          fontWeight: "bold",
+                                          flexGrow: 1,
+                                        }}
+                                      >
+                                        {field.name.includes("-")
+                                          ? ""
+                                          : field.name}{" "}
+                                      </Grid2>
+                                    )
+                                  )}
+                                </Grid2>
+                                <Grid2
+                                  size={1.6}
+                                  sx={{
+                                    background: "#f4f4f4",
+                                    display: { xs: "none", lg: "flex" },
+                                    alignItems: "center",
+                                    fontWeight: "bold",
+                                    borderBottom: "1px solid #e0e0e0",
+                                  }}
+                                ></Grid2>
+                              </>
+                            )}
 
-                  <Grid2 size={{ xs: 1.5, sm: 2, lg: 1.5 }}>
-                    {Object.values(section.items)?.map(
-                      (_item: any, childIndex: number) => (
-                        <Box
-                          key={childIndex}
-                          sx={{
-                            height: 100,
-                            boxShadow:
-                              scrollPosition.right || scrollPosition.bothShadows
-                                ? "inset 10px 0 8px -8px rgba(0, 0, 0, 0.2)"
-                                : "none",
-                          }}
-                        >
-                          {childActionsIcons()}
-                        </Box>
-                      )
-                    )}
-                  </Grid2>
-                </Grid2>
+                            {/* Field rows */}
+                            <Grid2
+                              size={{ xs: 12, lg: 0.4 }}
+                              sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                backgroundColor: "#fff !important",
+                                borderRight: "1px solid #e0e0e0",
+                                px: 1,
+                                borderBottom:
+                                  Object.values(section.items).length - 1 ==
+                                  childIndex
+                                    ? ""
+                                    : "1px solid #e0e0e0",
+                              }}
+                            >
+                              {key + 1}.{childIndex + 1}
+                            </Grid2>
+
+                            <Grid2
+                              size={10}
+                              sx={{
+                                display: { xs: "block", lg: "flex" },
+                                borderBottom:
+                                  Object.values(section.items).length - 1 ==
+                                  childIndex
+                                    ? ""
+                                    : "1px solid #e0e0e0",
+                                overflow: "auto",
+                                flexWrap: "nowrap",
+                              }}
+                            >
+                              {Object.values(section?.fields)?.map(
+                                (field: any, _rowIndex: number) => (
+                                  <Grid2
+                                    size={{
+                                      xs: 12,
+                                      lg:
+                                        12 /
+                                        Object.values(section?.fields).length,
+                                    }}
+                                    key={_rowIndex}
+                                    sx={{
+                                      px: 2,
+                                      py: 1,
+
+                                      borderRight: "1px solid #ddd",
+                                      // borderRight:
+                                      //   _rowIndex ===
+                                      //   Object.values(section?.fields).length -
+                                      //     1
+                                      //     ? "none"
+                                      //     : "1px solid #ddd",
+                                      flexGrow: 1,
+                                      height: "auto",
+                                      flexWrap: "wrap",
+                                    }}
+                                  >
+                                    {getBodyByType(field)}
+                                  </Grid2>
+                                )
+                              )}
+                            </Grid2>
+
+                            <Grid2
+                              size={1.6}
+                              sx={{
+                                background: "#fff",
+                                display: "flex",
+                                flexGrow: 1,
+                                borderBottom:
+                                  Object.values(section.items).length - 1 ==
+                                  childIndex
+                                    ? ""
+                                    : "1px solid #e0e0e0",
+                              }}
+                            >
+                              {childActionsIcons()}
+                            </Grid2>
+                          </>
+                        )
+                      )}
+                    </Grid2>
+                  </>
+                )}
               </Collapse>
             </Grid2>
           </Grid2>
