@@ -7,6 +7,18 @@ const resources = [
   { id: 2, name: "Resource 2", startTime: 8, endTime: 9 },
   { id: 3, name: "Resource 3", startTime: 10, endTime: 11 },
   { id: 4, name: "Resource 4", startTime: 12, endTime: 14 },
+  { id: 1, name: "Resource 1", startTime: 7.5, endTime: 8 },
+  { id: 2, name: "Resource 2", startTime: 8, endTime: 9 },
+  { id: 3, name: "Resource 3", startTime: 10, endTime: 11 },
+  { id: 4, name: "Resource 4", startTime: 12, endTime: 14 },
+  { id: 1, name: "Resource 1", startTime: 7.5, endTime: 8 },
+  { id: 2, name: "Resource 2", startTime: 8, endTime: 9 },
+  { id: 3, name: "Resource 3", startTime: 10, endTime: 11 },
+  { id: 4, name: "Resource 4", startTime: 12, endTime: 14 },
+  { id: 1, name: "Resource 1", startTime: 7.5, endTime: 8 },
+  { id: 2, name: "Resource 2", startTime: 8, endTime: 9 },
+  { id: 3, name: "Resource 3", startTime: 10, endTime: 11 },
+  { id: 4, name: "Resource 4", startTime: 12, endTime: 14 },
 ];
 const startHour = 7;
 const endHour = 20;
@@ -27,7 +39,7 @@ const Calendar = () => {
   const [selectedId, setSelectedId] = useState(1);
 
   return (
-    <div className="w-full overflow-auto bg-white">
+    <div className="w-full overflow-auto bg-white h-96">
       <div
         className="grid grid-cols-[150px_repeat(${timeSlots.length},minmax(80px,1fr))]"
         style={{
@@ -35,18 +47,16 @@ const Calendar = () => {
         }}
       >
         {/* Header Row */}
-        <Typography className="border border-gray-300 p-2 font-extrabold sticky left-0">
+        <Typography className="border p-2 font-extrabold sticky bg-gray-100">
           Name
         </Typography>
         {timeSlots.map((slot, index) => (
-          <div className="w-50">
-            <Typography
-              key={index}
-              className="border border-gray-300 p-2 text-center font-extrabold bg-gray-100"
-            >
-              {slot.time}
-            </Typography>
-          </div>
+          <Typography
+            key={index}
+            className="border p-2 text-center font-extrabold bg-gray-100 sticky top-0"
+          >
+            {slot.time}
+          </Typography>
         ))}
         {/* Resource Rows */}
         {resources.map((resource, rowIndex) => (
