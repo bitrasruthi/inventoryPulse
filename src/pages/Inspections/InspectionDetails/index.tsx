@@ -17,7 +17,6 @@ import InspectionContactCommon from "../../../components/inspectionContactCommon
 import Divider from "@mui/material/Divider";
 import { paths } from "../../../routes/paths";
 import Reports from "./reports";
-import ReportsRsuite from "./reportsRsuite";
 
 function InspectionDetails() {
   const [activeTab, setActiveTab] = useState<string>(
