@@ -147,7 +147,7 @@ const Reports = () => {
             pb: { xs: 1, sm: 0 },
           }}
         >
-          <icon.icon />
+          <icon.icon sx={{ width: 16, height: 16 }} />
         </Grid2>
       ))}
     </>
@@ -173,7 +173,7 @@ const Reports = () => {
       <Grid2 container spacing={3} textAlign={"center"}>
         {reportsChildActionIcons.map((icon) => (
           <Grid2 size={4} pb={2}>
-            <icon.icon />
+            <icon.icon sx={{ width: 16, height: 16 }} />
           </Grid2>
         ))}
       </Grid2>
@@ -193,7 +193,7 @@ const Reports = () => {
               alignItems: "center",
             }}
           >
-            <icon.icon />
+            <icon.icon sx={{ width: 16, height: 16 }} />
           </Grid2>
         ))}
       </>
@@ -236,7 +236,7 @@ const Reports = () => {
                 sx={{ borderBottom: "1px solid #e0e0e0" }}
               >
                 <Grid2
-                  size={0.4}
+                  size={0.3}
                   sx={{
                     display: { xs: "none", sm: "flex" },
                     justifyContent: "center",
@@ -247,7 +247,7 @@ const Reports = () => {
                   {key + 1}
                 </Grid2>
                 <Grid2
-                  size={{ xs: 12, sm: 10 }}
+                  size={{ xs: 12, sm: 10.7 }}
                   p={1}
                   sx={{ borderRight: "1px solid #ddd" }}
                 >
@@ -259,7 +259,7 @@ const Reports = () => {
                   />
                 </Grid2>
                 <Grid2
-                  size={{ xs: 12, sm: 1.6 }}
+                  size={{ xs: 12, sm: 1 }}
                   sx={{
                     display: "flex",
                     flexGrow: 1,
@@ -327,7 +327,7 @@ const Reports = () => {
                             {childIndex === 0 && (
                               <>
                                 <Grid2
-                                  size={0.4}
+                                  size={0.28}
                                   sx={{
                                     display: { xs: "none", sm: "flex" },
                                     alignItems: "center",
@@ -343,7 +343,7 @@ const Reports = () => {
                                 ></Grid2>
 
                                 <Grid2
-                                  size={10}
+                                  size={10.785}
                                   sx={{
                                     display: { xs: "none", sm: "flex" },
                                     backgroundColor: "#f4f4f4",
@@ -372,6 +372,9 @@ const Reports = () => {
                                           textAlign: "center",
                                           fontWeight: "bold",
                                           flexGrow: 1,
+                                          maxWidth: 200,
+                                          textTransform: "capitalize",
+                                          fontFamily: "roboto-medium",
                                         }}
                                       >
                                         {field.name.includes("-")
@@ -382,7 +385,7 @@ const Reports = () => {
                                   )}
                                 </Grid2>
                                 <Grid2
-                                  size={1.6}
+                                  size={0.935}
                                   sx={{
                                     background: "#f4f4f4",
                                     display: { xs: "none", sm: "flex" },
@@ -400,7 +403,7 @@ const Reports = () => {
 
                             {/* Field rows */}
                             <Grid2
-                              size={{ xs: 12, sm: 0.4 }}
+                              size={{ xs: 12, sm: 0.28 }}
                               sx={{
                                 display: "flex",
                                 alignItems: "center",
@@ -427,7 +430,7 @@ const Reports = () => {
                             </Grid2>
 
                             <Grid2
-                              size={10}
+                              size={10.785}
                               sx={{
                                 display: { xs: "block", sm: "flex" },
                                 borderBottom:
@@ -459,7 +462,7 @@ const Reports = () => {
                                       flexGrow: 1,
                                       height: "auto",
                                       flexWrap: "wrap",
-                                      maxWidth: 200,
+                                      maxWidth: 250,
                                     }}
                                   >
                                     {getBodyByType(field)}
@@ -469,7 +472,7 @@ const Reports = () => {
                             </Grid2>
 
                             <Grid2
-                              size={1.6}
+                              size={0.935}
                               sx={{
                                 background: "#fff",
                                 display: "flex",
