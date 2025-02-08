@@ -374,7 +374,7 @@ const Reports = () => {
                                           textAlign: "center",
                                           fontWeight: "bold",
                                           flexGrow: 1,
-                                          maxWidth: 200,
+                                          // maxWidth: 200,
                                           textTransform: "capitalize",
                                           fontFamily: "roboto-medium",
                                         }}
@@ -470,7 +470,7 @@ const Reports = () => {
                                         flexGrow: 1,
                                         height: "auto",
                                         flexWrap: "wrap",
-                                        maxWidth: 200,
+                                        // maxWidth: 200,
                                       }}
                                     >
                                       {getBodyByType(field)}
