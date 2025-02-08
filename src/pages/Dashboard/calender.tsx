@@ -19,11 +19,11 @@ const resources = [
   { id: 3, name: "Resource 3", startTime: 9, duration: 0.5 },
   { id: 4, name: "Resource 4", startTime: 9, duration: 0.75 },
   { id: 5, name: "Resource 5", startTime: 8, duration: 1.5 },
-  { id: 1, name: "Resource 1", startTime: 7, duration: 0.5 },
-  { id: 2, name: "Resource 2", startTime: 8.5, duration: 0.5 },
-  { id: 3, name: "Resource 3", startTime: 9, duration: 0.5 },
-  { id: 4, name: "Resource 4", startTime: 9, duration: 0.75 },
-  { id: 5, name: "Resource 5", startTime: 8, duration: 1.5 },
+  { id: 6, name: "Resource 1", startTime: 7, duration: 0.5 },
+  { id: 7, name: "Resource 2", startTime: 8.5, duration: 0.5 },
+  { id: 8, name: "Resource 3", startTime: 9, duration: 0.5 },
+  { id: 9, name: "Resource 4", startTime: 9, duration: 0.75 },
+  { id: 10, name: "Resource 5", startTime: 18, duration: 1.5 },
 ];
 const startHour = 7;
 const endHour = 20;
