@@ -13,12 +13,11 @@ import {
 import theme from "../../styles/theme";
 
 const resources = [
-  { id: 1, name: "Resource 2", startTime: 7, duration: 2 },
-  { id: 2, name: "Resource 2", startTime: 8.5, duration: 3 },
-  { id: 3, name: "Resource 3", startTime: 8, duration: 0.75 },
-  { id: 4, name: "Resource 4", startTime: 12, duration: 1 },
-  { id: 5, name: "Resource 4", startTime: 14, duration: 0.5 },
-  { id: 6, name: "Resource 4", startTime: 14, duration: 0.25 },
+  { id: 1, name: "Resource 1", startTime: 7, duration: 0.5 },
+  { id: 2, name: "Resource 2", startTime: 8.5, duration: 0.5 },
+  { id: 3, name: "Resource 3", startTime: 9, duration: 0.5 },
+  { id: 4, name: "Resource 4", startTime: 9, duration: 0.75 },
+  { id: 4, name: "Resource 4", startTime: 7, duration: 1.5 },
 ];
 const startHour = 7;
 const endHour = 20;
@@ -27,7 +26,10 @@ const generateTimeSlots = () => {
   const slots = [];
   let currentTime = addHours(startOfDay(new Date()), startHour);
   for (let i = startHour; i <= endHour; i++) {
-    slots.push({ time: format(currentTime, "h a"), hour: i });
+    slots.push({
+      time: format(currentTime, "h a"),
+      hour: i,
+    });
     currentTime = addHours(currentTime, 1);
   }
   return slots;
@@ -47,12 +49,27 @@ const Calendar = () => {
       }
     };
 
-    const container: any = tableContainerRef.current;
+    const container = tableContainerRef.current;
     if (container) {
       container.addEventListener("scroll", handleScroll);
       return () => container.removeEventListener("scroll", handleScroll);
     }
   }, []);
+
+  const calculateColSpan = (startTime, duration) => {
+    const durationMinutes = duration * 60;
+    return Math.ceil(durationMinutes / 60);
+  };
+
+  const calculateWidthPercentage = (duration) => {
+    const durationMinutes = duration * 60;
+    return (durationMinutes / 60) * 100;
+  };
+
+  const calculateLeftOffsetPercentage = (startTime) => {
+    const startMinutes = (startTime % 1) * 60;
+    return (startMinutes / 60) * 100;
+  };
 
   return (
     <TableContainer
@@ -72,7 +89,7 @@ const Calendar = () => {
             <TableCell
               sx={{
                 borderRight: "1px solid #dbdbdb",
-                minWidth: 170,
+                minWidth: 200,
                 position: "sticky",
                 left: 0,
                 top: 0,
@@ -92,7 +109,7 @@ const Calendar = () => {
                 sx={{
                   fontWeight: "bold",
                   borderRight: "1px solid #dbdbdb",
-                  minWidth: 170,
+                  minWidth: 220,
                   zIndex: 1,
                 }}
               >
@@ -106,7 +123,35 @@ const Calendar = () => {
         <TableBody>
           {resources.map((resource) => {
             const endTime = resource.startTime + resource.duration;
-            console.log({ endTime });
+            const colSpan = calculateColSpan(
+              resource.startTime,
+              resource.duration
+            );
+            const widthPercentage = calculateWidthPercentage(resource.duration);
+            const leftOffsetPercentage = calculateLeftOffsetPercentage(
+              resource.startTime
+            );
+            const startFormatted = format(
+              addHours(startOfDay(new Date()), resource.startTime),
+              resource.startTime % 1 === 0.75
+                ? "h:45 a"
+                : resource.startTime % 1 === 0.5
+                ? "h:30 a"
+                : resource.startTime % 1 === 0.25
+                ? "h:15 a"
+                : "h a"
+            );
+
+            const endFormatted = format(
+              addHours(startOfDay(new Date()), endTime),
+              endTime % 1 === 0.75
+                ? "h:45 a"
+                : endTime % 1 === 0.5
+                ? "h:30 a"
+                : endTime % 1 === 0.25
+                ? "h:15 a"
+                : "h a"
+            );
 
             return (
               <TableRow
@@ -135,53 +180,54 @@ const Calendar = () => {
                 </TableCell>
                 {timeSlots.map((slot, index) => {
                   if (slot.hour === Math.floor(resource.startTime)) {
-                    const spanSlots = Math.ceil(resource.duration);
-                    const startFormatted = format(
-                      addHours(startOfDay(new Date()), resource.startTime),
-                      resource.startTime % 1 === 0.75
-                        ? "h:45 a"
-                        : resource.startTime % 1 === 0.5
-                        ? "h:30 a"
-                        : resource.startTime % 1 === 0.25
-                        ? "h:15 a"
-                        : "h a"
-                    );
-
-                    const endFormatted = format(
-                      addHours(startOfDay(new Date()), endTime),
-                      endTime % 1 === 0.75
-                        ? "h:45 a"
-                        : endTime % 1 === 0.5
-                        ? "h:30 a"
-                        : endTime % 1 === 0.25
-                        ? "h:15 a"
-                        : "h a"
-                    );
-
                     return (
                       <TableCell
                         key={index}
                         align="center"
-                        colSpan={spanSlots}
+                        //colSpan={colSpan}
                         style={{
-                          backgroundColor: theme.palette.primary.main,
                           color: "white",
                           fontWeight: "bold",
-                          borderRadius: 8,
-                          borderRight: 0,
+                          position: "relative",
                         }}
                       >
-                        {`${startFormatted} - ${endFormatted}`}
+                        <div
+                          style={{
+                            position: "absolute",
+                            top: 0,
+                            bottom: 0,
+                            left: `${leftOffsetPercentage}%`,
+                            width: `${widthPercentage}%`,
+                            backgroundColor: theme.palette.primary.main,
+                            borderRadius: 8,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          {`${startFormatted.toLocaleLowerCase()} - ${endFormatted.toLocaleLowerCase()}`}
+                        </div>
                       </TableCell>
                     );
-                  } // Fill empty slots
-
-                  return slot.hour > resource.startTime &&
-                    slot.hour < endTime ? null : (
+                  }
+                  return (
                     <TableCell
                       key={index}
-                      style={{ borderRight: "1px solid #dbdbdb" }}
-                    ></TableCell>
+                      style={{
+                        borderRight: "1px solid #dbdbdb",
+                        position: "relative",
+                      }}
+                    >
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: 0,
+                          bottom: 0,
+                          left: "50%",
+                          borderLeft: "1px dotted rgba(0,0,0,0.2)",
+                        }}
+                      ></div>
+                    </TableCell>
                   );
                 })}
               </TableRow>
