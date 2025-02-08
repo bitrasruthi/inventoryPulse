@@ -225,31 +225,31 @@ const Reports = () => {
               }}
               onClick={() => toggleSection(section.uuid)}
             >
-              <IconButton disableRipple sx={{}}>
+              <IconButton disableRipple>
                 {openSections[section.uuid] ? <ExpandLess /> : <ExpandMore />}
               </IconButton>
             </Grid2>
             <Grid2 size={{ xs: 11, sm: 11.7 }}>
-              <Grid2
-                container
-                spacing={0}
-                sx={{ borderBottom: "1px solid #e0e0e0" }}
-              >
+              <Grid2 container spacing={0} sx={{ width: "100%" }}>
                 <Grid2
-                  size={0.3}
+                  // size={{ xs: 0.32, md: 0.3 }}
                   sx={{
                     display: { xs: "none", sm: "flex" },
                     justifyContent: "center",
                     alignItems: "center",
                     borderRight: "1px solid #ddd",
+                    width: "2.5vw",
                   }}
                 >
                   {key + 1}
                 </Grid2>
                 <Grid2
-                  size={{ xs: 12, sm: 10.7 }}
+                  // size={{ xs: 12, sm: 10.7 }}
                   p={1}
-                  sx={{ borderRight: "1px solid #ddd" }}
+                  sx={{
+                    borderRight: "1px solid #ddd",
+                    width: "calc(100% - 10.5vw)",
+                  }}
                 >
                   <OutlinedTextField
                     variant="outlined"
@@ -259,10 +259,11 @@ const Reports = () => {
                   />
                 </Grid2>
                 <Grid2
-                  size={{ xs: 12, sm: 1 }}
+                  // size={{ xs: 12, sm: 1 }}
                   sx={{
                     display: "flex",
-                    flexGrow: 1,
+                    // flexGrow: 1,
+                    width: "8vw",
                   }}
                 >
                   {parentActionsIcons()}
@@ -279,7 +280,6 @@ const Reports = () => {
                     (_item: any, childIndex: number) => (
                       <Grid2 container spacing={0}>
                         <Grid2 size={12} p={1} textAlign={"center"}>
-                          {" "}
                           {key + 1}.{childIndex + 1}
                         </Grid2>
                         <Grid2 size={12}>
@@ -318,37 +318,39 @@ const Reports = () => {
                       spacing={0}
                       id="scroll-container"
                       ref={scrollContainerRef}
-                      sx={{ width: "100vw !important" }}
+                      sx={{ width: "100vw" }}
                     >
                       {Object.values(section.items)?.map(
                         (_item: any, childIndex: number) => (
                           <>
                             {/* Header row */}
                             {childIndex === 0 && (
-                              <>
+                              <Grid2 container sx={{ width: "100%" }}>
                                 <Grid2
-                                  size={0.28}
+                                  // size={0.3}
                                   sx={{
-                                    display: { xs: "none", sm: "flex" },
-                                    alignItems: "center",
                                     backgroundColor: "#f4f4f4",
                                     borderRight: "1px solid #e0e0e0",
-                                    px: 1,
+                                    display: { xs: "none", sm: "flex" },
+                                    alignItems: "center",
                                     fontWeight: "bold",
                                     borderBottom: "1px solid #e0e0e0",
+                                    borderTop: "1px solid #e0e0e0",
                                     zIndex: 1001,
                                     position: "sticky",
                                     left: 0,
+                                    width: "2.5vw",
                                   }}
                                 ></Grid2>
 
                                 <Grid2
-                                  size={10.785}
+                                  // size={10.7}
                                   sx={{
                                     display: { xs: "none", sm: "flex" },
                                     backgroundColor: "#f4f4f4",
-                                    zIndex: 3,
                                     borderBottom: "1px solid #e0e0e0",
+                                    borderTop: "1px solid #e0e0e0",
+                                    width: "calc(100% - 10.5vw)",
                                   }}
                                 >
                                   {Object.values(section?.fields)?.map(
@@ -385,7 +387,7 @@ const Reports = () => {
                                   )}
                                 </Grid2>
                                 <Grid2
-                                  size={0.935}
+                                  // size={1}
                                   sx={{
                                     background: "#f4f4f4",
                                     display: { xs: "none", sm: "flex" },
@@ -396,99 +398,105 @@ const Reports = () => {
                                     position: "sticky",
                                     right: 0,
                                     zIndex: 1001,
+                                    borderTop: "1px solid #e0e0e0",
+                                    width: "8vw",
                                   }}
                                 ></Grid2>
-                              </>
+                              </Grid2>
                             )}
 
-                            {/* Field rows */}
-                            <Grid2
-                              size={{ xs: 12, sm: 0.28 }}
-                              sx={{
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                borderRight: "1px solid #e0e0e0",
-                                px: 1,
-                                borderBottom:
-                                  childIndex ===
-                                  Object.values(section.items).length - 1
-                                    ? ""
-                                    : "1px solid #e0e0e0",
-                                position: "sticky",
-                                left: 0,
-                                zIndex: 2,
-                                background: "#fff !important",
-                                boxShadow:
-                                  scrollPosition.left ||
-                                  scrollPosition.bothShadows
-                                    ? "inset -8px 0 8px -7px rgba(0, 0, 0, 0.2)"
-                                    : "none",
-                              }}
-                            >
-                              {key + 1}.{childIndex + 1}
-                            </Grid2>
+                            <Grid2 container width={"100%"}>
+                              {/* Field rows */}
+                              <Grid2
+                                // size={{ xs: 12, sm: 0.3 }}
+                                sx={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  borderRight: "1px solid #e0e0e0",
+                                  px: 1,
+                                  borderBottom:
+                                    childIndex ===
+                                    Object.values(section.items).length - 1
+                                      ? ""
+                                      : "1px solid #e0e0e0",
+                                  position: "sticky",
+                                  left: 0,
+                                  zIndex: 2,
+                                  background: "#fff !important",
+                                  width: "2.5vw",
+                                  // boxShadow:
+                                  //   scrollPosition.left ||
+                                  //   scrollPosition.bothShadows
+                                  //     ? "inset -8px 0 8px -7px rgba(0, 0, 0, 0.2)"
+                                  //     : "none",
+                                }}
+                              >
+                                {key + 1}.{childIndex + 1}
+                              </Grid2>
 
-                            <Grid2
-                              size={10.785}
-                              sx={{
-                                display: { xs: "block", sm: "flex" },
-                                borderBottom:
-                                  Object.values(section.items).length - 1 ===
-                                  childIndex
-                                    ? ""
-                                    : "1px solid #e0e0e0",
-                              }}
-                            >
-                              {Object.values(section?.fields)?.map(
-                                (field: any, _rowIndex: number) => (
-                                  <Grid2
-                                    size={{
-                                      xs: 12,
-                                      sm:
-                                        12 /
-                                        Object.values(section?.fields).length,
-                                    }}
-                                    key={_rowIndex}
-                                    sx={{
-                                      px: 2,
-                                      py: 1,
-                                      borderRight:
-                                        Object.values(section?.fields).length -
-                                          1 ===
-                                        _rowIndex
-                                          ? ""
-                                          : "1px solid #ddd",
-                                      flexGrow: 1,
-                                      height: "auto",
-                                      flexWrap: "wrap",
-                                      maxWidth: 250,
-                                    }}
-                                  >
-                                    {getBodyByType(field)}
-                                  </Grid2>
-                                )
-                              )}
-                            </Grid2>
+                              <Grid2
+                                // size={10.7}
+                                sx={{
+                                  display: { xs: "block", sm: "flex" },
+                                  borderBottom:
+                                    Object.values(section.items).length - 1 ===
+                                    childIndex
+                                      ? ""
+                                      : "1px solid #e0e0e0",
+                                  width: "calc(100% - 10.5vw)",
+                                }}
+                              >
+                                {Object.values(section?.fields)?.map(
+                                  (field: any, _rowIndex: number) => (
+                                    <Grid2
+                                      size={{
+                                        xs: 12,
+                                        sm:
+                                          12 /
+                                          Object.values(section?.fields).length,
+                                      }}
+                                      key={_rowIndex}
+                                      sx={{
+                                        px: 2,
+                                        py: 1,
+                                        borderRight:
+                                          Object.values(section?.fields)
+                                            .length -
+                                            1 ===
+                                          _rowIndex
+                                            ? ""
+                                            : "1px solid #ddd",
+                                        flexGrow: 1,
+                                        height: "auto",
+                                        flexWrap: "wrap",
+                                        maxWidth: 200,
+                                      }}
+                                    >
+                                      {getBodyByType(field)}
+                                    </Grid2>
+                                  )
+                                )}
+                              </Grid2>
 
-                            <Grid2
-                              size={0.935}
-                              sx={{
-                                background: "#fff",
-                                display: "flex",
-                                flexGrow: 0,
-                                padding: "0px !important",
-                                borderBottom:
-                                  Object.values(section.items).length - 1 ===
-                                  childIndex
-                                    ? ""
-                                    : "1px solid #e0e0e0",
-                                zIndex: 10,
-                                position: "sticky",
-                                right: 0,
-                              }}
-                            >
-                              {childActionsIcons()}
+                              <Grid2
+                                // size={1}
+                                sx={{
+                                  background: "#fff",
+                                  display: "flex",
+                                  borderBottom:
+                                    Object.values(section.items).length - 1 ===
+                                    childIndex
+                                      ? ""
+                                      : "1px solid #e0e0e0",
+                                  zIndex: 10,
+                                  position: "sticky",
+                                  right: 0,
+                                  width: "8vw",
+                                }}
+                              >
+                                {childActionsIcons()}
+                              </Grid2>
                             </Grid2>
                           </>
                         )
