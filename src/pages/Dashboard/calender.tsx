@@ -9,6 +9,7 @@ import {
   Paper,
   TableContainer,
   Typography,
+  Box,
 } from "@mui/material";
 import theme from "../../styles/theme";
 
@@ -17,7 +18,12 @@ const resources = [
   { id: 2, name: "Resource 2", startTime: 8.5, duration: 0.5 },
   { id: 3, name: "Resource 3", startTime: 9, duration: 0.5 },
   { id: 4, name: "Resource 4", startTime: 9, duration: 0.75 },
-  { id: 4, name: "Resource 4", startTime: 7, duration: 1.5 },
+  { id: 5, name: "Resource 5", startTime: 8, duration: 1.5 },
+  { id: 1, name: "Resource 1", startTime: 7, duration: 0.5 },
+  { id: 2, name: "Resource 2", startTime: 8.5, duration: 0.5 },
+  { id: 3, name: "Resource 3", startTime: 9, duration: 0.5 },
+  { id: 4, name: "Resource 4", startTime: 9, duration: 0.75 },
+  { id: 5, name: "Resource 5", startTime: 8, duration: 1.5 },
 ];
 const startHour = 7;
 const endHour = 20;
@@ -49,24 +55,24 @@ const Calendar = () => {
       }
     };
 
-    const container = tableContainerRef.current;
+    const container: any = tableContainerRef.current;
     if (container) {
       container.addEventListener("scroll", handleScroll);
       return () => container.removeEventListener("scroll", handleScroll);
     }
   }, []);
 
-  const calculateColSpan = (startTime, duration) => {
+  const calculateColSpan = (startTime: number, duration: number) => {
     const durationMinutes = duration * 60;
     return Math.ceil(durationMinutes / 60);
   };
 
-  const calculateWidthPercentage = (duration) => {
+  const calculateWidthPercentage = (duration: number) => {
     const durationMinutes = duration * 60;
     return (durationMinutes / 60) * 100;
   };
 
-  const calculateLeftOffsetPercentage = (startTime) => {
+  const calculateLeftOffsetPercentage = (startTime: number) => {
     const startMinutes = (startTime % 1) * 60;
     return (startMinutes / 60) * 100;
   };
@@ -81,6 +87,7 @@ const Calendar = () => {
         overflowX: "auto",
         position: "relative",
         borderRadius: 2,
+        height: 300,
       }}
     >
       <Table stickyHeader>
@@ -109,7 +116,7 @@ const Calendar = () => {
                 sx={{
                   fontWeight: "bold",
                   borderRight: "1px solid #dbdbdb",
-                  minWidth: 220,
+                  minWidth: 200,
                   zIndex: 1,
                 }}
               >
@@ -158,7 +165,7 @@ const Calendar = () => {
                 key={resource.id}
                 sx={{
                   backgroundColor:
-                    selectedId === resource.id ? "#FFECB3" : "inherit",
+                    selectedId === resource.id ? "#fff2c9" : "inherit",
                 }}
                 onClick={() => setSelectedId(resource.id)}
               >
@@ -170,7 +177,7 @@ const Calendar = () => {
                     left: 0,
                     zIndex: 2,
                     backgroundColor:
-                      selectedId === resource.id ? "#FFECB3" : "white",
+                      selectedId === resource.id ? "#fff2c9" : "white",
                     boxShadow: shadow
                       ? "8px 0px 10px -2px rgba(0,0,0,0.1)"
                       : "none",
@@ -189,24 +196,28 @@ const Calendar = () => {
                           color: "white",
                           fontWeight: "bold",
                           position: "relative",
+                          borderRight: "1px solid #dbdbdb",
                         }}
                       >
-                        <div
-                          style={{
+                        <Box
+                          sx={{
                             position: "absolute",
                             top: 0,
                             bottom: 0,
                             left: `${leftOffsetPercentage}%`,
                             width: `${widthPercentage}%`,
                             backgroundColor: theme.palette.primary.main,
-                            borderRadius: 8,
+                            borderRadius: 2,
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
+                            opacity: 0.8,
+                            m: 0.2,
+                            borderLeft: "2px dashed rgba(0,0,0,0.1)",
                           }}
                         >
                           {`${startFormatted.toLocaleLowerCase()} - ${endFormatted.toLocaleLowerCase()}`}
-                        </div>
+                        </Box>
                       </TableCell>
                     );
                   }
@@ -224,7 +235,7 @@ const Calendar = () => {
                           top: 0,
                           bottom: 0,
                           left: "50%",
-                          borderLeft: "1px dotted rgba(0,0,0,0.2)",
+                          borderLeft: "2px dashed rgba(0,0,0,0.1)",
                         }}
                       ></div>
                     </TableCell>
