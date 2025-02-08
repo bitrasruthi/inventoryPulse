@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { format, addHours, startOfDay } from "date-fns";
 import {
   Table,
@@ -9,17 +9,16 @@ import {
   Paper,
   TableContainer,
   Typography,
-  Box,
 } from "@mui/material";
 import theme from "../../styles/theme";
 
 const resources = [
-  { id: 1, name: "Resource 2", startTime: 7, endTime: 9 },
-  { id: 2, name: "Resource 2", startTime: 8.5, endTime: 9 },
-  { id: 3, name: "Resource 3", startTime: 8, endTime: 11 },
-  { id: 4, name: "Resource 4", startTime: 12, endTime: 14 },
-  { id: 5, name: "Resource 4", startTime: 14, endTime: 13 },
-  { id: 6, name: "Resource 4", startTime: 14, endTime: 18 },
+  { id: 1, name: "Resource 2", startTime: 7, duration: 2 },
+  { id: 2, name: "Resource 2", startTime: 8.5, duration: 3 },
+  { id: 3, name: "Resource 3", startTime: 8, duration: 0.75 },
+  { id: 4, name: "Resource 4", startTime: 12, duration: 1 },
+  { id: 5, name: "Resource 4", startTime: 14, duration: 0.5 },
+  { id: 6, name: "Resource 4", startTime: 14, duration: 0.25 },
 ];
 const startHour = 7;
 const endHour = 20;
@@ -105,67 +104,89 @@ const Calendar = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {resources.map((resource) => (
-            <TableRow
-              key={resource.id}
-              sx={{
-                backgroundColor:
-                  selectedId === resource.id ? "#FFECB3" : "inherit",
-              }}
-              onClick={() => setSelectedId(resource.id)}
-            >
-              <TableCell
+          {resources.map((resource) => {
+            const endTime = resource.startTime + resource.duration;
+            console.log({ endTime });
+
+            return (
+              <TableRow
+                key={resource.id}
                 sx={{
-                  fontWeight: "bold",
-                  borderRight: "1px solid #dbdbdb",
-                  position: "sticky",
-                  left: 0,
-                  zIndex: 2,
                   backgroundColor:
-                    selectedId === resource.id ? "#FFECB3" : "white",
-                  boxShadow: shadow
-                    ? "8px 0px 10px -2px rgba(0,0,0,0.1)"
-                    : "none",
+                    selectedId === resource.id ? "#FFECB3" : "inherit",
                 }}
+                onClick={() => setSelectedId(resource.id)}
               >
-                {resource.name}
-              </TableCell>
-              {timeSlots.map((slot, index) => {
-                if (slot.hour === resource.startTime) {
-                  const spanHours = resource.endTime - resource.startTime + 1;
-                  return (
+                <TableCell
+                  sx={{
+                    fontWeight: "bold",
+                    borderRight: "1px solid #dbdbdb",
+                    position: "sticky",
+                    left: 0,
+                    zIndex: 2,
+                    backgroundColor:
+                      selectedId === resource.id ? "#FFECB3" : "white",
+                    boxShadow: shadow
+                      ? "8px 0px 10px -2px rgba(0,0,0,0.1)"
+                      : "none",
+                  }}
+                >
+                  {resource.name}
+                </TableCell>
+                {timeSlots.map((slot, index) => {
+                  if (slot.hour === Math.floor(resource.startTime)) {
+                    const spanSlots = Math.ceil(resource.duration);
+                    const startFormatted = format(
+                      addHours(startOfDay(new Date()), resource.startTime),
+                      resource.startTime % 1 === 0.75
+                        ? "h:45 a"
+                        : resource.startTime % 1 === 0.5
+                        ? "h:30 a"
+                        : resource.startTime % 1 === 0.25
+                        ? "h:15 a"
+                        : "h a"
+                    );
+
+                    const endFormatted = format(
+                      addHours(startOfDay(new Date()), endTime),
+                      endTime % 1 === 0.75
+                        ? "h:45 a"
+                        : endTime % 1 === 0.5
+                        ? "h:30 a"
+                        : endTime % 1 === 0.25
+                        ? "h:15 a"
+                        : "h a"
+                    );
+
+                    return (
+                      <TableCell
+                        key={index}
+                        align="center"
+                        colSpan={spanSlots}
+                        style={{
+                          backgroundColor: theme.palette.primary.main,
+                          color: "white",
+                          fontWeight: "bold",
+                          borderRadius: 8,
+                          borderRight: 0,
+                        }}
+                      >
+                        {`${startFormatted} - ${endFormatted}`}
+                      </TableCell>
+                    );
+                  } // Fill empty slots
+
+                  return slot.hour > resource.startTime &&
+                    slot.hour < endTime ? null : (
                     <TableCell
                       key={index}
-                      align="center"
-                      colSpan={spanHours}
-                      style={{
-                        backgroundColor: theme.palette.primary.main,
-                        color: "white",
-                        fontWeight: "bold",
-                        borderRadius: 8,
-                        borderRight: 0,
-                      }}
-                    >
-                      {`${format(
-                        addHours(startOfDay(new Date()), resource.startTime),
-                        "h a"
-                      )} - ${format(
-                        addHours(startOfDay(new Date()), resource.endTime),
-                        "h a"
-                      )}`}
-                    </TableCell>
+                      style={{ borderRight: "1px solid #dbdbdb" }}
+                    ></TableCell>
                   );
-                }
-                return slot.hour > resource.startTime &&
-                  slot.hour < resource.endTime ? null : (
-                  <TableCell
-                    key={index}
-                    style={{ borderRight: "1px solid #dbdbdb" }}
-                  ></TableCell>
-                );
-              })}
-            </TableRow>
-          ))}
+                })}
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
     </TableContainer>
