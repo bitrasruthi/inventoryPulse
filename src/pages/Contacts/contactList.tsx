@@ -7,12 +7,17 @@ import {
   Grid2 as Grid,
   Avatar,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { inspectionColors } from "../../constants/constants";
 import PhoneIcon from "../../assets/icons/phoneIcon";
 import EmailIcon from "../../assets/icons/emailIcon";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import DeleteIcon from "../../assets/icons/deleteIcon";
+import GradientButton from "../../components/gradientButton";
+import FullScreenDialog, { CustomButtonProps } from "../../components/fullScreenDialog";
+import { useFormHook } from "../../hooks/useFormHook";
+import AddContact from "./addContact";
+import validate from "../../helpers/validations";
 
 interface IProps extends CardProps {
   list: any;
@@ -29,10 +34,23 @@ export const StyledCard = styled(Card)(() => ({
 }));
 
 const ContactList: React.FC<IProps> = (props) => {
+  const [dialogOpen, setDialogOpen] = useState(false);
   const { list } = props;
+
+    const { form } = useFormHook(validate.propertyDetailsSchema);
+
+   const handleOpenDialog = () => {
+     setDialogOpen(true);
+   };
+
+   const handleCloseDialog = () => {
+     setDialogOpen(false);
+   };
+
 
   return (
     <>
+      <GradientButton label="Add Contact" handleAction={handleOpenDialog} />
       <Grid container spacing={1} columnSpacing={3} mt={3}>
         {list?.length > 0
           ? list?.map((item: any, index: number) => (
@@ -85,7 +103,6 @@ const ContactList: React.FC<IProps> = (props) => {
                               color: "inherit !important",
                             }}
                           >
-                            {" "}
                             {item?.role}
                           </Typography>
                         </Box>
@@ -159,6 +176,29 @@ const ContactList: React.FC<IProps> = (props) => {
             ))
           : "No data"}
       </Grid>
+      {dialogOpen && (
+        <FullScreenDialog
+          open={dialogOpen}
+          onClose={handleCloseDialog}
+          title="Add Contact"
+          buttons={
+            [
+              {
+                label: "Close",
+                variant: "outlined",
+                onClick: () => console.log("canceled"),
+              },
+              {
+                label: "Add",
+                variant: "contained",
+                onClick: () => console.log("Confirm"),
+              },
+            ] as CustomButtonProps[]
+          }
+        >
+          <AddContact formProps={form} />
+        </FullScreenDialog>
+      )}
     </>
   );
 };
