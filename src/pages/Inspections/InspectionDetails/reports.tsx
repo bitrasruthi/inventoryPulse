@@ -1,10 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import {
-  TableCell,
   IconButton,
   Collapse,
   Box,
-  styled,
   Radio,
   Grid2,
   useMediaQuery,
@@ -20,18 +18,12 @@ import {
 } from "../../../constants/constants";
 import SelectField from "../../../components/selectField";
 import ReportProblemIcon from "@mui/icons-material/ReportProblem";
-
-const BorderTableCell = styled(TableCell)({
-  border: "1px solid #e0e0e0",
-  zIndex: 1,
-  minWidth: 200,
-  padding: 0,
-});
+import ReportsStyles from "../../../styles/reportsStyles";
 
 const Reports = () => {
   const [openSections, setOpenSections] = useState<any>({});
   const matches = useMediaQuery((_theme: any) =>
-    _theme?.breakpoints?.down("700")
+    _theme?.breakpoints?.down("sm")
   );
   const [scrollPosition, setScrollPosition] = useState({
     left: false,
@@ -48,9 +40,10 @@ const Reports = () => {
         const scrollLeft = container.scrollLeft;
         const scrollWidth = container.scrollWidth;
         const offsetWidth = container.offsetWidth;
+        const tolerance = 1;
 
         const left = scrollLeft > 0;
-        const right = scrollLeft < scrollWidth - offsetWidth;
+        const right = scrollLeft < scrollWidth - offsetWidth - tolerance;
         const bothShadows = left && right;
 
         setScrollPosition((prevState) => {
@@ -137,10 +130,7 @@ const Reports = () => {
         <Grid2
           size={12}
           sx={{
-            borderRight:
-              reportsParentActionIcons.length - 1 === index
-                ? ""
-                : "1px solid  #e0e0e0",
+            borderLeft: "1px solid  #e0e0e0",
             justifyContent: "center",
             display: "flex",
             alignItems: "center",
@@ -183,14 +173,12 @@ const Reports = () => {
           <Grid2
             size={12}
             sx={{
-              borderLeft: index === 0 ? "1px solid  #e0e0e0" : "",
-              borderRight:
-                reportsChildActionIcons.length - 1 === index
-                  ? ""
-                  : "1px solid  #e0e0e0",
+              borderLeft: index === 0 ? "" : "1px solid  #e0e0e0",
+
               justifyContent: "center",
               display: "flex",
               alignItems: "center",
+              height: 110,
             }}
           >
             <icon.icon sx={{ width: 16, height: 16 }} />
@@ -200,29 +188,18 @@ const Reports = () => {
     );
 
   return (
-    <Box sx={{ p: 3 }}>
+    <ReportsStyles>
       {Object.values(tableDataDummy2.rooms).map((section: any, key: number) => (
-        <Box key={key} sx={{ pb: 3 }}>
-          <Grid2
-            container
-            spacing={0}
-            sx={{
-              border: "1px solid #ddd",
-              borderRadius: "4px",
-            }}
-          >
+        <Box key={key} pb={3}>
+          <Grid2 container spacing={0} className="parent-container">
             <Grid2
               size={{ xs: 1, sm: 0.3 }}
               sx={{
-                borderRight: "1px solid #ddd",
                 backgroundColor: `${
                   inspectionColors2[key % inspectionColors2.length]
                 }`,
-                justifyContent: "center",
-                alignItems: "flex-start",
-                display: "flex",
-                cursor: "pointer",
               }}
+              className="expand-collapse-grid"
               onClick={() => toggleSection(section.uuid)}
             >
               <IconButton disableRipple>
@@ -230,27 +207,24 @@ const Reports = () => {
               </IconButton>
             </Grid2>
             <Grid2 size={{ xs: 11, sm: 11.7 }}>
-              <Grid2 container spacing={0} sx={{ width: "100%" }}>
+              <Grid2
+                container
+                spacing={0}
+                display={{
+                  xs: "flex",
+                  sm: "none",
+                }}
+                sx={{
+                  borderBottom: "1px solid #ddd",
+                }}
+              >
                 <Grid2
-                  // size={{ xs: 0.32, md: 0.3 }}
-                  sx={{
-                    display: { xs: "none", sm: "flex" },
-                    justifyContent: "center",
-                    alignItems: "center",
-                    borderRight: "1px solid #ddd",
-                    width: "2.5vw",
-                  }}
+                  className="parent-index-grid"
+                  sx={{ display: "none !important" }}
                 >
                   {key + 1}
                 </Grid2>
-                <Grid2
-                  // size={{ xs: 12, sm: 10.7 }}
-                  p={1}
-                  sx={{
-                    borderRight: "1px solid #ddd",
-                    width: "calc(100% - 10.5vw)",
-                  }}
-                >
+                <Grid2 className="parent-content-grid">
                   <OutlinedTextField
                     variant="outlined"
                     placeholder={section.name?.value}
@@ -259,13 +233,23 @@ const Reports = () => {
                   />
                 </Grid2>
                 <Grid2
-                  // size={{ xs: 12, sm: 1 }}
-                  sx={{
-                    display: "flex",
-                    // flexGrow: 1,
-                    width: "8vw",
-                  }}
+                  className="parent-icons-grid"
+                  sx={{ display: "block !important" }}
                 >
+                  {parentActionsIcons()}
+                </Grid2>
+              </Grid2>
+              <Grid2 container spacing={0} display={{ xs: "none", sm: "flex" }}>
+                <Grid2 className="parent-index-grid">{key + 1}</Grid2>
+                <Grid2 className="parent-content-grid">
+                  <OutlinedTextField
+                    variant="outlined"
+                    placeholder={section.name?.value}
+                    value={section.name?.value}
+                    type={"pagination"}
+                  />
+                </Grid2>
+                <Grid2 className="parent-icons-grid">
                   {parentActionsIcons()}
                 </Grid2>
               </Grid2>
@@ -275,241 +259,205 @@ const Reports = () => {
                 timeout="auto"
                 unmountOnExit
               >
-                {matches ? (
-                  Object.values(section.items)?.map(
-                    (_item: any, childIndex: number) => (
-                      <Grid2 container spacing={0}>
-                        <Grid2 size={12} p={1} textAlign={"center"}>
-                          {key + 1}.{childIndex + 1}
-                        </Grid2>
-                        <Grid2 size={12}>
-                          {Object.values(section?.fields)?.map(
-                            (field: any, _rowIndex: number) => (
-                              <Box
-                                key={_rowIndex}
-                                sx={{
-                                  px: 2,
-                                  py: 1,
-                                  borderRight:
-                                    _rowIndex ===
-                                    Object.values(section?.fields).length - 1
-                                      ? "none"
-                                      : "1px solid #ddd",
-                                  flexShrink: 0,
-                                }}
-                              >
-                                {getBodyByType(field)}
-                              </Box>
-                            )
-                          )}
-                        </Grid2>
-                        <Grid2 size={12}> {childActionsIcons()}</Grid2>
-                      </Grid2>
-                    )
-                  )
-                ) : (
-                  <div
-                    style={{
-                      overflow: "auto",
-                    }}
+                <Grid2
+                  display={{ xs: "none", sm: "flex" }}
+                  container
+                  spacing={0}
+                  className="collapse-parent-grid"
+                >
+                  <Box
+                    className="collapse-box"
+                    id="scroll-container"
+                    ref={scrollContainerRef}
                   >
-                    <Grid2
-                      container
-                      spacing={0}
-                      id="scroll-container"
-                      ref={scrollContainerRef}
-                      sx={{ width: "100vw" }}
-                    >
-                      {Object.values(section.items)?.map(
-                        (_item: any, childIndex: number) => (
-                          <>
-                            {/* Header row */}
-                            {childIndex === 0 && (
-                              <Grid2 container sx={{ width: "100%" }}>
-                                <Grid2
-                                  // size={0.3}
-                                  sx={{
-                                    backgroundColor: "#f4f4f4",
-                                    borderRight: "1px solid #e0e0e0",
-                                    display: { xs: "none", sm: "flex" },
-                                    alignItems: "center",
-                                    fontWeight: "bold",
-                                    borderBottom: "1px solid #e0e0e0",
-                                    borderTop: "1px solid #e0e0e0",
-                                    zIndex: 1001,
-                                    position: "sticky",
-                                    left: 0,
-                                    width: "2.5vw",
-                                  }}
-                                ></Grid2>
-
-                                <Grid2
-                                  // size={10.7}
-                                  sx={{
-                                    display: { xs: "none", sm: "flex" },
-                                    backgroundColor: "#f4f4f4",
-                                    borderBottom: "1px solid #e0e0e0",
-                                    borderTop: "1px solid #e0e0e0",
-                                    width: "calc(100% - 10.5vw)",
-                                  }}
-                                >
-                                  {Object.values(section?.fields)?.map(
-                                    (field: any, _headerIndex: number) => (
-                                      <Grid2
-                                        size={
-                                          Object.values(section?.fields)
-                                            .length / 12
-                                        }
-                                        key={_headerIndex}
-                                        sx={{
-                                          px: 2,
-                                          py: 1,
-                                          borderRight:
-                                            _headerIndex ===
-                                            Object.values(section?.fields)
-                                              .length -
-                                              1
-                                              ? "none"
-                                              : "1px solid #ddd",
-                                          textAlign: "center",
-                                          fontWeight: "bold",
-                                          flexGrow: 1,
-                                          // maxWidth: 200,
-                                          textTransform: "capitalize",
-                                          fontFamily: "roboto-medium",
-                                        }}
-                                      >
-                                        {field.name.includes("-")
-                                          ? ""
-                                          : field.name}
-                                      </Grid2>
-                                    )
-                                  )}
-                                </Grid2>
-                                <Grid2
-                                  // size={1}
-                                  sx={{
-                                    background: "#f4f4f4",
-                                    display: { xs: "none", sm: "flex" },
-                                    alignItems: "center",
-                                    fontWeight: "bold",
-                                    borderBottom: "1px solid #e0e0e0",
-                                    borderLeft: "1px solid #e0e0e0",
-                                    position: "sticky",
-                                    right: 0,
-                                    zIndex: 1001,
-                                    borderTop: "1px solid #e0e0e0",
-                                    width: "8vw",
-                                  }}
-                                ></Grid2>
-                              </Grid2>
-                            )}
-
-                            <Grid2 container width={"100%"}>
-                              {/* Field rows */}
+                    {Object.values(section.items)?.map(
+                      (_item: any, _childIndex: number) => (
+                        <>
+                          {_childIndex === 0 && (
+                            <Grid2 container spacing={0}>
                               <Grid2
-                                // size={{ xs: 12, sm: 0.3 }}
+                                className="left-positioned-grid"
                                 sx={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                                  borderRight: "1px solid #e0e0e0",
-                                  px: 1,
-                                  borderBottom:
-                                    childIndex ===
-                                    Object.values(section.items).length - 1
-                                      ? ""
-                                      : "1px solid #e0e0e0",
-                                  position: "sticky",
-                                  left: 0,
-                                  zIndex: 2,
-                                  background: "#fff !important",
-                                  width: "2.5vw",
-                                  // boxShadow:
-                                  //   scrollPosition.left ||
-                                  //   scrollPosition.bothShadows
-                                  //     ? "inset -8px 0 8px -7px rgba(0, 0, 0, 0.2)"
-                                  //     : "none",
+                                  backgroundColor: "#f4f4f4",
+                                  minHeight: 31,
                                 }}
-                              >
-                                {key + 1}.{childIndex + 1}
-                              </Grid2>
-
-                              <Grid2
-                                // size={10.7}
-                                sx={{
-                                  display: { xs: "block", sm: "flex" },
-                                  borderBottom:
-                                    Object.values(section.items).length - 1 ===
-                                    childIndex
-                                      ? ""
-                                      : "1px solid #e0e0e0",
-                                  width: "calc(100% - 10.5vw)",
-                                }}
-                              >
+                              ></Grid2>
+                              <Grid2 className="scrollable-content-grid">
                                 {Object.values(section?.fields)?.map(
                                   (field: any, _rowIndex: number) => (
-                                    <Grid2
-                                      size={{
-                                        xs: 12,
-                                        sm:
-                                          12 /
-                                          Object.values(section?.fields).length,
-                                      }}
-                                      key={_rowIndex}
+                                    <Box
+                                      key={_childIndex}
                                       sx={{
-                                        px: 2,
-                                        py: 1,
                                         borderRight:
+                                          _rowIndex ===
                                           Object.values(section?.fields)
                                             .length -
-                                            1 ===
-                                          _rowIndex
-                                            ? ""
+                                            1
+                                            ? "none"
                                             : "1px solid #ddd",
-                                        flexGrow: 1,
-                                        height: "auto",
-                                        flexWrap: "wrap",
-                                        // maxWidth: 200,
+                                        backgroundColor: "#f4f4f4",
                                       }}
+                                      className="scrollable-box"
                                     >
-                                      {getBodyByType(field)}
-                                    </Grid2>
+                                      {field.name.includes("-")
+                                        ? ""
+                                        : field.name}
+                                    </Box>
                                   )
                                 )}
                               </Grid2>
-
                               <Grid2
-                                // size={1}
-                                sx={{
-                                  background: "#fff",
-                                  display: "flex",
-                                  borderBottom:
-                                    Object.values(section.items).length - 1 ===
-                                    childIndex
-                                      ? ""
-                                      : "1px solid #e0e0e0",
-                                  zIndex: 10,
-                                  position: "sticky",
-                                  right: 0,
-                                  width: "8vw",
-                                }}
-                              >
-                                {childActionsIcons()}
-                              </Grid2>
+                                className="right-positioned-grid"
+                                sx={{ backgroundColor: "#f4f4f4" }}
+                              ></Grid2>
                             </Grid2>
-                          </>
-                        )
-                      )}
+                          )}
+                          <Grid2 container spacing={0}>
+                            <Grid2
+                              className="left-positioned-grid"
+                              sx={{
+                                background: "#fff",
+                                minHeight:
+                                  _childIndex ===
+                                  Object.values(section?.items).length - 1
+                                    ? 110
+                                    : 100,
+                                boxShadow:
+                                  scrollPosition.left ||
+                                  scrollPosition.bothShadows
+                                    ? "2px 2px 10px #ddd"
+                                    : "none",
+                                borderBottom:
+                                  _childIndex ===
+                                  Object.values(section?.items).length - 1
+                                    ? "none !important"
+                                    : "1px solid #ddd",
+                                borderTop:
+                                  _childIndex ===
+                                  Object.values(section?.items).length - 1
+                                    ? "1px solid #ddd"
+                                    : "none !important",
+                              }}
+                            >
+                              {key + 1}.{_childIndex + 1}
+                            </Grid2>
+
+                            <Grid2 className="scrollable-content-grid">
+                              {Object.values(section?.fields)?.map(
+                                (field: any, _rowIndex: number) => (
+                                  <Box
+                                    key={_childIndex}
+                                    className="scrollable-box"
+                                    sx={{
+                                      paddingRight:
+                                        _rowIndex ===
+                                        Object.values(section?.fields).length -
+                                          1
+                                          ? 3
+                                          : 1,
+                                      borderRight:
+                                        _rowIndex ===
+                                        Object.values(section?.fields).length -
+                                          1
+                                          ? "none"
+                                          : "1px solid #ddd",
+                                      borderBottom: "none !important",
+                                      borderTop:
+                                        _childIndex ===
+                                        Object.values(section?.items).length - 1
+                                          ? "1px solid #ddd"
+                                          : "none !important",
+                                    }}
+                                  >
+                                    {getBodyByType(field)}
+                                  </Box>
+                                )
+                              )}
+                            </Grid2>
+                            <Grid2
+                              className="right-positioned-grid"
+                              sx={{
+                                background: "#fff",
+                                boxShadow:
+                                  scrollPosition.right ||
+                                  scrollPosition.bothShadows
+                                    ? "-2px 2px 10px #ddd"
+                                    : "none",
+                                borderBottom:
+                                  _childIndex ===
+                                  Object.values(section?.items).length - 1
+                                    ? "none !important"
+                                    : "1px solid #ddd",
+                                borderTop:
+                                  _childIndex ===
+                                  Object.values(section?.items).length - 1
+                                    ? "1px solid #ddd"
+                                    : "none !important",
+                                height: 110,
+                              }}
+                            >
+                              {childActionsIcons()}
+                            </Grid2>
+                          </Grid2>
+                        </>
+                      )
+                    )}
+                  </Box>
+                </Grid2>
+
+                {Object.values(section.items)?.map(
+                  (_item: any, childIndex: number) => (
+                    <Grid2
+                      container
+                      spacing={0}
+                      display={{ xs: "flex", sm: "none" }}
+                    >
+                      <Grid2 size={12} p={1} textAlign={"center"}>
+                        {key + 1}.{childIndex + 1}
+                      </Grid2>
+                      <Grid2 size={12}>
+                        {Object.values(section?.fields)?.map(
+                          (field: any, _rowIndex: number) => (
+                            <Box
+                              key={_rowIndex}
+                              sx={{
+                                px: 2,
+                                py: 1,
+                                borderRight:
+                                  _rowIndex ===
+                                  Object.values(section?.fields).length - 1
+                                    ? "none"
+                                    : "1px solid #ddd",
+                                flexShrink: 0,
+                              }}
+                            >
+                              {getBodyByType(field)}
+                            </Box>
+                          )
+                        )}
+                      </Grid2>
+                      <Grid2
+                        size={12}
+                        sx={{
+                          borderBottom:
+                            Object.values(section.items).length - 1 ===
+                            childIndex
+                              ? ""
+                              : "1px solid #ddd",
+                        }}
+                      >
+                        {" "}
+                        {childActionsIcons()}
+                      </Grid2>
                     </Grid2>
-                  </div>
+                  )
                 )}
               </Collapse>
             </Grid2>
           </Grid2>
         </Box>
       ))}
-    </Box>
+    </ReportsStyles>
   );
 };
 
