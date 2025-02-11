@@ -62,12 +62,12 @@ const ReportsStyles = styled(Box)(({ theme }) => ({
     position: "relative",
     "& .scrollable-box": {
       padding: "4px 10px",
-      minWidth: 200,
+      minWidth: 300,
       textTransform: "capitalize",
       fontFamily: "roboto-bold",
       borderTop: "1px solid #e0e0e0",
       borderBottom: "1px solid #e0e0e0",
-      width: "calc(100% - 3% - 10%) !important",
+      width: "calc(100% - 3% - 10%)",
     },
   },
   "& .right-positioned-grid": {
@@ -82,6 +82,20 @@ const ReportsStyles = styled(Box)(({ theme }) => ({
     minHeight: 31,
     borderTop: "1px solid #e0e0e0",
     borderBottom: "1px solid #e0e0e0",
+  },
+  [theme.breakpoints.down("md")]: {
+    "& .left-positioned-grid": {
+      width: "6%",
+    },
+    "& .right-positioned-grid": {
+      width: "15%",
+    },
+    "& .scrollable-content-grid": {
+      width: "calc(100% - 6% - 15%) !important",
+      "& .scrollable-box": {
+        width: "calc(100% - 6% - 15%) !important",
+      },
+    },
   },
 }));
 
