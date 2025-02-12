@@ -9,19 +9,26 @@ import {
 } from "@mui/material";
 import { ExpandMore, ExpandLess, MoreVert } from "@mui/icons-material";
 import OutlinedTextField from "../../../components/outlinedTextField";
-import CameraAltIcon from "@mui/icons-material/CameraAlt";
-import DescriptionIcon from "@mui/icons-material/Description";
 import {
   inspectionColors2,
   tableDataDummy2,
   tabMenuList,
 } from "../../../constants/constants";
 import SelectField from "../../../components/selectField";
-import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 import ReportsStyles from "../../../styles/reportsStyles";
+import DetailsIcon from "../../../assets/icons/detailsIcon";
+import CameraIcon from "../../../assets/icons/cameraIcon";
+import ReportIcon from "../../../assets/icons/reportIcon";
+import MenuCommon from "../../../components/menuCommon";
+import { IMenuItemExtendProps } from "../../../helpers/Interfaces";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
 const Reports = () => {
   const [openSections, setOpenSections] = useState<any>({});
+  const [selectedChildId, setSelectedChildId] = useState<any>(0);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
   const matches = useMediaQuery((_theme: any) =>
     _theme?.breakpoints?.down("sm")
   );
@@ -112,11 +119,11 @@ const Reports = () => {
   const reportsParentActionIcons = [
     {
       id: 1,
-      icon: CameraAltIcon,
+      icon: CameraIcon,
     },
     {
       id: 2,
-      icon: DescriptionIcon,
+      icon: DetailsIcon,
     },
     {
       id: 3,
@@ -128,6 +135,7 @@ const Reports = () => {
     <>
       {reportsParentActionIcons.map((icon, index) => (
         <Grid2
+          key={index}
           size={12}
           sx={{
             borderLeft: "1px solid  #e0e0e0",
@@ -143,14 +151,25 @@ const Reports = () => {
     </>
   );
 
+  const handleChildMenuClick = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    childId?: string
+  ) => {
+    console.log(selectedChildId, childId);
+
+    if (selectedChildId === childId) {
+      setAnchorEl(event.currentTarget);
+    }
+  };
+
   const reportsChildActionIcons = [
     {
       id: 1,
-      icon: ReportProblemIcon,
+      icon: CameraIcon,
     },
     {
       id: 2,
-      icon: DescriptionIcon,
+      icon: ReportIcon,
     },
     {
       id: 3,
@@ -158,11 +177,11 @@ const Reports = () => {
     },
   ];
 
-  const childActionsIcons = (childId?: number) =>
+  const childActionsIcons = (childId?: string) =>
     matches ? (
       <Grid2 container spacing={3} textAlign={"center"}>
-        {reportsChildActionIcons.map((icon) => (
-          <Grid2 size={4} pb={2}>
+        {reportsChildActionIcons.map((icon, index) => (
+          <Grid2 key={index} size={4} pb={2}>
             <icon.icon sx={{ width: 16, height: 16 }} />
           </Grid2>
         ))}
@@ -171,21 +190,60 @@ const Reports = () => {
       <>
         {reportsChildActionIcons.map((icon, index) => (
           <Grid2
+            key={index}
             size={12}
             sx={{
               borderLeft: index === 0 ? "" : "1px solid  #e0e0e0",
-
               justifyContent: "center",
               display: "flex",
               alignItems: "center",
               height: 110,
             }}
           >
-            <icon.icon sx={{ width: 16, height: 16 }} />
+            <IconButton
+              disableRipple
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                if (icon.id === 3) {
+                  setAnchorEl(e.currentTarget);
+                }
+              }}
+            >
+              <icon.icon sx={{ width: 16, height: 16 }} />
+            </IconButton>
           </Grid2>
         ))}
       </>
     );
+
+  const handleClickView = () => {
+    console.log("view");
+  };
+
+  const handleClickEdit = () => {
+    console.log("edit");
+  };
+
+  const handleClickDelete = () => {
+    console.log("delete");
+  };
+
+  const userMenuList: IMenuItemExtendProps[] = [
+    {
+      key: 1,
+      label: "View",
+      onClick: (_e) => handleClickView(),
+    },
+    {
+      key: 2,
+      label: "Edit",
+      onClick: (_e) => handleClickEdit(),
+    },
+    {
+      key: 3,
+      label: "Delete",
+      onClick: (_e) => handleClickDelete(),
+    },
+  ];
 
   return (
     <ReportsStyles>
@@ -339,7 +397,19 @@ const Reports = () => {
                                     : "none !important",
                               }}
                             >
-                              {key + 1}.{_childIndex + 1}
+                              <Box sx={{ position: "relative", zIndex: 1002 }}>
+                                <Box
+                                  sx={{
+                                    position: "absolute",
+                                    top: 30,
+                                    right: 10,
+                                    zIndex: 1003,
+                                  }}
+                                >
+                                  <AddCircleOutlineIcon />
+                                </Box>
+                                {key + 1}.{_childIndex + 1}
+                              </Box>
                             </Grid2>
 
                             <Grid2 className="scrollable-content-grid">
@@ -396,8 +466,14 @@ const Reports = () => {
                                 height: 110,
                               }}
                             >
-                              {childActionsIcons()}
+                              {childActionsIcons(_item.uuid)}
                             </Grid2>
+                            <MenuCommon
+                              anchor={anchorEl}
+                              menuList={userMenuList}
+                              setAnchor={setAnchorEl}
+                              open={open}
+                            />
                           </Grid2>
                         </>
                       )
@@ -423,11 +499,6 @@ const Reports = () => {
                               sx={{
                                 px: 2,
                                 py: 1,
-                                borderRight:
-                                  _rowIndex ===
-                                  Object.values(section?.fields).length - 1
-                                    ? "none"
-                                    : "1px solid #ddd",
                                 flexShrink: 0,
                               }}
                             >
@@ -436,6 +507,7 @@ const Reports = () => {
                           )
                         )}
                       </Grid2>
+
                       <Grid2
                         size={12}
                         sx={{
@@ -447,7 +519,7 @@ const Reports = () => {
                         }}
                       >
                         {" "}
-                        {childActionsIcons()}
+                        {childActionsIcons(_item.id)}
                       </Grid2>
                     </Grid2>
                   )

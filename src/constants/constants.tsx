@@ -281,17 +281,17 @@ export const contactListDummy = [
 
 export const userMenuList = [
   {
-    id: 1,
+    key: 1,
     label: "View",
     icon: VisibilityOutlinedIcon,
   },
   {
-    id: 2,
+    key: 2,
     label: "Edit",
     icon: EditOutlinedIcon,
   },
   {
-    id: 3,
+    key: 3,
     label: "Delete",
     icon: DeleteOutlineIcon,
   },

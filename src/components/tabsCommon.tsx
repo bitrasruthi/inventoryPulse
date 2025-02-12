@@ -152,9 +152,9 @@ const TabsCommon: React.FC<Props> = ({
                 </IconButton>
               </Box>
             )}
-            {tabMenuList?.map((item) => (
+            {tabMenuList?.map((item, index) => (
               <Tab
-                key={item.label}
+                key={index}
                 label={
                   <Typography sx={{ fontFamily: "roboto-bold" }}>
                     {item?.label}
