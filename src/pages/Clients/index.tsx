@@ -4,13 +4,14 @@ import FullScreenDialog, {
 } from "../../components/fullScreenDialog";
 import { useState } from "react";
 import AddClient from "./addClient";
-import { contactListDummy, tabMenuList } from "../../constants/constants";
+import { clientListDummy, contactListDummy, tabMenuList } from "../../constants/constants";
 import ContentWrapper from "../../components/contentWrapper";
 import TabsCommon from "../../components/tabsCommon";
 import Pagination from "../../components/pagination";
 import ContactList from "../Contacts/contactList";
 import validate from "../../helpers/validations";
 import { useFormHook } from "../../hooks/useFormHook";
+import ClientList from "./clientList";
 
 type Props = {};
 
@@ -53,8 +54,8 @@ const Clients = (_props: Props) => {
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
-        <ContactList list={contactListDummy} />
-        {/* <ClientList list={clientListDummy} /> */}
+        {/* <ContactList list={contactListDummy} /> */}
+        <ClientList list={clientListDummy} />
       </Box>
     </ContentWrapper>
   );

@@ -10,7 +10,7 @@ import { styled } from "@mui/material/styles";
 import LabelCommon from "./labelCommon";
 
 interface IProps extends BaseSelectProps {
-  options: { label: string; value: string }[];
+  options: { label: string; value: string | number }[];
   isnotboldtext?: boolean;
   marginBottom?: number;
   helperText?: React.ReactNode;

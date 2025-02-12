@@ -12,19 +12,9 @@ import {
   Box,
 } from "@mui/material";
 import theme from "../../styles/theme";
+import { CalendarProps } from "../../types/type";
 
-const resources = [
-  { id: 1, name: "Resource 1", startTime: 7, duration: 0.5 },
-  { id: 2, name: "Resource 2", startTime: 8.5, duration: 0.5 },
-  { id: 3, name: "Resource 3", startTime: 9, duration: 0.5 },
-  { id: 4, name: "Resource 4", startTime: 9, duration: 0.75 },
-  { id: 5, name: "Resource 5", startTime: 8, duration: 1.5 },
-  { id: 6, name: "Resource 1", startTime: 7, duration: 0.5 },
-  { id: 7, name: "Resource 2", startTime: 8.5, duration: 0.5 },
-  { id: 8, name: "Resource 3", startTime: 9, duration: 0.5 },
-  { id: 9, name: "Resource 4", startTime: 9, duration: 0.75 },
-  { id: 10, name: "Resource 5", startTime: 18, duration: 1.5 },
-];
+
 const startHour = 7;
 const endHour = 20;
 
@@ -43,10 +33,10 @@ const generateTimeSlots = () => {
 
 const timeSlots = generateTimeSlots();
 
-const Calendar = () => {
+const Calendar: React.FC<CalendarProps> = ({resources}) => {
   const [selectedId, setSelectedId] = useState(0);
   const [shadow, setShadow] = useState(false);
-  const tableContainerRef = useRef(null);
+  const tableContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -128,7 +118,7 @@ const Calendar = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {resources.map((resource) => {
+          {resources&&resources?.map((resource) => {
             const endTime = resource.startTime + resource.duration;
             const colSpan = calculateColSpan(
               resource.startTime,
