@@ -46,7 +46,7 @@ const ReportsStyles = styled(Box)(({ theme }) => ({
     display: "flex",
     position: "absolute",
     left: 0,
-    zIndex: 1001,
+    // zIndex: 1001,
     padding: "5px",
     alignItems: "center",
     width: "3%",
