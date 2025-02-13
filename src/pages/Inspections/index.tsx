@@ -68,18 +68,22 @@ const Inspections = () => {
 
   const inspectionCalendarContent = (
     <Grid container spacing={0}>
-      <Grid size={3}>
+      <Grid
+        size={{ md: 2.5 }}
+        display={{ xs: "none", md: "block" }}
+        sx={{ overflowY: "auto", height: "85vh" }}
+      >
         <Filters filters={inspectionFilters} />
       </Grid>
       <Grid size={0}>
         <Divider orientation="vertical" />
       </Grid>
-      <Grid size={6}>
+      <Grid size={7}>
         <Box height={"85vh"} sx={{ overflowY: "auto" }}>
           <Calendar />
         </Box>
       </Grid>
-      <Grid size={3}>
+      <Grid size={2.5}>
         <Box>
           <InspectionListByDate FormattedDate={getFormattedDate()} />
         </Box>
