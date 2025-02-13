@@ -27,7 +27,7 @@ const Dashboard = () => {
       />
       <DateTimeCard date="15 Dec 2024" time="10:30am" />
       <ActivityStepper /> */}
-      <Calendar />
+      {/* <Calendar /> */}
     </Container>
   );
 };
