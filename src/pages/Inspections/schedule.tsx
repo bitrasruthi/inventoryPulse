@@ -82,7 +82,7 @@ const Schedule = () => {
                 onChange={(event) => setSelectedClerk(event.target.value)}
               />
             </Grid2>
-            <Grid2>
+            <Grid2 size={12}>
               <Calendar resources={timeSlots} />
             </Grid2>
           </Grid2>

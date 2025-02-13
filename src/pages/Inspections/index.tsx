@@ -19,6 +19,8 @@ import validate from "../../helpers/validations";
 import { useFormHook } from "../../hooks/useFormHook";
 import { PropertyDetailsFormValues } from "../../helpers/Interfaces";
 import InspectionStepper from "./inspectionStepper";
+import InspectionListByDate from "./inspectionListByDate";
+import moment from "moment";
 
 const Inspections = () => {
   const [activeTab, setActiveTab] = useState<string>(tabMenuList[0]?.value);
@@ -40,6 +42,10 @@ const Inspections = () => {
   const handleCloseDialog = () => {
     setDialogOpen(false);
     reset();
+  };
+
+  const getFormattedDate = () => {
+    return moment().format("dddd, MMM D");
   };
 
   const inspectionListContent = (
@@ -68,9 +74,14 @@ const Inspections = () => {
       <Grid size={0}>
         <Divider orientation="vertical" />
       </Grid>
-      <Grid size={9}>
+      <Grid size={6}>
         <Box height={"85vh"} sx={{ overflowY: "auto" }}>
           <Calendar />
+        </Box>
+      </Grid>
+      <Grid size={3}>
+        <Box>
+          <InspectionListByDate FormattedDate={getFormattedDate()} />
         </Box>
       </Grid>
     </Grid>
