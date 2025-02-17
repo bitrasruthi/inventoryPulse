@@ -4,8 +4,9 @@ import {
   BaseSelectProps,
   Box,
   FormHelperText,
+  SelectChangeEvent,
 } from "@mui/material";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import LabelCommon from "./labelCommon";
 
@@ -14,6 +15,11 @@ interface IProps extends BaseSelectProps {
   isnotboldtext?: boolean;
   marginBottom?: number;
   helperText?: React.ReactNode;
+  value?: string | number;
+  onChange?: (
+    event: SelectChangeEvent<unknown>,
+    child: React.ReactNode
+  ) => void;
 }
 
 const StyledSelect = styled(Select)(({ theme }) => ({
@@ -26,16 +32,36 @@ const StyledSelect = styled(Select)(({ theme }) => ({
   },
 }));
 
-const SelectField: React.FC<IProps> = (props) => {
-  const {
-    options,
-    required,
-    label,
-    isnotboldtext,
-    marginBottom,
-    type,
-    helperText,
-  } = props;
+const SelectField: React.FC<IProps> = ({
+  options,
+  required,
+  label,
+  isnotboldtext,
+  marginBottom,
+  type,
+  helperText,
+  value,
+  onChange,
+  ...props
+}) => {
+  const [selectedValue, setSelectedValue] = useState<string | number>("");
+
+  useEffect(() => {
+    if (value !== undefined) {
+      setSelectedValue(value);
+    }
+  }, [value]);
+
+  const handleChange = (
+    event: SelectChangeEvent<unknown>,
+    _child: React.ReactNode
+  ) => {
+    const newValue = event.target.value as string | number;
+    setSelectedValue(newValue);
+    if (onChange) {
+      onChange(event, newValue);
+    }
+  };
 
   return (
     <Box mb={marginBottom} pb={type === "pagination" ? 0 : 2} width={"100%"}>
@@ -45,20 +71,22 @@ const SelectField: React.FC<IProps> = (props) => {
         fullWidth
         displayEmpty
         size="small"
-        label={""}
+        value={selectedValue}
+        onChange={handleChange}
         sx={{
           "& .MuiInputBase-input": {
             fontFamily: isnotboldtext ? "roboto-regular" : "roboto-bold",
           },
         }}
+        renderValue={(selected: any) => (selected ? selected : "Please Select")}
       >
         {options?.map((option, index) => (
           <MenuItem
             key={index}
-            value={option?.value}
+            value={option.label}
             sx={{ fontFamily: "roboto-regular !important" }}
           >
-            {option?.label}
+            {option.label}
           </MenuItem>
         ))}
       </StyledSelect>

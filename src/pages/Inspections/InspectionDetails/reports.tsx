@@ -1,17 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  IconButton,
-  Collapse,
-  Box,
-  Radio,
-  Grid2,
-  useMediaQuery,
-  Typography,
-} from "@mui/material";
+import { IconButton, Collapse, Box, Grid2, useMediaQuery } from "@mui/material";
 import { ExpandMore, ExpandLess, MoreVert } from "@mui/icons-material";
 import OutlinedTextField from "../../../components/outlinedTextField";
 import {
   inspectionColors2,
+  radioDummyList,
   tableDataDummy2,
   tabMenuList,
 } from "../../../constants/constants";
@@ -23,12 +16,17 @@ import ReportIcon from "../../../assets/icons/reportIcon";
 import MenuCommon from "../../../components/menuCommon";
 import { IMenuItemExtendProps } from "../../../helpers/Interfaces";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import MuiRadioButton from "../../../components/MuiRadioButton";
+import { useFormHook } from "../../../hooks/useFormHook";
 
 const Reports = () => {
   const [openSections, setOpenSections] = useState<any>({});
   const [selectedChildId, setSelectedChildId] = useState<any>(0);
+  const [selectedRowId, setSelectedRowId] = useState<any>(0);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const { form } = useFormHook();
+  const { control } = form;
 
   const matches = useMediaQuery((_theme: any) =>
     _theme?.breakpoints?.down("sm")
@@ -79,35 +77,53 @@ const Reports = () => {
     }));
   };
 
-  const getBodyByType = (row: any) => {
+  const getBodyByType = (row: any, values: any) => {
     switch (row.type) {
       case "TEXT":
         return (
           <OutlinedTextField
             variant="outlined"
             placeholder={row.name}
-            value={row.name}
+            value={values[row.uuid].content}
           />
         );
       case "SELECT":
-        return <SelectField options={tabMenuList} />;
+        return (
+          <SelectField
+            options={tabMenuList}
+            value={values[row.uuid].content}
+            onChange={(newValue) => {
+              console.log("Updated Value ", newValue.target.value);
+            }}
+          />
+        );
       case "SELECT_MULTI":
-        return <SelectField options={tabMenuList} />;
+        return (
+          <SelectField
+            options={tabMenuList}
+            value={values[row.uuid].content}
+            onChange={(newValue) => {
+              console.log("Updated Value", newValue.target.value);
+            }}
+          />
+        );
       case "SCALE":
         return (
-          <>
-            <Radio />
-            <Radio />
-            <Radio />
-            <Radio />
-          </>
+          <MuiRadioButton
+            radioList={radioDummyList}
+            control={control}
+            onChange={(newValue) => {
+              console.log("Updated Value", newValue.target.value);
+            }}
+            value={values[row.uuid].content}
+          />
         );
       case "TEXTAREA":
         return (
           <OutlinedTextField
             variant="outlined"
             placeholder={row.name}
-            value={row.name}
+            value={values[row.uuid].content}
             multiline={true}
             minRows={2}
           />
@@ -284,8 +300,6 @@ const Reports = () => {
     });
   };
 
-  console.log(tableData);
-
   return (
     <ReportsStyles>
       {Object.entries(tableData.rooms).map(([roomUUID, section]: any, key) => (
@@ -413,7 +427,13 @@ const Reports = () => {
                               </Grid2>
                             )}
 
-                            <Grid2 container spacing={0}>
+                            <Grid2
+                              container
+                              spacing={0}
+                              onClick={() => {
+                                setSelectedRowId(_item.uuid);
+                              }}
+                            >
                               <Grid2
                                 className="left-positioned-grid"
                                 sx={{
@@ -490,7 +510,7 @@ const Reports = () => {
                                             : "none !important",
                                       }}
                                     >
-                                      {getBodyByType(field)}
+                                      {getBodyByType(field, _item.values)}
                                     </Box>
                                   )
                                 )}
@@ -599,7 +619,7 @@ const Reports = () => {
                                             borderBottom: "none !important",
                                           }}
                                         >
-                                          {getBodyByType(field)}
+                                          {getBodyByType(field, _item.values)}
                                         </Box>
                                       )
                                     )}
@@ -648,7 +668,7 @@ const Reports = () => {
                                 flexShrink: 0,
                               }}
                             >
-                              {getBodyByType(field)}
+                              {getBodyByType(field, _item.values)}
                             </Box>
                           )
                         )}
