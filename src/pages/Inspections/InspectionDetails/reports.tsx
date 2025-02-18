@@ -268,7 +268,6 @@ const Reports = () => {
 
   const [tableData, setTableData] = useState<any>(tableDataDummy2);
   const generateUUID = () => crypto.randomUUID();
-
   const handleAddRow = (roomUUID: string, parentUUID: string) => {
     setTableData((prevData: any) => {
       const newUUID = generateUUID();
@@ -413,9 +412,9 @@ const Reports = () => {
                                         }}
                                         className="scrollable-box"
                                       >
-                                        {field.name.includes("-")
+                                        {field.label.includes("-")
                                           ? ""
-                                          : field.name}
+                                          : field.label}
                                       </Box>
                                     )
                                   )}

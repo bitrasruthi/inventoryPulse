@@ -45,7 +45,7 @@ const MuiRadioButton: React.FC<IProps> = ({
   return (
     <FormControl>
       <Controller
-        name="isCompanyOrIndividual"
+        name=""
         control={control}
         render={() => (
           <RadioGroup row value={selectedValue} onChange={handleChange}>
