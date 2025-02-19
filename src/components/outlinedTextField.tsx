@@ -6,15 +6,21 @@ import {
   styled,
   TextField,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LabelCommon from "./labelCommon";
 import { UseFormRegisterReturn } from "react-hook-form";
+import useDebounce from "../hooks/UseDebounce";
 
 interface IProps extends OutlinedTextFieldProps {
   startAdormentIcon?: React.ElementType;
   endAdormentIcon?: React.ElementType;
   isnotboldtext?: boolean;
   formProps?: UseFormRegisterReturn;
+  handleChange?: (
+    event: React.ChangeEvent<HTMLInputElement>,
+    child: React.ReactNode
+  ) => void;
+  value: string;
 }
 
 export const StyledTextField = styled(TextField)<{ props?: IProps }>(
@@ -42,7 +48,31 @@ const OutlinedTextField: React.FC<IProps> = (props) => {
     required,
     type,
     formProps,
+    handleChange,
+    value,
   } = props;
+
+  const [selectedValue, setSelectedValue] = useState<string | number>("");
+  const debouncedValue = useDebounce(selectedValue, 2000);
+
+  useEffect(() => {
+    if (value !== undefined) {
+      setSelectedValue(value);
+    }
+  }, [value]);
+
+  useEffect(() => {
+    if (handleChange) {
+      const event = {
+        target: { value: debouncedValue },
+      } as React.ChangeEvent<HTMLInputElement>;
+      handleChange(event, debouncedValue);
+    }
+  }, [debouncedValue]);
+
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedValue(event.target.value);
+  };
 
   return (
     <Box pb={type === "pagination" ? 0 : 2} width={"100%"}>
@@ -54,6 +84,8 @@ const OutlinedTextField: React.FC<IProps> = (props) => {
         size="small"
         {...props}
         label={""}
+        value={selectedValue}
+        onChange={handleOnChange}
         slotProps={{
           input: {
             startAdornment: (

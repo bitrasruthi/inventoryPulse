@@ -11,7 +11,7 @@ import { styled } from "@mui/material/styles";
 import LabelCommon from "./labelCommon";
 
 interface IProps extends BaseSelectProps {
-  options: { label: string; value: string | number }[];
+  options: { label: string; value: string | number }[] | string[];
   isnotboldtext?: boolean;
   marginBottom?: number;
   helperText?: React.ReactNode;
@@ -80,15 +80,18 @@ const SelectField: React.FC<IProps> = ({
         }}
         renderValue={(selected: any) => (selected ? selected : "Please Select")}
       >
-        {options?.map((option, index) => (
-          <MenuItem
-            key={index}
-            value={option.label}
-            sx={{ fontFamily: "roboto-regular !important" }}
-          >
-            {option.label}
-          </MenuItem>
-        ))}
+        {options?.map((option, index) => {
+          const isObject = typeof option === "object";
+          return (
+            <MenuItem
+              key={index}
+              value={isObject ? option.value : option}
+              sx={{ fontFamily: "roboto-regular !important" }}
+            >
+              {isObject ? option.label : option}{" "}
+            </MenuItem>
+          );
+        })}
       </StyledSelect>
       <FormHelperText sx={{ fontSize: 12, color: "#FF1744" }}>
         {helperText}

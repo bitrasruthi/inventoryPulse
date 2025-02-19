@@ -735,7 +735,7 @@ export const tableDataDummy2 = {
               id: 3,
               name: "5 Star",
               editable: false,
-              type: 2,
+              type: 1,
               options: [1, 2, 3, 4, 5],
               accountId: null,
               colors: [],
