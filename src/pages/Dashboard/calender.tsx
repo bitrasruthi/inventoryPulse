@@ -12,19 +12,8 @@ import {
   Box,
 } from "@mui/material";
 import theme from "../../styles/theme";
+import { CalendarProps } from "../../types/type";
 
-const resources = [
-  { id: 1, name: "Resource 1", startTime: 7, duration: 0.5 },
-  { id: 2, name: "Resource 2", startTime: 8.5, duration: 0.5 },
-  { id: 3, name: "Resource 3", startTime: 9, duration: 0.5 },
-  { id: 4, name: "Resource 4", startTime: 9, duration: 0.75 },
-  { id: 5, name: "Resource 5", startTime: 8, duration: 1.5 },
-  { id: 6, name: "Resource 1", startTime: 7, duration: 0.5 },
-  { id: 7, name: "Resource 2", startTime: 8.5, duration: 0.5 },
-  { id: 8, name: "Resource 3", startTime: 9, duration: 0.5 },
-  { id: 9, name: "Resource 4", startTime: 9, duration: 0.75 },
-  { id: 10, name: "Resource 5", startTime: 18, duration: 1.5 },
-];
 const startHour = 7;
 const endHour = 20;
 
@@ -43,10 +32,10 @@ const generateTimeSlots = () => {
 
 const timeSlots = generateTimeSlots();
 
-const Calendar = () => {
+const Calendar: React.FC<CalendarProps> = ({ resources }) => {
   const [selectedId, setSelectedId] = useState(0);
   const [shadow, setShadow] = useState(false);
-  const tableContainerRef = useRef(null);
+  const tableContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -109,6 +98,7 @@ const Calendar = () => {
             >
               <Typography className="roboto-medium">Name</Typography>
             </TableCell>
+
             {timeSlots.map((slot, index) => (
               <TableCell
                 key={index}
@@ -128,122 +118,134 @@ const Calendar = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {resources.map((resource) => {
-            const endTime = resource.startTime + resource.duration;
-            const colSpan = calculateColSpan(
-              resource.startTime,
-              resource.duration
-            );
-            const widthPercentage = calculateWidthPercentage(resource.duration);
-            const leftOffsetPercentage = calculateLeftOffsetPercentage(
-              resource.startTime
-            );
-            const startFormatted = format(
-              addHours(startOfDay(new Date()), resource.startTime),
-              resource.startTime % 1 === 0.75
-                ? "h:45 a"
-                : resource.startTime % 1 === 0.5
-                ? "h:30 a"
-                : resource.startTime % 1 === 0.25
-                ? "h:15 a"
-                : "h a"
-            );
+          {resources &&
+            resources?.map((resource) => {
+              const endTime = resource.startTime + resource.duration;
+              const colSpan = calculateColSpan(
+                resource.startTime,
+                resource.duration
+              );
+              const widthPercentage = calculateWidthPercentage(
+                resource.duration
+              );
+              const leftOffsetPercentage = calculateLeftOffsetPercentage(
+                resource.startTime
+              );
+              const startFormatted = format(
+                addHours(startOfDay(new Date()), resource.startTime),
+                resource.startTime % 1 === 0.75
+                  ? "h:45 a"
+                  : resource.startTime % 1 === 0.5
+                  ? "h:30 a"
+                  : resource.startTime % 1 === 0.25
+                  ? "h:15 a"
+                  : "h a"
+              );
 
-            const endFormatted = format(
-              addHours(startOfDay(new Date()), endTime),
-              endTime % 1 === 0.75
-                ? "h:45 a"
-                : endTime % 1 === 0.5
-                ? "h:30 a"
-                : endTime % 1 === 0.25
-                ? "h:15 a"
-                : "h a"
-            );
+              const endFormatted = format(
+                addHours(startOfDay(new Date()), endTime),
+                endTime % 1 === 0.75
+                  ? "h:45 a"
+                  : endTime % 1 === 0.5
+                  ? "h:30 a"
+                  : endTime % 1 === 0.25
+                  ? "h:15 a"
+                  : "h a"
+              );
 
-            return (
-              <TableRow
-                key={resource.id}
-                sx={{
-                  backgroundColor:
-                    selectedId === resource.id ? "#fff2c9" : "inherit",
-                }}
-                onClick={() => setSelectedId(resource.id)}
-              >
-                <TableCell
+              return (
+                <TableRow
+                  key={resource.id}
                   sx={{
-                    fontWeight: "bold",
-                    borderRight: "1px solid #dbdbdb",
-                    position: "sticky",
-                    left: 0,
-                    zIndex: 2,
                     backgroundColor:
-                      selectedId === resource.id ? "#fff2c9" : "white",
-                    boxShadow: shadow
-                      ? "8px 0px 10px -2px rgba(0,0,0,0.1)"
-                      : "none",
+                      selectedId === resource.id ? "#fff2c9" : "inherit",
                   }}
+                  onClick={() => setSelectedId(resource.id)}
                 >
-                  {resource.name}
-                </TableCell>
-                {timeSlots.map((slot, index) => {
-                  if (slot.hour === Math.floor(resource.startTime)) {
+                  <TableCell
+                    sx={{
+                      fontWeight: "bold",
+                      borderRight: "1px solid #dbdbdb",
+                      position: "sticky",
+                      left: 0,
+                      zIndex: 2,
+                      backgroundColor:
+                        selectedId === resource.id ? "#fff2c9" : "white",
+                      boxShadow: shadow
+                        ? "8px 0px 10px -2px rgba(0,0,0,0.1)"
+                        : "none",
+                    }}
+                  >
+                    {resource.name}
+                  </TableCell>
+                  {timeSlots.map((slot, index) => {
+                    if (slot.hour === Math.floor(resource.startTime)) {
+                      return (
+                        <TableCell
+                          key={index}
+                          align="center"
+                          //colSpan={colSpan}
+                          style={{
+                            color: "white",
+                            fontWeight: "bold",
+                            position: "relative",
+                            borderRight: "1px solid #dbdbdb",
+                          }}
+                        >
+                          <div
+                            style={{
+                              position: "absolute",
+                              top: 0,
+                              bottom: 0,
+                              left: "50%",
+                              borderLeft: "2px dashed rgba(0,0,0,0.1)",
+                            }}
+                          ></div>
+                          <Box
+                            sx={{
+                              position: "absolute",
+                              top: 0,
+                              bottom: 0,
+                              left: `${leftOffsetPercentage}%`,
+                              width: `${widthPercentage - 1}%`,
+                              backgroundColor: theme.palette.primary.main,
+                              borderRadius: 2,
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              opacity: 0.8,
+                              m: 0.2,
+                              borderLeft: "2px dashed rgba(0,0,0,0.1)",
+                            }}
+                          >
+                            {`${startFormatted.toLocaleLowerCase()} - ${endFormatted.toLocaleLowerCase()}`}
+                          </Box>
+                        </TableCell>
+                      );
+                    }
                     return (
                       <TableCell
                         key={index}
-                        align="center"
-                        //colSpan={colSpan}
                         style={{
-                          color: "white",
-                          fontWeight: "bold",
-                          position: "relative",
                           borderRight: "1px solid #dbdbdb",
+                          position: "relative",
                         }}
                       >
-                        <Box
-                          sx={{
+                        <div
+                          style={{
                             position: "absolute",
                             top: 0,
                             bottom: 0,
-                            left: `${leftOffsetPercentage}%`,
-                            width: `${widthPercentage}%`,
-                            backgroundColor: theme.palette.primary.main,
-                            borderRadius: 2,
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            opacity: 0.8,
-                            m: 0.2,
+                            left: "50%",
                             borderLeft: "2px dashed rgba(0,0,0,0.1)",
                           }}
-                        >
-                          {`${startFormatted.toLocaleLowerCase()} - ${endFormatted.toLocaleLowerCase()}`}
-                        </Box>
+                        ></div>
                       </TableCell>
                     );
-                  }
-                  return (
-                    <TableCell
-                      key={index}
-                      style={{
-                        borderRight: "1px solid #dbdbdb",
-                        position: "relative",
-                      }}
-                    >
-                      <div
-                        style={{
-                          position: "absolute",
-                          top: 0,
-                          bottom: 0,
-                          left: "50%",
-                          borderLeft: "2px dashed rgba(0,0,0,0.1)",
-                        }}
-                      ></div>
-                    </TableCell>
-                  );
-                })}
-              </TableRow>
-            );
-          })}
+                  })}
+                </TableRow>
+              );
+            })}
         </TableBody>
       </Table>
     </TableContainer>

@@ -46,7 +46,7 @@ const ReportsStyles = styled(Box)(({ theme }) => ({
     display: "flex",
     position: "absolute",
     left: 0,
-    zIndex: 1001,
+    // zIndex: 1001,
     padding: "5px",
     alignItems: "center",
     width: "3%",
@@ -84,17 +84,21 @@ const ReportsStyles = styled(Box)(({ theme }) => ({
     borderBottom: "1px solid #e0e0e0",
   },
   [theme.breakpoints.down("md")]: {
+    "& .parent-index-grid": {
+      width: "6%",
+    },
+    "& .parent-icons-grid": {
+      width: "15%",
+    },
     "& .left-positioned-grid": {
       width: "6%",
     },
     "& .right-positioned-grid": {
       width: "15%",
     },
-    "& .scrollable-content-grid": {
-      width: "calc(100% - 6% - 15%) !important",
-      "& .scrollable-box": {
-        width: "calc(100% - 6% - 15%) !important",
-      },
+    "& .collapse-box": {
+      marginLeft: "6%",
+      marginRight: "15%",
     },
   },
 }));

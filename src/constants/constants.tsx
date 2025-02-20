@@ -281,17 +281,17 @@ export const contactListDummy = [
 
 export const userMenuList = [
   {
-    id: 1,
+    key: 1,
     label: "View",
     icon: VisibilityOutlinedIcon,
   },
   {
-    id: 2,
+    key: 2,
     label: "Edit",
     icon: EditOutlinedIcon,
   },
   {
-    id: 3,
+    key: 3,
     label: "Delete",
     icon: DeleteOutlineIcon,
   },
@@ -561,40 +561,6 @@ export const tableDataDummy2 = {
           required: false,
           source_id: null,
         },
-        "9803493f-002b-4222-948c-9c2e3191bb3b": {
-          id: 134652489,
-          uuid: "9803493f-002b-4222-948c-9c2e3191bb3b",
-          name: "Single select",
-          label: "Single Select",
-          editable: true,
-          placeholder: "Select one",
-          type: "SELECT",
-          source: {
-            type: "OPTIONS",
-            options: ["test 2", "test 1"],
-          },
-          deleted_at: null,
-          can_edit_value: true,
-          required: false,
-          source_id: null,
-        },
-        "9cee6956-c521-4436-92ed-e801073c0d77": {
-          id: 134652490,
-          uuid: "9cee6956-c521-4436-92ed-e801073c0d77",
-          name: "Multi select",
-          label: "Multi select",
-          editable: true,
-          placeholder: "Multi select placeholder",
-          type: "SELECT_MULTI",
-          source: {
-            type: "OPTIONS",
-            options: ["Option1", "Option2", "Option3"],
-          },
-          deleted_at: null,
-          can_edit_value: true,
-          required: false,
-          source_id: null,
-        },
       },
       item_order: [
         "6a9b1a38-0f34-489f-92b4-bb7acdbf9ee1",
@@ -607,19 +573,19 @@ export const tableDataDummy2 = {
           deleted_at: null,
           values: {
             "9a2ab4c6-4d1d-4e2c-8e2b-1216b03336e2": {
-              content: null,
+              content: 1,
             },
             "9803492f-002b-4222-948c-9c2e3191bb3b": {
-              content: null,
+              content: "value2 select",
             },
             "9cee695c-c521-4436-92ed-e801073c0d77": {
-              content: null,
+              content: "value1",
             },
             "c26ea5bf-6e79-402e-8cf8-e164cc588ca5": {
               content: "item",
             },
             "db2c0f99-4239-46ab-89df-8750d406e427": {
-              content: null,
+              content: "description values",
             },
           },
           attachments: {},
@@ -648,19 +614,19 @@ export const tableDataDummy2 = {
           deleted_at: null,
           values: {
             "9a2ab4c6-4d1d-4e2c-8e2b-1216b03336e2": {
-              content: null,
+              content: 2,
             },
             "9803492f-002b-4222-948c-9c2e3191bb3b": {
-              content: null,
+              content: "selcted value 2",
             },
             "9cee695c-c521-4436-92ed-e801073c0d77": {
-              content: null,
+              content: "value2",
             },
             "c26ea5bf-6e79-402e-8cf8-e164cc588ca5": {
               content: "item2",
             },
             "db2c0f99-4239-46ab-89df-8750d406e427": {
-              content: null,
+              content: "desc",
             },
           },
           attachments: {},
@@ -769,7 +735,7 @@ export const tableDataDummy2 = {
               id: 3,
               name: "5 Star",
               editable: false,
-              type: 2,
+              type: 1,
               options: [1, 2, 3, 4, 5],
               accountId: null,
               colors: [],
@@ -892,3 +858,9 @@ export const tableDataDummy2 = {
   assets: [],
   conditional_logic_rules: {},
 };
+
+export const radioDummyList = [
+  { label: "Yes", value: 1 },
+  { label: "No", value: 2 },
+  { label: "Neutral", value: 3 },
+];

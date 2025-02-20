@@ -1,27 +1,32 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  IconButton,
-  Collapse,
-  Box,
-  Radio,
-  Grid2,
-  useMediaQuery,
-} from "@mui/material";
+import { IconButton, Collapse, Box, Grid2, useMediaQuery } from "@mui/material";
 import { ExpandMore, ExpandLess, MoreVert } from "@mui/icons-material";
 import OutlinedTextField from "../../../components/outlinedTextField";
-import CameraAltIcon from "@mui/icons-material/CameraAlt";
-import DescriptionIcon from "@mui/icons-material/Description";
 import {
   inspectionColors2,
   tableDataDummy2,
-  tabMenuList,
 } from "../../../constants/constants";
 import SelectField from "../../../components/selectField";
-import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 import ReportsStyles from "../../../styles/reportsStyles";
+import DetailsIcon from "../../../assets/icons/detailsIcon";
+import CameraIcon from "../../../assets/icons/cameraIcon";
+import ReportIcon from "../../../assets/icons/reportIcon";
+import MenuCommon from "../../../components/menuCommon";
+import { IMenuItemExtendProps } from "../../../helpers/Interfaces";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import { useFormHook } from "../../../hooks/useFormHook";
+import MuiRating from "../../../components/MuiRating";
 
 const Reports = () => {
+  const [tableData, setTableData] = useState<any>(tableDataDummy2);
   const [openSections, setOpenSections] = useState<any>({});
+  const [selectedChildId, setSelectedChildId] = useState<any>(0);
+  const [selectedRowId, setSelectedRowId] = useState<any>(0);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const { form } = useFormHook();
+  const { control } = form;
+
   const matches = useMediaQuery((_theme: any) =>
     _theme?.breakpoints?.down("sm")
   );
@@ -71,37 +76,65 @@ const Reports = () => {
     }));
   };
 
-  const getBodyByType = (row: any) => {
+  const getBodyByType = (row: any, values: any) => {
     switch (row.type) {
       case "TEXT":
         return (
           <OutlinedTextField
             variant="outlined"
-            placeholder={row.name}
-            value={row.name}
+            placeholder={row.placeholder}
+            value={values[row.uuid] ? values[row.uuid].content : ""}
           />
         );
       case "SELECT":
-        return <SelectField options={tabMenuList} />;
+        return (
+          <SelectField
+            options={row.source.options}
+            value={values[row.uuid] ? values[row.uuid].content : ""}
+            onChange={(newValue) => {
+              console.log("Updated Value ", newValue.target.value);
+            }}
+          />
+        );
       case "SELECT_MULTI":
-        return <SelectField options={tabMenuList} />;
+        return (
+          <SelectField
+            options={row.source.options}
+            value={values[row.uuid] ? values[row.uuid].content : ""}
+            onChange={(newValue) => {
+              console.log("Updated Value", newValue.target.value);
+            }}
+          />
+        );
       case "SCALE":
         return (
-          <>
-            <Radio />
-            <Radio />
-            <Radio />
-            <Radio />
-          </>
+          // <MuiRadioButton
+          //   radioList={radioDummyList}
+          //   control={control}
+          //   onChange={(newValue) => {
+          //     console.log("Updated Value", newValue.target.value);
+          //   }}
+          //   value={values[row.uuid] ? values[row.uuid].content : ""}
+          // />
+          <MuiRating
+            value={values[row.uuid] ? values[row.uuid].content : null}
+            max={row.source?.option_set?.type === 2 ? 5 : 3}
+            onChange={(_event, newValue) => {
+              console.log("Updated Value:", newValue);
+            }}
+          />
         );
       case "TEXTAREA":
         return (
           <OutlinedTextField
             variant="outlined"
-            placeholder={row.name}
-            value={row.name}
+            placeholder={row.placeholder}
+            value={values[row.uuid] ? values[row.uuid].content : ""}
             multiline={true}
             minRows={2}
+            handleChange={(newValue) => {
+              console.log("Updated Value", newValue.target.value);
+            }}
           />
         );
       default:
@@ -112,11 +145,11 @@ const Reports = () => {
   const reportsParentActionIcons = [
     {
       id: 1,
-      icon: CameraAltIcon,
+      icon: CameraIcon,
     },
     {
       id: 2,
-      icon: DescriptionIcon,
+      icon: DetailsIcon,
     },
     {
       id: 3,
@@ -126,8 +159,9 @@ const Reports = () => {
 
   const parentActionsIcons = (parentId?: number) => (
     <>
-      {reportsParentActionIcons.map((icon, index) => (
+      {reportsParentActionIcons.map((icon) => (
         <Grid2
+          key={icon.id}
           size={12}
           sx={{
             borderLeft: "1px solid  #e0e0e0",
@@ -143,26 +177,40 @@ const Reports = () => {
     </>
   );
 
+  const handleChildMenuClick = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    childId?: string
+  ) => {
+    console.log(selectedChildId, childId);
+
+    if (selectedChildId === childId) {
+      setAnchorEl(event.currentTarget);
+    }
+  };
+
   const reportsChildActionIcons = [
     {
       id: 1,
-      icon: ReportProblemIcon,
+      icon: CameraIcon,
     },
     {
       id: 2,
-      icon: DescriptionIcon,
+      icon: ReportIcon,
     },
     {
       id: 3,
       icon: MoreVert,
+      onClick: (childid: string) => {
+        console.log(childid);
+      },
     },
   ];
 
-  const childActionsIcons = (childId?: number) =>
+  const childActionsIcons = (childId?: string) =>
     matches ? (
       <Grid2 container spacing={3} textAlign={"center"}>
         {reportsChildActionIcons.map((icon) => (
-          <Grid2 size={4} pb={2}>
+          <Grid2 key={icon.id} size={4} pb={2}>
             <icon.icon sx={{ width: 16, height: 16 }} />
           </Grid2>
         ))}
@@ -171,26 +219,98 @@ const Reports = () => {
       <>
         {reportsChildActionIcons.map((icon, index) => (
           <Grid2
+            key={icon.id}
             size={12}
             sx={{
               borderLeft: index === 0 ? "" : "1px solid  #e0e0e0",
-
               justifyContent: "center",
               display: "flex",
               alignItems: "center",
               height: 110,
             }}
           >
-            <icon.icon sx={{ width: 16, height: 16 }} />
+            <IconButton
+              disableRipple
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                if (icon.id === 3) {
+                  setAnchorEl(e.currentTarget);
+                  setSelectedChildId(childId);
+                }
+              }}
+            >
+              <icon.icon sx={{ width: 16, height: 16 }} />
+            </IconButton>
           </Grid2>
         ))}
       </>
     );
 
+  const handleClickView = () => {
+    console.log("view", selectedChildId);
+  };
+
+  const handleClickEdit = () => {
+    console.log("edit");
+  };
+
+  const handleClickDelete = () => {
+    console.log("delete");
+  };
+
+  const userMenuList: IMenuItemExtendProps[] = [
+    {
+      key: 1,
+      label: "View",
+      onClick: (_e) => handleClickView(),
+    },
+    {
+      key: 2,
+      label: "Edit",
+      onClick: (_e) => handleClickEdit(),
+    },
+    {
+      key: 3,
+      label: "Delete",
+      onClick: (_e) => handleClickDelete(),
+    },
+  ];
+
+  const generateUUID = () => crypto.randomUUID();
+  const handleAddRow = (roomUUID: string, parentUUID: string) => {
+    setTableData((prevData: any) => {
+      const newUUID = generateUUID();
+
+      return {
+        ...prevData,
+        rooms: {
+          ...prevData.rooms,
+          [roomUUID]: {
+            ...prevData.rooms[roomUUID],
+            items: {
+              ...prevData.rooms[roomUUID].items,
+              [parentUUID]: {
+                ...prevData.rooms[roomUUID].items[parentUUID],
+                childItems: [
+                  ...(prevData.rooms[roomUUID].items[parentUUID]?.childItems ||
+                    []),
+                  {
+                    id: 0,
+                    uuid: newUUID,
+                    values: {},
+                  },
+                ],
+              },
+            },
+          },
+        },
+      };
+    });
+  };
+
   return (
     <ReportsStyles>
-      {Object.values(tableDataDummy2.rooms).map((section: any, key: number) => (
-        <Box key={key} pb={3}>
+      {Object.entries(tableData.rooms).map(([roomUUID, section]: any, key) => (
+        <Box key={roomUUID} pb={3}>
           <Grid2 container spacing={0} className="parent-container">
             <Grid2
               size={{ xs: 1, sm: 0.3 }}
@@ -270,24 +390,123 @@ const Reports = () => {
                     id="scroll-container"
                     ref={scrollContainerRef}
                   >
-                    {Object.values(section.items)?.map(
-                      (_item: any, _childIndex: number) => (
-                        <>
-                          {_childIndex === 0 && (
-                            <Grid2 container spacing={0}>
+                    {section.items &&
+                      Object.values(section.items)?.map(
+                        (_item: any, _childIndex: number) => (
+                          <>
+                            {_childIndex === 0 && (
+                              <Grid2 container spacing={0}>
+                                <Grid2
+                                  className="left-positioned-grid"
+                                  sx={{
+                                    backgroundColor: "#f4f4f4",
+                                    minHeight: 31,
+                                  }}
+                                ></Grid2>
+                                <Grid2 className="scrollable-content-grid">
+                                  {Object.values(section?.fields)?.map(
+                                    (field: any, _rowIndex: number) => (
+                                      <Box
+                                        key={field.uuid}
+                                        sx={{
+                                          borderRight:
+                                            _rowIndex ===
+                                            Object.values(section?.fields)
+                                              .length -
+                                              1
+                                              ? "none"
+                                              : "1px solid #ddd",
+                                          backgroundColor: "#f4f4f4",
+                                        }}
+                                        className="scrollable-box"
+                                      >
+                                        {field.label.includes("-")
+                                          ? ""
+                                          : field.label}
+                                      </Box>
+                                    )
+                                  )}
+                                </Grid2>
+                                <Grid2
+                                  className="right-positioned-grid"
+                                  sx={{ backgroundColor: "#f4f4f4" }}
+                                ></Grid2>
+                              </Grid2>
+                            )}
+
+                            <Grid2
+                              container
+                              spacing={0}
+                              onClick={() => {
+                                setSelectedRowId(_item.uuid);
+                              }}
+                              onMouseOver={() => {
+                                setSelectedRowId(_item.uuid);
+                              }}
+                            >
                               <Grid2
                                 className="left-positioned-grid"
                                 sx={{
-                                  backgroundColor: "#f4f4f4",
-                                  minHeight: 31,
+                                  background: "#fff",
+                                  minHeight:
+                                    _childIndex ===
+                                    Object.values(section?.items).length - 1
+                                      ? 110
+                                      : 100,
+                                  boxShadow:
+                                    scrollPosition.left ||
+                                    scrollPosition.bothShadows
+                                      ? "2px 2px 10px #ddd"
+                                      : "none",
+                                  borderBottom:
+                                    _childIndex ===
+                                    Object.values(section?.items).length - 1
+                                      ? "none !important"
+                                      : "1px solid #ddd",
+                                  borderTop:
+                                    _childIndex ===
+                                    Object.values(section?.items).length - 1
+                                      ? "1px solid #ddd"
+                                      : "none !important",
                                 }}
-                              ></Grid2>
+                              >
+                                {selectedRowId === _item.uuid && (
+                                  <Box
+                                    key={_item.uuid}
+                                    sx={{
+                                      position: "absolute",
+                                      top: 75,
+                                      left: 10,
+                                      zIndex: 1031,
+                                      cursor: "pointer",
+                                    }}
+                                    onClick={() =>
+                                      handleAddRow(roomUUID, _item.uuid)
+                                    }
+                                  >
+                                    <AddCircleOutlineIcon />
+                                  </Box>
+                                )}
+
+                                <Box sx={{ position: "relative", zIndex: 10 }}>
+                                  {key + 1}.{_childIndex + 1}
+                                </Box>
+                              </Grid2>
+
                               <Grid2 className="scrollable-content-grid">
                                 {Object.values(section?.fields)?.map(
                                   (field: any, _rowIndex: number) => (
                                     <Box
-                                      key={_childIndex}
+                                      key={field.uuid}
+                                      className="scrollable-box"
                                       sx={{
+                                        paddingRight:
+                                          _rowIndex ===
+                                          Object.values(section?.fields)
+                                            .length -
+                                            1
+                                            ? 3
+                                            : 1,
                                         borderRight:
                                           _rowIndex ===
                                           Object.values(section?.fields)
@@ -295,113 +514,168 @@ const Reports = () => {
                                             1
                                             ? "none"
                                             : "1px solid #ddd",
-                                        backgroundColor: "#f4f4f4",
+                                        borderBottom: "none !important",
+                                        borderTop:
+                                          _childIndex ===
+                                          Object.values(section?.items).length -
+                                            1
+                                            ? "1px solid #ddd"
+                                            : "none !important",
                                       }}
-                                      className="scrollable-box"
                                     >
-                                      {field.name.includes("-")
-                                        ? ""
-                                        : field.name}
+                                      {getBodyByType(field, _item.values)}
                                     </Box>
                                   )
                                 )}
                               </Grid2>
                               <Grid2
                                 className="right-positioned-grid"
-                                sx={{ backgroundColor: "#f4f4f4" }}
-                              ></Grid2>
+                                sx={{
+                                  background: "#fff",
+                                  boxShadow:
+                                    scrollPosition.right ||
+                                    scrollPosition.bothShadows
+                                      ? "-2px 2px 10px #ddd"
+                                      : "none",
+                                  borderBottom:
+                                    _childIndex ===
+                                    Object.values(section?.items).length - 1
+                                      ? "none !important"
+                                      : "1px solid #ddd",
+                                  borderTop:
+                                    _childIndex ===
+                                    Object.values(section?.items).length - 1
+                                      ? "1px solid #ddd"
+                                      : "none !important",
+                                  height: 100,
+                                }}
+                              >
+                                {childActionsIcons(_item.uuid)}
+                              </Grid2>
                             </Grid2>
-                          )}
-                          <Grid2 container spacing={0}>
-                            <Grid2
-                              className="left-positioned-grid"
-                              sx={{
-                                background: "#fff",
-                                minHeight:
-                                  _childIndex ===
-                                  Object.values(section?.items).length - 1
-                                    ? 110
-                                    : 100,
-                                boxShadow:
-                                  scrollPosition.left ||
-                                  scrollPosition.bothShadows
-                                    ? "2px 2px 10px #ddd"
-                                    : "none",
-                                borderBottom:
-                                  _childIndex ===
-                                  Object.values(section?.items).length - 1
-                                    ? "none !important"
-                                    : "1px solid #ddd",
-                                borderTop:
-                                  _childIndex ===
-                                  Object.values(section?.items).length - 1
-                                    ? "1px solid #ddd"
-                                    : "none !important",
-                              }}
-                            >
-                              {key + 1}.{_childIndex + 1}
-                            </Grid2>
-
-                            <Grid2 className="scrollable-content-grid">
-                              {Object.values(section?.fields)?.map(
-                                (field: any, _rowIndex: number) => (
-                                  <Box
-                                    key={_childIndex}
-                                    className="scrollable-box"
+                            {_item?.childItems?.map(
+                              (childItem: any, grandIndex: number) => (
+                                <Grid2
+                                  container
+                                  spacing={0}
+                                  key={childItem.uuid}
+                                  onMouseOver={() => {
+                                    setSelectedRowId(childItem.uuid);
+                                  }}
+                                >
+                                  <Grid2
+                                    className="left-positioned-grid"
                                     sx={{
-                                      paddingRight:
-                                        _rowIndex ===
-                                        Object.values(section?.fields).length -
-                                          1
-                                          ? 3
-                                          : 1,
-                                      borderRight:
-                                        _rowIndex ===
-                                        Object.values(section?.fields).length -
-                                          1
-                                          ? "none"
+                                      background: "#fff",
+                                      minHeight:
+                                        _childIndex ===
+                                        Object.values(section?.items).length - 1
+                                          ? 110
+                                          : 100,
+                                      boxShadow:
+                                        scrollPosition.left ||
+                                        scrollPosition.bothShadows
+                                          ? "2px 2px 10px #ddd"
+                                          : "none",
+                                      borderBottom:
+                                        _childIndex ===
+                                        Object.values(section?.items).length - 1
+                                          ? "none !important"
                                           : "1px solid #ddd",
-                                      borderBottom: "none !important",
+                                      borderTop:
+                                        _childIndex ===
+                                        Object.values(section?.items).length - 1
+                                          ? ""
+                                          : "1px solid #ddd",
+                                    }}
+                                  >
+                                    {selectedRowId === childItem.uuid && (
+                                      <Box
+                                        key={childItem.uuid}
+                                        sx={{
+                                          position: "absolute",
+                                          top: 75,
+                                          left: 10,
+                                          zIndex: 1031,
+                                        }}
+                                        onClick={() =>
+                                          handleAddRow(roomUUID, _item.uuid)
+                                        }
+                                      >
+                                        <AddCircleOutlineIcon />
+                                      </Box>
+                                    )}
+                                    <Box
+                                      sx={{ position: "relative", zIndex: 10 }}
+                                    >
+                                      {key + 1}.{_childIndex + 1}.
+                                      {grandIndex + 1}
+                                    </Box>
+                                  </Grid2>
+
+                                  <Grid2 className="scrollable-content-grid">
+                                    {Object.values(section?.fields)?.map(
+                                      (field: any, _rowIndex: number) => (
+                                        <Box
+                                          key={field.uuid}
+                                          className="scrollable-box"
+                                          sx={{
+                                            paddingRight:
+                                              _rowIndex ===
+                                              Object.values(section?.fields)
+                                                .length -
+                                                1
+                                                ? 3
+                                                : 1,
+                                            borderRight:
+                                              _rowIndex ===
+                                              Object.values(section?.fields)
+                                                .length -
+                                                1
+                                                ? "none"
+                                                : "1px solid #ddd",
+                                            borderBottom: "none !important",
+                                          }}
+                                        >
+                                          {getBodyByType(
+                                            field,
+                                            childItem.values
+                                          )}
+                                        </Box>
+                                      )
+                                    )}
+                                  </Grid2>
+
+                                  <Grid2
+                                    className="right-positioned-grid"
+                                    sx={{
+                                      background: "#fff",
+                                      boxShadow:
+                                        scrollPosition.right ||
+                                        scrollPosition.bothShadows
+                                          ? "-2px 2px 10px #ddd"
+                                          : "none",
+                                      borderBottom:
+                                        _childIndex ===
+                                        Object.values(section?.items).length - 1
+                                          ? "none !important"
+                                          : "1px solid #ddd",
                                       borderTop:
                                         _childIndex ===
                                         Object.values(section?.items).length - 1
                                           ? "1px solid #ddd"
                                           : "none !important",
+                                      height: 100,
                                     }}
                                   >
-                                    {getBodyByType(field)}
-                                  </Box>
-                                )
-                              )}
-                            </Grid2>
-                            <Grid2
-                              className="right-positioned-grid"
-                              sx={{
-                                background: "#fff",
-                                boxShadow:
-                                  scrollPosition.right ||
-                                  scrollPosition.bothShadows
-                                    ? "-2px 2px 10px #ddd"
-                                    : "none",
-                                borderBottom:
-                                  _childIndex ===
-                                  Object.values(section?.items).length - 1
-                                    ? "none !important"
-                                    : "1px solid #ddd",
-                                borderTop:
-                                  _childIndex ===
-                                  Object.values(section?.items).length - 1
-                                    ? "1px solid #ddd"
-                                    : "none !important",
-                                height: 110,
-                              }}
-                            >
-                              {childActionsIcons()}
-                            </Grid2>
-                          </Grid2>
-                        </>
-                      )
-                    )}
+                                    {childActionsIcons(childItem.uuid)}
+                                  </Grid2>
+                                </Grid2>
+                              )
+                            )}
+                          </>
+                        )
+                      )}
                   </Box>
                 </Grid2>
 
@@ -419,23 +693,19 @@ const Reports = () => {
                         {Object.values(section?.fields)?.map(
                           (field: any, _rowIndex: number) => (
                             <Box
-                              key={_rowIndex}
+                              key={field.uuid}
                               sx={{
                                 px: 2,
                                 py: 1,
-                                borderRight:
-                                  _rowIndex ===
-                                  Object.values(section?.fields).length - 1
-                                    ? "none"
-                                    : "1px solid #ddd",
                                 flexShrink: 0,
                               }}
                             >
-                              {getBodyByType(field)}
+                              {getBodyByType(field, _item.values)}
                             </Box>
                           )
                         )}
                       </Grid2>
+
                       <Grid2
                         size={12}
                         sx={{
@@ -447,7 +717,7 @@ const Reports = () => {
                         }}
                       >
                         {" "}
-                        {childActionsIcons()}
+                        {childActionsIcons(_item.id)}
                       </Grid2>
                     </Grid2>
                   )
@@ -457,6 +727,12 @@ const Reports = () => {
           </Grid2>
         </Box>
       ))}
+      <MenuCommon
+        anchor={anchorEl}
+        menuList={userMenuList}
+        setAnchor={setAnchorEl}
+        open={open}
+      />
     </ReportsStyles>
   );
 };

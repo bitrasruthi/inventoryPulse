@@ -9,7 +9,7 @@ export interface viewMenuInterface {
 
 export interface IMenuItemExtendProps extends MenuItemProps {
   label: string;
-  icon: OverridableComponent<SvgIconTypeMap<{}, "svg">> & { muiName: string };
+  icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">> & { muiName: string };
 }
 
 export interface PropertyDetailsFormValues {
