@@ -1,11 +1,9 @@
 import { Container } from "@mui/material";
-import EditIcon from "../../assets/icons/editIcon";
 
 const Dashboard = () => {
   return (
     <Container>
-      <h1>Dashboard</h1>
-      <EditIcon />
+      <h1>Dashboard test</h1>
     </Container>
   );
 };
