@@ -579,7 +579,7 @@ export const tableDataDummy2 = {
               content: "value2 select",
             },
             "9cee695c-c521-4436-92ed-e801073c0d77": {
-              content: "value1",
+              content: ["Option1"],
             },
             "c26ea5bf-6e79-402e-8cf8-e164cc588ca5": {
               content: "item",
