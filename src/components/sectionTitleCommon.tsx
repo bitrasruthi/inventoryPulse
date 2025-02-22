@@ -10,7 +10,7 @@ const SectionTitleCommon: React.FC<IProps> = (props) => {
   return (
     <Typography
       color="#694A96"
-      fontSize={"16px"}
+      fontSize={"18px"}
       fontFamily={"roboto-bold"}
       pt={"10px"}
     >

@@ -5,36 +5,53 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import StepContent from "@mui/material/StepContent";
 import Typography from "@mui/material/Typography";
-import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined"; // Empty circle icon
-import CheckCircleIcon from "@mui/icons-material/CheckCircle"; // Checkmark icon (optional)
+import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ContentWrapper from "../../../components/contentWrapper";
-import LabelValueCommon from "../../../components/labelValueCommon";
+import Button from "@mui/material/Button";
 
 const steps = [
   {
     label: "Pending",
-    description: "04 Jan",
+    description: "04 Jan, 2025 10:20 AM",
     value: 1,
+    button: "Cancel Processing",
   },
   {
     label: "Assigned",
-    description: "04 Jan",
+    description: "04 Jan, 2025 10:21 AM",
     value: 2,
+    button: "Cancel Processing",
   },
   {
     label: "Active",
-    description: "04 Jan",
+    description: "04 Jan, 2025 10:21 AM",
     value: 3,
+    button: "Cancel Processing",
+  },
+  {
+    label: "Processing",
+    description: "Typist Processing",
+    value: 4,
+    button: "Cancel Processing",
+  },
+  {
+    label: "Review",
+    description: "Manager Review",
+    value: 5,
+    button: "Cancel Processing",
   },
   {
     label: "Complete",
-    description: "04 Jan",
-    value: 4,
+    description: "Ready to Sign/Download",
+    value: 6,
+    button: "Cancel Processing",
   },
   {
     label: "Closed",
-    description: "04 Jan",
-    value: 5,
+    description: "Report Archived",
+    value: 7,
+    button: "Cancel Processing",
   },
 ];
 
@@ -57,7 +74,7 @@ function CustomStepIcon({
 }
 
 function InspectionStatusStepper() {
-  const [activeStep] = React.useState(3);
+  const [activeStep] = React.useState(4);
 
   return (
     <ContentWrapper>
@@ -88,13 +105,39 @@ function InspectionStatusStepper() {
                     ),
                 }}
               >
-                <LabelValueCommon fieldName={step.label} type={2} />
+                <Typography
+                  fontWeight={activeStep === step.value ? "bold" : "normal"}
+                  sx={{ fontSize: "14px" }}
+                >
+                  {step.label}
+                </Typography>
+                <Typography
+                  sx={{
+                    color: "back",
+                    fontSize: "14px",
+                  }}
+                >
+                  {step.description}
+                </Typography>
               </StepLabel>
 
               <StepContent>
-                <Typography sx={{ fontSize: "14px" }}>
-                  {step.description}
-                </Typography>
+                {step.button && (
+                  <Box sx={{ my: 2 }}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      size="small"
+                      sx={{
+                        fontSize: "12px",
+                        width: "100%",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      {step.button}
+                    </Button>
+                  </Box>
+                )}
               </StepContent>
             </Step>
           ))}

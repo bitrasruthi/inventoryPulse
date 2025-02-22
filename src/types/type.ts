@@ -24,3 +24,9 @@ export interface ScheduledTime {
   startTime: number;
   duration: number;
 }
+
+export interface IconProps {
+  width: string;
+  height: string;
+  fill?: string;
+}

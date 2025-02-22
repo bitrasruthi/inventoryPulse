@@ -362,9 +362,9 @@ export const propertyDetails = [
     description: "Bath Room",
   },
   {
-    icon: <AdditionalAreas />,
-    value: "-",
-    description: "Additional Areas",
+    icon: <ParkingSlot />,
+    value: "Yes",
+    description: "Parking Slot",
   },
   {
     icon: <GarageIcon />,
@@ -375,11 +375,6 @@ export const propertyDetails = [
     icon: <Garden />,
     value: "Yes",
     description: "Garden",
-  },
-  {
-    icon: <ParkingSlot />,
-    value: "No",
-    description: "Parking Slot",
   },
 ];
 
