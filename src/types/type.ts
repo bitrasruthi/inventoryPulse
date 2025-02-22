@@ -24,3 +24,11 @@ export interface ScheduledTime {
   startTime: number;
   duration: number;
 }
+
+export interface ISnackBarContextType {
+  snackBarState: {
+    snackbarMessage: string;
+    snackbarSeverity: "success" | "error";
+  };
+  showSnackBar: (message: any, severity: "success" | "error") => void;
+}

@@ -1,9 +1,14 @@
+import CustomSnackBar from "./components/customSnackbar";
+import SnackBarProvider from "./context/SnackBarContext";
 import MainRouter from "./routes/mainRouter";
 
 function App() {
   return (
     <>
-      <MainRouter />
+      <SnackBarProvider>
+        <MainRouter />
+        <CustomSnackBar />
+      </SnackBarProvider>
     </>
   );
 }
