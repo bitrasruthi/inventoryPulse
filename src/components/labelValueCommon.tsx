@@ -12,7 +12,7 @@ interface IProps {
 const LabelValueCommon: React.FC<IProps> = (props) => {
   const { fieldName, value, type = 1, fontSize = "14px" } = props;
   return (
-    <Box sx={{ paddingY: "3px" }}>
+    <Box sx={{ paddingY: "3px", mb: 2 }}>
       {type === 1 && (
         <>
           <LabelCommon fieldName={fieldName} fontSize={fontSize} />
