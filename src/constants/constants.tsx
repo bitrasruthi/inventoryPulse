@@ -15,12 +15,12 @@ import {
   StepperStepEnum,
   TableFieldTypeEnum,
 } from "./enum";
-import BedIcon from "../assets/icons/bedIcon";
-import BathIcon from "../assets/icons/bathIcon";
 import GarageIcon from "../assets/icons/garageIcon";
 import Garden from "../assets/icons/garden";
 import ParkingSlot from "../assets/icons/parkingSlot";
 import AdditionalAreas from "../assets/icons/additionalAreas";
+import BedIcon from "../assets/icons/primaryBedIcon";
+import BathIcon from "../assets/icons/primaryBathIcon";
 
 export const tabMenuList = [
   {
