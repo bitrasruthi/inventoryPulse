@@ -274,9 +274,6 @@ function InspectionDetails() {
                 <OutlinedCustomButton
                   label="Add"
                   startIcon={<AddIcon width="12" height="12" />}
-                  height={10}
-                  width={100}
-                  fontSize="10px"
                 />
               </Box>
               <Grid2>
