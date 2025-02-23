@@ -43,7 +43,7 @@ const SectionItem = ({ name, description, color }: SectionItemProps) => (
     position="relative"
     border={`2px dotted ${color}`}
     borderRadius={2}
-    p={2}
+    p={1.5}
     mb={1.5}
   >
     <Box
@@ -53,23 +53,32 @@ const SectionItem = ({ name, description, color }: SectionItemProps) => (
         borderTopRightRadius: 10,
         borderBottomRightRadius: 10,
         position: "absolute",
-        left: -1.5,
+        left: -2,
         top: 0,
         bottom: 0,
         my: 2,
       }}
     />
-    <Box flex={1} ml={1}>
-      <Typography variant="body1" sx={{ fontWeight: "bold" }}>
-        {name}
-      </Typography>
-      <Typography variant="caption" color="textSecondary">
-        {description}
-      </Typography>
+    <Box
+      flex={1}
+      display={"flex"}
+      justifyContent={"space-between"}
+      alignItems={"center"}
+    >
+      <Box>
+        <Typography variant="body1" sx={{ fontWeight: "roboto-medium" }}>
+          {name}
+        </Typography>
+        <Typography variant="caption" color="textSecondary">
+          {description}
+        </Typography>
+      </Box>
+      <Box>
+        <IconButton sx={{ p: 0 }}>
+          <AddIcon fill={"#FFFFFF"} />
+        </IconButton>
+      </Box>
     </Box>
-    <IconButton>
-      <AddIcon />
-    </IconButton>
   </Box>
 );
 
@@ -116,7 +125,7 @@ export default function AddSectionDrawer({
         </IconButton>
         <Typography
           variant="h6"
-          sx={{ fontWeight: "bold", flex: 1, textAlign: "center" }}
+          sx={{ flex: 1, textAlign: "center", fontFamily: "roboto-bold" }}
         >
           Add New Section
         </Typography>
