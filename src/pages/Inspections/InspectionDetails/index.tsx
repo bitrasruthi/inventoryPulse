@@ -32,12 +32,12 @@ function InspectionDetails() {
   };
 
   const handleOpenDialog = () => {
-    setIsDrawerOpen(true)
-  }
+    setIsDrawerOpen(true);
+  };
 
-   const handlecloseDialog = () => {
-     setIsDrawerOpen(false);
-   };
+  const handlecloseDialog = () => {
+    setIsDrawerOpen(false);
+  };
 
   const contact = [
     {
@@ -346,14 +346,26 @@ function InspectionDetails() {
       case "2":
         return (
           <>
-            <Box py={1} display={"flex"} justifyContent={"flex-end"}>
-              <OutlinedCustomButton
-                label="Add"
-                fillColor={true}
-                startIcon={<AddIcon width={"12"} height={"12"} fill="#ffff" />}
-                onClick={toggleDrawer(true)}
-              />
-            </Box>
+            <ContentWrapper paddingY={1}>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  p: 0,
+                  gap : 2
+                }}
+              >
+                <OutlinedCustomButton label="Preview" />
+                <OutlinedCustomButton
+                  label="Add"
+                  fillColor={true}
+                  startIcon={
+                    <AddIcon width={"12"} height={"12"} fill="#ffff" />
+                  }
+                  onClick={toggleDrawer(true)}
+                />
+              </Box>
+            </ContentWrapper>
             <AddSectionDrawer
               isDrawerOpen={isDrawerOpen}
               onClose={handlecloseDialog}

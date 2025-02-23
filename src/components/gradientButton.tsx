@@ -100,6 +100,7 @@ const GradientButton: React.FC<Props> = ({
               sx={{ display: "flex", alignItems: "center" }}
               onClick={() => {
                 handleAction && handleAction();
+                handleClose();
               }}
             >
               {item?.icon && <item.icon />}
