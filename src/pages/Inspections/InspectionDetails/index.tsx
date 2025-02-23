@@ -1,4 +1,4 @@
-import { Box, Divider, Grid2, Typography } from "@mui/material";
+import { Box, Button, Divider, Drawer, Grid2, Typography } from "@mui/material";
 import { useState } from "react";
 import TabsCommon from "../../../components/tabsCommon";
 import {
@@ -19,11 +19,25 @@ import EditIcon from "../../../assets/icons/editIcon";
 import LocationHomeIcon from "../../../assets/icons/locationHomeIcon";
 import AddIcon from "../../../assets/icons/addIcon";
 import OutlinedCustomButton from "../../../components/outlinedCustomButton";
+import AddSectionDrawer from "./addSectionDrawer";
 
 function InspectionDetails() {
   const [activeTab, setActiveTab] = useState<string>(
     inspectionsDetailsMenuList[0]?.value
   );
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const toggleDrawer = (open: boolean) => () => {
+    setIsDrawerOpen(open);
+  };
+
+  const handleOpenDialog = () => {
+    setIsDrawerOpen(true)
+  }
+
+   const handlecloseDialog = () => {
+     setIsDrawerOpen(false);
+   };
 
   const contact = [
     {
@@ -336,9 +350,14 @@ function InspectionDetails() {
               <OutlinedCustomButton
                 label="Add"
                 fillColor={true}
-                startIcon={<AddIcon width={"16"} height={"16"} fill="#ffff" />}
+                startIcon={<AddIcon width={"12"} height={"12"} fill="#ffff" />}
+                onClick={toggleDrawer(true)}
               />
             </Box>
+            <AddSectionDrawer
+              isDrawerOpen={isDrawerOpen}
+              onClose={handlecloseDialog}
+            />
             <Reports />
           </>
         );
