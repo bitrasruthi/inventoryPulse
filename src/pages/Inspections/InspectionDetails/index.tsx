@@ -71,7 +71,7 @@ function InspectionDetails() {
             <Grid2 mb={2}>
               <ProfileUpload
                 edit="Edit"
-                backgroundImage={"../public/InspectionHome.jpg"}
+                backgroundImage={"/InspectionHome.jpg"}
               />
             </Grid2>
             <Grid2
