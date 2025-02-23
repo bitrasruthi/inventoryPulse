@@ -1,4 +1,4 @@
-import { Box, Grid2, Typography } from "@mui/material";
+import { Box, Divider, Grid2, Typography } from "@mui/material";
 import { useState } from "react";
 import TabsCommon from "../../../components/tabsCommon";
 import {
@@ -16,9 +16,9 @@ import InspectionContactCommon from "../../../components/inspectionContactCommon
 import { paths } from "../../../routes/paths";
 import Reports from "./reports";
 import EditIcon from "../../../assets/icons/editIcon";
-import { DividerIcon } from "../../../assets/icons/dividerIcon";
 import LocationHomeIcon from "../../../assets/icons/locationHomeIcon";
 import AddIcon from "../../../assets/icons/addIcon";
+import OutlinedCustomButton from "../../../components/outlinedCustomButton";
 
 function InspectionDetails() {
   const [activeTab, setActiveTab] = useState<string>(
@@ -147,7 +147,7 @@ function InspectionDetails() {
                 </Box>
               ))}
             </Grid2>
-            <DividerIcon width="274" height="2" />
+            <Divider />
             <Grid2 container mb={2}>
               <Grid2 size={{ xs: 12, md: 6 }}>
                 <LabelValueCommon
@@ -261,61 +261,59 @@ function InspectionDetails() {
               </Grid2>
             </Grid2>
           </Grid2>
-          <Grid2
-            size={{ xs: 12, md: 3 }}
-            sx={{ backgroundColor: "#f6f6f6", padding: 2, borderRadius: 2 }}
-          >
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                gap: 1,
-                mb: 2,
-              }}
-            >
+          <Grid2 size={{ xs: 12, md: 3 }} sx={{ padding: 2, borderRadius: 2 }}>
+            <Box sx={{ backgroundColor: "#f6f6f6", padding: 2 }}>
               <Box
                 sx={{
-                  display: "flex",
-                  alignItems: "flex-end",
-                  gap: 1,
-                }}
-              >
-                <SectionTitleCommon title="Contacts" />
-                <Box sx={{ cursor: "pointer", paddingY: 1 }}>
-                  <EditIcon width="12" height="11" />
-                </Box>
-              </Box>
-              <Box
-                sx={{
-                  cursor: "pointer",
                   display: "flex",
                   alignItems: "center",
+                  justifyContent: "space-between",
                   gap: 1,
-                  border: "1px solid #333333",
-                  borderRadius: "10px",
-                  padding: "5px",
+                  mb: 2,
                 }}
               >
-                <AddIcon width="12" height="12" />
-                <Typography sx={{ color: "#333333", fontSize: "12px" }}>
-                  Add
-                </Typography>
-              </Box>
-            </Box>
-            <Grid2>
-              {contact.map((item, index) => (
-                <>
-                  <InspectionContactCommon
-                    key={index}
-                    name={item.name}
-                    phoneNo={item.phoneNo}
-                    email={item.email}
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "flex-end",
+                    gap: 1,
+                  }}
+                >
+                  <SectionTitleCommon title="Contacts" />
+                  <Box sx={{ cursor: "pointer", paddingY: 1 }}>
+                    <EditIcon width="12" height="11" />
+                  </Box>
+                </Box>
+                <Box
+                  sx={{
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1,
+                    borderRadius: "10px",
+                    padding: "5px",
+                  }}
+                >
+                  <OutlinedCustomButton
+                    label="Add"
+                    startIcon={<AddIcon width="12" height="12" />}
                   />
-                  <DividerIcon width="229" height="2" />
-                </>
-              ))}
-            </Grid2>
+                </Box>
+              </Box>
+              <Grid2>
+                {contact.map((item, index) => (
+                  <Grid2>
+                    <InspectionContactCommon
+                      key={index}
+                      name={item.name}
+                      phoneNo={item.phoneNo}
+                      email={item.email}
+                    />
+                    <Divider />
+                  </Grid2>
+                ))}
+              </Grid2>
+            </Box>
           </Grid2>
         </Grid2>
         <Grid2 size={{ xs: 12, md: 2 }}>
