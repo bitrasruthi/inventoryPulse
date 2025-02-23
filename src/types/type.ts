@@ -25,6 +25,15 @@ export interface ScheduledTime {
   duration: number;
 }
 
+export interface ISnackBarContextType {
+  snackBarState: {
+    snackbarOpen: boolean;
+    snackbarMessage: string;
+    snackbarSeverity: "success" | "error";
+  };
+  showSnackBar: (isOpen:boolean,message: any, severity: "success" | "error") => void;
+}
+
 export interface IconProps {
   width?: string | number;
   height?: string | number;

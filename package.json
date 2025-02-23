@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build --emptyOutDir",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generate-fetch-local": "react-query-swagger /tanstack /input:http://localhost:3000/api-json /output:src/api/axios-client.ts /template:Axios /serviceHost:. /use-recommended-configuration"
   },
   "dependencies": {
     "@emotion/styled": "^11.14.0",
@@ -23,6 +24,8 @@
     "@mui/styles": "^6.2.1",
     "@mui/x-date-pickers": "^7.23.3",
     "@rsuite/icons": "^1.0.2",
+    "@tanstack/react-query": "^5.66.9",
+    "axios": "^1.7.9",
     "clsx": "^2.1.1",
     "date-fns": "^2.29.2",
     "lodash": "^4.17.21",
@@ -31,6 +34,8 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.54.2",
+    "react-hot-toast": "^2.5.2",
+    "react-query-swagger": "^15.12.3",
     "react-router-dom": "^7.1.1",
     "rsuite": "^5.76.0",
     "yup": "^1.6.1",
@@ -40,6 +45,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.15.0",
+    "@tanstack/react-query-devtools": "^5.66.9",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.4",
