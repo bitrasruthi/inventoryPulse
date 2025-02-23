@@ -27,10 +27,11 @@ export interface ScheduledTime {
 
 export interface ISnackBarContextType {
   snackBarState: {
+    snackbarOpen: boolean;
     snackbarMessage: string;
     snackbarSeverity: "success" | "error";
   };
-  showSnackBar: (message: any, severity: "success" | "error") => void;
+  showSnackBar: (isOpen:boolean,message: any, severity: "success" | "error") => void;
 }
 
 export interface IconProps {

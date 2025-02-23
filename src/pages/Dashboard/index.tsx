@@ -8,14 +8,14 @@ const Dashboard = () => {
       <h1>Dashboard</h1>
       <Button
         onClick={() => {
-          showSnackBar("data saved successfully", "success");
+          showSnackBar(true, "data saved successfully", "success");
         }}
       >
         Show Success Toast
       </Button>
       <Button
         onClick={() => {
-          showSnackBar("data save error", "error");
+          showSnackBar(true, "data save error", "error");
         }}
       >
         Show Error Toast

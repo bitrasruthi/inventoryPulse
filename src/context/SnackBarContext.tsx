@@ -4,6 +4,7 @@ import { ISnackBarContextType } from "../types/type";
 
 const SnackBarContext = createContext<ISnackBarContextType>({
   snackBarState: {
+    snackbarOpen: false,
     snackbarMessage: "",
     snackbarSeverity: "success",
   },
@@ -12,12 +13,18 @@ const SnackBarContext = createContext<ISnackBarContextType>({
 
 function SnackBarProvider({ children }) {
   const [snackBarState, setSnackBarstate] = useState({
+    snackbarOpen: false,
     snackbarMessage: "",
     snackbarSeverity: "success" as "success" | "error",
   });
 
-  const showSnackBar = (message: string, severity: "success" | "error") => {
+  const showSnackBar = (
+    isOpen: boolean,
+    message: string,
+    severity: "success" | "error"
+  ) => {
     var obj = {
+      snackbarOpen: isOpen,
       snackbarMessage: message,
       snackbarSeverity: severity,
     };

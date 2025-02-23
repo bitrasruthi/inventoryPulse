@@ -7,7 +7,7 @@ function CustomSnackBar() {
   const { snackBarState } = useSnackBar() as ISnackBarContextType;
 
   useEffect(() => {
-    if (snackBarState) {
+    if (snackBarState && snackBarState.snackbarOpen) {
       if (snackBarState.snackbarSeverity == "success") {
         toast.success(snackBarState.snackbarMessage, {});
       } else if (snackBarState.snackbarSeverity == "error") {
