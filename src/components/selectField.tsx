@@ -23,7 +23,7 @@ interface IProps extends BaseSelectProps {
 }
 
 const StyledSelect = styled(Select)(({ theme }) => ({
-  borderRadius: 10,
+  borderRadius: 5,
   "&:hover .MuiOutlinedInput-notchedOutline": {
     borderColor: theme.palette.primary.main,
   },
@@ -58,9 +58,8 @@ const SelectField: React.FC<IProps> = ({
   ) => {
     const newValue = event.target.value as string | number;
     setSelectedValue(newValue);
-    if (onChange) {
-      onChange(event, newValue);
-    }
+
+    onChange?.(event, newValue);
   };
 
   return (

@@ -32,3 +32,9 @@ export interface ISnackBarContextType {
   };
   showSnackBar: (message: any, severity: "success" | "error") => void;
 }
+
+export interface IconProps {
+  width?: string | number;
+  height?: string | number;
+  fill?: string;
+}

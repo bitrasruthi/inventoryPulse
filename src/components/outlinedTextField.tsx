@@ -9,7 +9,6 @@ import {
 import React, { useEffect, useState } from "react";
 import LabelCommon from "./labelCommon";
 import { UseFormRegisterReturn } from "react-hook-form";
-import useDebounce from "../hooks/UseDebounce";
 
 interface IProps extends OutlinedTextFieldProps {
   startAdormentIcon?: React.ElementType;
@@ -20,7 +19,7 @@ interface IProps extends OutlinedTextFieldProps {
     event: React.ChangeEvent<HTMLInputElement>,
     child: React.ReactNode
   ) => void;
-  value: string;
+  value?: string;
 }
 
 export const StyledTextField = styled(TextField)<{ props?: IProps }>(
@@ -29,7 +28,7 @@ export const StyledTextField = styled(TextField)<{ props?: IProps }>(
       paddingLeft: 2,
       paddingRight: 2,
       fontFamily: props?.isnotboldtext ? "roboto-regular" : "roboto-bold",
-      borderRadius: 10,
+      borderRadius: 5,
       "&:hover .MuiOutlinedInput-notchedOutline": {
         borderColor: theme.palette.primary.main,
       },
@@ -53,7 +52,6 @@ const OutlinedTextField: React.FC<IProps> = (props) => {
   } = props;
 
   const [selectedValue, setSelectedValue] = useState<string | number>("");
-  const debouncedValue = useDebounce(selectedValue, 2000);
 
   useEffect(() => {
     if (value !== undefined) {
@@ -61,17 +59,21 @@ const OutlinedTextField: React.FC<IProps> = (props) => {
     }
   }, [value]);
 
-  useEffect(() => {
-    if (handleChange) {
-      const event = {
-        target: { value: debouncedValue },
-      } as React.ChangeEvent<HTMLInputElement>;
-      handleChange(event, debouncedValue);
-    }
-  }, [debouncedValue]);
-
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedValue(event.target.value);
+  };
+
+  const handleOnBlur = () => {
+    if (
+      handleChange &&
+      selectedValue.toString().trim() !== value?.toString().trim()
+    ) {
+      const event = {
+        target: { value: selectedValue },
+      } as React.ChangeEvent<HTMLInputElement>;
+
+      handleChange(event, selectedValue);
+    }
   };
 
   return (
@@ -86,6 +88,7 @@ const OutlinedTextField: React.FC<IProps> = (props) => {
         label={""}
         value={selectedValue}
         onChange={handleOnChange}
+        onBlur={handleOnBlur}
         slotProps={{
           input: {
             startAdornment: (

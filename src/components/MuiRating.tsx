@@ -27,7 +27,12 @@ const MuiRating: React.FC<IProps> = (props) => {
   };
 
   return (
-    <Rating {...ratingProps} value={selectedValue} onChange={handleOnChange} />
+    <Rating
+      {...ratingProps}
+      value={selectedValue}
+      onChange={handleOnChange}
+      size="large"
+    />
   );
 };
 
