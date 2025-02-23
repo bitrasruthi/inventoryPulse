@@ -9,6 +9,9 @@ interface IProps extends ButtonProps {
   fillColor?: boolean;
   endIcon?: ReactNode;
   startIcon?: ReactNode;
+  height?: number;
+  width?: number;
+  fontSize?: string;
 }
 
 const OutlinedCustomButton: React.FC<IProps> = (props) => {
@@ -30,7 +33,7 @@ const OutlinedCustomButton: React.FC<IProps> = (props) => {
     if (menuList.length > 0) {
       setAnchorEl(event.currentTarget);
     } else if (onClick) {
-      onClick(event); 
+      onClick(event);
     }
   };
 
@@ -46,7 +49,7 @@ const OutlinedCustomButton: React.FC<IProps> = (props) => {
         sx={{
           background: fillColor ? "#111" : "#fff",
           color: fillColor ? "#fff" : "#111",
-          border: `1px solid #111`,
+          border: "1px solid #111",
           textTransform: "none",
           borderRadius: "10px",
           fontFamily: "roboto-medium",

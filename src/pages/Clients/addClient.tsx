@@ -30,7 +30,7 @@ const AddClient: React.FC<IProps> = ({ formProps }) => {
               <Grid2 size={{ xs: 12, md: 6 }}>
                 <ProfileUpload
                   title="Choose Profile Picture"
-                  image="/broken-image.jpg"
+                  uploadImage="/broken-image.jpg"
                 />
               </Grid2>
               <Grid2 size={{ xs: 12, md: 6 }}>

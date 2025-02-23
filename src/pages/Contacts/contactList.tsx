@@ -9,12 +9,14 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { inspectionColors } from "../../constants/constants";
-import PhoneIcon from "../../assets/icons/phoneIcon";
-import EmailIcon from "../../assets/icons/emailIcon";
+import PhoneIcon from "../../assets/icons/primaryPhoneIcon";
+import EmailIcon from "../../assets/icons/primaryEmailIcon";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import DeleteIcon from "../../assets/icons/deleteIcon";
 import GradientButton from "../../components/gradientButton";
-import FullScreenDialog, { CustomButtonProps } from "../../components/fullScreenDialog";
+import FullScreenDialog, {
+  CustomButtonProps,
+} from "../../components/fullScreenDialog";
 import { useFormHook } from "../../hooks/useFormHook";
 import AddContact from "./addContact";
 import validate from "../../helpers/validations";
@@ -37,16 +39,15 @@ const ContactList: React.FC<IProps> = (props) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const { list } = props;
 
-    const { form } = useFormHook(validate.propertyDetailsSchema);
+  const { form } = useFormHook(validate.propertyDetailsSchema);
 
-   const handleOpenDialog = () => {
-     setDialogOpen(true);
-   };
+  const handleOpenDialog = () => {
+    setDialogOpen(true);
+  };
 
-   const handleCloseDialog = () => {
-     setDialogOpen(false);
-   };
-
+  const handleCloseDialog = () => {
+    setDialogOpen(false);
+  };
 
   return (
     <>

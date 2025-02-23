@@ -31,7 +31,7 @@ const AddUser: React.FC<IProps> = ({ formProps }) => {
               <Grid2 size={{ xs: 12, md: 6 }}>
                 <ProfileUpload
                   title="Choose Profile Picture"
-                  image="/broken-image.jpg"
+                  uploadImage="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
                 />
               </Grid2>
               <Grid2 size={{ xs: 12, md: 6 }}>

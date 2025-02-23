@@ -10,8 +10,6 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { inspectionColors } from "../../constants/constants";
-import PhoneIcon from "../../assets/icons/phoneIcon";
-import EmailIcon from "../../assets/icons/emailIcon";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ContactIcon from "../../assets/icons/contactIcon";
 import MenuCommon from "../../components/menuCommon";
@@ -19,6 +17,8 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import { IMenuItemExtendProps } from "../../helpers/Interfaces";
+import PhoneIcon from "../../assets/icons/phoneIcon";
+import EmailIcon from "../../assets/icons/emailIcon";
 
 interface IProps extends CardProps {
   list: any;
