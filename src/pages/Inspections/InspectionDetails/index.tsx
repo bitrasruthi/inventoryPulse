@@ -316,7 +316,10 @@ function InspectionDetails() {
       case "2":
         return (
           <>
-            <ContentWrapper paddingY={1}>
+            <ContentWrapper paddingY={2}>
+              <InspectionAddress />
+            </ContentWrapper>
+            <ContentWrapper paddingY={0}>
               <Box
                 sx={{
                   display: "flex",
