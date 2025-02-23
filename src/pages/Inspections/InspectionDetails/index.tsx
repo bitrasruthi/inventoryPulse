@@ -59,16 +59,16 @@ function InspectionDetails() {
 
   const infoContent = (
     <ContentWrapper>
-      <Grid2 spacing={4} container>
-        <Grid2 spacing={3} container size={{ xs: 12, md: 9 }}>
+      <Grid2 spacing={2} container>
+        <Grid2 container size={{ xs: 12, md: 9.5 }}>
           <Grid2 size={{ xs: 12, md: 12 }}>
             <InspectionAddress />
           </Grid2>
-          <Grid2 size={{ xs: 12, md: 4 }}>
-            <Box>
-              <SectionTitleCommon title="Property (view More Details)" />
+          <Grid2 size={{ xs: 12, md: 3.5 }}>
+            <Box mb={1}>
+              <SectionTitleCommon title="Property (View More Details)" />
             </Box>
-            <Grid2 mb={2} p={2}>
+            <Grid2 mb={2}>
               <ProfileUpload
                 edit="Edit"
                 backgroundImage={"../public/InspectionHome.jpg"}
@@ -152,7 +152,7 @@ function InspectionDetails() {
               </Grid2>
             </Grid2>
           </Grid2>
-          <Grid2 size={{ xs: 12, md: 5 }}>
+          <Grid2 size={{ xs: 12, md: 5.5 }}>
             <Grid2>
               <Box
                 sx={{
@@ -295,7 +295,7 @@ function InspectionDetails() {
             </Box>
           </Grid2>
         </Grid2>
-        <Grid2 size={{ xs: 12, md: 3 }}>
+        <Grid2 size={{ xs: 12, md: 2.5 }}>
           <Grid2
             sx={{
               border: "1px solid #D8D8D8",

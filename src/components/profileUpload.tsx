@@ -36,7 +36,7 @@ const ProfileUpload: React.FC<IProps> = (props) => {
   return (
     <Box
       sx={{
-        width: "300px",
+        //width: "300px",
         height: "180px",
         display: "flex",
         flexDirection: "column",
