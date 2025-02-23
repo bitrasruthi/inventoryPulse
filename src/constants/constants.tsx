@@ -336,7 +336,7 @@ export const inspectionsDetailsMenuList = [
   },
   {
     id: 4,
-    label: "Settings",
+    label: "Report Settings",
     isActive: false,
     value: "4",
     icon: <SettingsOutlinedIcon />,

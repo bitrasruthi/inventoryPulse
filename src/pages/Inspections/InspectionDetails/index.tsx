@@ -15,6 +15,7 @@ import InspectionStatusStepper from "./inspectionStatusStepper";
 import InspectionContactCommon from "../../../components/inspectionContactCommon";
 import { paths } from "../../../routes/paths";
 import Reports from "./reports";
+import ReportSettings from "./reportSettings";
 import EditIcon from "../../../assets/icons/editIcon";
 import AddIcon from "../../../assets/icons/addIcon";
 import OutlinedCustomButton from "../../../components/outlinedCustomButton";
@@ -340,6 +341,12 @@ function InspectionDetails() {
               onClose={handlecloseDialog}
             />
             <Reports />
+          </>
+        );
+      case "4":
+        return (
+          <>
+            <ReportSettings />
           </>
         );
       default:
