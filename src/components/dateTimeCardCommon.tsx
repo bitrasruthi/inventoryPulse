@@ -1,6 +1,6 @@
 import React from "react";
-import { Grid2, Typography } from "@mui/material";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import { Grid, Typography, Box, Grid2 } from "@mui/material";
+import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 import { format, parse } from "date-fns";
 
 interface DateTimeCardProps {
@@ -8,56 +8,64 @@ interface DateTimeCardProps {
   time: string;
 }
 
-const DateTimeCard: React.FC<DateTimeCardProps> = (props) => {
-  const { date, time } = props;
-
+const DateTimeCard: React.FC<DateTimeCardProps> = ({ date, time }) => {
   const parsedDate = parse(date, "dd MMM yyyy", new Date());
-  const mainDate = format(parsedDate, "dd MMM");
-  const year = format(parsedDate, "yyyy");
+  const mainDate = format(parsedDate, "dd");
+  const year = format(parsedDate, "MMM yyyy");
 
   return (
-    <Grid2
-      container
-      direction="column"
-      alignItems="center"
-      justifyContent="center"
-      sx={{
-        width: "100px",
-        background: `linear-gradient(180deg, ${"#B2EBCC"} 65%, ${"#80D2A6"} 35%)`,
-        borderRadius: 2,
-        boxShadow: 3,
-        color: "#000",
-      }}
-    >
-      <Typography
+    <Box textAlign="center" sx={{ width: "110px" }}>
+      <Box
         sx={{
-          fontFamily: "roboto-bold",
-          fontSize: "18px",
-          textAlign: "center",
+          background: "#fde9b4",
+          borderRadius: 2,
+          boxShadow: 3,
+          color: "#000",
+          padding: "10px",
         }}
       >
-        {mainDate}
-      </Typography>
-      <Typography
-        sx={{
-          fontFamily: "roboto-regular",
-          fontSize: "16px",
-          textAlign: "center",
-        }}
-      >
-        {year}
-      </Typography>
-      <Grid2 container alignItems="center" justifyContent="center">
-        <AccessTimeIcon sx={{ fontSize: "14px" }} />
         <Typography
-          variant="body1"
-          component="span"
-          sx={{ fontSize: "14px", paddingY: "2px" }}
+          sx={{
+            fontFamily: "roboto-bold",
+            fontSize: "42px",
+            fontWeight: "bold",
+            lineHeight: 1,
+            display: "block",
+          }}
+        >
+          {mainDate}
+        </Typography>
+
+        <Typography
+          sx={{
+            fontFamily: "roboto-bold",
+            fontSize: "16px",
+            fontWeight: "500",
+          }}
+        >
+          {year}
+        </Typography>
+      </Box>
+
+      <Grid2
+        container
+        alignItems="center"
+        justifyContent="center"
+        sx={{ mt: 1, gap: 1 }}
+      >
+        <AccessTimeFilledIcon sx={{ fontSize: "16px", color: "primary" }} />
+        <Typography
+          sx={{
+            fontFamily: "roboto-bold",
+            fontSize: "14px",
+            fontWeight: "600",
+            color: "primary",
+          }}
         >
           {time}
         </Typography>
       </Grid2>
-    </Grid2>
+    </Box>
   );
 };
 

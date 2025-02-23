@@ -9,6 +9,7 @@ import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ContentWrapper from "../../../components/contentWrapper";
 import Button from "@mui/material/Button";
+import LabelCommon from "../../../components/labelCommon";
 
 const steps = [
   {
@@ -78,18 +79,20 @@ function InspectionStatusStepper() {
 
   return (
     <ContentWrapper>
-      <Box sx={{ Width: "100%" }}>
+      <Box sx={{ width: "100%" }}>
         <Stepper activeStep={activeStep - 1} orientation="vertical">
-          {steps.map((step, index) => (
+          {steps.map((step) => (
             <Step key={step.label} completed={activeStep > step.value}>
               <StepLabel
                 sx={{
                   "& .MuiStepLabel-label": {
                     fontSize: "14px",
                     fontFamily:
-                      activeStep === step.value ? "Roboto-bold" : "Roboto",
+                      activeStep > step.value ? "robotto-bold" : "roboto",
                     color:
-                      activeStep === step.value
+                      activeStep > step.value
+                        ? "#333333"
+                        : activeStep === step.value
                         ? (theme) => theme.palette.primary.main
                         : "inherit",
                   },
@@ -105,16 +108,15 @@ function InspectionStatusStepper() {
                     ),
                 }}
               >
-                <Typography
-                  fontWeight={activeStep === step.value ? "bold" : "normal"}
-                  sx={{ fontSize: "14px" }}
-                >
-                  {step.label}
-                </Typography>
+                <LabelCommon
+                  fieldName={step.label}
+                  fontSize="14px"
+                  fontFamily="roboto-bold"
+                />
                 <Typography
                   sx={{
-                    color: "back",
                     fontSize: "14px",
+                    color: "#000",
                   }}
                 >
                   {step.description}
@@ -130,7 +132,7 @@ function InspectionStatusStepper() {
                       size="small"
                       sx={{
                         fontSize: "12px",
-                        width: "100%",
+                        width: "auto",
                         whiteSpace: "nowrap",
                       }}
                     >

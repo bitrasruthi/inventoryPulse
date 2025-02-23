@@ -1,21 +1,23 @@
 import { Box, Link, IconButton } from "@mui/material";
-import { set } from "lodash";
 import React, { useEffect, useRef, useState } from "react";
 import EditIcon from "../assets/icons/editIcon";
 
 interface IProps {
-  title?: React.ReactNode; // Title is now optional and can be ReactNode
+  title?: React.ReactNode;
   backgroundImage?: string;
 }
 
 const ProfileUpload: React.FC<IProps> = (props) => {
-  const { title, backgroundImage } = props; // Default title to "Edit" if not provided
+  const { title, backgroundImage } = props;
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [profilePicture, setProfilePicture] = useState<string | null>(null);
+  const [profilePicture, setProfilePicture] = useState<string | null>(
+    backgroundImage || null
+  );
 
   useEffect(() => {
     if (backgroundImage) setProfilePicture(backgroundImage);
-  }, []);
+  }, [backgroundImage]);
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -31,29 +33,37 @@ const ProfileUpload: React.FC<IProps> = (props) => {
   return (
     <Box
       sx={{
-        width: "100%",
-        height: "200px",
+        height: "250px",
         position: "relative",
-        backgroundImage: profilePicture ? `url(${profilePicture})` : "none",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        borderRadius: 4,
         overflow: "hidden",
+        borderRadius: "10px",
       }}
     >
       <Box
         sx={{
+          height: "100%",
+          width: "100%",
+          backgroundImage: profilePicture ? `url(${profilePicture})` : "none",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      />
+
+      {/* Foreground Content */}
+      <Box
+        sx={{
           position: "absolute",
-          bottom: 10,
+          bottom: 5,
           right: 10,
           display: "flex",
           alignItems: "center",
+          justifyContent: "center",
           color: "white",
           fontWeight: "bold",
           backgroundColor: "black",
-          borderRadius: 2,
-          paddingLeft: "2px",
-          g: 0,
+          paddingX: "2px",
+          borderRadius: "5px",
         }}
       >
         <Link

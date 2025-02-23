@@ -9,6 +9,9 @@ interface IProps extends ButtonProps {
   fillColor?: boolean;
   endIcon?: ReactNode;
   startIcon?: ReactNode;
+  height?: number;
+  width?: number;
+  fontSize?: number | string;
 }
 
 const OutlinedCustomButton: React.FC<IProps> = (props) => {
@@ -19,6 +22,9 @@ const OutlinedCustomButton: React.FC<IProps> = (props) => {
     fillColor,
     endIcon,
     startIcon,
+    height = 40,
+    width = { xs: "100%", sm: "auto" },
+    fontSize = "14px",
     ...btnProps
   } = props;
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -44,9 +50,9 @@ const OutlinedCustomButton: React.FC<IProps> = (props) => {
             textTransform: "none",
             borderRadius: "10px",
             fontFamily: "roboto-medium",
-            height: 40,
+            height: height || 40,
             minWidth: 150,
-            width: { xs: "100%", sm: "auto" },
+            width: width || { xs: "100%", sm: "auto" },
           }}
           size="medium"
           disableRipple
