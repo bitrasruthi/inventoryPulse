@@ -5,22 +5,36 @@ import App from "./App.tsx";
 import theme from "./styles/theme.tsx";
 import { CustomProvider } from "rsuite";
 import { ThemeProvider } from "@mui/material/styles";
-import { SnackbarProvider } from "notistack";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import SnackBarProvider from "./context/SnackBarContext";
+import { getAxios, setBaseUrl } from "./api/axios-client.ts";
+import CustomSnackBar from "./components/customSnackbar.tsx";
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: 2,
+      refetchOnMount: false,
+    },
+  },
+});
+
+setBaseUrl("http://localhost:3000/");
+
+var axiosInstance = getAxios();
 
 createRoot(document.getElementById("root")!).render(
-  <CustomProvider>
-    <ThemeProvider theme={theme}>
-      <SnackbarProvider
-        autoHideDuration={3000}
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        maxSnack={2}
-      >
-        <App />
-      </SnackbarProvider>
-    </ThemeProvider>
-  </CustomProvider>
+  <QueryClientProvider client={queryClient}>
+    <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-left" />
+    <SnackBarProvider>
+      <CustomProvider>
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
+      </CustomProvider>
+      <CustomSnackBar />
+    </SnackBarProvider>
+  </QueryClientProvider>
 );
