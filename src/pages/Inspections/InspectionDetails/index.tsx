@@ -332,7 +332,13 @@ function InspectionDetails() {
       case "2":
         return (
           <>
-            {/* <ReportsRsuite /> */}
+            <Box py={1} display={"flex"} justifyContent={"flex-end"}>
+              <OutlinedCustomButton
+                label="Add"
+                fillColor={true}
+                startIcon={<AddIcon width={"16"} height={"16"} fill="#ffff" />}
+              />
+            </Box>
             <Reports />
           </>
         );

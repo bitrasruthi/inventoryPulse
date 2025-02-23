@@ -26,7 +26,7 @@ export interface ScheduledTime {
 }
 
 export interface IconProps {
-  width: string;
-  height: string;
+  width?: string | number;
+  height?: string | number;
   fill?: string;
 }
