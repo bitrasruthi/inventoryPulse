@@ -53,7 +53,7 @@ const DateTimeCard: React.FC<DateTimeCardProps> = ({ date, time }) => {
         justifyContent="center"
         sx={{ mt: 1, gap: 1 }}
       >
-        <AccessTimeFilledIcon sx={{ fontSize: "16px", color: "primary" }} />
+        <AccessTimeFilledIcon color="primary" sx={{ fontSize: 20 }} />
         <Typography
           sx={{
             fontFamily: "roboto-bold",
