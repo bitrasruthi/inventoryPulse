@@ -1,8 +1,7 @@
-import { Phone } from "@mui/icons-material";
-import { Box, Grid2, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React from "react";
-import PhoneIcon from "../assets/icons/phoneIcon";
-import EmailIcon from "../assets/icons/emailIcon";
+import PhoneIcon from "../assets/icons/primaryPhoneIcon";
+import EmailIcon from "../assets/icons/primaryEmailIcon";
 
 interface IProps {
   name: string;

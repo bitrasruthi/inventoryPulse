@@ -50,82 +50,91 @@ function InspectionDetails() {
           <Grid2 size={{ xs: 12, md: 12 }}>
             <InspectionAddress />
           </Grid2>
-          <Grid2 size={{ xs: 12, md: 4 }} sx={{ backgroundColor: "#f6f6f6" }}>
+          <Grid2 size={{ xs: 12, md: 4 }}>
             <Box>
               <SectionTitleCommon title="Property (view More Details)" />
             </Box>
-            <Grid2 mb={2}>
+            <Grid2 mb={2} p={2}>
               <ProfileUpload
-                title="Edit"
+                edit="Edit"
                 backgroundImage={"../public/InspectionHome.jpg"}
               />
             </Grid2>
             <Grid2
-              container
-              spacing={{ xs: 0, md: 2 }}
               sx={{
-                display: "grid",
-                gridTemplateColumns: "repeat(2, 1fr)",
-                gap: 2,
                 my: 2,
+                backgroundColor: "#f6f6f6",
+                borderRadius: "10px",
+                padding: 2,
               }}
             >
-              {propertyDetails.map((item, index) => (
-                <Box key={index} sx={{ textAlign: "center" }}>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "flex-start",
-                      gap: 1,
-                    }}
-                  >
-                    <Box sx={{ color: "#8542E9" }}>{item.icon}</Box>
-                    <Typography
-                      variant="body1"
-                      sx={{ fontFamily: "roboto-black" }}
+              <Grid2
+                container
+                spacing={{ xs: 0, md: 2 }}
+                sx={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(2, 1fr)",
+                  gap: 2,
+                  my: 2,
+                }}
+              >
+                {propertyDetails.map((item, index) => (
+                  <Box key={index} sx={{ textAlign: "center" }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "flex-start",
+                        gap: 1,
+                      }}
                     >
-                      {item.value}
+                      <Box sx={{ color: "#8542E9" }}>{item.icon}</Box>
+                      <Typography
+                        variant="body1"
+                        sx={{ fontFamily: "roboto-black" }}
+                      >
+                        {item.value}
+                      </Typography>
+                    </Box>
+                    <Typography
+                      variant="caption"
+                      sx={{
+                        marginTop: 0.5,
+                        display: "block",
+                        textAlign: "left",
+                      }}
+                    >
+                      {item.description}
                     </Typography>
                   </Box>
-                  <Typography
-                    variant="caption"
-                    sx={{
-                      marginTop: 0.5,
-                      display: "block",
-                      textAlign: "left",
-                    }}
-                  >
-                    {item.description}
-                  </Typography>
-                </Box>
-              ))}
-            </Grid2>
-            <Divider />
-            <Grid2 container my={2}>
-              <Grid2 size={{ xs: 12, md: 6 }}>
-                <LabelValueCommon
-                  fieldName="Furnishing"
-                  value="Fully Furnished"
-                  type={1}
-                />
+                ))}
               </Grid2>
-              <Grid2 size={{ xs: 12, md: 6 }}>
-                <LabelValueCommon fieldName="Type" value="House" type={1} />
-              </Grid2>
-              <Grid2 size={{ xs: 12, md: 6 }}>
-                <LabelValueCommon
-                  fieldName="Detachment/Style"
-                  value="Ground Floor"
-                  type={1}
-                />
-              </Grid2>
-              <Grid2 size={{ xs: 12, md: 12 }}>
-                <LabelValueCommon
-                  fieldName="Property Notes"
-                  value="Rosewood Residence is a premium residential property situated in the heart of Kensington, one of London's most prestigious neighborhoods. The property spans an area of 2,500 square feet and is an elegant four-bedroom house built in 2015. It is fully registered and holds a clear legal status, making it ready for immediate occupancy or sale."
-                  type={1}
-                />
+              <Divider />
+              <Grid2 container my={2}>
+                <Grid2 size={{ xs: 12, md: 6 }}>
+                  <LabelValueCommon
+                    fieldName="Furnishing"
+                    value="Fully Furnished"
+                    type={1}
+                  />
+                </Grid2>
+                <Grid2 size={{ xs: 12, md: 6 }}>
+                  <LabelValueCommon fieldName="Type" value="House" type={1} />
+                </Grid2>
+                <Grid2 size={{ xs: 12, md: 6 }}>
+                  <LabelValueCommon
+                    fieldName="Detachment/Style"
+                    value="Ground Floor"
+                    type={1}
+                  />
+                </Grid2>
+                <Grid2 size={{ xs: 12, md: 12 }}>
+                  <LabelValueCommon
+                    fieldName="Property Notes"
+                    value="Rosewood Residence is a premium residential property situated in the heart of Kensington, one of London's most prestigious neighborhoods. The property spans an area of 2,500 square feet and is an elegant four-bedroom house built in 2015. It is fully registered and holds a clear legal status, making it ready for immediate occupancy or sale."
+                    type={1}
+                  />
+                </Grid2>
               </Grid2>
             </Grid2>
           </Grid2>
@@ -275,8 +284,7 @@ function InspectionDetails() {
         <Grid2 size={{ xs: 12, md: 3 }}>
           <Grid2
             sx={{
-              border: "1px solid #E0E0E0",
-              backgroundColor: "#f6f6f6",
+              border: "1px solid #D8D8D8",
               borderRadius: "10px",
             }}
           >

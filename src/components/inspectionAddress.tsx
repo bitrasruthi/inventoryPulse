@@ -43,19 +43,16 @@ const InspectionAddress = () => {
               fontWeight: 500,
               color: "#333333",
               lineHeight: 1,
-              display: "block",
             }}
           >
             115-116, Beaverbrook Town House,
           </Typography>
           <Typography
             sx={{
-              fontFamily: "roboto",
+              fontFamily: "roboto-regular",
               fontSize: "12px",
               fontWeight: 400,
               color: "#333333",
-              lineHeight: 1,
-              display: "block",
             }}
           >
             Sloane St, London SW16 9PJ, UK
