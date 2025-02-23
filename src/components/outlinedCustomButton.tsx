@@ -4,7 +4,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 interface IProps extends ButtonProps {
   label: string;
-  menuList?: any;
+  menuList?: any[];
   handleAction?: () => void;
   fillColor?: boolean;
   endIcon?: ReactNode;
@@ -19,82 +19,55 @@ const OutlinedCustomButton: React.FC<IProps> = (props) => {
     fillColor,
     endIcon,
     startIcon,
+    onClick,
     ...btnProps
   } = props;
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
+    if (menuList.length > 0) {
+      setAnchorEl(event.currentTarget);
+    } else if (onClick) {
+      onClick(event); 
+    }
   };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   return (
     <>
-      {menuList?.length > 0 ? (
-        <Button
-          {...btnProps}
-          onClick={handleClick}
-          sx={{
-            background: fillColor ? "#111" : "#fff",
-            color: fillColor ? "#fff" : "#111",
-            border: `1px solid #111`,
-            textTransform: "none",
-            borderRadius: "10px",
-            fontFamily: "roboto-medium",
-            height: 40,
-            minWidth: 150,
-            width: { xs: "100%", sm: "auto" },
-          }}
-          size="medium"
-          disableRipple
-          endIcon={
-            endIcon
-              ? endIcon
-              : menuList &&
-                menuList.length > 0 && (
-                  <KeyboardArrowDownIcon
-                    sx={{ ml: 1, width: 20, height: 20 }}
-                  />
-                )
-          }
-          startIcon={startIcon}
-        >
-          {label}
-        </Button>
-      ) : (
-        <Button
-          onClick={handleAction}
-          sx={{
-            mr: 1,
-            background: fillColor ? "#111" : "#fff",
-            color: fillColor ? "#fff" : "#111",
-            border: `1px solid #111`,
-            textTransform: "none",
-            borderRadius: "10px",
-            fontFamily: "roboto-medium",
-            width: { xs: "100%", sm: "auto" },
-          }}
-          size="medium"
-          disableRipple
-          endIcon={
-            endIcon
-              ? endIcon
-              : menuList &&
-                menuList.length > 0 && (
-                  <KeyboardArrowDownIcon
-                    sx={{ ml: 1, width: 20, height: 20 }}
-                  />
-                )
-          }
-          startIcon={startIcon}
-        >
-          {label}
-        </Button>
-      )}
-      {menuList && (
+      <Button
+        {...btnProps}
+        onClick={handleClick}
+        sx={{
+          background: fillColor ? "#111" : "#fff",
+          color: fillColor ? "#fff" : "#111",
+          border: `1px solid #111`,
+          textTransform: "none",
+          borderRadius: "10px",
+          fontFamily: "roboto-medium",
+          height: 40,
+          minWidth: 80,
+          width: { xs: "100%", sm: "auto" },
+        }}
+        size="medium"
+        disableRipple
+        endIcon={
+          endIcon ||
+          (menuList.length > 0 && (
+            <KeyboardArrowDownIcon sx={{ ml: 1, width: 20, height: 20 }} />
+          ))
+        }
+        startIcon={startIcon}
+      >
+        {label}
+      </Button>
+
+      {menuList.length > 0 && (
         <Menu
           id="basic-menu"
           anchorEl={anchorEl}
@@ -104,23 +77,21 @@ const OutlinedCustomButton: React.FC<IProps> = (props) => {
             "aria-labelledby": "basic-button",
           }}
         >
-          {menuList &&
-            menuList?.map((item: any, index: number) => (
-              <MenuItem
-                key={index}
-                sx={{ display: "flex", alignItems: "center" }}
-                onClick={() => {
-                  if (handleAction) {
-                    handleAction();
-                  }
-                }}
-              >
-                {item?.icon && item?.icon}
-                <Typography fontSize={12} pl={1}>
-                  {item?.label ? item.label : item?.name ? item.name : ""}
-                </Typography>
-              </MenuItem>
-            ))}
+          {menuList.map((item, index) => (
+            <MenuItem
+              key={index}
+              sx={{ display: "flex", alignItems: "center" }}
+              onClick={() => {
+                if (handleAction) handleAction();
+                handleClose();
+              }}
+            >
+              {item.icon && item.icon}
+              <Typography fontSize={12} pl={1}>
+                {item.label || item.name || ""}
+              </Typography>
+            </MenuItem>
+          ))}
         </Menu>
       )}
     </>
