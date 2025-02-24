@@ -1,6 +1,19 @@
-import { Drawer, Box, Typography, IconButton, Divider } from "@mui/material";
+import {
+  Drawer,
+  Box,
+  Typography,
+  IconButton,
+  Divider,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
+} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from "@mui/icons-material/Add";
+import { useState } from "react";
+import ConfigureSectionDrawer from "./components/configureSectionDrawer";
 
 interface AddSectionDrawerProps {
   isDrawerOpen: boolean;
@@ -25,17 +38,33 @@ const sections = [
 ];
 
 const detailSections = [
-  { name: "Custom", description: "Explain common usage", color: "#FF8A80" },
-  { name: "Media", description: "Explain common usage", color: "#1DE9B6" },
+  {
+    name: "Custom",
+    description: "Explain common usage",
+    color: "#FF8A80",
+    id: "custom",
+  },
+  {
+    name: "Media",
+    description: "Explain common usage",
+    color: "#1DE9B6",
+    id: "media",
+  },
 ];
 
 interface SectionItemProps {
   name: string;
   description: string;
   color: string;
+  onAddClick: () => void;
 }
 
-const SectionItem = ({ name, description, color }: SectionItemProps) => (
+const SectionItem = ({
+  name,
+  description,
+  color,
+  onAddClick,
+}: SectionItemProps) => (
   <Box
     display="flex"
     alignItems="center"
@@ -74,7 +103,7 @@ const SectionItem = ({ name, description, color }: SectionItemProps) => (
         </Typography>
       </Box>
       <Box>
-        <IconButton sx={{ p: 0 }}>
+        <IconButton sx={{ p: 0 }} onClick={onAddClick}>
           <AddIcon fill={"#FFFFFF"} />
         </IconButton>
       </Box>
@@ -86,63 +115,88 @@ export default function AddSectionDrawer({
   isDrawerOpen,
   onClose,
 }: AddSectionDrawerProps) {
+  const [isConfigureSsctionDialogOpen, setIsConfigureSsctionDialogOpen] =useState(false);
+
+  const handleClickOpen = () => {
+    setIsConfigureSsctionDialogOpen(true);
+    onClose();
+  };
+
+  const handleClose = () => {
+    setIsConfigureSsctionDialogOpen(false);
+  };
+
   return (
-    <Drawer
-      anchor="right"
-      open={isDrawerOpen}
-      onClose={onClose}
-      sx={{
-        zIndex: 9999,
-        width: drawerWidth,
-        flexShrink: 0,
-        [`& .MuiDrawer-paper`]: {
-          width: drawerWidth,
-          boxSizing: "border-box",
-          top: appBarHeight,
-          display: "flex",
-          flexDirection: "column",
-          height: `calc(100vh - ${appBarHeight}px)`,
-        },
-      }}
-      hideBackdrop
-    >
-      {/* Drawer Header */}
-      <Box
-        display="flex"
-        alignItems="center"
-        justifyContent="space-between"
-        p={1}
+    <>
+      <Drawer
+        anchor="right"
+        open={isDrawerOpen}
+        onClose={onClose}
         sx={{
-          position: "sticky",
-          top: 0,
-          backgroundColor: "white",
-          zIndex: 1,
-          boxSizing: "border-box",
+          zIndex: 9999,
+          width: drawerWidth,
+          flexShrink: 0,
+          [`& .MuiDrawer-paper`]: {
+            width: drawerWidth,
+            boxSizing: "border-box",
+            top: appBarHeight,
+            display: "flex",
+            flexDirection: "column",
+            height: `calc(100vh - ${appBarHeight}px)`,
+          },
         }}
+        hideBackdrop
       >
-        <IconButton onClick={onClose}>
-          <CloseIcon />
-        </IconButton>
-        <Typography
-          variant="h6"
-          sx={{ flex: 1, textAlign: "center", fontFamily: "roboto-bold" }}
+        {/* Drawer Header */}
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="space-between"
+          p={1}
+          sx={{
+            position: "sticky",
+            top: 0,
+            backgroundColor: "white",
+            zIndex: 1,
+            boxSizing: "border-box",
+          }}
         >
-          Add New Section
-        </Typography>
-      </Box>
+          <IconButton onClick={onClose}>
+            <CloseIcon />
+          </IconButton>
+          <Typography
+            variant="h6"
+            sx={{ flex: 1, textAlign: "center", fontFamily: "roboto-bold" }}
+          >
+            Add New Section
+          </Typography>
+        </Box>
 
-      {/* Drawer Content */}
-      <Box p={2} role="presentation">
-        {sections.map((section, index) => (
-          <SectionItem key={`${index}-${section.name}`} {...section} />
-        ))}
+        {/* Drawer Content */}
+        <Box p={2} role="presentation">
+          {sections.map((section, index) => (
+            <SectionItem
+              key={`${index}-${section.name}`}
+              {...section}
+              onAddClick={handleClickOpen}
+            />
+          ))}
 
-        <Divider sx={{ my: 3 }} />
+          <Divider sx={{ my: 3 }} />
 
-        {detailSections.map((section, index) => (
-          <SectionItem key={`${index}-${section.name}`} {...section} />
-        ))}
-      </Box>
-    </Drawer>
+          {detailSections.map((section, index) => (
+            <SectionItem
+              key={`${index}-${section.name}`}
+              {...section}
+              onAddClick={handleClickOpen}
+            />
+          ))}
+        </Box>
+      </Drawer>
+      <ConfigureSectionDrawer
+        isConfigureSsctionDialogOpen={isConfigureSsctionDialogOpen}
+        onClose={handleClose}
+      />
+    </>
   );
 }
