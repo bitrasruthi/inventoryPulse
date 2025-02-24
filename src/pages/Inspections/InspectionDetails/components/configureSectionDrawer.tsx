@@ -90,17 +90,11 @@ function ConfigureSectionDrawer({
                   label="Field Name"
                   variant="outlined"
                   placeholder="Name"
-                  //   error={!!errors.address?.city}
-                  //   helperText={errors?.address?.city?.message}
-                  //   formProps={register("address.city")}
                 />
                 <OutlinedTextField
                   label="Field Placeholder"
                   variant="outlined"
                   placeholder="Enter Placeholder"
-                  //   error={!!errors.address?.city}
-                  //   helperText={errors?.address?.city?.message}
-                  //   formProps={register("address.city")}
                 />
               </Grid2>
               <Grid2 size={{ xs: 12, md: 6 }}>
@@ -120,66 +114,71 @@ function ConfigureSectionDrawer({
                 <RadioGroup
                   value={selectedField}
                   onChange={(e) => setSelectedField(e.target.value)}
-                  sx={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(5, 1fr)",
-                    gap: 2,
-                  }}
+                  sx={
+                    {
+                      //display: "grid",
+                      //gridTemplateColumns: "repeat(5, 1fr)",
+                      //gap: 2,
+                    }
+                  }
                 >
-                  {fieldTypes.map((field, index) => (
-                    <Box
-                      key={field.name}
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        borderRadius: 2,
-                        border:
-                          selectedField === field.name
-                            ? `2px solid ${theme.palette.primary.main}`
-                            : "1px solid #ccc",
-                        padding: 2,
-                        height: "100px",
-                        cursor: "pointer",
-                        position: "relative",
-                        "&:hover": {
-                          borderColor: theme.palette.primary.main,
-                        },
-                      }}
-                      onClick={() => setSelectedField(field.name)}
-                    >
-                        <Typography
-                          variant="body2"
+                  <Grid2 container spacing={2}>
+                    {fieldTypes.map((field, _index) => (
+                      <Grid2 size={{ xs: 12, md: 2, lg: 3 }}>
+                        <Box
+                          key={field.name}
                           sx={{
-                            position: "absolute",
-                            top: 8,
-                            left: 10,
-                            fontWeight: "bold",
-                          }}
-                        >
-                          {field.name}
-                        </Typography>
-                        <Radio
-                          value={field.name}
-                          checked={selectedField === field.name}
-                          icon={<span />}
-                          checkedIcon={
-                            <CheckCircleIcon
-                              sx={{ color: theme.palette.primary.main }}
-                            />
-                          }
-                          sx={{
-                            position: "absolute",
-                            top: 1,
-                            right: 3,
-                            "& .MuiSvgIcon-root": {
-                              fontSize: 20,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            borderRadius: 2,
+                            border:
+                              selectedField === field.name
+                                ? `2px solid ${theme.palette.primary.main}`
+                                : "1px solid #ccc",
+                            height: "100px",
+                            cursor: "pointer",
+                            position: "relative",
+                            "&:hover": {
+                              borderColor: theme.palette.primary.main,
                             },
                           }}
-                        />
-                      <Box sx={{ mt: 2 }}>{field.icon}</Box>
-                    </Box>
-                  ))}
+                          onClick={() => setSelectedField(field.name)}
+                        >
+                          <Typography
+                            variant="body2"
+                            sx={{
+                              position: "absolute",
+                              top: 8,
+                              left: 10,
+                              fontFamily: "roboto-bold",
+                            }}
+                          >
+                            {field.name}
+                          </Typography>
+                          <Radio
+                            value={field.name}
+                            checked={selectedField === field.name}
+                            icon={<span />}
+                            checkedIcon={
+                              <CheckCircleIcon
+                                sx={{ color: theme.palette.primary.main }}
+                              />
+                            }
+                            sx={{
+                              position: "absolute",
+                              top: 1,
+                              right: 0,
+                              "& .MuiSvgIcon-root": {
+                                fontSize: 20,
+                              },
+                            }}
+                          />
+                          <Box sx={{ p: 2, mt: 1 }}>{field.icon}</Box>
+                        </Box>
+                      </Grid2>
+                    ))}
+                  </Grid2>
                 </RadioGroup>
               </Grid2>
             </Grid2>
