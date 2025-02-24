@@ -91,3 +91,8 @@ html {
  display: flex;
  align-items: center;
 }
+
+.slick-list {
+  position: relative !important;
+  left: 30px !important;
+}

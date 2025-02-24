@@ -13,7 +13,7 @@ interface IProps extends RadioProps {
   radioList: { label: string; value: number | string }[];
   control: Control<any>;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  value: string | number;
+  value?: string | number;
 }
 
 const MuiRadioButton: React.FC<IProps> = ({

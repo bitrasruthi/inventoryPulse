@@ -1,5 +1,6 @@
 import { Typography, Box, Switch, styled, SwitchProps } from "@mui/material";
 import React from "react";
+import InfoIconWithTooltip from "./infoIconWithTooltip";
 
 const StyledSwitch = styled((props: SwitchProps) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -52,10 +53,12 @@ const StyledSwitch = styled((props: SwitchProps) => (
 
 interface IProps extends SwitchProps {
   label: string;
+  hasInfoIcon?: boolean;
+  isBoldText?: boolean;
 }
 
 const SwitchButton: React.FC<IProps> = (props) => {
-  const { label } = props;
+  const { label, hasInfoIcon, isBoldText } = props;
   return (
     <Box pb={2}>
       <Box
@@ -70,7 +73,23 @@ const SwitchButton: React.FC<IProps> = (props) => {
           height: 52,
         }}
       >
-        <Typography>{label}</Typography>
+        <Box
+          display={"flex"}
+          justifyContent={"space-between"}
+          alignItems={"center"}
+        >
+          <Typography
+            pr={1}
+            display={"flex"}
+            alignItems={"center"}
+            fontFamily={isBoldText ? "roboto-black" : "roboto-regular"}
+          >
+            {label}{" "}
+          </Typography>
+          {hasInfoIcon && (
+            <InfoIconWithTooltip title={"Tooltip text for info"} />
+          )}{" "}
+        </Box>
         <StyledSwitch sx={{ m: 1 }} {...props} />
       </Box>
     </Box>

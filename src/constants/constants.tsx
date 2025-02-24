@@ -10,15 +10,15 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import EventNoteOutlinedIcon from "@mui/icons-material/EventNoteOutlined";
 import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import {
-  InspectionColorEnum,
-  StepperStepEnum,
-  TableFieldTypeEnum,
-} from "./enum";
+import { StepperStepEnum } from "./enum";
 import GarageIcon from "../assets/icons/garageIcon";
 import Garden from "../assets/icons/garden";
 import ParkingSlot from "../assets/icons/parkingSlot";
-import AdditionalAreas from "../assets/icons/additionalAreas";
+import slide1 from "../assets/slide1.png";
+import { Box } from "@mui/material";
+import theme from "../styles/theme";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import BedIcon from "../assets/icons/primaryBedIcon";
 import BathIcon from "../assets/icons/primaryBathIcon";
 
@@ -336,7 +336,7 @@ export const inspectionsDetailsMenuList = [
   },
   {
     id: 4,
-    label: "Settings",
+    label: "Report Settings",
     isActive: false,
     value: "4",
     icon: <SettingsOutlinedIcon />,
@@ -859,3 +859,172 @@ export const radioDummyList = [
   { label: "No", value: 2 },
   { label: "Neutral", value: 3 },
 ];
+
+export const layoutRadios1 = [
+  { label: "Portrait", value: 1 },
+  { label: "Landscape", value: 2 },
+];
+export const layoutRadios2 = [
+  { label: "Together", value: 1 },
+  { label: "By Responsibility", value: 2 },
+  { label: "By Action", value: 3 },
+];
+
+export const coverImagesDummy = [
+  {
+    imageUrl: slide1,
+    id: 1,
+  },
+  {
+    imageUrl: slide1,
+    id: 2,
+  },
+  {
+    imageUrl: slide1,
+    id: 3,
+  },
+  {
+    imageUrl: slide1,
+    id: 4,
+  },
+  {
+    imageUrl: slide1,
+    id: 5,
+  },
+  {
+    imageUrl: slide1,
+    id: 6,
+  },
+  {
+    imageUrl: slide1,
+    id: 7,
+  },
+  {
+    imageUrl: slide1,
+    id: 8,
+  },
+];
+
+export const suggestedColors = [
+  "#E94F35",
+  "#FBBA00",
+  "#ffee00",
+  "#65b33b",
+  "#00aae5",
+  "#111",
+  "#fff",
+];
+
+export const palettes = [
+  {
+    label: "Main Heading",
+    id: 1,
+    colors: suggestedColors,
+  },
+  {
+    label: "Column Heading",
+    id: 2,
+    colors: suggestedColors,
+  },
+  {
+    label: "Sub Heading",
+    id: 3,
+    colors: suggestedColors,
+  },
+];
+
+export const itemRadios1 = [
+  { label: "Small (4 per row)", value: 1 },
+  { label: "Medium (3 per row)", value: 2 },
+  { label: "Large (2 per row)", value: 3 },
+  { label: "Full (1 per row)", value: 4 },
+];
+export const itemRadios2 = [
+  { label: "After Items", value: 1 },
+  { label: "Before Items", value: 2 },
+  { label: "After Each Items", value: 3 },
+  { label: "After All Sections", value: 4 },
+  { label: "Don't Show on Report", value: 5 },
+];
+
+export const sectionRadios2 = [
+  { label: "After Items", value: 1 },
+  { label: "Before Items", value: 2 },
+  { label: "After All Sections", value: 3 },
+  { label: "Don't Show on Report", value: 4 },
+];
+
+export const properyRadios2 = [
+  { label: "After All Sections", value: 3 },
+  { label: "Don't Show on Report", value: 4 },
+];
+
+const CustomNextArrow = (props) => {
+  const { className, style, onClick } = props;
+  return (
+    <Box
+      sx={{
+        position: "absolute",
+        right: 0,
+        top: 0,
+        alignItems: "center",
+        display: "flex",
+        height: "100%",
+      }}
+    >
+      <KeyboardArrowRightIcon
+        onClick={onClick}
+        style={{
+          ...style,
+          fontSize: "30px",
+          color: "#fff",
+          background: theme.palette.primary.main,
+          borderRadius: "50%",
+          cursor: "pointer",
+          zIndex: 1001,
+        }}
+      />
+    </Box>
+  );
+};
+
+const CustomPrevArrow = (props) => {
+  const { style, onClick } = props;
+  return (
+    <Box
+      sx={{
+        left: 0,
+        top: 0,
+        position: "absolute",
+        alignItems: "center",
+        display: "flex",
+        height: "100%",
+      }}
+    >
+      <KeyboardArrowLeftIcon
+        onClick={onClick}
+        style={{
+          ...style,
+          fontSize: "30px",
+          color: "#fff",
+          background: theme.palette.primary.main,
+          borderRadius: "50%",
+          cursor: "pointer",
+          zIndex: 1001,
+        }}
+      />
+    </Box>
+  );
+};
+
+export const coverImgSettings = {
+  arrows: true,
+  autoplaySpeed: 6000,
+  infinite: false,
+  speed: 500,
+  slidesToShow: 2.2,
+  slidesToScroll: 1,
+  nextArrow: <CustomNextArrow />,
+  prevArrow: <CustomPrevArrow />,
+  initialized: 0,
+};
