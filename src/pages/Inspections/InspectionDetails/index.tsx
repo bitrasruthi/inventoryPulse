@@ -60,11 +60,11 @@ function InspectionDetails() {
   const infoContent = (
     <ContentWrapper>
       <Grid2 spacing={2} container>
-        <Grid2 container size={{ xs: 12, md: 9.5 }}>
+        <Grid2 container size={{ xs: 12, md: 9, lg: 9.5 }}>
           <Grid2 size={{ xs: 12, md: 12 }}>
             <InspectionAddress />
           </Grid2>
-          <Grid2 size={{ xs: 12, md: 3.5 }}>
+          <Grid2 size={{ xs: 12, md: 4, lg: 3.5 }}>
             <Box mb={1}>
               <SectionTitleCommon title="Property (View More Details)" />
             </Box>
@@ -76,7 +76,6 @@ function InspectionDetails() {
             </Grid2>
             <Grid2
               sx={{
-                my: 2,
                 backgroundColor: "#f6f6f6",
                 borderRadius: "10px",
                 padding: 2,
@@ -89,7 +88,7 @@ function InspectionDetails() {
                   display: "grid",
                   gridTemplateColumns: "repeat(2, 1fr)",
                   gap: 2,
-                  my: 2,
+                  mb: 2,
                 }}
               >
                 {propertyDetails.map((item, index) => (
@@ -111,11 +110,11 @@ function InspectionDetails() {
                       </Typography>
                     </Box>
                     <Typography
-                      variant="caption"
+                      variant="subtitle1"
                       sx={{
-                        marginTop: 0.5,
                         display: "block",
                         textAlign: "left",
+                        opacity: 0.8,
                       }}
                     >
                       {item.description}
@@ -152,7 +151,7 @@ function InspectionDetails() {
               </Grid2>
             </Grid2>
           </Grid2>
-          <Grid2 size={{ xs: 12, md: 5.5 }}>
+          <Grid2 size={{ xs: 12, md: 4.5, lg: 5.5 }}>
             <Grid2>
               <Box
                 sx={{
@@ -246,7 +245,7 @@ function InspectionDetails() {
               </Grid2>
             </Grid2>
           </Grid2>
-          <Grid2 size={{ xs: 12, md: 3 }}>
+          <Grid2 size={{ xs: 12, md: 3.5, lg: 3 }}>
             <Box
               sx={{ backgroundColor: "#f6f6f6", padding: 2, borderRadius: 3 }}
             >
@@ -292,7 +291,7 @@ function InspectionDetails() {
             </Box>
           </Grid2>
         </Grid2>
-        <Grid2 size={{ xs: 12, md: 2.5 }}>
+        <Grid2 size={{ xs: 12, md: 3, lg: 2.5 }}>
           <Grid2
             sx={{
               border: "1px solid #D8D8D8",
