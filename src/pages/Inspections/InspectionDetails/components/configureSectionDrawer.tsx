@@ -114,13 +114,6 @@ function ConfigureSectionDrawer({
                 <RadioGroup
                   value={selectedField}
                   onChange={(e) => setSelectedField(e.target.value)}
-                  sx={
-                    {
-                      //display: "grid",
-                      //gridTemplateColumns: "repeat(5, 1fr)",
-                      //gap: 2,
-                    }
-                  }
                 >
                   <Grid2 container spacing={2}>
                     {fieldTypes.map((field, _index) => (
