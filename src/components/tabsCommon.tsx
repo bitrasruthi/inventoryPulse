@@ -78,7 +78,11 @@ const TabsCommon: React.FC<Props> = ({
         )}
       </Box>
       <TabContext value={value}>
-        <Box>
+        <Box
+          sx={{
+            borderBottom: "1px solid #d8d8d8",
+          }}
+        >
           <TabList
             variant={
               tabMenuList?.length >= 5 && matches ? "scrollable" : "standard"
@@ -86,10 +90,9 @@ const TabsCommon: React.FC<Props> = ({
             scrollButtons
             allowScrollButtonsMobile
             onChange={handleChange}
-            aria-label="lab API tabs example"
             sx={{
-              ml: 2,
-
+              ml: 3,
+              mb: "-1px",
               "& .MuiTabs-indicator": {
                 display: "flex",
                 justifyContent: "center",
@@ -108,8 +111,9 @@ const TabsCommon: React.FC<Props> = ({
 
               "& .MuiTab-root": {
                 bgcolor: "#fbfbfb",
-                border: "1px solid #d8d8d8",
+                //border: "1px solid #d8d8d8",
                 minHeight: "50px",
+                border: "1px solid #d8d8d8",
               },
 
               "& .Mui-selected": {
@@ -165,7 +169,7 @@ const TabsCommon: React.FC<Props> = ({
                 value={item?.value}
                 sx={{
                   px: 3,
-                  mr: 1,
+                  mr: 1.5,
                   background: "#fff",
                   borderTopLeftRadius: 12,
                   borderTopRightRadius: 12,

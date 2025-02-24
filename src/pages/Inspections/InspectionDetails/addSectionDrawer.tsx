@@ -92,7 +92,7 @@ export default function AddSectionDrawer({
       open={isDrawerOpen}
       onClose={onClose}
       sx={{
-        zIndex: 9,
+        zIndex: 9999,
         width: drawerWidth,
         flexShrink: 0,
         [`& .MuiDrawer-paper`]: {
