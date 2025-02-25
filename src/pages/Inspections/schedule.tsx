@@ -125,13 +125,13 @@ const Schedule = () => {
           </Grid2>
         </Grid2>
 
-        <Container sx={{ width: "90%" }}>
+        <Box sx={{ width: "100%" }}>
           <Grid2 container>
             <Grid2 size={12}>
               <Calendar resources={timeSlots} />
             </Grid2>
           </Grid2>
-        </Container>
+        </Box>
       </Fieldset>
     </ContentWrapper>
   );

@@ -70,7 +70,6 @@ const SwitchButton: React.FC<IProps> = (props) => {
           background: "#f8f8f8",
           p: 1,
           borderRadius: 2,
-          height: 52,
         }}
       >
         <Box
@@ -82,13 +81,13 @@ const SwitchButton: React.FC<IProps> = (props) => {
             pr={1}
             display={"flex"}
             alignItems={"center"}
-            fontFamily={isBoldText ? "roboto-black" : "roboto-regular"}
+            fontFamily={isBoldText ? "roboto-medium" : "roboto-regular"}
           >
-            {label}{" "}
+            {label}
           </Typography>
           {hasInfoIcon && (
             <InfoIconWithTooltip title={"Tooltip text for info"} />
-          )}{" "}
+          )}
         </Box>
         <StyledSwitch sx={{ m: 1 }} {...props} />
       </Box>

@@ -128,7 +128,7 @@ const ReportSettings = (_props: Props) => {
                 <MuiRadioButton control={control} radioList={layoutRadios2} />
               </Box>
             </Box>
-            <Box width={550} mt={4}>
+            <Box sx={{ mt: 4, width: "90%" }}>
               <LabelCommon fieldName={"Cover Page"} />
               <Slider {...coverImgSettings}>
                 {coverImagesDummy.map((img, index) => (
@@ -139,7 +139,6 @@ const ReportSettings = (_props: Props) => {
                       setSelectedCover(img.id);
                     }}
                   >
-                    {" "}
                     <img
                       src={img.imageUrl}
                       className="img"

@@ -8,14 +8,14 @@ interface FieldsetProps {
 
 const Fieldset = ({ title, children, ...props }: FieldsetProps) => {
   return (
-    <Box pb={2}>
+    <Box pb={2} mb={2}>
       <Box
-        component="fieldset"
         sx={{
           borderColor: "#E0E0E0",
           borderWidth: 1,
           borderRadius: "10px",
           padding: 3,
+          position: "relative",
         }}
         {...props}
       >
@@ -26,6 +26,9 @@ const Fieldset = ({ title, children, ...props }: FieldsetProps) => {
             sx={{
               fontSize: "1.2rem",
               paddingX: 2,
+              position: "absolute",
+              top: "-15px",
+              backgroundColor: "white",
             }}
           >
             {title}
