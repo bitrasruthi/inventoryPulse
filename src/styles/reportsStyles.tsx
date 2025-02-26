@@ -18,7 +18,8 @@ const ReportsStyles = styled(Box)(({ theme }) => ({
     justifyContent: "center",
     alignItems: "center",
     borderRight: "1px solid #ddd",
-    width: "3%",
+    width: "30px",
+    padding: 0,
   },
   "& .parent-content-grid": {
     padding: 10,
@@ -26,7 +27,7 @@ const ReportsStyles = styled(Box)(({ theme }) => ({
   },
   "& .parent-icons-grid": {
     display: "flex",
-    width: "10%",
+    width: "100px",
   },
   "& .collapse-parent-grid": {
     position: "relative",
