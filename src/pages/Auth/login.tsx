@@ -1,4 +1,12 @@
-import { Box, Button, Container, Grid2, Link, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Grid2,
+  Link,
+  Typography,
+  Paper,
+} from "@mui/material";
 import LogoImg from "../../assets/logo.png";
 import OutlinedTextField from "../../components/outlinedTextField";
 import MailIcon from "../../assets/icons/mailIcon";
@@ -17,14 +25,13 @@ const Login = (props: Props) => {
         height: "100vh",
       }}
     >
-      <Box
+      <Paper
         sx={{
           p: 2,
-          borderRadius: 4,
-          boxShadow: 3,
-          width: "80%",
-          textAlign: "center",
+          borderRadius: 5,
+          width: "75%",
         }}
+        elevation={8}
       >
         <Grid2 container spacing={6} alignItems="center">
           {/* Left Side (Poster) */}
@@ -47,10 +54,8 @@ const Login = (props: Props) => {
             >
               <img
                 src={LogoImg}
-                alt="Login Poster"
-                height="80%"
-                width="70%"
-                style={{ objectFit: "contain", padding: "20px" }}
+                alt="Logo-img"
+                style={{ objectFit: "contain", padding: "14px" }}
               />
               <OutlinedTextField
                 variant="outlined"
@@ -74,9 +79,9 @@ const Login = (props: Props) => {
                   href="/forget-password"
                   sx={{
                     textDecoration: "underline",
-                    fontWeight: "bold",
-                    color: "black",
+                    fontFamily: "roboto-medium",
                     opacity: 0.9,
+                    color: "black",
                   }}
                 >
                   Forgot Password?
@@ -85,13 +90,16 @@ const Login = (props: Props) => {
               <Button fullWidth variant="contained" sx={{ mt: 2 }}>
                 Sign In
               </Button>
-              <Typography variant="body2" textAlign="center" sx={{ mt: 2 }}>
-                Don't have an account?{" "}
+              <Typography
+                textAlign="center"
+                sx={{ mt: 2, fontFamily: "roboto-regular" }}
+              >
+                Don't have an account? &nbsp;
                 <Link
                   href="/register"
                   sx={{
                     textDecoration: "underline",
-                    fontWeight: "bold",
+                    fontFamily: "roboto-medium",
                   }}
                 >
                   Register
@@ -100,7 +108,7 @@ const Login = (props: Props) => {
             </Box>
           </Grid2>
         </Grid2>
-      </Box>
+      </Paper>
     </Container>
   );
 };
