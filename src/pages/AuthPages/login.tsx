@@ -81,7 +81,7 @@ const Login = (props: Props) => {
                     opacity: 0.9,
                   }}
                 >
-                  Forgot Password
+                  Forgot Password?
                 </Link>
               </Box>
               <Button fullWidth variant="contained" sx={{ mt: 2 }}>
