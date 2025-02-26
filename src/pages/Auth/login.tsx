@@ -65,7 +65,9 @@ const Login = (props: Props) => {
               />
               <Box
                 sx={{
-                  float: "right",
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  width: "100%",
                 }}
               >
                 <Link
