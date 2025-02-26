@@ -8,9 +8,9 @@ import FullScreenDialog, {
 } from "../../components/fullScreenDialog";
 import Pagination from "../../components/pagination";
 import PropertyList from "./propertyList";
-import AddUser from "../Users/addUser";
 import { useFormHook } from "../../hooks/useFormHook";
 import validate from "../../helpers/validations";
+import SaveProperty from "./saveProperty";
 
 const Properties = () => {
   const [activeTab, setActiveTab] = useState<string>(tabMenuList[0]?.value);
@@ -102,7 +102,7 @@ const Properties = () => {
             ] as CustomButtonProps[]
           }
         >
-          <AddUser formProps={form} />
+          <SaveProperty formProps={form} />
         </FullScreenDialog>
       )}
     </Box>
