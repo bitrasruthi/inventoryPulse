@@ -56,20 +56,16 @@ const Login = (props: Props) => {
                 variant="outlined"
                 startAdormentIcon={MailIcon}
                 placeholder="abc@gmail.com"
-                isnotboldtext={true}
               />
               <OutlinedTextField
                 variant="outlined"
                 startAdormentIcon={LockIcon}
                 endAdormentIcon={EyeIcon}
                 placeholder="Enter password"
-                isnotboldtext={true}
               />
               <Box
                 sx={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  width: "100%",
+                  float: "right",
                 }}
               >
                 <Link
