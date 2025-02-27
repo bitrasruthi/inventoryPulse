@@ -263,7 +263,11 @@ const Reports = () => {
               reportsParentActionIcons.length - 1 === index
                 ? ""
                 : "1px solid #ddd",
-            width: "auto",
+            width: "100%",
+            cursor: "pointer",
+            ":hover": {
+              backgroundColor: "#f6f6f6",
+            },
           }}
         >
           <IconButton disableRipple>
@@ -275,6 +279,7 @@ const Reports = () => {
   );
 
   const generateUUID = () => crypto.randomUUID();
+
   const handleAddRow = (roomUUID: string, parentUUID: string) => {
     setTableData((prevData: any) => {
       const newUUID = generateUUID();
@@ -319,7 +324,11 @@ const Reports = () => {
               reportsChildActionIcons.length - 1 === index
                 ? ""
                 : "1px solid #ddd",
-            width: "auto",
+            cursor: "pointer",
+            width: "100%",
+            ":hover": {
+              backgroundColor: "#f6f6f6",
+            },
           }}
         >
           <IconButton
@@ -388,7 +397,6 @@ const Reports = () => {
                           borderBottom: openSections[section.uuid]
                             ? "1px solid #ddd"
                             : "none",
-
                           padding: "8px 10px !important",
                         }}
                       >
@@ -563,13 +571,12 @@ const Reports = () => {
                                       height: "100% !important",
                                       p: 0,
                                     }}
-                                    width={"inherit"}
                                   >
                                     <Box
                                       display={"flex"}
                                       height={"inherit"}
                                       justifyContent={"center"}
-                                      padding={"0px 2px"}
+                                      paddingX={1}
                                     >
                                       {childActionsIcons(_item.uuid)}
                                     </Box>
