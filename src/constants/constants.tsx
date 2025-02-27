@@ -7,7 +7,6 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import EventNoteOutlinedIcon from "@mui/icons-material/EventNoteOutlined";
 import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { StepperStepEnum } from "./enum";
@@ -21,6 +20,8 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import BedIcon from "../assets/icons/primaryBedIcon";
 import BathIcon from "../assets/icons/primaryBathIcon";
+import RestoreOutlinedIcon from "@mui/icons-material/RestoreOutlined";
+import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
 
 export const tabMenuList = [
   {
@@ -325,7 +326,7 @@ export const inspectionsDetailsMenuList = [
     label: "Report",
     isActive: false,
     value: "2",
-    icon: <EventNoteOutlinedIcon />,
+    icon: <AssignmentOutlinedIcon />,
   },
   {
     id: 3,
@@ -346,7 +347,7 @@ export const inspectionsDetailsMenuList = [
     label: "Activity",
     isActive: false,
     value: "5",
-    icon: <CalendarMonthIcon />,
+    icon: <RestoreOutlinedIcon />,
   },
 ] as any;
 
