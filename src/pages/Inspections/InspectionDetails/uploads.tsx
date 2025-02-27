@@ -1,7 +1,8 @@
 import { useState } from "react";
 import InspectionAddress from "../../../components/inspectionAddress";
 import InspectionUploadCommon from "../../../components/inspectionUploadCommon";
-
+import { Box } from "@mui/material";
+import slide1 from "../../../assets/slide1.png";
 const Uploads = () => {
   const [files, setFiles] = useState([
     { id: "1", name: "document.pdf" },
@@ -9,9 +10,9 @@ const Uploads = () => {
   ]);
 
   const [images, setImages] = useState([
-    { id: "4", name: "image2.jpg", url: "/images/image2.jpg" },
-    { id: "5", name: "image3.jpg", url: "/images/image3.jpg" },
-    { id: "3", name: "image1.jpg", url: "/images/image1.jpg" },
+    { id: "4", name: "image2.jpg", url: slide1 },
+    { id: "5", name: "image3.jpg", url: slide1 },
+    { id: "3", name: "image1.jpg", url: slide1 },
   ]);
 
   const handleDelete = (ids) => {
@@ -25,12 +26,14 @@ const Uploads = () => {
   return (
     <div>
       <InspectionAddress />
-      <InspectionUploadCommon
-        files={files}
-        images={images}
-        onDelete={handleDelete}
-        onAssign={handleAssign}
-      />
+      <Box my={2}>
+        <InspectionUploadCommon
+          files={files}
+          images={images}
+          onDelete={handleDelete}
+          onAssign={handleAssign}
+        />
+      </Box>
     </div>
   );
 };
