@@ -7,7 +7,6 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import EventNoteOutlinedIcon from "@mui/icons-material/EventNoteOutlined";
 import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { StepperStepEnum } from "./enum";
@@ -21,6 +20,8 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import BedIcon from "../assets/icons/primaryBedIcon";
 import BathIcon from "../assets/icons/primaryBathIcon";
+import RestoreOutlinedIcon from "@mui/icons-material/RestoreOutlined";
+import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
 
 export const tabMenuList = [
   {
@@ -325,7 +326,7 @@ export const inspectionsDetailsMenuList = [
     label: "Report",
     isActive: false,
     value: "2",
-    icon: <EventNoteOutlinedIcon />,
+    icon: <AssignmentOutlinedIcon />,
   },
   {
     id: 3,
@@ -346,7 +347,7 @@ export const inspectionsDetailsMenuList = [
     label: "Activity",
     isActive: false,
     value: "5",
-    icon: <CalendarMonthIcon />,
+    icon: <RestoreOutlinedIcon />,
   },
 ] as any;
 
@@ -710,66 +711,6 @@ export const tableDataDummy2 = {
           source: {
             type: "DICTIONARY",
             dictionary: "descriptions",
-          },
-          deleted_at: null,
-          can_edit_value: true,
-          required: false,
-          source_id: null,
-        },
-        "b071e893-ead6-42b4-9d9c-ac71e5d64e67": {
-          id: 134774108,
-          uuid: "b071e893-ead6-42b4-9d9c-ac71e5d64e67",
-          name: "9a2ab4c6-4d1d-4e2c-8e2b-1216b03336e2",
-          label: "Rating",
-          editable: true,
-          placeholder: "give rating",
-          type: "SCALE",
-          source: {
-            type: "OPTION_SET",
-            option_set: {
-              id: 3,
-              name: "5 Star",
-              editable: false,
-              type: 1,
-              options: [1, 2, 3, 4, 5],
-              accountId: null,
-              colors: [],
-              deleted_at: null,
-            },
-          },
-          deleted_at: null,
-          can_edit_value: true,
-          required: false,
-          source_id: null,
-        },
-        "9d021f0b-d70c-4fb5-bd63-bdbd48442a3f": {
-          id: 134774109,
-          uuid: "9d021f0b-d70c-4fb5-bd63-bdbd48442a3f",
-          name: "9803492f-002b-4222-948c-9c2e3191bb3b",
-          label: "Single Select",
-          editable: true,
-          placeholder: "Select one",
-          type: "SELECT",
-          source: {
-            type: "OPTIONS",
-            options: ["test 2", "test 1"],
-          },
-          deleted_at: null,
-          can_edit_value: true,
-          required: false,
-          source_id: null,
-        },
-        "2feff7a0-b79f-48d0-be6a-6a8c0843f4bb": {
-          id: 134774110,
-          uuid: "2feff7a0-b79f-48d0-be6a-6a8c0843f4bb",
-          name: "9cee695c-c521-4436-92ed-e801073c0d77",
-          label: "Multi select",
-          editable: true,
-          placeholder: "Multi select placeholder",
-          type: "SELECT_MULTI",
-          source: {
-            type: "OPTIONS",
-            options: ["Option1", "Option2", "Option3"],
           },
           deleted_at: null,
           can_edit_value: true,

@@ -1,6 +1,6 @@
 import Layout from "../layout";
 import EmptyLayout from "../layout/emptyLayout";
-import Login from "../pages/AuthPages/login";
+import Login from "../pages/Auth/login";
 import Clients from "../pages/Clients";
 import Dashboard from "../pages/Dashboard";
 import Inspections from "../pages/Inspections";
