@@ -35,7 +35,6 @@ body,
 html {
   margin: 0;
   padding: 0;
-
 }
 * {
   box-sizing: border-box;
@@ -86,10 +85,9 @@ html {
   font-family: "roboto-thin", sans-serif !important;
 }
 
-
-.flex-align-center{
- display: flex;
- align-items: center;
+.flex-align-center {
+  display: flex;
+  align-items: center;
 }
 
 .slick-list {

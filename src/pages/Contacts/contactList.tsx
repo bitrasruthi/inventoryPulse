@@ -51,7 +51,7 @@ const ContactList: React.FC<IProps> = (props) => {
 
   return (
     <>
-      <GradientButton label="Add Contact" handleAction={handleOpenDialog} />
+      <GradientButton label="Add Contact" onClick={() => handleOpenDialog()} />
       <Grid container spacing={1} columnSpacing={3} mt={3}>
         {list?.length > 0
           ? list?.map((item: any, index: number) => (

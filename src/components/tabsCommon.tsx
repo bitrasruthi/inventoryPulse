@@ -196,7 +196,9 @@ const TabsCommon: React.FC<Props> = ({
             >
               {buttonList?.map((btn: any) =>
                 btn?.isGradient ? (
-                  <GradientButton {...btn} handleAction={btn.action} />
+                  <GradientButton
+                    {...btn}
+                  />
                 ) : (
                   <OutlinedCustomButton {...btn} />
                 )

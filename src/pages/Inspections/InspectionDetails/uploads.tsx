@@ -1,6 +1,6 @@
 import { useState } from "react";
 import InspectionAddress from "../../../components/inspectionAddress";
-import InspectionUploadCommon from "../../../components/inspectionUploadCommon";
+import InspectionUploadCommon from "./inspectionUploadCommon";
 import { Box } from "@mui/material";
 import slide1 from "../../../assets/slide1.png";
 const Uploads = () => {

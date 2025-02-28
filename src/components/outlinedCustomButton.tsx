@@ -44,7 +44,6 @@ const OutlinedCustomButton: React.FC<IProps> = (props) => {
   return (
     <>
       <Button
-        {...btnProps}
         onClick={handleClick}
         sx={{
           background: fillColor ? "#111" : "#fff",
@@ -56,9 +55,10 @@ const OutlinedCustomButton: React.FC<IProps> = (props) => {
           height: 40,
           minWidth: 80,
           width: { xs: "100%", sm: "auto" },
+          px: 2,
+          ...btnProps.sx,
         }}
         size="medium"
-        disableRipple
         endIcon={
           endIcon ||
           (menuList.length > 0 && (

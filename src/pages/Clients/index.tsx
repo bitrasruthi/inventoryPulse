@@ -74,7 +74,7 @@ const Clients = (_props: Props) => {
           {
             label: "Add Client",
             isGradient: true,
-            action: handleOpenDialog,
+            onClick: handleOpenDialog,
           },
         ]}
       />

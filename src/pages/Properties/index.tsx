@@ -77,7 +77,7 @@ const Properties = () => {
           {
             label: "Add Property",
             isGradient: true,
-            action: handleOpenDialog,
+            onClick: handleOpenDialog,
           },
         ]}
       />

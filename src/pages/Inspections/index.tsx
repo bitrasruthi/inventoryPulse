@@ -3,7 +3,6 @@ import { useState } from "react";
 import Filters from "../../components/filters";
 import InspectionList from "./inspectionList";
 import {
-  inspectionBtnList,
   inspectionFilters,
   steps,
   tabMenuList,
@@ -21,6 +20,9 @@ import { PropertyDetailsFormValues } from "../../helpers/Interfaces";
 import InspectionStepper from "./inspectionStepper";
 import InspectionListByDate from "./inspectionListByDate";
 import moment from "moment";
+import HomeIcon from "../../assets/icons/homeIcon";
+import AddHomeIcon from "../../assets/icons/addHomeIcon";
+
 
 const Inspections = () => {
   const [activeTab, setActiveTab] = useState<string>(tabMenuList[0]?.value);
@@ -47,6 +49,21 @@ const Inspections = () => {
   const getFormattedDate = () => {
     return moment().format("dddd, MMM D");
   };
+
+  const inspectionBtnList = [
+    {
+      id: 1,
+      name: "Existing Property",
+      icon: HomeIcon,
+      handleActionClick: handleOpenDialog,
+    },
+    {
+      id: 2,
+      name: "New Property",
+      icon: AddHomeIcon,
+      handleActionClick: handleOpenDialog,
+    },
+  ];
 
   const inspectionListContent = (
     <Grid container spacing={0}>
@@ -134,7 +151,6 @@ const Inspections = () => {
             label: "Add Inspection",
             menuList: inspectionBtnList,
             isGradient: true,
-            action: handleOpenDialog,
           },
         ]}
       />

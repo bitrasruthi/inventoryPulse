@@ -1,8 +1,6 @@
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import HomeIcon from "../assets/icons/homeIcon";
-import AddHomeIcon from "../assets/icons/addHomeIcon";
-import ImportIcon from "../assets/icons/ImportIcon";
+
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
@@ -75,12 +73,6 @@ export const inspectionFilters = [
       { id: 15, name: "To Be Confirmed By Contact" },
     ],
   },
-];
-
-export const inspectionBtnList = [
-  { id: 1, name: "Existing Property", icon: HomeIcon },
-  { id: 2, name: "New Property", icon: AddHomeIcon },
-  { id: 3, name: "Import", icon: ImportIcon },
 ];
 
 export const inspectionColors = ["#00BB54", "#EE9300", "#0182FC"];

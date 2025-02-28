@@ -71,7 +71,7 @@ const Users = () => {
           {
             label: "Add User",
             isGradient: true,
-            action: handleOpenDialog,
+            onClick: handleOpenDialog,
           },
         ]}
       />

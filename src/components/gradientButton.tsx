@@ -1,4 +1,11 @@
-import { Button, Fab, Menu, MenuItem, Typography } from "@mui/material";
+import {
+  Button,
+  Fab,
+  Menu,
+  MenuItem,
+  Typography,
+  ButtonProps,
+} from "@mui/material";
 import React, { useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
@@ -6,18 +13,17 @@ import FullScreenDialog, { CustomButtonProps } from "./fullScreenDialog";
 import Filters from "./filters";
 import { inspectionFilters } from "../constants/constants";
 
-interface Props {
+interface Props extends ButtonProps {
   label: string;
   menuList?: any;
   isGradient?: boolean;
-  handleAction?: () => void;
 }
 
 const GradientButton: React.FC<Props> = ({
   label,
   menuList = [],
   isGradient = true,
-  handleAction,
+  onClick,
 }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -31,7 +37,7 @@ const GradientButton: React.FC<Props> = ({
     setDialogOpen(false);
   };
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -53,9 +59,10 @@ const GradientButton: React.FC<Props> = ({
           width: { xs: "100%", sm: "auto" },
           borderRadius: 3,
           height: 40,
+          px: 2,
         }}
         size="medium"
-        onClick={menuList && menuList.length > 0 ? handleClick : handleAction}
+        onClick={menuList && menuList.length > 0 ? handleMenuOpen : onClick}
       >
         {label}
         {menuList && menuList.length > 0 && (
@@ -97,14 +104,17 @@ const GradientButton: React.FC<Props> = ({
           {menuList?.map((item: any, index: number) => (
             <MenuItem
               key={index}
-              sx={{ display: "flex", alignItems: "center" }}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+              }}
               onClick={() => {
-                handleAction && handleAction();
+                item.handleActionClick && item.handleActionClick();
                 handleClose();
               }}
             >
               {item?.icon && <item.icon />}
-              <Typography fontSize={12} pl={1}>
+              <Typography pl={1} fontFamily={"roboto-regular"}>
                 {item?.name}
               </Typography>
             </MenuItem>

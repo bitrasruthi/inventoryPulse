@@ -10,16 +10,16 @@ import {
   Grid2,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import theme from "../styles/theme";
-import EditIcon from "../assets/icons/editIcon";
-import RedDeleteIcon from "../assets/icons/redDeleteIcon";
-import PrimaryTickIcon from "../assets/icons/primaryTickIcon";
-import RotateLeftIcon from "../assets/icons/rotateLeftIcon";
-import RotateRightIcon from "../assets/icons/rotateRightIcon";
-import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf"; // Import PDF icon
-import DescriptionIcon from "@mui/icons-material/Description";
-import PdfIcon from "../assets/icons/pdfIcon";
-import WordDocIcon from "../assets/icons/wordDocIcon";
+import theme from "../../../styles/theme";
+import EditIcon from "../../../assets/icons/editIcon";
+import RedDeleteIcon from "../../../assets/icons/redDeleteIcon";
+import PrimaryTickIcon from "../../../assets/icons/primaryTickIcon";
+import RotateLeftIcon from "../../../assets/icons/rotateLeftIcon";
+import RotateRightIcon from "../../../assets/icons/rotateRightIcon";
+import PdfIcon from "../../../assets/icons/pdfIcon";
+import WordDocIcon from "../../../assets/icons/wordDocIcon";
+import OutlinedCustomButton from "../../../components/outlinedCustomButton";
+import GradientButton from "../../../components/gradientButton";
 interface IUpload {
   name: string;
   id: string;
@@ -72,46 +72,20 @@ const InspectionUploadCommon: React.FC<IProps> = ({
           gap: 1.5,
         }}
       >
-        <Button
-          variant="outlined"
-          color="error"
+        <OutlinedCustomButton
           sx={{
             border: "1px solid #FF4565",
             color: "#FF4565",
             backgroundColor: "white",
-            padding: "6px 16px",
-            display: "flex",
-            alignItems: "center",
-            gap: "8px",
-            fontFamily: "roboto-regular",
-            fontSize: "12px",
-            fontWeight: 500,
-            borderRadius: "8px",
           }}
-        >
-          <RedDeleteIcon />
-          Delete Selected
-        </Button>
+          startIcon={<RedDeleteIcon />}
+          label="Delete Selected"
+        ></OutlinedCustomButton>
 
-        <Button
-          variant="contained"
-          color="primary"
-          sx={{
-            padding: "6px 16px",
-            display: "flex",
-            alignItems: "center",
-            gap: "8px",
-            fontFamily: "roboto-regular",
-            fontSize: "12px",
-            fontWeight: 500,
-            color: "#FFFFFF",
-            borderRadius: "8px",
-          }}
+        <GradientButton
           onClick={() => onAssign([...selectedFiles, ...selectedImages])}
-        >
-          <PrimaryTickIcon />
-          Assign Selected
-        </Button>
+          label="Assign Selected"
+        ></GradientButton>
       </Box>
 
       <Accordion
