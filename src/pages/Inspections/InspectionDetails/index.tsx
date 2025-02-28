@@ -21,6 +21,7 @@ import AddIcon from "../../../assets/icons/addIcon";
 import OutlinedCustomButton from "../../../components/outlinedCustomButton";
 import InspectionAddress from "../../../components/inspectionAddress";
 import AddSectionDrawer from "./addSectionDrawer";
+import Uploads from "./uploads";
 
 function InspectionDetails() {
   const [activeTab, setActiveTab] = useState<string>(
@@ -342,6 +343,12 @@ function InspectionDetails() {
             />
             <Reports />
           </>
+        );
+      case "3":
+        return (
+          <ContentWrapper>
+            <Uploads />
+          </ContentWrapper>
         );
       case "4":
         return (
