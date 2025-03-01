@@ -3,17 +3,15 @@ import {
   Box,
   Typography,
   Checkbox,
-  Button,
   Accordion,
   AccordionSummary,
   AccordionDetails,
   Grid2,
+  styled,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import theme from "../../../styles/theme";
 import EditIcon from "../../../assets/icons/editIcon";
 import RedDeleteIcon from "../../../assets/icons/redDeleteIcon";
-import PrimaryTickIcon from "../../../assets/icons/primaryTickIcon";
 import RotateLeftIcon from "../../../assets/icons/rotateLeftIcon";
 import RotateRightIcon from "../../../assets/icons/rotateRightIcon";
 import PdfIcon from "../../../assets/icons/pdfIcon";
@@ -30,6 +28,24 @@ interface IProps {
   onDelete: (ids: string[]) => void;
   onAssign: (ids: string[]) => void;
 }
+
+const StyledAccordion = styled(Accordion)(() => ({
+  boxShadow: "none",
+  "&:before": { display: "none" },
+  border: "1px solid #E0E0E0",
+  marginTop: 18,
+  borderRadius: "10px",
+}));
+
+const StyledAccordionHeading = styled(Typography)(({ theme }) => ({
+  color: theme.palette.primary.main,
+  display: "flex",
+  alignItems: "center",
+  gap: 1,
+  fontFamily: "roboto-bold",
+  paddingLeft: 8,
+}));
+
 const InspectionUploadCommon: React.FC<IProps> = ({
   uploads = [],
   onDelete,
@@ -67,8 +83,9 @@ const InspectionUploadCommon: React.FC<IProps> = ({
       return { ...prevAngles, [imageId]: newAngle };
     });
   };
+
   return (
-    <Box>
+    <>
       <Box
         sx={{
           mt: 2,
@@ -76,6 +93,7 @@ const InspectionUploadCommon: React.FC<IProps> = ({
           justifyContent: "flex-end",
           alignItems: "center",
           gap: 1.5,
+          flexWrap: "wrap",
         }}
       >
         <OutlinedCustomButton
@@ -93,78 +111,46 @@ const InspectionUploadCommon: React.FC<IProps> = ({
         ></GradientButton>
       </Box>
       {otherFiles.length > 0 && (
-        <Accordion
-          sx={{
-            boxShadow: "none",
-            "&:before": { display: "none" },
-            border: "1px solid #E0E0E0",
-            my: 2,
-            borderRadius: "10px",
-          }}
-        >
+        <StyledAccordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             sx={{ flexDirection: "row-reverse" }}
           >
-            <Typography
-              variant="h6"
-              color="primary"
-              p={1}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: 1,
-                fontSize: "16px",
-                fontWeight: 600,
-                color: theme.palette.primary.dark,
-                fontFamily: "roboto-bold",
-              }}
-            >
+            <StyledAccordionHeading sx={{ p: 0.5 }}>
               Files ({otherFiles.length})
-            </Typography>
+            </StyledAccordionHeading>
           </AccordionSummary>
           <AccordionDetails>
             <Grid2 container spacing={2}>
               {otherFiles.map((file) => (
-                <Grid2 key={file.id}>
+                <Grid2 key={file.id} size={{ xs: 12, md: 2, lg: 2.3 }}>
                   <Box
                     sx={{
-                      position: "relative",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      p: 2,
-                      width: "207px",
-                      height: "171px",
+                      p: 1,
                       border: "1px solid #E0E0E0",
                       borderRadius: 2,
                     }}
                   >
-                    <Box sx={{ position: "absolute", top: 8, left: 8 }}>
+                    <Box
+                      display={"flex"}
+                      justifyContent={"space-between"}
+                      alignItems={"center"}
+                    >
                       <Checkbox
                         onChange={() => handleSelect(file.id, "file")}
                         size="small"
-                        sx={{
-                          "&.Mui-checked": {
-                            color: theme.palette.primary.main,
-                          },
-                        }}
                         checked={selectedFiles.includes(file.id)}
                       />
-                    </Box>
-
-                    <Box
-                      sx={{
-                        position: "absolute",
-                        top: 15,
-                        right: 15,
-                        display: "flex",
-                        gap: 1.5,
-                      }}
-                    >
-                      <EditIcon height={18} width={18} />
-                      <RedDeleteIcon />
+                      <Box
+                        sx={{
+                          display: "flex",
+                          gap: 1.5,
+                          cursor: "pointer",
+                        }}
+                      >
+                        <EditIcon height={18} width={18} />
+                        <RedDeleteIcon />
+                      </Box>
                     </Box>
 
                     <Box
@@ -173,7 +159,10 @@ const InspectionUploadCommon: React.FC<IProps> = ({
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        mt: 3,
+                        flexDirection: "column",
+                        mt: 1,
+                        rowGap: 2,
+                        height: "100px",
                       }}
                     >
                       {file.name.toLowerCase().endsWith(".pdf") ? (
@@ -182,153 +171,96 @@ const InspectionUploadCommon: React.FC<IProps> = ({
                         file.name.toLowerCase().endsWith(".doc") ? (
                         <WordDocIcon />
                       ) : null}
+
+                      <Typography
+                        sx={{
+                          fontFamily: "roboto-medium",
+                        }}
+                      >
+                        {file.name}
+                      </Typography>
                     </Box>
-                    <Typography
-                      sx={{
-                        mt: "auto",
-                        mb: "auto",
-                        fontFamily: "roboto-medium",
-                        color: "#222222",
-                      }}
-                    >
-                      {file.name}
-                    </Typography>
                   </Box>
                 </Grid2>
               ))}
             </Grid2>
           </AccordionDetails>
-        </Accordion>
+        </StyledAccordion>
       )}
 
       {images.length > 0 && (
-        <Accordion
-          sx={{
-            boxShadow: "none",
-            "&:before": { display: "none" },
-            border: "1px solid #E0E0E0",
-            my: 2,
-            borderRadius: "10px",
-          }}
-        >
+        <StyledAccordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
-            sx={{ flexDirection: "row-reverse", alignItems: "center" }} // Added alignItems: "center"
+            sx={{
+              flexDirection: "row-reverse",
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
           >
-            <Typography
-              p={1}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: 1,
-                fontSize: "16px",
-                fontWeight: 600,
-                color: theme.palette.primary.dark,
-                fontFamily: "roboto-bold",
-                flexGrow: 1, // Added flexGrow to push buttons to the right
-              }}
-            >
+            <StyledAccordionHeading sx={{ flex: 1 }}>
               Images ({images.length})
-            </Typography>
-            <Box sx={{ display: "flex", gap: 1 }}>
-              <Button
-                variant="outlined"
-                color="error"
-                sx={{
-                  border: "1px solid #333333",
-                  color: "#333333",
-                  backgroundColor: "white",
-                  padding: "5px",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  fontFamily: "roboto-regular",
-                  fontSize: "12px",
-                  fontWeight: 500,
-                  borderRadius: "8px",
-                  maxHeight: "30px",
-                }}
+            </StyledAccordionHeading>
+            <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
+              <OutlinedCustomButton
                 onClick={(event) => {
                   event.stopPropagation();
                   selectedImages.forEach((fileId) =>
                     handleRotate(fileId, "left")
                   );
                 }}
-              >
-                <RotateLeftIcon />
-                Image Rotate Left
-              </Button>
-              <Button
-                variant="outlined"
-                color="error"
+                label="Image Rotate Left"
+                startIcon={<RotateLeftIcon />}
                 sx={{
-                  border: "1px solid #333333",
-                  color: "#333333",
-                  backgroundColor: "white",
-                  padding: "5px",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  fontFamily: "roboto-regular",
-                  fontSize: "12px",
-                  fontWeight: 500,
-                  borderRadius: "8px",
-                  maxHeight: "30px",
+                  height: 35,
                 }}
+              />
+              <OutlinedCustomButton
                 onClick={(event) => {
                   event.stopPropagation();
                   selectedImages.forEach((fileId) =>
                     handleRotate(fileId, "right")
                   );
                 }}
-              >
-                <RotateRightIcon />
-                Image Rotate Right
-              </Button>
+                label="Image Rotate Right"
+                startIcon={<RotateRightIcon />}
+                sx={{
+                  height: 35,
+                }}
+              />
             </Box>
           </AccordionSummary>
           <AccordionDetails>
             <Grid2 container spacing={2}>
               {images.map((image) => (
-                <Grid2 key={image.id} p={1}>
+                <Grid2 key={image.id} size={{ xs: 12, md: 2, lg: 2.3 }}>
                   <Box
                     sx={{
-                      position: "relative",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      p: 2,
-                      width: "207px",
-                      height: "171px",
+                      p: 1,
                       border: "1px solid #E0E0E0",
                       borderRadius: 2,
                     }}
                   >
-                    <Box sx={{ position: "absolute", top: 8, left: 8 }}>
+                    <Box
+                      display={"flex"}
+                      justifyContent={"space-between"}
+                      alignItems={"center"}
+                    >
                       <Checkbox
                         onChange={() => handleSelect(image.id, "file")}
                         size="small"
-                        sx={{
-                          "&.Mui-checked": {
-                            color: theme.palette.primary.main,
-                          },
-                        }}
                         checked={selectedFiles.includes(image.id)}
                       />
-                    </Box>
 
-                    <Box
-                      sx={{
-                        position: "absolute",
-                        top: 15,
-                        right: 15,
-                        display: "flex",
-                        gap: 1.5,
-                      }}
-                    >
-                      <EditIcon height={18} width={18} />
-                      <RedDeleteIcon />
+                      <Box
+                        sx={{
+                          display: "flex",
+                          gap: 1.5,
+                        }}
+                      >
+                        <EditIcon height={18} width={18} />
+                        <RedDeleteIcon />
+                      </Box>
                     </Box>
                     <Box
                       sx={{
@@ -336,8 +268,10 @@ const InspectionUploadCommon: React.FC<IProps> = ({
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        mt: 3,
-                        py: 2,
+                        flexDirection: "column",
+                        mt: 1,
+                        rowGap: 2,
+                        height: "150px",
                       }}
                     >
                       <img
@@ -345,31 +279,30 @@ const InspectionUploadCommon: React.FC<IProps> = ({
                         alt={image.name}
                         style={{
                           width: "100%",
-                          height: "90px",
-                          objectFit: "cover",
+                          height: "80%",
+                          objectFit: "contain",
                           transform: `rotate(${
                             rotationAngles[image.id] || 0
                           }deg)`,
                           transition: "transform 0.3s ease-in-out",
                         }}
                       />
+                      <Typography
+                        sx={{
+                          fontFamily: "roboto-medium",
+                        }}
+                      >
+                        {image.name}
+                      </Typography>
                     </Box>
-                    <Typography
-                      sx={{
-                        fontFamily: "roboto-medium",
-                        color: "#222222",
-                      }}
-                    >
-                      {image.name}
-                    </Typography>
                   </Box>
                 </Grid2>
               ))}
             </Grid2>
           </AccordionDetails>
-        </Accordion>
+        </StyledAccordion>
       )}
-    </Box>
+    </>
   );
 };
 

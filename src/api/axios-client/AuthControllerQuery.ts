@@ -14,8 +14,10 @@ import { trimArrayEnd, isParameterObject, getBaseUrl, addMetaToOptions } from '.
 import type { QueryMetaContextValue } from 'react-query-swagger';
 import { QueryMetaContext } from 'react-query-swagger';
 import { useContext } from 'react';
-import * as Client from './AuthControllerClient'
-export { Client };
+import { AuthControllerClient as AuthControllerClientClass } from '../axios-client';
+import { createClient, getClientFactory } from './helpers';
+
+export const Client = () => getClientFactory()(AuthControllerClientClass);
 import type { AxiosRequestConfig } from 'axios';
 
 export type SetUserCustomerRoleAuthControllerQueryParameters = {
@@ -36,9 +38,6 @@ export function loginMutationKey(): MutationKey {
     ]);
 }
 
-/**
- * @return Login successful
- */
 export function useLoginMutation<TContext>(options?: Omit<UseMutationOptions<Types.Anonymous, unknown, Types.SignInDto, TContext>, 'mutationKey' | 'mutationFn'>): UseMutationResult<Types.Anonymous, unknown, Types.SignInDto, TContext> {
   const key = loginMutationKey();
   
@@ -47,7 +46,7 @@ export function useLoginMutation<TContext>(options?: Omit<UseMutationOptions<Typ
   
   return useMutation({
     ...options,
-    mutationFn: (body: Types.SignInDto) => Client.login(body),
+    mutationFn: (body: Types.SignInDto) => Client().login(body),
     mutationKey: key,
   });
 }
@@ -94,8 +93,8 @@ export function setUserCustomerRoleQueryKey(...params: any[]): QueryKey {
   }
 }
 export function __setUserCustomerRole(context: QueryFunctionContext, axiosConfig?: AxiosRequestConfig | undefined) {
-  return Client.setUserCustomerRole(
-      context.queryKey[2] as string,       context.queryKey[3] as number,axiosConfig    );
+  return Client().setUserCustomerRole(
+      context.queryKey[2] as string,       context.queryKey[3] as number);
 }
 
 export function useSetUserCustomerRoleQuery<TSelectData = void, TError = unknown>(dto: SetUserCustomerRoleAuthControllerQueryParameters, options?: Omit<UseQueryOptions<void, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;
@@ -161,8 +160,8 @@ export function getCookiesQueryKey(...params: any[]): QueryKey {
     ]);
 }
 export function __getCookies(context: QueryFunctionContext, axiosConfig?: AxiosRequestConfig | undefined) {
-  return Client.getCookies(
-axiosConfig    );
+  return Client().getCookies(
+);
 }
 
 export function useGetCookiesQuery<TSelectData = void, TError = unknown>(options?: Omit<UseQueryOptions<void, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;
@@ -192,5 +191,62 @@ export function setGetCookiesData(queryClient: QueryClient, updater: (data: void
 }
 
 export function setGetCookiesDataByQueryId(queryClient: QueryClient, queryKey: QueryKey, updater: (data: void | undefined) => void) {
+  queryClient.setQueryData(queryKey, updater);
+}
+    
+export function getMeUrl(): string {
+  let url_ = getBaseUrl() + "/auth/me";
+  url_ = url_.replace(/[?&]$/, "");
+  return url_;
+}
+
+let getMeDefaultOptions: Omit<UseQueryOptions<Types.Anonymous2, unknown, Types.Anonymous2>, 'queryKey' | 'queryFn'> & Partial<Pick<UseQueryOptions<Types.Anonymous2, unknown, Types.Anonymous2>, 'queryFn'>> = {
+};
+export function getGetMeDefaultOptions() {
+  return getMeDefaultOptions;
+};
+export function setGetMeDefaultOptions(options: typeof getMeDefaultOptions) {
+  getMeDefaultOptions = options;
+}
+
+export function getMeQueryKey(): QueryKey;
+export function getMeQueryKey(...params: any[]): QueryKey {
+  return trimArrayEnd([
+      'AuthControllerClient',
+      'getMe',
+    ]);
+}
+export function __getMe(context: QueryFunctionContext, axiosConfig?: AxiosRequestConfig | undefined) {
+  return Client().getMe(
+);
+}
+
+export function useGetMeQuery<TSelectData = Types.Anonymous2, TError = unknown>(options?: Omit<UseQueryOptions<Types.Anonymous2, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;
+export function useGetMeQuery<TSelectData = Types.Anonymous2, TError = unknown>(...params: any []): UseQueryResult<TSelectData, TError> {
+  let options: UseQueryOptions<Types.Anonymous2, TError, TSelectData> | undefined = undefined;
+  let axiosConfig: AxiosRequestConfig |undefined = undefined;
+  
+
+  options = params[0] as any;
+  axiosConfig = params[1] as any;
+
+  const metaContext = useContext(QueryMetaContext);
+  options = addMetaToOptions(options, metaContext);
+
+  return useQuery<Types.Anonymous2, TError, TSelectData>({
+    queryFn: axiosConfig ? (context) => __getMe(context, axiosConfig) : __getMe,
+    queryKey: getMeQueryKey(),
+    ...getMeDefaultOptions as unknown as Omit<UseQueryOptions<Types.Anonymous2, TError, TSelectData>, 'queryKey'>,
+    ...options,
+  });
+}
+
+export function setGetMeData(queryClient: QueryClient, updater: (data: Types.Anonymous2 | undefined) => Types.Anonymous2, ) {
+  queryClient.setQueryData(getMeQueryKey(),
+    updater
+  );
+}
+
+export function setGetMeDataByQueryId(queryClient: QueryClient, queryKey: QueryKey, updater: (data: Types.Anonymous2 | undefined) => Types.Anonymous2) {
   queryClient.setQueryData(queryKey, updater);
 }

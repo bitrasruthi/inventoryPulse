@@ -1,24 +1,34 @@
 import { Button, Container } from "@mui/material";
 import { useSnackBar } from "../../context/SnackBarContext";
 import {
+  ClientControllerQuery,
   GetUserRequestDto,
-  UsersControllerClient,
-  UsersControllerQuery,
+  PaginationRequest,
+  StaticControllerQuery,
 } from "../../api/axios-client";
 import { useEffect } from "react";
 
 const Dashboard = () => {
-  const getUsers = async () => {
-    const body = { page: 1, take: 10 } as GetUserRequestDto;
-    var result = await UsersControllerQuery.Client.getUsers(body);
-    console.log(result);
+  const {
+    data,
+    isPending,
+    isError,
+    mutate: getClientsPage,
+  } = ClientControllerQuery.useGetClientsMutation();
+
+  const getClients = () => {
+    getClientsPage(new PaginationRequest({ page: 0, take: 10 }));
   };
 
   useEffect(() => {
-    getUsers();
+    getClients();
   }, []);
 
   const { showSnackBar } = useSnackBar();
+
+
+  console.log(data);
+  
   return (
     <Container>
       <h1>Dashboard</h1>
