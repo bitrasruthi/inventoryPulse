@@ -12,10 +12,25 @@ import OutlinedTextField from "../../components/outlinedTextField";
 import MailIcon from "../../assets/icons/mailIcon";
 import EyeIcon from "../../assets/icons/eyeIcon";
 import LockIcon from "../../assets/icons/lockIcon";
+import { useFormHook } from "../../hooks/useFormHook";
+import validate from "../../helpers/validations";
+import { ISignInDto } from "../../api/axios-client";
 
 type Props = {};
 
 const Login = (props: Props) => {
+  const { form } = useFormHook(validate.loginSchema);
+
+  const {
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = form;
+
+  const onSubmit = (data: ISignInDto) => {
+    console.log("submitted", data);
+  };
+
   return (
     <Container
       sx={{
@@ -44,6 +59,7 @@ const Login = (props: Props) => {
 
           {/* Right Side (Login Form) */}
           <Grid2 size={{ xs: 12, md: 5 }}>
+            {/* <form onSubmit={handleSubmit(onSubmit)} id={"inspection-form"}> */}
             <Box
               sx={{
                 display: "flex",
@@ -106,6 +122,7 @@ const Login = (props: Props) => {
                 </Link>
               </Typography>
             </Box>
+            {/* </form> */}
           </Grid2>
         </Grid2>
       </Paper>
