@@ -93,6 +93,7 @@ const InspectionUploadCommon: React.FC<IProps> = ({
           justifyContent: "flex-end",
           alignItems: "center",
           gap: 1.5,
+          flexWrap: "wrap",
         }}
       >
         <OutlinedCustomButton
@@ -191,12 +192,16 @@ const InspectionUploadCommon: React.FC<IProps> = ({
         <StyledAccordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
-            sx={{ flexDirection: "row-reverse", alignItems: "center" }}
+            sx={{
+              flexDirection: "row-reverse",
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
           >
             <StyledAccordionHeading sx={{ flex: 1 }}>
               Images ({images.length})
             </StyledAccordionHeading>
-            <Box sx={{ display: "flex", gap: 1 }}>
+            <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
               <OutlinedCustomButton
                 onClick={(event) => {
                   event.stopPropagation();
