@@ -1,21 +1,8 @@
-import {
-  Box,
-  Dialog,
-  DialogContent,
-  Divider,
-  Typography,
-  IconButton,
-} from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
+import { Box, Container, Divider, Typography } from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoImg from "../../assets/logo.png";
 
-interface IProps {
-  open: boolean;
-  onClose: () => void;
-}
-
-function CompanyLogin({ open, onClose }: IProps) {
+function CompanyLogin() {
   const companyList = [
     {
       role: "clerk",
@@ -35,71 +22,55 @@ function CompanyLogin({ open, onClose }: IProps) {
   ];
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
-      <DialogContent>
-        <Box sx={{ position: "relative", minHeight: "500px" }}>
-          <IconButton
-            onClick={onClose}
-            sx={{
-              position: "absolute",
-              top: 8,
-              right: 8,
-              zIndex: 1,
-            }}
-          >
-            <CloseIcon />
-          </IconButton>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              width: "100%",
-            }}
-          >
-            <img
-              src={LogoImg}
-              alt="Logo-img"
-              style={{
-                width: "60%",
-                height: "90px",
-                padding: "18px",
+    <Container maxWidth={"xs"} sx={{ height: "100vh", placeContent: "center" }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <img
+          src={LogoImg}
+          alt="Logo-img"
+          style={{
+            padding: "18px",
+          }}
+        />
+      </Box>
+      <Typography fontFamily={"roboto-medium"} textAlign={"center"} my={1}>
+        Choose Login Role
+      </Typography>
+      <Box sx={{ height: "60vh", overflowY: "auto" }}>
+        {companyList.map((company, index) => (
+          <Box key={company.id}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                cursor: "pointer",
+                ":hover": {
+                  backgroundColor: "#f6f6f6",
+                },
+                p: 1,
               }}
-            />
-          </Box>
-          {companyList.map((company, index) => (
-            <Box key={company.id} sx={{ width: "100%" }}>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  width: "90%",
-                  margin: "auto",
-                  padding: "20px",
-                }}
-              >
-                <Box>
-                  <Typography variant="h6" fontFamily={"roboto-bold"}>
-                    {company.name}
-                  </Typography>
-                  <Typography
-                    sx={{ opacity: 0.7, fontSize: "18px" }}
-                    fontFamily={"roboto-medium"}
-                  >
-                    {company.role}
-                  </Typography>
-                </Box>
-                <LoginIcon fontSize="medium" />
+            >
+              <Box>
+                <Typography variant="h6" fontFamily={"roboto-bold"}>
+                  {company.name}
+                </Typography>
+                <Typography sx={{ opacity: 0.7 }} fontFamily={"roboto-medium"}>
+                  {company.role}
+                </Typography>
               </Box>
-              {index !== companyList.length - 1 && (
-                <Divider sx={{ width: "90%", margin: "auto" }} />
-              )}
+              <LoginIcon fontSize="medium" />
             </Box>
-          ))}
-        </Box>
-      </DialogContent>
-    </Dialog>
+            {index !== companyList.length - 1 && <Divider />}
+          </Box>
+        ))}
+      </Box>
+    </Container>
   );
 }
 

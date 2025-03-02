@@ -12,8 +12,6 @@ import OutlinedTextField from "../../components/outlinedTextField";
 import MailIcon from "../../assets/icons/mailIcon";
 import EyeIcon from "../../assets/icons/eyeIcon";
 import LockIcon from "../../assets/icons/lockIcon";
-import { useState } from "react";
-import CompanyLogin from "./companyLogin";
 import { useFormHook } from "../../hooks/useFormHook";
 import validate from "../../helpers/validations";
 import { ISignInDto } from "../../api/axios-client";
@@ -21,15 +19,6 @@ import { ISignInDto } from "../../api/axios-client";
 type Props = {};
 
 const Login = (props: Props) => {
-  const [isCompanyChooseDialogOpen, setIsCompanyChooseDialogOpen] = useState(false);
-
-const handleOpenCompanyChooseDialog = () => {
-  setIsCompanyChooseDialogOpen(true);
-};
-
-const handleCloseCompanyChooseDialog = () => {
-  setIsCompanyChooseDialogOpen(false);
-};
   const { form } = useFormHook(validate.loginSchema);
 
   const {
@@ -114,12 +103,7 @@ const handleCloseCompanyChooseDialog = () => {
                   Forgot Password?
                 </Link>
               </Box>
-              <Button
-                fullWidth
-                variant="contained"
-                sx={{ mt: 2 }}
-                onClick={handleOpenCompanyChooseDialog}
-              >
+              <Button fullWidth variant="contained" sx={{ mt: 2 }}>
                 Sign In
               </Button>
               <Typography
@@ -142,11 +126,6 @@ const handleCloseCompanyChooseDialog = () => {
           </Grid2>
         </Grid2>
       </Paper>
-
-      <CompanyLogin
-        onClose={handleCloseCompanyChooseDialog}
-        open={isCompanyChooseDialogOpen}
-      />
     </Container>
   );
 };
