@@ -14,7 +14,7 @@ import EyeIcon from "../../assets/icons/eyeIcon";
 import LockIcon from "../../assets/icons/lockIcon";
 import { useFormHook } from "../../hooks/useFormHook";
 import validate from "../../helpers/validations";
-import { ISignInDto } from "../../api/axios-client";
+import { ISignInDtoStrict } from "./types";
 
 type Props = {};
 
@@ -27,8 +27,8 @@ const Login = (props: Props) => {
     reset,
   } = form;
 
-  const onSubmit = (data: ISignInDto) => {
-    console.log("submitted", data);
+  const onSubmit = (data: ISignInDtoStrict) => {
+    console.log("submitted",data);
   };
 
   return (
@@ -59,70 +59,73 @@ const Login = (props: Props) => {
 
           {/* Right Side (Login Form) */}
           <Grid2 size={{ xs: 12, md: 5 }}>
-            {/* <form onSubmit={handleSubmit(onSubmit)} id={"inspection-form"}> */}
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexDirection: "column",
-              }}
-            >
-              <img
-                src={LogoImg}
-                alt="Logo-img"
-                style={{ objectFit: "contain", padding: "14px" }}
-              />
-              <OutlinedTextField
-                variant="outlined"
-                startAdormentIcon={MailIcon}
-                placeholder="abc@gmail.com"
-              />
-              <OutlinedTextField
-                variant="outlined"
-                startAdormentIcon={LockIcon}
-                endAdormentIcon={EyeIcon}
-                placeholder="Enter password"
-              />
+            <form onSubmit={handleSubmit(onSubmit)} id={"login-form"}>
               <Box
                 sx={{
                   display: "flex",
-                  justifyContent: "flex-end",
-                  width: "100%",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexDirection: "column",
                 }}
               >
-                <Link
-                  href="/forget-password"
+                <img
+                  src={LogoImg}
+                  alt="Logo-img"
+                  style={{ objectFit: "contain", padding: "14px" }}
+                />
+                <OutlinedTextField
+                  variant="outlined"
+                  startAdormentIcon={MailIcon}
+                  placeholder="abc@gmail.com"
+                  name="email"
+                />
+                <OutlinedTextField
+                  variant="outlined"
+                  startAdormentIcon={LockIcon}
+                  endAdormentIcon={EyeIcon}
+                  placeholder="Enter password"
+                  name="password"
+                  //helperText={errors && errors.}
+                />
+                <Box
                   sx={{
-                    textDecoration: "underline",
-                    fontFamily: "roboto-medium",
-                    opacity: 0.9,
-                    color: "black",
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    width: "100%",
                   }}
                 >
-                  Forgot Password?
-                </Link>
+                  <Link
+                    href="/forget-password"
+                    sx={{
+                      textDecoration: "underline",
+                      fontFamily: "roboto-medium",
+                      opacity: 0.9,
+                      color: "black",
+                    }}
+                  >
+                    Forgot Password?
+                  </Link>
+                </Box>
+                <Button fullWidth variant="contained" sx={{ mt: 2 }}>
+                  Sign In
+                </Button>
+                <Typography
+                  textAlign="center"
+                  sx={{ mt: 2, fontFamily: "roboto-regular" }}
+                >
+                  Don't have an account? &nbsp;
+                  <Link
+                    href="/register"
+                    sx={{
+                      textDecoration: "underline",
+                      fontFamily: "roboto-medium",
+                    }}
+                  >
+                    Register
+                  </Link>
+                </Typography>
               </Box>
-              <Button fullWidth variant="contained" sx={{ mt: 2 }}>
-                Sign In
-              </Button>
-              <Typography
-                textAlign="center"
-                sx={{ mt: 2, fontFamily: "roboto-regular" }}
-              >
-                Don't have an account? &nbsp;
-                <Link
-                  href="/register"
-                  sx={{
-                    textDecoration: "underline",
-                    fontFamily: "roboto-medium",
-                  }}
-                >
-                  Register
-                </Link>
-              </Typography>
-            </Box>
-            {/* </form> */}
+            </form>
           </Grid2>
         </Grid2>
       </Paper>
