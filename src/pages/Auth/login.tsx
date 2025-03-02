@@ -12,10 +12,21 @@ import OutlinedTextField from "../../components/outlinedTextField";
 import MailIcon from "../../assets/icons/mailIcon";
 import EyeIcon from "../../assets/icons/eyeIcon";
 import LockIcon from "../../assets/icons/lockIcon";
+import { useState } from "react";
+import CompanyLogin from "./companyLogin";
 
 type Props = {};
 
 const Login = (props: Props) => {
+  const [isCompanyChooseDialogOpen, setIsCompanyChooseDialogOpen] = useState(false);
+
+const handleOpenCompanyChooseDialog = () => {
+  setIsCompanyChooseDialogOpen(true);
+};
+
+const handleCloseCompanyChooseDialog = () => {
+  setIsCompanyChooseDialogOpen(false);
+};
   return (
     <Container
       sx={{
@@ -87,7 +98,12 @@ const Login = (props: Props) => {
                   Forgot Password?
                 </Link>
               </Box>
-              <Button fullWidth variant="contained" sx={{ mt: 2 }}>
+              <Button
+                fullWidth
+                variant="contained"
+                sx={{ mt: 2 }}
+                onClick={handleOpenCompanyChooseDialog}
+              >
                 Sign In
               </Button>
               <Typography
@@ -109,6 +125,11 @@ const Login = (props: Props) => {
           </Grid2>
         </Grid2>
       </Paper>
+
+      <CompanyLogin
+        onClose={handleCloseCompanyChooseDialog}
+        open={isCompanyChooseDialogOpen}
+      />
     </Container>
   );
 };
