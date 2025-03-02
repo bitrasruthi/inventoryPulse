@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Typography,
   Checkbox,
-  Button,
   Accordion,
   AccordionSummary,
   AccordionDetails,
@@ -13,7 +12,6 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import theme from "../../../styles/theme";
 import EditIcon from "../../../assets/icons/editIcon";
 import RedDeleteIcon from "../../../assets/icons/redDeleteIcon";
-import PrimaryTickIcon from "../../../assets/icons/primaryTickIcon";
 import RotateLeftIcon from "../../../assets/icons/rotateLeftIcon";
 import RotateRightIcon from "../../../assets/icons/rotateRightIcon";
 import PdfIcon from "../../../assets/icons/pdfIcon";
@@ -38,10 +36,14 @@ const InspectionUploadCommon: React.FC<IProps> = ({
   const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [rotationAngles, setRotationAngles] = useState({});
-
-  const images = (uploads || []).filter((upload) =>
-    /\.(jpg|jpeg|png|gif)$/i.test(upload.name)
-  );
+  const [images, setImages] = useState<IUpload[]>([]);
+  const [updatedUploads, setUpdatedUploads] = useState<IUpload[]>(uploads);
+  useEffect(() => {
+    const imageList = (updatedUploads || []).filter((upload) =>
+      /\.(jpg|jpeg|png|gif)$/i.test(upload.name)
+    );
+    setImages(imageList);
+  }, [updatedUploads]); // Use `updatedUploads` as dependency
 
   const otherFiles = (uploads || []).filter(
     (upload) => !/\.(jpg|jpeg|png|gif)$/i.test(upload.name)
@@ -59,14 +61,73 @@ const InspectionUploadCommon: React.FC<IProps> = ({
     }
   };
 
-  const handleRotate = (imageId: string, direction: string) => {
-    setRotationAngles((prevAngles) => {
-      const currentAngle = prevAngles[imageId] || 0;
-      const newAngle =
-        direction === "left" ? currentAngle - 90 : currentAngle + 90;
-      return { ...prevAngles, [imageId]: newAngle };
+  const rotateImage = (imageUrl: string, angle: number): Promise<string> => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.src = imageUrl;
+      img.crossOrigin = "anonymous"; // Ensure CORS is handled if needed
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+
+        if (!ctx) {
+          resolve(imageUrl); // Fallback to original URL if canvas is not supported
+          return;
+        }
+
+        // Adjust canvas size to fit the rotated image
+        if (angle % 180 !== 0) {
+          canvas.width = img.height;
+          canvas.height = img.width;
+        } else {
+          canvas.width = img.width;
+          canvas.height = img.height;
+        }
+
+        // Translate and rotate the canvas
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+        ctx.rotate((angle * Math.PI) / 180);
+        ctx.drawImage(img, -img.width / 2, -img.height / 2);
+
+        // Convert canvas to data URL
+        const rotatedImageUrl = canvas.toDataURL();
+        resolve(rotatedImageUrl);
+      };
     });
   };
+
+  const handleRotate = async (imageId: string, direction: string) => {
+    const currentAngle = rotationAngles[imageId] || 0;
+    const newAngle =
+      direction === "left" ? currentAngle - 90 : currentAngle + 90;
+
+    // Find the image by ID
+    const image = images.find((img) => img.id === imageId);
+    if (!image || !image.url) return;
+
+    // Rotate the image and get the new data URL
+    const rotatedImageUrl = await rotateImage(image.url, newAngle);
+
+    // Replace the original image URL with the rotated one
+    updateUploadsWithRotatedImage(imageId, rotatedImageUrl);
+
+    // Update the rotation angle
+    setRotationAngles((prevAngles) => ({
+      ...prevAngles,
+      [imageId]: 0,
+    }));
+  };
+
+  const updateUploadsWithRotatedImage = (
+    imageId: string,
+    rotatedImageUrl: string
+  ) => {
+    const updatedUploads = uploads.map((upload) =>
+      upload.id === imageId ? { ...upload, url: rotatedImageUrl } : upload
+    );
+    setUpdatedUploads(updatedUploads); // Update the state with the new rotated image
+  };
+
   return (
     <Box>
       <Box
@@ -231,9 +292,7 @@ const InspectionUploadCommon: React.FC<IProps> = ({
               Images ({images.length})
             </Typography>
             <Box sx={{ display: "flex", gap: 1 }}>
-              <Button
-                variant="outlined"
-                color="error"
+              <OutlinedCustomButton
                 sx={{
                   border: "1px solid #333333",
                   color: "#333333",
@@ -250,17 +309,14 @@ const InspectionUploadCommon: React.FC<IProps> = ({
                 }}
                 onClick={(event) => {
                   event.stopPropagation();
-                  selectedImages.forEach((fileId) =>
-                    handleRotate(fileId, "left")
+                  selectedImages.forEach((imageId) =>
+                    handleRotate(imageId, "left")
                   );
                 }}
-              >
-                <RotateLeftIcon />
-                Image Rotate Left
-              </Button>
-              <Button
-                variant="outlined"
-                color="error"
+                startIcon={<RotateLeftIcon />}
+                label="Image Rotate Left"
+              ></OutlinedCustomButton>
+              <OutlinedCustomButton
                 sx={{
                   border: "1px solid #333333",
                   color: "#333333",
@@ -275,16 +331,15 @@ const InspectionUploadCommon: React.FC<IProps> = ({
                   borderRadius: "8px",
                   maxHeight: "30px",
                 }}
+                startIcon={<RotateRightIcon />}
+                label="Image Rotate Right"
                 onClick={(event) => {
                   event.stopPropagation();
-                  selectedImages.forEach((fileId) =>
-                    handleRotate(fileId, "right")
+                  selectedImages.forEach((imageId) =>
+                    handleRotate(imageId, "right")
                   );
                 }}
-              >
-                <RotateRightIcon />
-                Image Rotate Right
-              </Button>
+              ></OutlinedCustomButton>
             </Box>
           </AccordionSummary>
           <AccordionDetails>
@@ -307,14 +362,14 @@ const InspectionUploadCommon: React.FC<IProps> = ({
                   >
                     <Box sx={{ position: "absolute", top: 8, left: 8 }}>
                       <Checkbox
-                        onChange={() => handleSelect(image.id, "file")}
+                        onChange={() => handleSelect(image.id, "image")}
                         size="small"
                         sx={{
                           "&.Mui-checked": {
                             color: theme.palette.primary.main,
                           },
                         }}
-                        checked={selectedFiles.includes(image.id)}
+                        checked={selectedImages.includes(image.id)}
                       />
                     </Box>
 
@@ -347,9 +402,9 @@ const InspectionUploadCommon: React.FC<IProps> = ({
                           width: "100%",
                           height: "90px",
                           objectFit: "cover",
-                          transform: `rotate(${
-                            rotationAngles[image.id] || 0
-                          }deg)`,
+                          // transform: `rotate(${
+                          //   rotationAngles[image.id] || 0
+                          // }deg)`,
                           transition: "transform 0.3s ease-in-out",
                         }}
                       />
@@ -369,6 +424,12 @@ const InspectionUploadCommon: React.FC<IProps> = ({
           </AccordionDetails>
         </Accordion>
       )}
+
+      <Box style={{ display: "flex" }}>
+        {images.map((img) => (
+          <img src={img.url} alt="" />
+        ))}
+      </Box>
     </Box>
   );
 };
