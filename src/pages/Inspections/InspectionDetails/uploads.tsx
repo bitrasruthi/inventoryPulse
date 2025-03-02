@@ -1,9 +1,8 @@
 import { useState } from "react";
 import InspectionAddress from "../../../components/inspectionAddress";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import slide1 from "../../../assets/slide1.png";
 import InspectionUploadCommon from "./inspectionUploadCommon";
-import UploadIcon from "../../../assets/icons/primaryUploadIcon";
 import { FileUploadBox } from "../../../components/inspectionFileUploadBox";
 
 const Uploads = () => {
@@ -14,6 +13,7 @@ const Uploads = () => {
     { id: "5", name: "image3.jpg", url: slide1 },
     { id: "3", name: "image1.jpg", url: slide1 },
   ]);
+  console.log({ files });
 
   const handleDelete = (ids) => {
     setFiles((prev) => prev.filter((file) => !ids.includes(file.id)));
@@ -27,6 +27,13 @@ const Uploads = () => {
     console.log("Assigned Items:", ids);
   };
 
+  const handleRotate = (id: string, rotatedImageUrl: string) => {
+    setFiles((prev) =>
+      prev.map((file) =>
+        file.id === id ? { ...file, url: rotatedImageUrl } : file
+      )
+    );
+  };
   return (
     <div>
       <InspectionAddress />
@@ -36,6 +43,7 @@ const Uploads = () => {
           uploads={files}
           onDelete={handleDelete}
           onAssign={handleAssign}
+          onRotate={handleRotate}
         />
       </Box>
     </div>
