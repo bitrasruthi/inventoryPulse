@@ -7,6 +7,7 @@ import {
   AccordionSummary,
   AccordionDetails,
   Grid2,
+  styled,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import theme from "../../../styles/theme";
@@ -29,6 +30,24 @@ interface IProps {
   onAssign: (ids: string[]) => void;
   onRotate: (id: string, rotatedImageUrl: string) => void;
 }
+
+const StyledAccordion = styled(Accordion)(() => ({
+  boxShadow: "none",
+  "&:before": { display: "none" },
+  border: "1px solid #E0E0E0",
+  marginTop: 18,
+  borderRadius: "10px",
+}));
+
+const StyledAccordionHeading = styled(Typography)(({ theme }) => ({
+  color: theme.palette.primary.main,
+  display: "flex",
+  alignItems: "center",
+  gap: 1,
+  fontFamily: "roboto-bold",
+  paddingLeft: 8,
+}));
+
 const InspectionUploadCommon: React.FC<IProps> = ({
   uploads = [],
   onDelete,
@@ -159,35 +178,14 @@ const InspectionUploadCommon: React.FC<IProps> = ({
         ></GradientButton>
       </Box>
       {otherFiles.length > 0 && (
-        <Accordion
-          sx={{
-            boxShadow: "none",
-            "&:before": { display: "none" },
-            border: "1px solid #E0E0E0",
-            my: 2,
-            borderRadius: "10px",
-          }}
-        >
+        <StyledAccordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             sx={{ flexDirection: "row-reverse" }}
           >
-            <Typography
-              variant="h6"
-              color="primary"
-              p={1}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: 1,
-                fontSize: "16px",
-                fontWeight: 600,
-                color: theme.palette.primary.dark,
-                fontFamily: "roboto-bold",
-              }}
-            >
+            <StyledAccordionHeading sx={{ p: 0.5 }}>
               Files ({otherFiles.length})
-            </Typography>
+            </StyledAccordionHeading>
           </AccordionSummary>
           <AccordionDetails>
             <Grid2 container spacing={2}>
@@ -264,39 +262,19 @@ const InspectionUploadCommon: React.FC<IProps> = ({
               ))}
             </Grid2>
           </AccordionDetails>
-        </Accordion>
+        </StyledAccordion>
       )}
 
       {images.length > 0 && (
-        <Accordion
-          sx={{
-            boxShadow: "none",
-            "&:before": { display: "none" },
-            border: "1px solid #E0E0E0",
-            my: 2,
-            borderRadius: "10px",
-          }}
-        >
+        <StyledAccordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             sx={{ flexDirection: "row-reverse", alignItems: "center" }} // Added alignItems: "center"
           >
-            <Typography
-              p={1}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: 1,
-                fontSize: "16px",
-                fontWeight: 600,
-                color: theme.palette.primary.dark,
-                fontFamily: "roboto-bold",
-                flexGrow: 1, // Added flexGrow to push buttons to the right
-              }}
-            >
+            <StyledAccordionHeading sx={{ flex: 1 }}>
               Images ({images.length})
-            </Typography>
-            <Box sx={{ display: "flex", gap: 1 }}>
+            </StyledAccordionHeading>
+            <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
               <OutlinedCustomButton
                 sx={{
                   border: "1px solid #333333",
@@ -427,7 +405,7 @@ const InspectionUploadCommon: React.FC<IProps> = ({
               ))}
             </Grid2>
           </AccordionDetails>
-        </Accordion>
+        </StyledAccordion>
       )}
     </Box>
   );
