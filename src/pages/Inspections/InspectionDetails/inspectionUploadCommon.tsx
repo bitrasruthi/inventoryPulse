@@ -190,7 +190,7 @@ const InspectionUploadCommon: React.FC<IProps> = ({
           <AccordionDetails>
             <Grid2 container spacing={2}>
               {otherFiles.map((file) => (
-                <Grid2 key={file.id}>
+                <Grid2 key={file.id} size={{ xs: 12, md: 2, lg: 2.3 }}>
                   <Box
                     sx={{
                       position: "relative",
@@ -220,17 +220,14 @@ const InspectionUploadCommon: React.FC<IProps> = ({
 
                     <Box
                       sx={{
-                        position: "absolute",
-                        top: 15,
-                        right: 15,
                         display: "flex",
                         gap: 1.5,
+                        cursor: "pointer",
                       }}
                     >
                       <EditIcon height={18} width={18} />
                       <RedDeleteIcon />
                     </Box>
-
                     <Box
                       sx={{
                         flexGrow: 1,
