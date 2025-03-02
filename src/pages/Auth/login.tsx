@@ -14,6 +14,9 @@ import EyeIcon from "../../assets/icons/eyeIcon";
 import LockIcon from "../../assets/icons/lockIcon";
 import { useState } from "react";
 import CompanyLogin from "./companyLogin";
+import { useFormHook } from "../../hooks/useFormHook";
+import validate from "../../helpers/validations";
+import { ISignInDto } from "../../api/axios-client";
 
 type Props = {};
 
@@ -27,6 +30,18 @@ const handleOpenCompanyChooseDialog = () => {
 const handleCloseCompanyChooseDialog = () => {
   setIsCompanyChooseDialogOpen(false);
 };
+  const { form } = useFormHook(validate.loginSchema);
+
+  const {
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = form;
+
+  const onSubmit = (data: ISignInDto) => {
+    console.log("submitted", data);
+  };
+
   return (
     <Container
       sx={{
@@ -55,6 +70,7 @@ const handleCloseCompanyChooseDialog = () => {
 
           {/* Right Side (Login Form) */}
           <Grid2 size={{ xs: 12, md: 5 }}>
+            {/* <form onSubmit={handleSubmit(onSubmit)} id={"inspection-form"}> */}
             <Box
               sx={{
                 display: "flex",
@@ -122,6 +138,7 @@ const handleCloseCompanyChooseDialog = () => {
                 </Link>
               </Typography>
             </Box>
+            {/* </form> */}
           </Grid2>
         </Grid2>
       </Paper>

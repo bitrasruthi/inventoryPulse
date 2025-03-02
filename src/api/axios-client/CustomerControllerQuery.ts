@@ -14,8 +14,10 @@ import { trimArrayEnd, isParameterObject, getBaseUrl, addMetaToOptions } from '.
 import type { QueryMetaContextValue } from 'react-query-swagger';
 import { QueryMetaContext } from 'react-query-swagger';
 import { useContext } from 'react';
-import * as Client from './CustomerControllerClient'
-export { Client };
+import { CustomerControllerClient as CustomerControllerClientClass } from '../axios-client';
+import { createClient, getClientFactory } from './helpers';
+
+export const Client = () => getClientFactory()(CustomerControllerClientClass);
 import type { AxiosRequestConfig } from 'axios';
 
 export type GetCustomerByIsCustomerControllerQueryParameters = {
@@ -43,7 +45,7 @@ export function useCreateCustomerMutation<TContext>(options?: Omit<UseMutationOp
   
   return useMutation({
     ...options,
-    mutationFn: (body: Types.CreateCustomerDto) => Client.createCustomer(body),
+    mutationFn: (body: Types.CreateCustomerDto) => Client().createCustomer(body),
     mutationKey: key,
   });
 }
@@ -85,8 +87,8 @@ export function getCustomerByIsQueryKey(...params: any[]): QueryKey {
   }
 }
 export function __getCustomerByIs(context: QueryFunctionContext, axiosConfig?: AxiosRequestConfig | undefined) {
-  return Client.getCustomerByIs(
-      context.queryKey[2] as string,axiosConfig    );
+  return Client().getCustomerByIs(
+      context.queryKey[2] as string);
 }
 
 export function useGetCustomerByIsQuery<TSelectData = void, TError = unknown>(dto: GetCustomerByIsCustomerControllerQueryParameters, options?: Omit<UseQueryOptions<void, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;

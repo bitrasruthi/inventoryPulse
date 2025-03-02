@@ -14,8 +14,10 @@ import { trimArrayEnd, isParameterObject, getBaseUrl, addMetaToOptions } from '.
 import type { QueryMetaContextValue } from 'react-query-swagger';
 import { QueryMetaContext } from 'react-query-swagger';
 import { useContext } from 'react';
-import * as Client from './UsersControllerClient'
-export { Client };
+import { UsersControllerClient as UsersControllerClientClass } from '../axios-client';
+import { createClient, getClientFactory } from './helpers';
+
+export const Client = () => getClientFactory()(UsersControllerClientClass);
 import type { AxiosRequestConfig } from 'axios';
 
 
@@ -40,7 +42,7 @@ export function useAddUserMutation<TContext>(options?: Omit<UseMutationOptions<v
   
   return useMutation({
     ...options,
-    mutationFn: (body: Types.CreateUserRequestDto) => Client.addUser(body),
+    mutationFn: (body: Types.CreateUserRequestDto) => Client().addUser(body),
     mutationKey: key,
   });
 }
@@ -66,7 +68,7 @@ export function useGetUsersMutation<TContext>(options?: Omit<UseMutationOptions<
   
   return useMutation({
     ...options,
-    mutationFn: (body: Types.GetUserRequestDto) => Client.getUsers(body),
+    mutationFn: (body: Types.GetUserRequestDto) => Client().getUsers(body),
     mutationKey: key,
   });
 }
