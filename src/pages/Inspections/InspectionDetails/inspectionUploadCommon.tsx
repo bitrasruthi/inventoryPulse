@@ -429,12 +429,6 @@ const InspectionUploadCommon: React.FC<IProps> = ({
           </AccordionDetails>
         </Accordion>
       )}
-
-      <Box style={{ display: "flex" }}>
-        {images.map((img) => (
-          <img src={img.url} alt="" />
-        ))}
-      </Box>
     </Box>
   );
 };
