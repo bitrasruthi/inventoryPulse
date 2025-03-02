@@ -1,5 +1,6 @@
 import Layout from "../layout";
 import EmptyLayout from "../layout/emptyLayout";
+import CompanyLogin from "../pages/Auth/companyLogin";
 import Login from "../pages/Auth/login";
 import Clients from "../pages/Clients";
 import Dashboard from "../pages/Dashboard";
@@ -20,6 +21,12 @@ const routes = [
     component: Login,
     layout: EmptyLayout,
     path: paths.LOGIN,
+    withoutLogin: true,
+  },
+  {
+    component: CompanyLogin,
+    layout: EmptyLayout,
+    path: paths.CHOOSE_LOGIN,
     withoutLogin: true,
   },
   {

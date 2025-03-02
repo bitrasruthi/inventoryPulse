@@ -6,4 +6,5 @@ export enum paths {
   PROPERTIES = "/properties",
   USERS = "/users",
   CLIENTS = "/clients",
+  CHOOSE_LOGIN = "/choose-login",
 }

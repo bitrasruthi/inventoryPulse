@@ -27,11 +27,13 @@ interface IProps {
   uploads: IUpload[];
   onDelete: (ids: string[]) => void;
   onAssign: (ids: string[]) => void;
+  onRotate: (id: string, rotatedImageUrl: string) => void;
 }
 const InspectionUploadCommon: React.FC<IProps> = ({
   uploads = [],
   onDelete,
   onAssign,
+  onRotate,
 }) => {
   const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
@@ -39,15 +41,17 @@ const InspectionUploadCommon: React.FC<IProps> = ({
   const [images, setImages] = useState<IUpload[]>([]);
   const [updatedUploads, setUpdatedUploads] = useState<IUpload[]>(uploads);
   useEffect(() => {
-    const imageList = (updatedUploads || []).filter((upload) =>
+    const imageList = (uploads || []).filter((upload) =>
       /\.(jpg|jpeg|png|gif)$/i.test(upload.name)
     );
     setImages(imageList);
-  }, [updatedUploads]); // Use `updatedUploads` as dependency
+    setUpdatedUploads(uploads);
+  }, [uploads]);
 
-  const otherFiles = (uploads || []).filter(
+  var otherFiles = (uploads || []).filter(
     (upload) => !/\.(jpg|jpeg|png|gif)$/i.test(upload.name)
   );
+  console.log({ images, uploads });
 
   const handleSelect = (id, type) => {
     if (type === "file") {
@@ -114,7 +118,7 @@ const InspectionUploadCommon: React.FC<IProps> = ({
     // Update the rotation angle
     setRotationAngles((prevAngles) => ({
       ...prevAngles,
-      [imageId]: 0,
+      [imageId]: newAngle,
     }));
   };
 
@@ -125,7 +129,8 @@ const InspectionUploadCommon: React.FC<IProps> = ({
     const updatedUploads = uploads.map((upload) =>
       upload.id === imageId ? { ...upload, url: rotatedImageUrl } : upload
     );
-    setUpdatedUploads(updatedUploads); // Update the state with the new rotated image
+    setUpdatedUploads(updatedUploads); // 🔹 Update local state
+    onRotate(imageId, rotatedImageUrl); // 🔹 Notify parent component of the rotation
   };
 
   return (
