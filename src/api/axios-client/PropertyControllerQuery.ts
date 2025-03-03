@@ -32,7 +32,7 @@ export function saveMutationKey(): MutationKey {
     ]);
 }
 
-export function useSaveMutation<TContext>(options?: Omit<UseMutationOptions<Types.Anonymous, unknown, Types.PropertyRequestDto, TContext>, 'mutationKey' | 'mutationFn'>): UseMutationResult<Types.Anonymous, unknown, Types.PropertyRequestDto, TContext> {
+export function useSaveMutation<TContext>(options?: Omit<UseMutationOptions<Types.PropertyRequestDto, unknown, Types.PropertyRequestDto, TContext>, 'mutationKey' | 'mutationFn'>): UseMutationResult<Types.PropertyRequestDto, unknown, Types.PropertyRequestDto, TContext> {
   const key = saveMutationKey();
   
   const metaContext = useContext(QueryMetaContext);

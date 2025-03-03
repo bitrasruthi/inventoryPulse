@@ -950,54 +950,6 @@ export interface IInspectionCreateResponseDto {
     message: string;
 }
 
-export class CustomResponse implements ICustomResponse {
-    data!: any | null;
-    success!: boolean;
-    statusCode!: number;
-    message!: string;
-
-    constructor(data?: ICustomResponse) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.data = _data["data"];
-            this.success = _data["success"];
-            this.statusCode = _data["statusCode"];
-            this.message = _data["message"];
-        }
-    }
-
-    static fromJS(data: any): CustomResponse {
-        data = typeof data === 'object' ? data : {};
-        let result = new CustomResponse();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["data"] = this.data;
-        data["success"] = this.success;
-        data["statusCode"] = this.statusCode;
-        data["message"] = this.message;
-        return data;
-    }
-}
-
-export interface ICustomResponse {
-    data: any | null;
-    success: boolean;
-    statusCode: number;
-    message: string;
-}
-
 export class PropertyRequestDto implements IPropertyRequestDto {
     id!: string;
     referenceNo?: string;
@@ -2068,49 +2020,52 @@ export interface IContactResponseDto {
     message: string;
 }
 
-export class Anonymous extends CustomResponse implements IAnonymous {
-    data?: PropertyRequestDto;
+export class CustomResponse implements ICustomResponse {
+    data!: any | null;
+    success!: boolean;
+    statusCode!: number;
+    message!: string;
 
-    [key: string]: any;
-
-    constructor(data?: IAnonymous) {
-        super(data);
-    }
-
-    init(_data?: any) {
-        super.init(_data);
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
+    constructor(data?: ICustomResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
             }
-            this.data = _data["data"] ? PropertyRequestDto.fromJS(_data["data"]) : <any>null;
         }
     }
 
-    static fromJS(data: any): Anonymous {
+    init(_data?: any) {
+        if (_data) {
+            this.data = _data["data"];
+            this.success = _data["success"];
+            this.statusCode = _data["statusCode"];
+            this.message = _data["message"];
+        }
+    }
+
+    static fromJS(data: any): CustomResponse {
         data = typeof data === 'object' ? data : {};
-        let result = new Anonymous();
+        let result = new CustomResponse();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        data["data"] = this.data ? this.data.toJSON() : this.data;
-        super.toJSON(data);
+        data["data"] = this.data;
+        data["success"] = this.success;
+        data["statusCode"] = this.statusCode;
+        data["message"] = this.message;
         return data;
     }
 }
 
-export interface IAnonymous extends ICustomResponse {
-    data?: PropertyRequestDto;
-
-    [key: string]: any;
+export interface ICustomResponse {
+    data: any | null;
+    success: boolean;
+    statusCode: number;
+    message: string;
 }
 //-----/CustomTypes.File-----
 

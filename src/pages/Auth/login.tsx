@@ -84,6 +84,7 @@ const Login = (props: Props) => {
                 />
                 <OutlinedTextField
                   variant="outlined"
+                  type="password"
                   startAdormentIcon={LockIcon}
                   endAdormentIcon={EyeIcon}
                   placeholder="Enter password"

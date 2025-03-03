@@ -13,7 +13,7 @@ import type { AxiosRequestConfig, AxiosResponse, CancelToken } from 'axios';
 import { throwException, isAxiosError } from '../axios-client';
 import { getAxios, getBaseUrl } from './helpers';
 
-export function save(body: Types.PropertyRequestDto, config?: AxiosRequestConfig | undefined): Promise<Types.Anonymous> {
+export function save(body: Types.PropertyRequestDto, config?: AxiosRequestConfig | undefined): Promise<Types.PropertyRequestDto> {
     let url_ = getBaseUrl() + "/property/save";
       url_ = url_.replace(/[?&]$/, "");
 
@@ -44,7 +44,7 @@ export function save(body: Types.PropertyRequestDto, config?: AxiosRequestConfig
     });
 }
 
-function processSave(response: AxiosResponse): Promise<Types.Anonymous> {
+function processSave(response: AxiosResponse): Promise<Types.PropertyRequestDto> {
     const status = response.status;
     let _headers: any = {};
     if (response.headers && typeof response.headers === "object") {
@@ -58,9 +58,8 @@ function processSave(response: AxiosResponse): Promise<Types.Anonymous> {
         const _responseText = response.data;
         let result200: any = null;
         let resultData200  = _responseText;
-            result200 = resultData200 !== undefined ? resultData200 : <any>null;
-    
-        return Promise.resolve<Types.Anonymous>(result200);
+        result200 = Types.PropertyRequestDto.fromJS(resultData200);
+        return Promise.resolve<Types.PropertyRequestDto>(result200);
 
     } else if (status === 201) {
         const _responseText = response.data;
@@ -70,7 +69,7 @@ function processSave(response: AxiosResponse): Promise<Types.Anonymous> {
         const _responseText = response.data;
         return throwException("An unexpected server error occurred.", status, _responseText, _headers);
     }
-    return Promise.resolve<Types.Anonymous>(null as any);
+    return Promise.resolve<Types.PropertyRequestDto>(null as any);
 }
 
 export function getProperties(body: Types.PaginationRequest, config?: AxiosRequestConfig | undefined): Promise<Types.PropertyPaginationResponse> {
