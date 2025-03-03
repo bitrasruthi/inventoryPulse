@@ -15,25 +15,24 @@ interface IProps extends OutlinedTextFieldProps {
   endAdormentIcon?: React.ElementType;
   isnotboldtext?: boolean;
   formProps?: UseFormRegisterReturn;
-  handleChange?: (
-    event: React.ChangeEvent<HTMLInputElement>,
-    child: React.ReactNode
-  ) => void;
-  value?: string;
 }
 
 export const StyledTextField = styled(TextField)<{ props?: IProps }>(
-  ({ theme, props }) => ({
+  ({ theme, props, error }) => ({
     "& .MuiInputBase-root": {
       paddingLeft: 2,
       paddingRight: 2,
       fontFamily: props?.isnotboldtext ? "roboto-regular" : "roboto-bold",
       borderRadius: 5,
       "&:hover .MuiOutlinedInput-notchedOutline": {
-        borderColor: theme.palette.primary.main,
+        borderColor: !error
+          ? theme.palette.primary.main
+          : theme.palette.error.main,
       },
       "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-        borderColor: theme.palette.primary.main,
+        borderColor: !error
+          ? theme.palette.primary.main
+          : theme.palette.error.main,
       },
     },
   })
@@ -47,34 +46,7 @@ const OutlinedTextField: React.FC<IProps> = (props) => {
     required,
     type,
     formProps,
-    handleChange,
-    value,
   } = props;
-
-  const [selectedValue, setSelectedValue] = useState<string | number>("");
-
-  useEffect(() => {
-    if (value !== undefined) {
-      setSelectedValue(value);
-    }
-  }, [value]);
-
-  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedValue(event.target.value);
-  };
-
-  const handleOnBlur = () => {
-    if (
-      handleChange &&
-      selectedValue.toString().trim() !== value?.toString().trim()
-    ) {
-      const event = {
-        target: { value: selectedValue },
-      } as React.ChangeEvent<HTMLInputElement>;
-
-      handleChange(event, selectedValue);
-    }
-  };
 
   return (
     <Box pb={type === "pagination" ? 0 : 2} width={"100%"}>
@@ -86,9 +58,6 @@ const OutlinedTextField: React.FC<IProps> = (props) => {
         size="small"
         {...props}
         label={""}
-        value={selectedValue}
-        onChange={handleOnChange}
-        onBlur={handleOnBlur}
         slotProps={{
           input: {
             startAdornment: (

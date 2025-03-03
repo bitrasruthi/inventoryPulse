@@ -14,6 +14,7 @@ interface IProps extends RadioProps {
   control: Control<any>;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string | number;
+  labelPlacement?: "end" | "start" | "top" | "bottom";
 }
 
 const MuiRadioButton: React.FC<IProps> = ({
@@ -21,6 +22,7 @@ const MuiRadioButton: React.FC<IProps> = ({
   control,
   onChange,
   value,
+  labelPlacement,
   ...radioProps
 }) => {
   const [selectedValue, setSelectedValue] = useState<string | number>("");
@@ -56,6 +58,7 @@ const MuiRadioButton: React.FC<IProps> = ({
                 label={
                   <Typography className="font14">{radioItem.label}</Typography>
                 }
+                labelPlacement={labelPlacement ? labelPlacement : "end"}
                 control={
                   <Radio
                     size="small"

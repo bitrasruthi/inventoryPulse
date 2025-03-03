@@ -469,7 +469,7 @@ export const tableDataDummy2 = {
           },
           deleted_at: null,
           can_edit_value: true,
-          required: false,
+          required: true,
           source_id: null,
         },
         "db2c0f99-4239-46ab-89df-8750d406e427": {
@@ -689,7 +689,7 @@ export const tableDataDummy2 = {
           },
           deleted_at: null,
           can_edit_value: true,
-          required: false,
+          required: true,
           source_id: null,
         },
         "d526ea98-6c17-4c56-911c-78cbb30b68ce": {

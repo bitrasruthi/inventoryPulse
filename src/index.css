@@ -94,3 +94,7 @@ html {
   position: relative !important;
   left: 30px !important;
 }
+
+.MuiFormHelperText-root.Mui-error {
+ margin:0px !important;
+}
