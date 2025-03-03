@@ -14,6 +14,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Loader from "./components/loader.tsx";
 import axios from "axios";
+import { AuthProvider } from "./context/AuthContext.tsx";
+import { BrowserRouter } from "react-router-dom";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -36,11 +38,13 @@ createRoot(document.getElementById("root")!).render(
   <QueryClientProvider client={queryClient}>
     <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-left" />
     <SnackBarProvider>
-      <CustomProvider>
-        <ThemeProvider theme={theme}>
-          <App />
-        </ThemeProvider>
-      </CustomProvider>
+      <BrowserRouter>
+        <AuthProvider>
+          <ThemeProvider theme={theme}>
+            <App />
+          </ThemeProvider>
+        </AuthProvider>
+      </BrowserRouter>
       <CustomSnackBar />
     </SnackBarProvider>
     <Loader />

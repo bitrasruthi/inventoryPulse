@@ -14,12 +14,20 @@ import EyeIcon from "../../assets/icons/eyeIcon";
 import LockIcon from "../../assets/icons/lockIcon";
 import { useFormHook } from "../../hooks/useFormHook";
 import validate from "../../helpers/validations";
-import { ISignInDto } from "../../api/axios-client";
+import {
+  AuthControllerClient,
+  ISignInDto,
+  SignInDto,
+} from "../../api/axios-client";
+import { useAuth } from "../../context/AuthContext";
+import { useSnackBar } from "../../context/SnackBarContext";
 
 type Props = {};
 
 const Login = (props: Props) => {
   const { form } = useFormHook(validate.loginSchema);
+  const { fetchUserProfile } = useAuth();
+  const { showSnackBar } = useSnackBar();
 
   const {
     handleSubmit,
@@ -28,8 +36,23 @@ const Login = (props: Props) => {
     register,
   } = form;
 
-  const onSubmit = (data: ISignInDto) => {
-    console.log("submitted", data);
+  const onSubmit = async (data: ISignInDto) => {
+    try {
+      var loginResponse = await AuthControllerClient.login(new SignInDto(data));
+      console.log(loginResponse);
+
+      if (loginResponse.success && loginResponse.data.accessToken) {
+        await fetchUserProfile();
+      }
+    } catch (error: any) {
+      console.log("Error:", error);
+
+      // Extract error message from backend response
+      const errorMessage =
+        error.response?.data?.message || "Login failed. Please try again.";
+
+      showSnackBar(true, errorMessage, "error");
+    }
   };
 
   return (

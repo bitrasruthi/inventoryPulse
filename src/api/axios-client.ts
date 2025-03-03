@@ -189,7 +189,7 @@ export interface ISignInResponseDto {
 
 export class CustomerRoleSelectionDataDto implements ICustomerRoleSelectionDataDto {
     customerId!: string;
-    roleId!: string;
+    roleId!: number;
 
     constructor(data?: ICustomerRoleSelectionDataDto) {
         if (data) {
@@ -224,7 +224,7 @@ export class CustomerRoleSelectionDataDto implements ICustomerRoleSelectionDataD
 
 export interface ICustomerRoleSelectionDataDto {
     customerId: string;
-    roleId: string;
+    roleId: number;
 }
 
 export class SelectCustomerRoleResponseDto implements ISelectCustomerRoleResponseDto {

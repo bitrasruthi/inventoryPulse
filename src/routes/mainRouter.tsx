@@ -4,10 +4,9 @@ import routes from "./routes";
 
 const MainRouter: FC = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* Authorized routes */}
-        {/* {currentuser?.Id &&
+    <Routes>
+      {/* Authorized routes */}
+      {/* {currentuser?.Id &&
           routes.map((route, index) => (
             <Route key={index} element={<route.layout />}>
               <Route
@@ -21,18 +20,17 @@ const MainRouter: FC = () => {
             </Route>
           ))} */}
 
-        {/* Public routes */}
-        {routes
-          // .filter((i: any) => i.withoutLogin === true)
-          .map((route, index) => {
-            return (
-              <Route key={index} element={<route.layout />}>
-                <Route path={route.path} element={<route.component />} />
-              </Route>
-            );
-          })}
-      </Routes>
-    </BrowserRouter>
+      {/* Public routes */}
+      {routes
+        // .filter((i: any) => i.withoutLogin === true)
+        .map((route, index) => {
+          return (
+            <Route key={index} element={<route.layout />}>
+              <Route path={route.path} element={<route.component />} />
+            </Route>
+          );
+        })}
+    </Routes>
   );
 };
 export default MainRouter;

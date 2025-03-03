@@ -75,7 +75,7 @@ function processLogin(response: AxiosResponse): Promise<Types.SignInResponseDto>
 /**
  * @return CustomerId and RoleId set successfully
  */
-export function setUserCustomerRole(cusId: string, roleId: string, config?: AxiosRequestConfig | undefined): Promise<Types.SelectCustomerRoleResponseDto> {
+export function setUserCustomerRole(cusId: string, roleId: number, config?: AxiosRequestConfig | undefined): Promise<Types.SelectCustomerRoleResponseDto> {
     let url_ = getBaseUrl() + "/auth/set-user-customer-role/{cusId}/{roleId}";
     if (cusId === undefined || cusId === null)
       throw new Error("The parameter 'cusId' must be defined.");

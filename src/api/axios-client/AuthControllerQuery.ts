@@ -20,7 +20,7 @@ import type { AxiosRequestConfig } from 'axios';
 
 export type SetUserCustomerRoleAuthControllerQueryParameters = {
   cusId: string ;
-  roleId: string ;
+  roleId: number ;
 }
 
 export function loginUrl(): string {
@@ -49,7 +49,7 @@ export function useLoginMutation<TContext>(options?: Omit<UseMutationOptions<Typ
   });
 }
   
-export function setUserCustomerRoleUrl(cusId: string, roleId: string): string {
+export function setUserCustomerRoleUrl(cusId: string, roleId: number): string {
   let url_ = getBaseUrl() + "/auth/set-user-customer-role/{cusId}/{roleId}";
 if (cusId === undefined || cusId === null)
   throw new Error("The parameter 'cusId' must be defined.");
@@ -71,7 +71,7 @@ export function setSetUserCustomerRoleDefaultOptions(options: typeof setUserCust
 }
 
 export function setUserCustomerRoleQueryKey(dto: SetUserCustomerRoleAuthControllerQueryParameters): QueryKey;
-export function setUserCustomerRoleQueryKey(cusId: string, roleId: string): QueryKey;
+export function setUserCustomerRoleQueryKey(cusId: string, roleId: number): QueryKey;
 export function setUserCustomerRoleQueryKey(...params: any[]): QueryKey {
   if (params.length === 1 && isParameterObject(params[0])) {
     const { cusId, roleId,  } = params[0] as SetUserCustomerRoleAuthControllerQueryParameters;
@@ -92,14 +92,14 @@ export function setUserCustomerRoleQueryKey(...params: any[]): QueryKey {
 }
 export function __setUserCustomerRole(context: QueryFunctionContext, axiosConfig?: AxiosRequestConfig | undefined) {
   return Client.setUserCustomerRole(
-      context.queryKey[2] as string,       context.queryKey[3] as string,axiosConfig    );
+      context.queryKey[2] as string,       context.queryKey[3] as number,axiosConfig    );
 }
 
 export function useSetUserCustomerRoleQuery<TSelectData = Types.SelectCustomerRoleResponseDto, TError = unknown>(dto: SetUserCustomerRoleAuthControllerQueryParameters, options?: Omit<UseQueryOptions<Types.SelectCustomerRoleResponseDto, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;
 /**
  * @return CustomerId and RoleId set successfully
  */
-export function useSetUserCustomerRoleQuery<TSelectData = Types.SelectCustomerRoleResponseDto, TError = unknown>(cusId: string, roleId: string, options?: Omit<UseQueryOptions<Types.SelectCustomerRoleResponseDto, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;
+export function useSetUserCustomerRoleQuery<TSelectData = Types.SelectCustomerRoleResponseDto, TError = unknown>(cusId: string, roleId: number, options?: Omit<UseQueryOptions<Types.SelectCustomerRoleResponseDto, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;
 export function useSetUserCustomerRoleQuery<TSelectData = Types.SelectCustomerRoleResponseDto, TError = unknown>(...params: any []): UseQueryResult<TSelectData, TError> {
   let options: UseQueryOptions<Types.SelectCustomerRoleResponseDto, TError, TSelectData> | undefined = undefined;
   let axiosConfig: AxiosRequestConfig |undefined = undefined;
@@ -129,7 +129,7 @@ export function useSetUserCustomerRoleQuery<TSelectData = Types.SelectCustomerRo
 /**
  * @return CustomerId and RoleId set successfully
  */
-export function setSetUserCustomerRoleData(queryClient: QueryClient, updater: (data: Types.SelectCustomerRoleResponseDto | undefined) => Types.SelectCustomerRoleResponseDto, cusId: string, roleId: string) {
+export function setSetUserCustomerRoleData(queryClient: QueryClient, updater: (data: Types.SelectCustomerRoleResponseDto | undefined) => Types.SelectCustomerRoleResponseDto, cusId: string, roleId: number) {
   queryClient.setQueryData(setUserCustomerRoleQueryKey(cusId, roleId),
     updater
   );
