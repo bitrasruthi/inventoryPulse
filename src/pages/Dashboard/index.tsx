@@ -21,14 +21,13 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    getClients();
+    //getClients();
   }, []);
 
   const { showSnackBar } = useSnackBar();
 
-
   console.log(data);
-  
+
   return (
     <Container>
       <h1>Dashboard</h1>

@@ -14,43 +14,41 @@ import { trimArrayEnd, isParameterObject, getBaseUrl, addMetaToOptions } from '.
 import type { QueryMetaContextValue } from 'react-query-swagger';
 import { QueryMetaContext } from 'react-query-swagger';
 import { useContext } from 'react';
-import { CustomerControllerClient as CustomerControllerClientClass } from '../axios-client';
-import { createClient, getClientFactory } from './helpers';
-
-export const Client = () => getClientFactory()(CustomerControllerClientClass);
+import * as Client from './CustomerControllerClient'
+export { Client };
 import type { AxiosRequestConfig } from 'axios';
 
-export type GetCustomerByIsCustomerControllerQueryParameters = {
+export type GetCustomerByIdCustomerControllerQueryParameters = {
   id: string ;
 }
 
-export function createCustomerUrl(): string {
-  let url_ = getBaseUrl() + "/customer/createCustomer";
+export function createUrl(): string {
+  let url_ = getBaseUrl() + "/customer/create";
   url_ = url_.replace(/[?&]$/, "");
   return url_;
 }
 
-export function createCustomerMutationKey(): MutationKey {
+export function createMutationKey(): MutationKey {
   return trimArrayEnd([
       'CustomerControllerClient',
-      'createCustomer',
+      'create',
     ]);
 }
 
-export function useCreateCustomerMutation<TContext>(options?: Omit<UseMutationOptions<void, unknown, Types.CreateCustomerDto, TContext>, 'mutationKey' | 'mutationFn'>): UseMutationResult<void, unknown, Types.CreateCustomerDto, TContext> {
-  const key = createCustomerMutationKey();
+export function useCreateMutation<TContext>(options?: Omit<UseMutationOptions<Types.CreateCustomerDto, unknown, Types.CreateCustomerDto, TContext>, 'mutationKey' | 'mutationFn'>): UseMutationResult<Types.CreateCustomerDto, unknown, Types.CreateCustomerDto, TContext> {
+  const key = createMutationKey();
   
   const metaContext = useContext(QueryMetaContext);
   options = addMetaToOptions(options, metaContext);
   
   return useMutation({
     ...options,
-    mutationFn: (body: Types.CreateCustomerDto) => Client().createCustomer(body),
+    mutationFn: (body: Types.CreateCustomerDto) => Client.create(body),
     mutationKey: key,
   });
 }
   
-export function getCustomerByIsUrl(id: string): string {
+export function getCustomerByIdUrl(id: string): string {
   let url_ = getBaseUrl() + "/customer/getCustomerById/{id}";
 if (id === undefined || id === null)
   throw new Error("The parameter 'id' must be defined.");
@@ -59,49 +57,49 @@ url_ = url_.replace("{id}", encodeURIComponent("" + id));
   return url_;
 }
 
-let getCustomerByIsDefaultOptions: Omit<UseQueryOptions<void, unknown, void>, 'queryKey' | 'queryFn'> & Partial<Pick<UseQueryOptions<void, unknown, void>, 'queryFn'>> = {
+let getCustomerByIdDefaultOptions: Omit<UseQueryOptions<void, unknown, void>, 'queryKey' | 'queryFn'> & Partial<Pick<UseQueryOptions<void, unknown, void>, 'queryFn'>> = {
 };
-export function getGetCustomerByIsDefaultOptions() {
-  return getCustomerByIsDefaultOptions;
+export function getGetCustomerByIdDefaultOptions() {
+  return getCustomerByIdDefaultOptions;
 };
-export function setGetCustomerByIsDefaultOptions(options: typeof getCustomerByIsDefaultOptions) {
-  getCustomerByIsDefaultOptions = options;
+export function setGetCustomerByIdDefaultOptions(options: typeof getCustomerByIdDefaultOptions) {
+  getCustomerByIdDefaultOptions = options;
 }
 
-export function getCustomerByIsQueryKey(id: string): QueryKey;
-export function getCustomerByIsQueryKey(...params: any[]): QueryKey {
+export function getCustomerByIdQueryKey(id: string): QueryKey;
+export function getCustomerByIdQueryKey(...params: any[]): QueryKey {
   if (params.length === 1 && isParameterObject(params[0])) {
-    const { id,  } = params[0] as GetCustomerByIsCustomerControllerQueryParameters;
+    const { id,  } = params[0] as GetCustomerByIdCustomerControllerQueryParameters;
 
     return trimArrayEnd([
         'CustomerControllerClient',
-        'getCustomerByIs',
+        'getCustomerById',
         id as any,
       ]);
   } else {
     return trimArrayEnd([
         'CustomerControllerClient',
-        'getCustomerByIs',
+        'getCustomerById',
         ...params
       ]);
   }
 }
-export function __getCustomerByIs(context: QueryFunctionContext, axiosConfig?: AxiosRequestConfig | undefined) {
-  return Client().getCustomerByIs(
-      context.queryKey[2] as string);
+export function __getCustomerById(context: QueryFunctionContext, axiosConfig?: AxiosRequestConfig | undefined) {
+  return Client.getCustomerById(
+      context.queryKey[2] as string,axiosConfig    );
 }
 
-export function useGetCustomerByIsQuery<TSelectData = void, TError = unknown>(dto: GetCustomerByIsCustomerControllerQueryParameters, options?: Omit<UseQueryOptions<void, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;
+export function useGetCustomerByIdQuery<TSelectData = void, TError = unknown>(dto: GetCustomerByIdCustomerControllerQueryParameters, options?: Omit<UseQueryOptions<void, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;
 
-export function useGetCustomerByIsQuery<TSelectData = void, TError = unknown>(id: string, options?: Omit<UseQueryOptions<void, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;
-export function useGetCustomerByIsQuery<TSelectData = void, TError = unknown>(...params: any []): UseQueryResult<TSelectData, TError> {
+export function useGetCustomerByIdQuery<TSelectData = void, TError = unknown>(id: string, options?: Omit<UseQueryOptions<void, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;
+export function useGetCustomerByIdQuery<TSelectData = void, TError = unknown>(...params: any []): UseQueryResult<TSelectData, TError> {
   let options: UseQueryOptions<void, TError, TSelectData> | undefined = undefined;
   let axiosConfig: AxiosRequestConfig |undefined = undefined;
   let id: any = undefined;
   
   if (params.length > 0) {
     if (isParameterObject(params[0])) {
-      ({ id,  } = params[0] as GetCustomerByIsCustomerControllerQueryParameters);
+      ({ id,  } = params[0] as GetCustomerByIdCustomerControllerQueryParameters);
       options = params[1];
       axiosConfig = params[2];
     } else {
@@ -113,19 +111,19 @@ export function useGetCustomerByIsQuery<TSelectData = void, TError = unknown>(..
   options = addMetaToOptions(options, metaContext);
 
   return useQuery<void, TError, TSelectData>({
-    queryFn: axiosConfig ? (context) => __getCustomerByIs(context, axiosConfig) : __getCustomerByIs,
-    queryKey: getCustomerByIsQueryKey(id),
-    ...getCustomerByIsDefaultOptions as unknown as Omit<UseQueryOptions<void, TError, TSelectData>, 'queryKey'>,
+    queryFn: axiosConfig ? (context) => __getCustomerById(context, axiosConfig) : __getCustomerById,
+    queryKey: getCustomerByIdQueryKey(id),
+    ...getCustomerByIdDefaultOptions as unknown as Omit<UseQueryOptions<void, TError, TSelectData>, 'queryKey'>,
     ...options,
   });
 }
 
-export function setGetCustomerByIsData(queryClient: QueryClient, updater: (data: void | undefined) => void, id: string) {
-  queryClient.setQueryData(getCustomerByIsQueryKey(id),
+export function setGetCustomerByIdData(queryClient: QueryClient, updater: (data: void | undefined) => void, id: string) {
+  queryClient.setQueryData(getCustomerByIdQueryKey(id),
     updater
   );
 }
 
-export function setGetCustomerByIsDataByQueryId(queryClient: QueryClient, queryKey: QueryKey, updater: (data: void | undefined) => void) {
+export function setGetCustomerByIdDataByQueryId(queryClient: QueryClient, queryKey: QueryKey, updater: (data: void | undefined) => void) {
   queryClient.setQueryData(queryKey, updater);
 }

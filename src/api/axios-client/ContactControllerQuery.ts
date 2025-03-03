@@ -14,10 +14,8 @@ import { trimArrayEnd, isParameterObject, getBaseUrl, addMetaToOptions } from '.
 import type { QueryMetaContextValue } from 'react-query-swagger';
 import { QueryMetaContext } from 'react-query-swagger';
 import { useContext } from 'react';
-import { ContactControllerClient as ContactControllerClientClass } from '../axios-client';
-import { createClient, getClientFactory } from './helpers';
-
-export const Client = () => getClientFactory()(ContactControllerClientClass);
+import * as Client from './ContactControllerClient'
+export { Client };
 import type { AxiosRequestConfig } from 'axios';
 
 export type GetContactsContactControllerQueryParameters = {
@@ -41,7 +39,7 @@ export function saveMutationKey(): MutationKey {
     ]);
 }
 
-export function useSaveMutation<TContext>(options?: Omit<UseMutationOptions<Types.Anonymous6, unknown, Types.ContactRequestDto, TContext>, 'mutationKey' | 'mutationFn'>): UseMutationResult<Types.Anonymous6, unknown, Types.ContactRequestDto, TContext> {
+export function useSaveMutation<TContext>(options?: Omit<UseMutationOptions<Types.ContactCreateResponseDto, unknown, Types.ContactRequestDto, TContext>, 'mutationKey' | 'mutationFn'>): UseMutationResult<Types.ContactCreateResponseDto, unknown, Types.ContactRequestDto, TContext> {
   const key = saveMutationKey();
   
   const metaContext = useContext(QueryMetaContext);
@@ -49,7 +47,7 @@ export function useSaveMutation<TContext>(options?: Omit<UseMutationOptions<Type
   
   return useMutation({
     ...options,
-    mutationFn: (body: Types.ContactRequestDto) => Client().save(body),
+    mutationFn: (body: Types.ContactRequestDto) => Client.save(body),
     mutationKey: key,
   });
 }
@@ -63,7 +61,7 @@ url_ = url_.replace("{id}", encodeURIComponent("" + id));
   return url_;
 }
 
-let getContactsDefaultOptions: Omit<UseQueryOptions<Types.Anonymous7, unknown, Types.Anonymous7>, 'queryKey' | 'queryFn'> & Partial<Pick<UseQueryOptions<Types.Anonymous7, unknown, Types.Anonymous7>, 'queryFn'>> = {
+let getContactsDefaultOptions: Omit<UseQueryOptions<Types.ContactResponseDto, unknown, Types.ContactResponseDto>, 'queryKey' | 'queryFn'> & Partial<Pick<UseQueryOptions<Types.ContactResponseDto, unknown, Types.ContactResponseDto>, 'queryFn'>> = {
 };
 export function getGetContactsDefaultOptions() {
   return getContactsDefaultOptions;
@@ -91,15 +89,15 @@ export function getContactsQueryKey(...params: any[]): QueryKey {
   }
 }
 export function __getContacts(context: QueryFunctionContext, axiosConfig?: AxiosRequestConfig | undefined) {
-  return Client().getContacts(
-      context.queryKey[2] as string);
+  return Client.getContacts(
+      context.queryKey[2] as string,axiosConfig    );
 }
 
-export function useGetContactsQuery<TSelectData = Types.Anonymous7, TError = unknown>(dto: GetContactsContactControllerQueryParameters, options?: Omit<UseQueryOptions<Types.Anonymous7, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;
+export function useGetContactsQuery<TSelectData = Types.ContactResponseDto, TError = unknown>(dto: GetContactsContactControllerQueryParameters, options?: Omit<UseQueryOptions<Types.ContactResponseDto, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;
 
-export function useGetContactsQuery<TSelectData = Types.Anonymous7, TError = unknown>(id: string, options?: Omit<UseQueryOptions<Types.Anonymous7, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;
-export function useGetContactsQuery<TSelectData = Types.Anonymous7, TError = unknown>(...params: any []): UseQueryResult<TSelectData, TError> {
-  let options: UseQueryOptions<Types.Anonymous7, TError, TSelectData> | undefined = undefined;
+export function useGetContactsQuery<TSelectData = Types.ContactResponseDto, TError = unknown>(id: string, options?: Omit<UseQueryOptions<Types.ContactResponseDto, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;
+export function useGetContactsQuery<TSelectData = Types.ContactResponseDto, TError = unknown>(...params: any []): UseQueryResult<TSelectData, TError> {
+  let options: UseQueryOptions<Types.ContactResponseDto, TError, TSelectData> | undefined = undefined;
   let axiosConfig: AxiosRequestConfig |undefined = undefined;
   let id: any = undefined;
   
@@ -116,21 +114,21 @@ export function useGetContactsQuery<TSelectData = Types.Anonymous7, TError = unk
   const metaContext = useContext(QueryMetaContext);
   options = addMetaToOptions(options, metaContext);
 
-  return useQuery<Types.Anonymous7, TError, TSelectData>({
+  return useQuery<Types.ContactResponseDto, TError, TSelectData>({
     queryFn: axiosConfig ? (context) => __getContacts(context, axiosConfig) : __getContacts,
     queryKey: getContactsQueryKey(id),
-    ...getContactsDefaultOptions as unknown as Omit<UseQueryOptions<Types.Anonymous7, TError, TSelectData>, 'queryKey'>,
+    ...getContactsDefaultOptions as unknown as Omit<UseQueryOptions<Types.ContactResponseDto, TError, TSelectData>, 'queryKey'>,
     ...options,
   });
 }
 
-export function setGetContactsData(queryClient: QueryClient, updater: (data: Types.Anonymous7 | undefined) => Types.Anonymous7, id: string) {
+export function setGetContactsData(queryClient: QueryClient, updater: (data: Types.ContactResponseDto | undefined) => Types.ContactResponseDto, id: string) {
   queryClient.setQueryData(getContactsQueryKey(id),
     updater
   );
 }
 
-export function setGetContactsDataByQueryId(queryClient: QueryClient, queryKey: QueryKey, updater: (data: Types.Anonymous7 | undefined) => Types.Anonymous7) {
+export function setGetContactsDataByQueryId(queryClient: QueryClient, queryKey: QueryKey, updater: (data: Types.ContactResponseDto | undefined) => Types.ContactResponseDto) {
   queryClient.setQueryData(queryKey, updater);
 }
     
@@ -159,7 +157,7 @@ export function useDeleteMutation<TContext>(id: string, options?: Omit<UseMutati
   
   return useMutation({
     ...options,
-    mutationFn: () => Client().delete(id),
+    mutationFn: () => Client.delete_(id),
     mutationKey: key,
   });
 }
@@ -174,7 +172,7 @@ export function useDeleteMutationWithParameters<TContext>(options?: Omit<UseMuta
   
 return useMutation({
   ...options, 
-  mutationFn: (data: Delete__MutationParameters) => Client().delete(data.id ?? options?.parameters?.id!),
+  mutationFn: (data: Delete__MutationParameters) => Client.delete_(data.id ?? options?.parameters?.id!),
   mutationKey: key,
 });
 }

@@ -14,15 +14,13 @@ import { trimArrayEnd, isParameterObject, getBaseUrl, addMetaToOptions } from '.
 import type { QueryMetaContextValue } from 'react-query-swagger';
 import { QueryMetaContext } from 'react-query-swagger';
 import { useContext } from 'react';
-import { AuthControllerClient as AuthControllerClientClass } from '../axios-client';
-import { createClient, getClientFactory } from './helpers';
-
-export const Client = () => getClientFactory()(AuthControllerClientClass);
+import * as Client from './AuthControllerClient'
+export { Client };
 import type { AxiosRequestConfig } from 'axios';
 
 export type SetUserCustomerRoleAuthControllerQueryParameters = {
   cusId: string ;
-  roleId: number ;
+  roleId: string ;
 }
 
 export function loginUrl(): string {
@@ -38,7 +36,7 @@ export function loginMutationKey(): MutationKey {
     ]);
 }
 
-export function useLoginMutation<TContext>(options?: Omit<UseMutationOptions<Types.Anonymous, unknown, Types.SignInDto, TContext>, 'mutationKey' | 'mutationFn'>): UseMutationResult<Types.Anonymous, unknown, Types.SignInDto, TContext> {
+export function useLoginMutation<TContext>(options?: Omit<UseMutationOptions<Types.SignInResponseDto, unknown, Types.SignInDto, TContext>, 'mutationKey' | 'mutationFn'>): UseMutationResult<Types.SignInResponseDto, unknown, Types.SignInDto, TContext> {
   const key = loginMutationKey();
   
   const metaContext = useContext(QueryMetaContext);
@@ -46,12 +44,12 @@ export function useLoginMutation<TContext>(options?: Omit<UseMutationOptions<Typ
   
   return useMutation({
     ...options,
-    mutationFn: (body: Types.SignInDto) => Client().login(body),
+    mutationFn: (body: Types.SignInDto) => Client.login(body),
     mutationKey: key,
   });
 }
   
-export function setUserCustomerRoleUrl(cusId: string, roleId: number): string {
+export function setUserCustomerRoleUrl(cusId: string, roleId: string): string {
   let url_ = getBaseUrl() + "/auth/set-user-customer-role/{cusId}/{roleId}";
 if (cusId === undefined || cusId === null)
   throw new Error("The parameter 'cusId' must be defined.");
@@ -73,7 +71,7 @@ export function setSetUserCustomerRoleDefaultOptions(options: typeof setUserCust
 }
 
 export function setUserCustomerRoleQueryKey(dto: SetUserCustomerRoleAuthControllerQueryParameters): QueryKey;
-export function setUserCustomerRoleQueryKey(cusId: string, roleId: number): QueryKey;
+export function setUserCustomerRoleQueryKey(cusId: string, roleId: string): QueryKey;
 export function setUserCustomerRoleQueryKey(...params: any[]): QueryKey {
   if (params.length === 1 && isParameterObject(params[0])) {
     const { cusId, roleId,  } = params[0] as SetUserCustomerRoleAuthControllerQueryParameters;
@@ -93,15 +91,15 @@ export function setUserCustomerRoleQueryKey(...params: any[]): QueryKey {
   }
 }
 export function __setUserCustomerRole(context: QueryFunctionContext, axiosConfig?: AxiosRequestConfig | undefined) {
-  return Client().setUserCustomerRole(
-      context.queryKey[2] as string,       context.queryKey[3] as number);
+  return Client.setUserCustomerRole(
+      context.queryKey[2] as string,       context.queryKey[3] as string,axiosConfig    );
 }
 
 export function useSetUserCustomerRoleQuery<TSelectData = Types.SelectCustomerRoleResponseDto, TError = unknown>(dto: SetUserCustomerRoleAuthControllerQueryParameters, options?: Omit<UseQueryOptions<Types.SelectCustomerRoleResponseDto, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;
 /**
  * @return CustomerId and RoleId set successfully
  */
-export function useSetUserCustomerRoleQuery<TSelectData = Types.SelectCustomerRoleResponseDto, TError = unknown>(cusId: string, roleId: number, options?: Omit<UseQueryOptions<Types.SelectCustomerRoleResponseDto, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;
+export function useSetUserCustomerRoleQuery<TSelectData = Types.SelectCustomerRoleResponseDto, TError = unknown>(cusId: string, roleId: string, options?: Omit<UseQueryOptions<Types.SelectCustomerRoleResponseDto, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;
 export function useSetUserCustomerRoleQuery<TSelectData = Types.SelectCustomerRoleResponseDto, TError = unknown>(...params: any []): UseQueryResult<TSelectData, TError> {
   let options: UseQueryOptions<Types.SelectCustomerRoleResponseDto, TError, TSelectData> | undefined = undefined;
   let axiosConfig: AxiosRequestConfig |undefined = undefined;
@@ -131,7 +129,7 @@ export function useSetUserCustomerRoleQuery<TSelectData = Types.SelectCustomerRo
 /**
  * @return CustomerId and RoleId set successfully
  */
-export function setSetUserCustomerRoleData(queryClient: QueryClient, updater: (data: Types.SelectCustomerRoleResponseDto | undefined) => Types.SelectCustomerRoleResponseDto, cusId: string, roleId: number) {
+export function setSetUserCustomerRoleData(queryClient: QueryClient, updater: (data: Types.SelectCustomerRoleResponseDto | undefined) => Types.SelectCustomerRoleResponseDto, cusId: string, roleId: string) {
   queryClient.setQueryData(setUserCustomerRoleQueryKey(cusId, roleId),
     updater
   );
@@ -167,8 +165,8 @@ export function getCookiesQueryKey(...params: any[]): QueryKey {
     ]);
 }
 export function __getCookies(context: QueryFunctionContext, axiosConfig?: AxiosRequestConfig | undefined) {
-  return Client().getCookies(
-);
+  return Client.getCookies(
+axiosConfig    );
 }
 
 export function useGetCookiesQuery<TSelectData = void, TError = unknown>(options?: Omit<UseQueryOptions<void, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;
@@ -201,36 +199,36 @@ export function setGetCookiesDataByQueryId(queryClient: QueryClient, queryKey: Q
   queryClient.setQueryData(queryKey, updater);
 }
     
-export function getMeUrl(): string {
-  let url_ = getBaseUrl() + "/auth/me";
+export function getProfileUrl(): string {
+  let url_ = getBaseUrl() + "/auth/getProfile";
   url_ = url_.replace(/[?&]$/, "");
   return url_;
 }
 
-let getMeDefaultOptions: Omit<UseQueryOptions<Types.Anonymous2, unknown, Types.Anonymous2>, 'queryKey' | 'queryFn'> & Partial<Pick<UseQueryOptions<Types.Anonymous2, unknown, Types.Anonymous2>, 'queryFn'>> = {
+let getProfileDefaultOptions: Omit<UseQueryOptions<Types.UserProfileResponseDto, unknown, Types.UserProfileResponseDto>, 'queryKey' | 'queryFn'> & Partial<Pick<UseQueryOptions<Types.UserProfileResponseDto, unknown, Types.UserProfileResponseDto>, 'queryFn'>> = {
 };
-export function getGetMeDefaultOptions() {
-  return getMeDefaultOptions;
+export function getGetProfileDefaultOptions() {
+  return getProfileDefaultOptions;
 };
-export function setGetMeDefaultOptions(options: typeof getMeDefaultOptions) {
-  getMeDefaultOptions = options;
+export function setGetProfileDefaultOptions(options: typeof getProfileDefaultOptions) {
+  getProfileDefaultOptions = options;
 }
 
-export function getMeQueryKey(): QueryKey;
-export function getMeQueryKey(...params: any[]): QueryKey {
+export function getProfileQueryKey(): QueryKey;
+export function getProfileQueryKey(...params: any[]): QueryKey {
   return trimArrayEnd([
       'AuthControllerClient',
-      'getMe',
+      'getProfile',
     ]);
 }
-export function __getMe(context: QueryFunctionContext, axiosConfig?: AxiosRequestConfig | undefined) {
-  return Client().getMe(
-);
+export function __getProfile(context: QueryFunctionContext, axiosConfig?: AxiosRequestConfig | undefined) {
+  return Client.getProfile(
+axiosConfig    );
 }
 
-export function useGetMeQuery<TSelectData = Types.Anonymous2, TError = unknown>(options?: Omit<UseQueryOptions<Types.Anonymous2, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;
-export function useGetMeQuery<TSelectData = Types.Anonymous2, TError = unknown>(...params: any []): UseQueryResult<TSelectData, TError> {
-  let options: UseQueryOptions<Types.Anonymous2, TError, TSelectData> | undefined = undefined;
+export function useGetProfileQuery<TSelectData = Types.UserProfileResponseDto, TError = unknown>(options?: Omit<UseQueryOptions<Types.UserProfileResponseDto, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;
+export function useGetProfileQuery<TSelectData = Types.UserProfileResponseDto, TError = unknown>(...params: any []): UseQueryResult<TSelectData, TError> {
+  let options: UseQueryOptions<Types.UserProfileResponseDto, TError, TSelectData> | undefined = undefined;
   let axiosConfig: AxiosRequestConfig |undefined = undefined;
   
 
@@ -240,20 +238,20 @@ export function useGetMeQuery<TSelectData = Types.Anonymous2, TError = unknown>(
   const metaContext = useContext(QueryMetaContext);
   options = addMetaToOptions(options, metaContext);
 
-  return useQuery<Types.Anonymous2, TError, TSelectData>({
-    queryFn: axiosConfig ? (context) => __getMe(context, axiosConfig) : __getMe,
-    queryKey: getMeQueryKey(),
-    ...getMeDefaultOptions as unknown as Omit<UseQueryOptions<Types.Anonymous2, TError, TSelectData>, 'queryKey'>,
+  return useQuery<Types.UserProfileResponseDto, TError, TSelectData>({
+    queryFn: axiosConfig ? (context) => __getProfile(context, axiosConfig) : __getProfile,
+    queryKey: getProfileQueryKey(),
+    ...getProfileDefaultOptions as unknown as Omit<UseQueryOptions<Types.UserProfileResponseDto, TError, TSelectData>, 'queryKey'>,
     ...options,
   });
 }
 
-export function setGetMeData(queryClient: QueryClient, updater: (data: Types.Anonymous2 | undefined) => Types.Anonymous2, ) {
-  queryClient.setQueryData(getMeQueryKey(),
+export function setGetProfileData(queryClient: QueryClient, updater: (data: Types.UserProfileResponseDto | undefined) => Types.UserProfileResponseDto, ) {
+  queryClient.setQueryData(getProfileQueryKey(),
     updater
   );
 }
 
-export function setGetMeDataByQueryId(queryClient: QueryClient, queryKey: QueryKey, updater: (data: Types.Anonymous2 | undefined) => Types.Anonymous2) {
+export function setGetProfileDataByQueryId(queryClient: QueryClient, queryKey: QueryKey, updater: (data: Types.UserProfileResponseDto | undefined) => Types.UserProfileResponseDto) {
   queryClient.setQueryData(queryKey, updater);
 }

@@ -14,10 +14,8 @@ import { trimArrayEnd, isParameterObject, getBaseUrl, addMetaToOptions } from '.
 import type { QueryMetaContextValue } from 'react-query-swagger';
 import { QueryMetaContext } from 'react-query-swagger';
 import { useContext } from 'react';
-import { ClientControllerClient as ClientControllerClientClass } from '../axios-client';
-import { createClient, getClientFactory } from './helpers';
-
-export const Client = () => getClientFactory()(ClientControllerClientClass);
+import * as Client from './ClientControllerClient'
+export { Client };
 import type { AxiosRequestConfig } from 'axios';
 
 
@@ -34,7 +32,7 @@ export function createMutationKey(): MutationKey {
     ]);
 }
 
-export function useCreateMutation<TContext>(options?: Omit<UseMutationOptions<Types.Anonymous5, unknown, Types.ClientDto, TContext>, 'mutationKey' | 'mutationFn'>): UseMutationResult<Types.Anonymous5, unknown, Types.ClientDto, TContext> {
+export function useCreateMutation<TContext>(options?: Omit<UseMutationOptions<Types.ClientResponseDto, unknown, Types.ClientDataDto, TContext>, 'mutationKey' | 'mutationFn'>): UseMutationResult<Types.ClientResponseDto, unknown, Types.ClientDataDto, TContext> {
   const key = createMutationKey();
   
   const metaContext = useContext(QueryMetaContext);
@@ -42,13 +40,13 @@ export function useCreateMutation<TContext>(options?: Omit<UseMutationOptions<Ty
   
   return useMutation({
     ...options,
-    mutationFn: (body: Types.ClientDto) => Client().create(body),
+    mutationFn: (body: Types.ClientDataDto) => Client.create(body),
     mutationKey: key,
   });
 }
   
 export function getClientsUrl(): string {
-  let url_ = getBaseUrl() + "/client/get";
+  let url_ = getBaseUrl() + "/client/getClients";
   url_ = url_.replace(/[?&]$/, "");
   return url_;
 }
@@ -68,7 +66,7 @@ export function useGetClientsMutation<TContext>(options?: Omit<UseMutationOption
   
   return useMutation({
     ...options,
-    mutationFn: (body: Types.PaginationRequest) => Client().getClients(body),
+    mutationFn: (body: Types.PaginationRequest) => Client.getClients(body),
     mutationKey: key,
   });
 }

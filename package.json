@@ -8,7 +8,7 @@
     "build": "vite build --emptyOutDir",
     "lint": "eslint .",
     "preview": "vite preview",
-    "generate-fetch-local": "react-query-swagger /tanstack /input:http://localhost:3000/api-json /output:src/api/axios-client.ts /template:Axios /serviceHost:. /generateConstructorInterface:true /markOptionalProperties:false /generateOptionalParameters:true /nullValue:undefined"
+    "generate-fetch-local": "react-query-swagger /tanstack /input:http://localhost:3000/api-json /output:src/api/axios-client.ts /template:Axios /serviceHost:. /use-recommended-configuration"
   },
   "dependencies": {
     "@emotion/styled": "^11.14.0",

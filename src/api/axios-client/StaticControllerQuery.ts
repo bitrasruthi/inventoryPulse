@@ -14,10 +14,8 @@ import { trimArrayEnd, isParameterObject, getBaseUrl, addMetaToOptions } from '.
 import type { QueryMetaContextValue } from 'react-query-swagger';
 import { QueryMetaContext } from 'react-query-swagger';
 import { useContext } from 'react';
-import { StaticControllerClient as StaticControllerClientClass } from '../axios-client';
-import { createClient, getClientFactory } from './helpers';
-
-export const Client = () => getClientFactory()(StaticControllerClientClass);
+import * as Client from './StaticControllerClient'
+export { Client };
 import type { AxiosRequestConfig } from 'axios';
 
 export function getStaticDataUrl(): string {
@@ -43,8 +41,8 @@ export function getStaticDataQueryKey(...params: any[]): QueryKey {
     ]);
 }
 export function __getStaticData(context: QueryFunctionContext, axiosConfig?: AxiosRequestConfig | undefined) {
-  return Client().getStaticData(
-);
+  return Client.getStaticData(
+axiosConfig    );
 }
 
 export function useGetStaticDataQuery<TSelectData = void, TError = unknown>(options?: Omit<UseQueryOptions<void, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;
