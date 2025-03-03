@@ -14,7 +14,7 @@ import EyeIcon from "../../assets/icons/eyeIcon";
 import LockIcon from "../../assets/icons/lockIcon";
 import { useFormHook } from "../../hooks/useFormHook";
 import validate from "../../helpers/validations";
-import { ISignInDtoStrict } from "./types";
+import { ISignInDto } from "../../api/axios-client";
 
 type Props = {};
 
@@ -25,10 +25,11 @@ const Login = (props: Props) => {
     handleSubmit,
     formState: { errors },
     reset,
+    register,
   } = form;
 
-  const onSubmit = (data: ISignInDtoStrict) => {
-    console.log("submitted",data);
+  const onSubmit = (data: ISignInDto) => {
+    console.log("submitted", data);
   };
 
   return (
@@ -77,15 +78,18 @@ const Login = (props: Props) => {
                   variant="outlined"
                   startAdormentIcon={MailIcon}
                   placeholder="abc@gmail.com"
-                  name="email"
+                  error={!!errors.email}
+                  helperText={errors && errors.email?.message}
+                  formProps={register("email")}
                 />
                 <OutlinedTextField
                   variant="outlined"
                   startAdormentIcon={LockIcon}
                   endAdormentIcon={EyeIcon}
                   placeholder="Enter password"
-                  name="password"
-                  //helperText={errors && errors.}
+                  error={!!errors.password}
+                  helperText={errors && errors.password?.message}
+                  formProps={register("password")}
                 />
                 <Box
                   sx={{
@@ -106,7 +110,12 @@ const Login = (props: Props) => {
                     Forgot Password?
                   </Link>
                 </Box>
-                <Button fullWidth variant="contained" sx={{ mt: 2 }}>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 2 }}
+                  type="submit"
+                >
                   Sign In
                 </Button>
                 <Typography

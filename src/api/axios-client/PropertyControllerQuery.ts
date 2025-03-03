@@ -14,8 +14,10 @@ import { trimArrayEnd, isParameterObject, getBaseUrl, addMetaToOptions } from '.
 import type { QueryMetaContextValue } from 'react-query-swagger';
 import { QueryMetaContext } from 'react-query-swagger';
 import { useContext } from 'react';
-import * as Client from './PropertyControllerClient'
-export { Client };
+import { PropertyControllerClient as PropertyControllerClientClass } from '../axios-client';
+import { createClient, getClientFactory } from './helpers';
+
+export const Client = () => getClientFactory()(PropertyControllerClientClass);
 import type { AxiosRequestConfig } from 'axios';
 
 
@@ -40,7 +42,7 @@ export function useSaveMutation<TContext>(options?: Omit<UseMutationOptions<Type
   
   return useMutation({
     ...options,
-    mutationFn: (body: Types.PropertyRequestDto) => Client.save(body),
+    mutationFn: (body: Types.PropertyRequestDto) => Client().save(body),
     mutationKey: key,
   });
 }
@@ -66,7 +68,7 @@ export function useGetPropertiesMutation<TContext>(options?: Omit<UseMutationOpt
   
   return useMutation({
     ...options,
-    mutationFn: (body: Types.PaginationRequest) => Client.getProperties(body),
+    mutationFn: (body: Types.PaginationRequest) => Client().getProperties(body),
     mutationKey: key,
   });
 }

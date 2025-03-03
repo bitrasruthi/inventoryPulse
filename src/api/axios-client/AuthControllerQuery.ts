@@ -14,8 +14,10 @@ import { trimArrayEnd, isParameterObject, getBaseUrl, addMetaToOptions } from '.
 import type { QueryMetaContextValue } from 'react-query-swagger';
 import { QueryMetaContext } from 'react-query-swagger';
 import { useContext } from 'react';
-import * as Client from './AuthControllerClient'
-export { Client };
+import { AuthControllerClient as AuthControllerClientClass } from '../axios-client';
+import { createClient, getClientFactory } from './helpers';
+
+export const Client = () => getClientFactory()(AuthControllerClientClass);
 import type { AxiosRequestConfig } from 'axios';
 
 export type SetUserCustomerRoleAuthControllerQueryParameters = {
@@ -44,7 +46,7 @@ export function useLoginMutation<TContext>(options?: Omit<UseMutationOptions<Typ
   
   return useMutation({
     ...options,
-    mutationFn: (body: Types.SignInDto) => Client.login(body),
+    mutationFn: (body: Types.SignInDto) => Client().login(body),
     mutationKey: key,
   });
 }
@@ -61,7 +63,7 @@ url_ = url_.replace("{roleId}", encodeURIComponent("" + roleId));
   return url_;
 }
 
-let setUserCustomerRoleDefaultOptions: Omit<UseQueryOptions<void, unknown, void>, 'queryKey' | 'queryFn'> & Partial<Pick<UseQueryOptions<void, unknown, void>, 'queryFn'>> = {
+let setUserCustomerRoleDefaultOptions: Omit<UseQueryOptions<Types.SelectCustomerRoleResponseDto, unknown, Types.SelectCustomerRoleResponseDto>, 'queryKey' | 'queryFn'> & Partial<Pick<UseQueryOptions<Types.SelectCustomerRoleResponseDto, unknown, Types.SelectCustomerRoleResponseDto>, 'queryFn'>> = {
 };
 export function getSetUserCustomerRoleDefaultOptions() {
   return setUserCustomerRoleDefaultOptions;
@@ -91,15 +93,17 @@ export function setUserCustomerRoleQueryKey(...params: any[]): QueryKey {
   }
 }
 export function __setUserCustomerRole(context: QueryFunctionContext, axiosConfig?: AxiosRequestConfig | undefined) {
-  return Client.setUserCustomerRole(
-      context.queryKey[2] as string,       context.queryKey[3] as number,axiosConfig    );
+  return Client().setUserCustomerRole(
+      context.queryKey[2] as string,       context.queryKey[3] as number);
 }
 
-export function useSetUserCustomerRoleQuery<TSelectData = void, TError = unknown>(dto: SetUserCustomerRoleAuthControllerQueryParameters, options?: Omit<UseQueryOptions<void, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;
-
-export function useSetUserCustomerRoleQuery<TSelectData = void, TError = unknown>(cusId: string, roleId: number, options?: Omit<UseQueryOptions<void, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;
-export function useSetUserCustomerRoleQuery<TSelectData = void, TError = unknown>(...params: any []): UseQueryResult<TSelectData, TError> {
-  let options: UseQueryOptions<void, TError, TSelectData> | undefined = undefined;
+export function useSetUserCustomerRoleQuery<TSelectData = Types.SelectCustomerRoleResponseDto, TError = unknown>(dto: SetUserCustomerRoleAuthControllerQueryParameters, options?: Omit<UseQueryOptions<Types.SelectCustomerRoleResponseDto, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;
+/**
+ * @return CustomerId and RoleId set successfully
+ */
+export function useSetUserCustomerRoleQuery<TSelectData = Types.SelectCustomerRoleResponseDto, TError = unknown>(cusId: string, roleId: number, options?: Omit<UseQueryOptions<Types.SelectCustomerRoleResponseDto, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;
+export function useSetUserCustomerRoleQuery<TSelectData = Types.SelectCustomerRoleResponseDto, TError = unknown>(...params: any []): UseQueryResult<TSelectData, TError> {
+  let options: UseQueryOptions<Types.SelectCustomerRoleResponseDto, TError, TSelectData> | undefined = undefined;
   let axiosConfig: AxiosRequestConfig |undefined = undefined;
   let cusId: any = undefined;
   let roleId: any = undefined;
@@ -117,21 +121,26 @@ export function useSetUserCustomerRoleQuery<TSelectData = void, TError = unknown
   const metaContext = useContext(QueryMetaContext);
   options = addMetaToOptions(options, metaContext);
 
-  return useQuery<void, TError, TSelectData>({
+  return useQuery<Types.SelectCustomerRoleResponseDto, TError, TSelectData>({
     queryFn: axiosConfig ? (context) => __setUserCustomerRole(context, axiosConfig) : __setUserCustomerRole,
     queryKey: setUserCustomerRoleQueryKey(cusId, roleId),
-    ...setUserCustomerRoleDefaultOptions as unknown as Omit<UseQueryOptions<void, TError, TSelectData>, 'queryKey'>,
+    ...setUserCustomerRoleDefaultOptions as unknown as Omit<UseQueryOptions<Types.SelectCustomerRoleResponseDto, TError, TSelectData>, 'queryKey'>,
     ...options,
   });
 }
-
-export function setSetUserCustomerRoleData(queryClient: QueryClient, updater: (data: void | undefined) => void, cusId: string, roleId: number) {
+/**
+ * @return CustomerId and RoleId set successfully
+ */
+export function setSetUserCustomerRoleData(queryClient: QueryClient, updater: (data: Types.SelectCustomerRoleResponseDto | undefined) => Types.SelectCustomerRoleResponseDto, cusId: string, roleId: number) {
   queryClient.setQueryData(setUserCustomerRoleQueryKey(cusId, roleId),
     updater
   );
 }
 
-export function setSetUserCustomerRoleDataByQueryId(queryClient: QueryClient, queryKey: QueryKey, updater: (data: void | undefined) => void) {
+/**
+ * @return CustomerId and RoleId set successfully
+ */
+export function setSetUserCustomerRoleDataByQueryId(queryClient: QueryClient, queryKey: QueryKey, updater: (data: Types.SelectCustomerRoleResponseDto | undefined) => Types.SelectCustomerRoleResponseDto) {
   queryClient.setQueryData(queryKey, updater);
 }
     
@@ -158,8 +167,8 @@ export function getCookiesQueryKey(...params: any[]): QueryKey {
     ]);
 }
 export function __getCookies(context: QueryFunctionContext, axiosConfig?: AxiosRequestConfig | undefined) {
-  return Client.getCookies(
-axiosConfig    );
+  return Client().getCookies(
+);
 }
 
 export function useGetCookiesQuery<TSelectData = void, TError = unknown>(options?: Omit<UseQueryOptions<void, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;
@@ -215,8 +224,8 @@ export function getMeQueryKey(...params: any[]): QueryKey {
     ]);
 }
 export function __getMe(context: QueryFunctionContext, axiosConfig?: AxiosRequestConfig | undefined) {
-  return Client.getMe(
-axiosConfig    );
+  return Client().getMe(
+);
 }
 
 export function useGetMeQuery<TSelectData = Types.Anonymous2, TError = unknown>(options?: Omit<UseQueryOptions<Types.Anonymous2, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;

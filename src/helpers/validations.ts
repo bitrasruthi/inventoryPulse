@@ -1,7 +1,6 @@
 import * as yup from "yup";
 import { PropertyDetailsFormValues } from "./Interfaces";
-import { ISignInDto, SignInDto } from "../api/axios-client";
-import { ISignInDtoStrict } from "../pages/Auth/types";
+import { ISignInDto } from "../api/axios-client";
 
 const propertyDetailsSchema: yup.ObjectSchema<PropertyDetailsFormValues> = yup
   .object()
@@ -25,7 +24,7 @@ const propertyDetailsSchema: yup.ObjectSchema<PropertyDetailsFormValues> = yup
   })
   .required();
 
-const loginSchema: yup.ObjectSchema<any> = yup.object().shape({
+const loginSchema: yup.ObjectSchema<ISignInDto> = yup.object().shape({
   email: yup.string().email().required("Email is required"),
   password: yup.string().required("Password is required"),
 });
