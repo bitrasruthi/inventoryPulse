@@ -14,10 +14,8 @@ import { trimArrayEnd, isParameterObject, getBaseUrl, addMetaToOptions } from '.
 import type { QueryMetaContextValue } from 'react-query-swagger';
 import { QueryMetaContext } from 'react-query-swagger';
 import { useContext } from 'react';
-import { AuthControllerClient as AuthControllerClientClass } from '../axios-client';
-import { createClient, getClientFactory } from './helpers';
-
-export const Client = () => getClientFactory()(AuthControllerClientClass);
+import * as Client from './AuthControllerClient'
+export { Client };
 import type { AxiosRequestConfig } from 'axios';
 
 export type SetUserCustomerRoleAuthControllerQueryParameters = {
@@ -46,7 +44,7 @@ export function useLoginMutation<TContext>(options?: Omit<UseMutationOptions<Typ
   
   return useMutation({
     ...options,
-    mutationFn: (body: Types.SignInDto) => Client().login(body),
+    mutationFn: (body: Types.SignInDto) => Client.login(body),
     mutationKey: key,
   });
 }
@@ -93,8 +91,8 @@ export function setUserCustomerRoleQueryKey(...params: any[]): QueryKey {
   }
 }
 export function __setUserCustomerRole(context: QueryFunctionContext, axiosConfig?: AxiosRequestConfig | undefined) {
-  return Client().setUserCustomerRole(
-      context.queryKey[2] as string,       context.queryKey[3] as number);
+  return Client.setUserCustomerRole(
+      context.queryKey[2] as string,       context.queryKey[3] as number,axiosConfig    );
 }
 
 export function useSetUserCustomerRoleQuery<TSelectData = void, TError = unknown>(dto: SetUserCustomerRoleAuthControllerQueryParameters, options?: Omit<UseQueryOptions<void, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;
@@ -160,8 +158,8 @@ export function getCookiesQueryKey(...params: any[]): QueryKey {
     ]);
 }
 export function __getCookies(context: QueryFunctionContext, axiosConfig?: AxiosRequestConfig | undefined) {
-  return Client().getCookies(
-);
+  return Client.getCookies(
+axiosConfig    );
 }
 
 export function useGetCookiesQuery<TSelectData = void, TError = unknown>(options?: Omit<UseQueryOptions<void, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;
@@ -217,8 +215,8 @@ export function getMeQueryKey(...params: any[]): QueryKey {
     ]);
 }
 export function __getMe(context: QueryFunctionContext, axiosConfig?: AxiosRequestConfig | undefined) {
-  return Client().getMe(
-);
+  return Client.getMe(
+axiosConfig    );
 }
 
 export function useGetMeQuery<TSelectData = Types.Anonymous2, TError = unknown>(options?: Omit<UseQueryOptions<Types.Anonymous2, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;

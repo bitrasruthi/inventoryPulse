@@ -14,10 +14,8 @@ import { trimArrayEnd, isParameterObject, getBaseUrl, addMetaToOptions } from '.
 import type { QueryMetaContextValue } from 'react-query-swagger';
 import { QueryMetaContext } from 'react-query-swagger';
 import { useContext } from 'react';
-import { InspectionControllerClient as InspectionControllerClientClass } from '../axios-client';
-import { createClient, getClientFactory } from './helpers';
-
-export const Client = () => getClientFactory()(InspectionControllerClientClass);
+import * as Client from './InspectionControllerClient'
+export { Client };
 import type { AxiosRequestConfig } from 'axios';
 
 export function saveUrl(): string {
@@ -41,7 +39,7 @@ export function useSaveMutation<TContext>(options?: Omit<UseMutationOptions<Type
   
   return useMutation({
     ...options,
-    mutationFn: (body: Types.InspectionRequestDto) => Client().save(body),
+    mutationFn: (body: Types.InspectionRequestDto) => Client.save(body),
     mutationKey: key,
   });
 }

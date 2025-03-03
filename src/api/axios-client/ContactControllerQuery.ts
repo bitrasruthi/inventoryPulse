@@ -14,10 +14,8 @@ import { trimArrayEnd, isParameterObject, getBaseUrl, addMetaToOptions } from '.
 import type { QueryMetaContextValue } from 'react-query-swagger';
 import { QueryMetaContext } from 'react-query-swagger';
 import { useContext } from 'react';
-import { ContactControllerClient as ContactControllerClientClass } from '../axios-client';
-import { createClient, getClientFactory } from './helpers';
-
-export const Client = () => getClientFactory()(ContactControllerClientClass);
+import * as Client from './ContactControllerClient'
+export { Client };
 import type { AxiosRequestConfig } from 'axios';
 
 export type GetContactsContactControllerQueryParameters = {
@@ -49,7 +47,7 @@ export function useSaveMutation<TContext>(options?: Omit<UseMutationOptions<Type
   
   return useMutation({
     ...options,
-    mutationFn: (body: Types.ContactRequestDto) => Client().save(body),
+    mutationFn: (body: Types.ContactRequestDto) => Client.save(body),
     mutationKey: key,
   });
 }
@@ -91,8 +89,8 @@ export function getContactsQueryKey(...params: any[]): QueryKey {
   }
 }
 export function __getContacts(context: QueryFunctionContext, axiosConfig?: AxiosRequestConfig | undefined) {
-  return Client().getContacts(
-      context.queryKey[2] as string);
+  return Client.getContacts(
+      context.queryKey[2] as string,axiosConfig    );
 }
 
 export function useGetContactsQuery<TSelectData = Types.Anonymous7, TError = unknown>(dto: GetContactsContactControllerQueryParameters, options?: Omit<UseQueryOptions<Types.Anonymous7, TError, TSelectData>, 'queryKey'>, axiosConfig?: Partial<AxiosRequestConfig>): UseQueryResult<TSelectData, TError>;
@@ -159,7 +157,7 @@ export function useDeleteMutation<TContext>(id: string, options?: Omit<UseMutati
   
   return useMutation({
     ...options,
-    mutationFn: () => Client().delete(id),
+    mutationFn: () => Client.delete_(id),
     mutationKey: key,
   });
 }
@@ -174,7 +172,7 @@ export function useDeleteMutationWithParameters<TContext>(options?: Omit<UseMuta
   
 return useMutation({
   ...options, 
-  mutationFn: (data: Delete__MutationParameters) => Client().delete(data.id ?? options?.parameters?.id!),
+  mutationFn: (data: Delete__MutationParameters) => Client.delete_(data.id ?? options?.parameters?.id!),
   mutationKey: key,
 });
 }
