@@ -1,44 +1,34 @@
 import { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import UploadIcon from "../assets/icons/primaryUploadIcon";
-
 export const FileUploadBox = ({ onFilesDragEnd }) => {
   const [isDragging, setIsDragging] = useState(false);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return;
-    processFiles(Array.from(event.target.files));
-  };
-
-  const processFiles = (files: File[]) => {
-    const uploadedFiles = files.map((file) => ({
+    const uploadedFiles = Array.from(event.target.files).map((file) => ({
       id: String(Date.now() + Math.random()),
       name: file.name,
       url: URL.createObjectURL(file),
     }));
-
-    onFilesDragEnd(uploadedFiles);
+    onFilesDragEnd(uploadedFiles); // 🔹 Call `onFilesDragEnd` directly with uploaded files
   };
 
-  // 🔹 Drag enter - adds blur effect
   const handleDragEnter = (event: React.DragEvent) => {
     event.preventDefault();
     setIsDragging(true);
   };
 
-  // 🔹 Drag leave - removes blur effect
   const handleDragLeave = (event: React.DragEvent) => {
     event.preventDefault();
     setIsDragging(false);
   };
 
-  // 🔹 Drag over - MUST prevent default to allow drop
   const handleDragOver = (event: React.DragEvent) => {
     event.preventDefault();
     setIsDragging(true);
   };
 
-  // 🔹 Drop - process files & remove blur effect
   const handleDrop = (event: React.DragEvent) => {
     event.preventDefault();
     setIsDragging(false);
@@ -53,7 +43,7 @@ export const FileUploadBox = ({ onFilesDragEnd }) => {
       })
     );
 
-    onFilesDragEnd(droppedFiles);
+    onFilesDragEnd(droppedFiles); // 🔹 Call `onFilesDragEnd` directly with dropped files
   };
 
   return (
